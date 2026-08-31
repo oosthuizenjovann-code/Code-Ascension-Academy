@@ -21,49 +21,137 @@ public partial class MainWindow : Window
 
     private readonly AcademyStorageService _storage = new();
     private readonly CSharpRunner _csharpRunner = new();
+    private bool _initialized;
 
     public MainWindow()
     {
         InitializeComponent();
         Loaded += MainWindow_Loaded;
+        Closing += (_, _) => DesktopDiagnostics.Log("Main window closing.");
+        Closed += (_, _) => DesktopDiagnostics.Log("Main window closed.");
     }
 
     private async void MainWindow_Loaded(
         object sender,
         RoutedEventArgs e)
     {
-        await AcademyWebView.EnsureCoreWebView2Async();
-
-        AcademyWebView.CoreWebView2.Settings.IsWebMessageEnabled = true;
-        AcademyWebView.CoreWebView2.WebMessageReceived +=
-            CoreWebView2_WebMessageReceived;
-
-        string webRoot = Path.Combine(
-            AppContext.BaseDirectory,
-            "web");
-
-        string indexPath = Path.Combine(
-            webRoot,
-            "index.html");
-
-        if (!File.Exists(indexPath))
+        if (_initialized)
         {
-            MessageBox.Show(
-                $"Academy interface could not be found.\n\n{indexPath}",
-                "Code Ascension Academy",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
-
             return;
         }
 
-        AcademyWebView.CoreWebView2.SetVirtualHostNameToFolderMapping(
-            AcademyHostName,
-            webRoot,
-            CoreWebView2HostResourceAccessKind.Allow);
+        _initialized = true;
+        DesktopDiagnostics.Log("Main window initialization started.");
 
-        AcademyWebView.CoreWebView2.Navigate(
-            $"https://{AcademyHostName}/index.html");
+        try
+        {
+            StartupStatus.Text = "Preparing the desktop runtime...";
+
+            string userDataFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Code Ascension Academy",
+                "WebView2");
+
+            Directory.CreateDirectory(userDataFolder);
+
+            CoreWebView2Environment environment =
+                await CoreWebView2Environment.CreateAsync(
+                    browserExecutableFolder: null,
+                    userDataFolder: userDataFolder);
+
+            await AcademyWebView.EnsureCoreWebView2Async(environment);
+
+            AcademyWebView.CoreWebView2.Settings.IsWebMessageEnabled = true;
+#if !DEBUG
+            AcademyWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
+#endif
+            AcademyWebView.CoreWebView2.WebMessageReceived +=
+                CoreWebView2_WebMessageReceived;
+            AcademyWebView.CoreWebView2.NavigationCompleted +=
+                CoreWebView2_NavigationCompleted;
+            AcademyWebView.CoreWebView2.ProcessFailed +=
+                CoreWebView2_ProcessFailed;
+
+            string webRoot = Path.Combine(
+                AppContext.BaseDirectory,
+                "web");
+
+            string indexPath = Path.Combine(
+                webRoot,
+                "index.html");
+
+            if (!File.Exists(indexPath))
+            {
+                string message =
+                    $"Academy interface could not be found.\n\n{indexPath}";
+
+                DesktopDiagnostics.Log(message.Replace(Environment.NewLine, " "));
+                ShowStartupFailure(message);
+                return;
+            }
+
+            StartupStatus.Text = "Loading your Academy...";
+
+            AcademyWebView.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                AcademyHostName,
+                webRoot,
+                CoreWebView2HostResourceAccessKind.Allow);
+
+            DesktopDiagnostics.Log(
+                $"Navigating WebView2 to https://{AcademyHostName}/index.html");
+
+            AcademyWebView.CoreWebView2.Navigate(
+                $"https://{AcademyHostName}/index.html");
+        }
+        catch (Exception exception)
+        {
+            DesktopDiagnostics.LogException(
+                "Desktop initialization failed",
+                exception);
+
+            ShowStartupFailure(
+                "The Academy desktop interface could not start.\n\n" +
+                exception.Message +
+                "\n\nDiagnostic log:\n" +
+                DesktopDiagnostics.LogFile);
+        }
+    }
+
+    private void CoreWebView2_NavigationCompleted(
+        object? sender,
+        CoreWebView2NavigationCompletedEventArgs e)
+    {
+        if (!e.IsSuccess)
+        {
+            DesktopDiagnostics.Log(
+                $"WebView2 navigation failed: {e.WebErrorStatus}");
+
+            ShowStartupFailure(
+                "The Academy interface failed to load.\n\n" +
+                $"WebView2 status: {e.WebErrorStatus}\n\n" +
+                "Diagnostic log:\n" +
+                DesktopDiagnostics.LogFile);
+            return;
+        }
+
+        DesktopDiagnostics.Log("Academy interface navigation completed successfully.");
+        AcademyWebView.Visibility = Visibility.Visible;
+        StartupOverlay.Visibility = Visibility.Collapsed;
+    }
+
+    private void CoreWebView2_ProcessFailed(
+        object? sender,
+        CoreWebView2ProcessFailedEventArgs e)
+    {
+        DesktopDiagnostics.Log(
+            $"WebView2 process failure reported: {e.ProcessFailedKind}");
+    }
+
+    private void ShowStartupFailure(string message)
+    {
+        StartupStatus.Text = message;
+        AcademyWebView.Visibility = Visibility.Hidden;
+        StartupOverlay.Visibility = Visibility.Visible;
     }
 
     private async void CoreWebView2_WebMessageReceived(
@@ -156,12 +244,17 @@ public partial class MainWindow : Window
                     break;
 
                 case "quit":
-                    Application.Current.Shutdown();
+                    DesktopDiagnostics.Log("Quit requested from the Academy interface.");
+                    Close();
                     break;
             }
         }
         catch (Exception exception)
         {
+            DesktopDiagnostics.LogException(
+                "Desktop bridge request failed",
+                exception);
+
             SendMessageToWeb(new
             {
                 action = "desktop-error",
@@ -291,6 +384,11 @@ public partial class MainWindow : Window
 
     private void SendMessageToWeb(object message)
     {
+        if (AcademyWebView.CoreWebView2 is null)
+        {
+            return;
+        }
+
         string json = JsonSerializer.Serialize(message, WebJsonOptions);
         AcademyWebView.CoreWebView2.PostWebMessageAsJson(json);
     }

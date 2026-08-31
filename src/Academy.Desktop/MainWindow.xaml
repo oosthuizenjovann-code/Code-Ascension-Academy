@@ -9,13 +9,63 @@
     Title="Code Ascension Academy"
     Width="1400"
     Height="900"
-    MinWidth="1000"
-    MinHeight="650"
+    MinWidth="860"
+    MinHeight="560"
     WindowStartupLocation="CenterScreen"
-    Background="#05080D">
+    Background="#05080D"
+    UseLayoutRounding="True"
+    SnapsToDevicePixels="True">
 
-    <Grid>
-        <wv2:WebView2 x:Name="AcademyWebView" />
+    <Grid Background="#05080D">
+        <wv2:WebView2
+            x:Name="AcademyWebView"
+            Visibility="Hidden"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
+
+        <Grid
+            x:Name="StartupOverlay"
+            Background="#070B12">
+            <Border
+                Width="480"
+                Padding="42"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#111827"
+                BorderBrush="#28445E"
+                BorderThickness="1"
+                CornerRadius="18">
+                <StackPanel>
+                    <TextBlock
+                        Text="CODE ASCENSION"
+                        HorizontalAlignment="Center"
+                        Foreground="#F4F8FF"
+                        FontSize="30"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        Text="ACADEMY"
+                        Margin="0,2,0,28"
+                        HorizontalAlignment="Center"
+                        Foreground="#36D7FF"
+                        FontSize="30"
+                        FontWeight="Bold" />
+
+                    <ProgressBar
+                        Height="4"
+                        IsIndeterminate="True"
+                        Foreground="#36D7FF"
+                        Background="#0A101A" />
+
+                    <TextBlock
+                        x:Name="StartupStatus"
+                        Margin="0,18,0,0"
+                        Text="Preparing your local Academy..."
+                        TextAlignment="Center"
+                        TextWrapping="Wrap"
+                        Foreground="#93A4B8"
+                        FontSize="13" />
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
-
 </Window>

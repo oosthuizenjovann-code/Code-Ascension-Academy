@@ -1,0 +1,67 @@
+/* RC1 — one optical sizing system for every language brand mark. */
+.language-icon{
+  width:60px!important;
+  height:60px!important;
+  min-width:60px;
+  padding:7px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden;
+  border-radius:14px!important;
+}
+
+.language-icon img{
+  width:44px!important;
+  height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+  display:block;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+
+/* HTML hidden is respected even when a component has its own display rule. */
+.language-icon img[hidden],
+.language-icon-fallback[hidden]{
+  display:none!important;
+}
+
+.mastery-icon{
+  width:54px!important;
+  height:54px!important;
+  min-width:54px;
+  padding:6px!important;
+}
+.mastery-icon img{
+  width:40px!important;
+  height:40px!important;
+  max-width:40px!important;
+  max-height:40px!important;
+}
+
+.lab-language-icon{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  padding:5px!important;
+}
+.lab-language-icon img{
+  width:28px!important;
+  height:28px!important;
+  max-width:28px!important;
+  max-height:28px!important;
+}
+
+.reference-library-heading .language-icon{
+  width:52px!important;
+  height:52px!important;
+  min-width:52px;
+  padding:6px!important;
+}
+.reference-library-heading .language-icon img{
+  width:38px!important;
+  height:38px!important;
+  max-width:38px!important;
+  max-height:38px!important;
+}

@@ -7,11 +7,51 @@
   <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+  <a class="skip-link" href="#app">SKIP TO CONTENT</a>
+  <aside id="desktopRail" class="desktop-rail" aria-label="Academy navigation">
+    <div class="rail-brand">
+      <div class="rail-brand-mark">CA</div>
+      <div class="rail-brand-copy">
+        <strong>CODE ASCENSION</strong>
+        <span>ACADEMY 2.0</span>
+      </div>
+    </div>
+
+    <div class="rail-search">
+      <button class="rail-command" data-action="open-search" data-rail-group="search" title="Search the Academy">
+        <span>Search Academy</span><kbd>Ctrl K</kbd>
+      </button>
+    </div>
+
+    <nav class="rail-nav" aria-label="Primary Academy sections">
+      <div class="rail-section-label">LEARNING</div>
+      <button class="rail-item active" data-action="back-languages" data-rail-group="learn"><span class="rail-dot"></span><span>Academy</span></button>
+      <button class="rail-item" data-action="open-practice-lab" data-rail-group="practice"><span class="rail-dot"></span><span>Practice Lab</span></button>
+      <button class="rail-item" data-action="open-challenges" data-rail-group="challenges"><span class="rail-dot"></span><span>Challenges</span></button>
+      <button class="rail-item" data-action="open-revision" data-rail-group="revision"><span class="rail-dot"></span><span>Revision</span></button>
+      <button class="rail-item" data-action="open-learning-paths" data-rail-group="paths"><span class="rail-dot"></span><span>Learning Paths</span></button>
+
+      <div class="rail-section-label">PROGRESS</div>
+      <button class="rail-item" data-action="open-mastery" data-rail-group="mastery"><span class="rail-dot"></span><span>Mastery</span></button>
+      <button class="rail-item" data-action="open-achievements" data-rail-group="achievements"><span class="rail-dot"></span><span>Achievements</span></button>
+      <button class="rail-item" data-action="open-boss-arena" data-rail-group="boss"><span class="rail-dot"></span><span>Boss Arena</span></button>
+
+      <div class="rail-section-label">LIBRARY</div>
+      <button class="rail-item" data-action="open-study-library" data-rail-group="library"><span class="rail-dot"></span><span>Study Library</span></button>
+      <button class="rail-item" data-action="open-references" data-rail-group="references"><span class="rail-dot"></span><span>References</span></button>
+    </nav>
+
+    <div class="rail-footer">
+      <button class="rail-item" data-action="open-profile" data-rail-group="profile"><span class="rail-dot"></span><span>Profile</span></button>
+      <button class="rail-item" data-action="open-settings" data-rail-group="settings"><span class="rail-dot"></span><span>Settings</span></button>
+      <button class="rail-exit" data-action="back-start">EXIT TO START</button>
+    </div>
+  </aside>
 <div class="ambient ambient-a"></div>
   <div class="ambient ambient-b"></div>
   <div class="grid-overlay"></div>
 
-  <main id="app" class="app-shell">
+  <main id="app" class="app-shell" tabindex="-1">
     <section id="startupScreen" class="screen active startup-screen">
       <div class="brand-panel glass-panel">
         <div class="eyebrow">YOUR CODING JOURNEY</div>
@@ -26,8 +66,8 @@
 <section id="academyScreen" class="screen dashboard-screen">
       <header class="topbar glass-panel">
         <div>
-          <div class="eyebrow">CODE ASCENSION</div>
-          <h2>Choose Your Discipline</h2>
+          <div class="eyebrow">ACADEMY DASHBOARD</div>
+          <h2>Continue Your Ascension</h2>
         </div>
         <div class="topbar-actions">
           <button class="icon-button" data-action="open-search" title="Search the entire Academy (Ctrl+K)">SEARCH</button>
@@ -54,6 +94,14 @@
         <div class="progress-track"><div id="overallProgressBar" class="progress-fill"></div></div>
         <div class="streak-box"><span>SESSION XP</span><strong id="xpValue">0</strong></div>
       </div>
+
+      <section class="dashboard-section-heading">
+        <div>
+          <div class="eyebrow">CORE DISCIPLINES</div>
+          <h3>Choose a learning track</h3>
+        </div>
+        <p>Progress through five ranks, capstones and final exams at your own pace.</p>
+      </section>
 
       <div id="languageGrid" class="language-grid"></div>
     </section>
@@ -949,6 +997,8 @@
     </section>
   </main>
 
+  <div id="academyA11yStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
   <template id="lessonSectionTemplate">
     <section class="lesson-section"><div class="section-number"></div><div><h3></h3><div class="section-content"></div></div></section>
   </template>
@@ -959,6 +1009,7 @@
 
   <script src="js/curriculum.js"></script>
   <script src="js/desktop-bridge.js"></script>
+  <script type="module" src="js/core/accessibility.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

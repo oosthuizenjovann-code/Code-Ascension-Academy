@@ -1,0 +1,214 @@
+/* RC3 — final accessibility, scaling, overflow, and visual QA hardening. */
+
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  scroll-padding-top:92px;
+}
+
+/* Browser hidden state must always win over component display rules. */
+[hidden]{display:none!important}
+
+/* Assistive-text helpers. */
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+.skip-link{
+  position:fixed;
+  top:10px;
+  left:10px;
+  z-index:10000;
+  transform:translateY(-160%);
+  padding:10px 14px;
+  border:1px solid var(--shell-accent,#38d7ff);
+  border-radius:9px;
+  background:#08111c;
+  color:#eefbff;
+  font-size:12px;
+  font-weight:850;
+  text-decoration:none;
+  box-shadow:0 10px 28px rgba(0,0,0,.42);
+  transition:transform .12s ease;
+}
+.skip-link:focus{transform:translateY(0)}
+
+/* Prevent long curriculum/reference text from pushing the layout sideways. */
+.screen,
+.screen>*,
+.topbar>*,
+.header-title,
+.glass-panel,
+.language-card,
+.node-info,
+.lesson-content,
+.section-content,
+.code-lab,
+.setting-card,
+.profile-card,
+.mastery-card,
+.path-card,
+.boss-card,
+.search-result,
+.reference-library-card{
+  min-width:0;
+}
+
+h1,h2,h3,h4,p,span,strong,a,button,label{
+  overflow-wrap:anywhere;
+}
+
+pre,code,textarea{
+  overflow-wrap:normal;
+  word-break:normal;
+}
+
+pre{max-width:100%;overflow:auto}
+img,svg,iframe{max-width:100%}
+
+.screen{
+  overflow-x:clip;
+  container-type:inline-size;
+}
+
+/* Keep sticky headers usable with long labels and higher DPI scaling. */
+.topbar{
+  flex-wrap:wrap;
+  row-gap:10px;
+}
+.topbar-actions{
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+/* Input ergonomics and visible states. */
+button,a,input,textarea,select{font-size:max(12px,1em)}
+button:disabled,[aria-disabled="true"]{cursor:not-allowed}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid var(--shell-accent,#38d7ff)!important;
+  outline-offset:3px!important;
+  box-shadow:0 0 0 4px rgba(56,215,255,.14)!important;
+}
+
+body.keyboard-navigation .rail-item:focus-visible,
+body.keyboard-navigation .rail-command:focus-visible{
+  background:rgba(56,215,255,.09);
+}
+
+/* Dynamic status/output areas should remain readable at high zoom. */
+.console-panel pre,
+.data-safety-status,
+.backup-summary,
+.search-count,
+.hint-box{
+  line-height:1.55;
+}
+
+/* High-DPI / shorter desktop windows: reduce nonessential vertical chrome. */
+@media(max-height:760px){
+  .screen{padding-top:18px;padding-bottom:24px}
+  .topbar{top:8px;margin-bottom:14px}
+  .desktop-rail{padding-top:12px;padding-bottom:10px;gap:9px}
+  .rail-brand{padding-bottom:9px}
+  .rail-section-label{padding-top:8px}
+  .rail-item{min-height:34px}
+}
+
+/* Effective viewport widths commonly produced by 125–200% Windows scaling. */
+@media(max-width:1040px){
+  .screen{padding-inline:20px}
+  .language-grid{grid-template-columns:1fr}
+  .difficulty-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .reference-library-grid{grid-template-columns:1fr}
+  .roadmap-panel{padding:24px}
+}
+
+@media(max-width:860px){
+  body.desktop-shell-active .desktop-rail{display:none}
+  body.desktop-shell-active .app-shell{margin-left:0}
+  .screen{padding:14px 14px 26px}
+  .topbar{position:relative;top:auto}
+  .topbar-actions{width:100%;justify-content:flex-start}
+  .progress-banner,
+  .profile-grid,
+  .settings-grid,
+  .difficulty-grid,
+  .result-breakdown{
+    grid-template-columns:1fr;
+  }
+  .lesson-layout,
+  .assessment-layout,
+  .roadmap-layout{
+    grid-template-columns:1fr;
+  }
+  .roadmap-sidebar,.code-lab{position:static}
+  .brand-panel{padding:42px 22px}
+}
+
+@media(max-width:560px){
+  .language-card{
+    grid-template-columns:1fr;
+    grid-template-areas:"icon" "title" "desc" "footer";
+  }
+  .language-card .language-icon{margin-bottom:8px}
+  .lesson-footer-actions,.editor-actions,.node-actions,.setting-actions{flex-wrap:wrap}
+  .glow-button,.icon-button{max-width:100%}
+}
+
+/* Larger physical touch targets only on touch-first hardware. */
+@media(pointer:coarse){
+  button,.glow-button,.icon-button,.rail-item,.rail-command,
+  .answer-option,.search-filter,.mastery-filter,.achievement-filter,
+  .study-filter,.revision-filter,.challenge-filter,.lab-language-button{
+    min-height:44px;
+  }
+}
+
+/* Accessibility preferences. */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+@media(prefers-contrast:more){
+  :root{
+    --shell-line:rgba(190,215,244,.42);
+    --shell-line-strong:rgba(112,218,255,.72);
+    --shell-muted:#b4c0d0;
+  }
+  .glass-panel,.topbar,.language-card,.difficulty-card{border-width:2px}
+}
+
+@media(forced-colors:active){
+  .ambient,.grid-overlay{display:none!important}
+  .glass-panel,.topbar,.desktop-rail,.language-icon,.glow-button,.icon-button,
+  .rail-item,.rail-command,.answer-option{
+    forced-color-adjust:auto;
+    box-shadow:none!important;
+  }
+  .progress-fill,.mini-progress>div{background:Highlight!important}
+}
+
+/* Print only the material that existing print flows explicitly reveal. */
+@media print{
+  .desktop-rail,.skip-link,#academyA11yStatus{display:none!important}
+  body.desktop-shell-active .app-shell{margin-left:0}
+}
