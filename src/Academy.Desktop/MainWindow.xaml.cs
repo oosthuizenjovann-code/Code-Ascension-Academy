@@ -1,23 +1,44 @@
-﻿using System.Text;
+﻿using System;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Academy.Desktop;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
+
+        Loaded += MainWindow_Loaded;
+    }
+
+    private async void MainWindow_Loaded(
+        object sender,
+        RoutedEventArgs e)
+    {
+        await AcademyWebView.EnsureCoreWebView2Async();
+
+        string webRoot = Path.Combine(
+            AppContext.BaseDirectory,
+            "web");
+
+        string indexPath = Path.Combine(
+            webRoot,
+            "index.html");
+
+        if (!File.Exists(indexPath))
+        {
+            MessageBox.Show(
+                $"Academy interface could not be found.\n\n{indexPath}",
+                "Code Ascension Academy",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+
+            return;
+        }
+
+        AcademyWebView.Source =
+            new Uri(indexPath);
     }
 }
