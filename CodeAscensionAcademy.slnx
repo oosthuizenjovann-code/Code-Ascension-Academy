@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Academy.Core/Academy.Core.csproj" />
+    <Project Path="src/Academy.Desktop/Academy.Desktop.csproj" />
+    <Project Path="src/Academy.Runner/Academy.Runner.csproj" />
+  </Folder>
+</Solution>
