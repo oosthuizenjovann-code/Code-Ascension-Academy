@@ -1,0 +1,242 @@
+{
+  "language": "csharp",
+  "difficulty": "junior",
+  "topics": [
+    {
+      "title": "Properties, Constructors & Encapsulation",
+      "summary": "Build types whose public API protects invariants using access modifiers, validated setters, init-only values, and constructor requirements.",
+      "concepts": [
+        {
+          "name": "Access modifiers",
+          "explanation": "public exposes a member broadly; private limits access to the containing type; protected and internal support inheritance/assembly boundaries."
+        },
+        {
+          "name": "Properties as behavior",
+          "explanation": "A property can validate in its setter or compute in its getter. Do not expose mutable fields publicly when a property can preserve the type contract."
+        },
+        {
+          "name": "Initialization",
+          "explanation": "Constructors, required members, and init accessors express what must be supplied when an object is created and what may change later."
+        }
+      ],
+      "example": "class Course\n{\n    public required string Name { get; init; }\n    public int PassMark { get; }\n\n    public Course(int passMark)\n    {\n        if (passMark is < 0 or > 100)\n            throw new ArgumentOutOfRangeException(nameof(passMark));\n\n        PassMark = passMark;\n    }\n}\n\nCourse course = new(80) { Name = \"C# Junior\" };\nConsole.WriteLine(course.PassMark);",
+      "challenge": "Create a class that validates a constructor argument and exposes at least one property with restricted modification.",
+      "hint": "Validate invalid state at the boundary, then make the valid value available through a property.",
+      "solution": "class Course\n{\n    public required string Name { get; init; }\n    public int PassMark { get; }\n\n    public Course(int passMark)\n    {\n        if (passMark is < 0 or > 100)\n            throw new ArgumentOutOfRangeException(nameof(passMark));\n\n        PassMark = passMark;\n    }\n}\n\nCourse course = new(80) { Name = \"C# Junior\" };\nConsole.WriteLine(course.PassMark);",
+      "groups": [
+        [
+          "class "
+        ],
+        [
+          "public "
+        ],
+        [
+          "throw new"
+        ],
+        [
+          "get;"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Inheritance, Interfaces & Polymorphism",
+      "summary": "Separate “is-a” inheritance from capability contracts and call behavior through base/interface types.",
+      "concepts": [
+        {
+          "name": "Inheritance",
+          "explanation": "A class can derive from one base class. virtual members may be overridden by derived classes; base constructors and methods can be invoked with base."
+        },
+        {
+          "name": "Interfaces",
+          "explanation": "Interfaces describe a contract without requiring a specific class hierarchy. A class can implement multiple interfaces."
+        },
+        {
+          "name": "Polymorphism",
+          "explanation": "Code can depend on an interface/base type and receive different concrete implementations. This reduces coupling when the abstraction represents a real shared behavior."
+        }
+      ],
+      "example": "interface IScorable\n{\n    int Score { get; }\n    bool Passed(int passMark);\n}\n\nclass Assessment : IScorable\n{\n    public int Score { get; init; }\n    public bool Passed(int passMark) => Score >= passMark;\n}\n\nIScorable result = new Assessment { Score = 91 };\nConsole.WriteLine(result.Passed(80));",
+      "challenge": "Create an interface with one property and one method, implement it in a class, and use the object through the interface type.",
+      "hint": "Write the interface contract first, then make the class provide every required member.",
+      "solution": "interface IScorable\n{\n    int Score { get; }\n    bool Passed(int passMark);\n}\n\nclass Assessment : IScorable\n{\n    public int Score { get; init; }\n    public bool Passed(int passMark) => Score >= passMark;\n}\n\nIScorable result = new Assessment { Score = 91 };\nConsole.WriteLine(result.Passed(80));",
+      "groups": [
+        [
+          "interface "
+        ],
+        [
+          "class "
+        ],
+        [
+          ": I"
+        ],
+        [
+          "=>",
+          "return "
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Collections, Dictionaries & Enumeration",
+      "summary": "Choose arrays, List<T>, Dictionary<TKey,TValue>, HashSet<T>, queues, and stacks based on access and uniqueness needs.",
+      "concepts": [
+        {
+          "name": "Dictionary",
+          "explanation": "Dictionary<TKey,TValue> maps unique keys to values and provides fast lookup by key in typical cases."
+        },
+        {
+          "name": "HashSet",
+          "explanation": "HashSet<T> stores unique values and supports set operations such as union, intersection, and membership tests."
+        },
+        {
+          "name": "Enumeration",
+          "explanation": "foreach works with the enumeration pattern/IEnumerable<T>. Avoid modifying many collections structurally while enumerating them unless the API documents it as safe."
+        }
+      ],
+      "example": "Dictionary<string, int> scores = new()\n{\n    [\"HTML\"] = 92,\n    [\"CSS\"] = 88\n};\n\nscores[\"C#\"] = 95;\n\nHashSet<string> completed = new() { \"HTML\", \"CSS\" };\ncompleted.Add(\"C#\");\n\nConsole.WriteLine(scores[\"C#\"]);\nConsole.WriteLine(completed.Contains(\"CSS\"));",
+      "challenge": "Create a Dictionary<string,int> and a HashSet<string>, add values, and perform one lookup/membership check.",
+      "hint": "A dictionary uses two generic type arguments: one for keys and one for values.",
+      "solution": "Dictionary<string, int> scores = new()\n{\n    [\"HTML\"] = 92,\n    [\"CSS\"] = 88\n};\n\nscores[\"C#\"] = 95;\n\nHashSet<string> completed = new() { \"HTML\", \"CSS\" };\ncompleted.Add(\"C#\");\n\nConsole.WriteLine(scores[\"C#\"]);\nConsole.WriteLine(completed.Contains(\"CSS\"));",
+      "groups": [
+        [
+          "Dictionary<"
+        ],
+        [
+          "HashSet<"
+        ],
+        [
+          ".Add("
+        ],
+        [
+          ".Contains("
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Exceptions & Defensive Error Handling",
+      "summary": "Represent exceptional failures with exceptions, preserve useful context, and distinguish validation from broad catch-all handling.",
+      "concepts": [
+        {
+          "name": "Throwing",
+          "explanation": "Throw exceptions when a method cannot satisfy its contract. Standard exception types such as ArgumentException and InvalidOperationException communicate common failure categories."
+        },
+        {
+          "name": "try/catch/finally",
+          "explanation": "Catch only where you can recover, translate, log, or add useful context. finally is for cleanup that must occur whether the operation succeeds or fails."
+        },
+        {
+          "name": "Do not hide failures",
+          "explanation": "An empty catch block destroys evidence. Preserve the original exception when wrapping it, and avoid using exceptions as routine branch logic."
+        }
+      ],
+      "example": "static int ParseScore(string text)\n{\n    if (!int.TryParse(text, out int score))\n        throw new FormatException(\"Score must be an integer.\");\n\n    if (score is < 0 or > 100)\n        throw new ArgumentOutOfRangeException(nameof(text));\n\n    return score;\n}\n\ntry\n{\n    Console.WriteLine(ParseScore(\"91\"));\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(ex.Message);\n}",
+      "challenge": "Write a method that throws a meaningful exception for invalid input and a caller that handles it with try/catch.",
+      "hint": "Use a specific exception inside the method. The caller decides whether it can recover or report the error.",
+      "solution": "static int ParseScore(string text)\n{\n    if (!int.TryParse(text, out int score))\n        throw new FormatException(\"Score must be an integer.\");\n\n    if (score is < 0 or > 100)\n        throw new ArgumentOutOfRangeException(nameof(text));\n\n    return score;\n}\n\ntry\n{\n    Console.WriteLine(ParseScore(\"91\"));\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(ex.Message);\n}",
+      "groups": [
+        [
+          "throw new"
+        ],
+        [
+          "try"
+        ],
+        [
+          "catch ("
+        ],
+        [
+          "Exception"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Files, using & Resource Lifetime",
+      "summary": "Read/write local files and ensure disposable resources are released even when an operation fails.",
+      "concepts": [
+        {
+          "name": "File helpers",
+          "explanation": "File.ReadAllText/WriteAllText and async variants cover small straightforward file operations without manual stream management."
+        },
+        {
+          "name": "IDisposable",
+          "explanation": "Some resources own operating-system or unmanaged handles. IDisposable provides deterministic cleanup through Dispose."
+        },
+        {
+          "name": "using",
+          "explanation": "using statements/declarations call Dispose automatically at scope exit, including exceptional paths. await using does the same for IAsyncDisposable."
+        }
+      ],
+      "example": "string path = \"progress.txt\";\nFile.WriteAllText(path, \"HTML=92\nCSS=88\");\nstring text = File.ReadAllText(path);\nConsole.WriteLine(text);\n\nusing StreamReader reader = File.OpenText(path);\nConsole.WriteLine(reader.ReadLine());",
+      "challenge": "Write text to a local file, read it back, and use at least one using declaration with a disposable file/stream object.",
+      "hint": "Use File helpers for the simple operation and a using declaration when you create a disposable stream directly.",
+      "solution": "string path = \"progress.txt\";\nFile.WriteAllText(path, \"HTML=92\nCSS=88\");\nstring text = File.ReadAllText(path);\nConsole.WriteLine(text);\n\nusing StreamReader reader = File.OpenText(path);\nConsole.WriteLine(reader.ReadLine());",
+      "groups": [
+        [
+          "File.WriteAllText",
+          "File.WriteAllTextAsync"
+        ],
+        [
+          "File.ReadAllText",
+          "File.ReadAllTextAsync"
+        ],
+        [
+          "using "
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

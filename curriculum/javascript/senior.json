@@ -1,0 +1,233 @@
+{
+  "language": "javascript",
+  "difficulty": "senior",
+  "topics": [
+    {
+      "title": "Iterators, Generators & Custom Iterables",
+      "summary": "Control lazy sequence production by understanding the iterable/iterator protocols and generator functions.",
+      "concepts": [
+        {
+          "name": "Iterator protocol",
+          "explanation": "An iterator has next() returning { value, done }. An iterable exposes Symbol.iterator that returns an iterator."
+        },
+        {
+          "name": "Generators",
+          "explanation": "function* and yield create iterators with far less boilerplate, preserving execution state between yielded values."
+        },
+        {
+          "name": "Lazy computation",
+          "explanation": "Iterables can produce values on demand rather than materializing an entire array, which helps with pipelines and large/infinite sequences."
+        }
+      ],
+      "example": "function* range(start, end) {\n  for (let value = start; value <= end; value++) {\n    yield value;\n  }\n}\n\nfor (const number of range(3, 7)) {\n  console.log(number);\n}",
+      "challenge": "Create a generator that yields a finite numeric sequence and consume it with for...of.",
+      "hint": "Generator declarations use function* and produce values with yield.",
+      "solution": "function* range(start, end) {\n  for (let value = start; value <= end; value++) {\n    yield value;\n  }\n}\n\nfor (const number of range(3, 7)) {\n  console.log(number);\n}",
+      "groups": [
+        [
+          "function*"
+        ],
+        [
+          "yield "
+        ],
+        [
+          "for (const"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Advanced Async, Concurrency & Cancellation",
+      "summary": "Compose independent async work concurrently, coordinate completion order, and cancel operations with AbortController.",
+      "concepts": [
+        {
+          "name": "Concurrency",
+          "explanation": "Start independent promises before awaiting them, then use Promise.all when all results are required or Promise.allSettled when every outcome matters."
+        },
+        {
+          "name": "Races",
+          "explanation": "Promise.race settles with the first settled input, while Promise.any fulfills with the first fulfillment. Choose semantics based on what failure means."
+        },
+        {
+          "name": "Cancellation",
+          "explanation": "AbortController creates an AbortSignal that many Web APIs accept. Cancellation should propagate through your async call chain rather than being trapped at the UI edge."
+        }
+      ],
+      "example": "async function loadDashboard(signal) {\n  const lessonsRequest = fetch(\"/lessons.json\", { signal });\n  const scoresRequest = fetch(\"/scores.json\", { signal });\n\n  const [lessons, scores] = await Promise.all([lessonsRequest, scoresRequest]);\n  return Promise.all([lessons.json(), scores.json()]);\n}\n\nconst controller = new AbortController();\nloadDashboard(controller.signal).catch(error => console.error(error));",
+      "challenge": "Start two independent promises concurrently, await them with Promise.all, and pass an AbortSignal into the work.",
+      "hint": "Do not await the first independent request before starting the second; create both promises first.",
+      "solution": "async function loadDashboard(signal) {\n  const lessonsRequest = fetch(\"/lessons.json\", { signal });\n  const scoresRequest = fetch(\"/scores.json\", { signal });\n\n  const [lessons, scores] = await Promise.all([lessonsRequest, scoresRequest]);\n  return Promise.all([lessons.json(), scores.json()]);\n}\n\nconst controller = new AbortController();\nloadDashboard(controller.signal).catch(error => console.error(error));",
+      "groups": [
+        [
+          "Promise.all"
+        ],
+        [
+          "AbortController"
+        ],
+        [
+          "signal"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Property Descriptors, Proxy & Reflect",
+      "summary": "Intercept object operations and reason about writable/configurable/enumerable properties without confusing metaprogramming with ordinary data modeling.",
+      "concepts": [
+        {
+          "name": "Descriptors",
+          "explanation": "Object.getOwnPropertyDescriptor exposes property flags and getter/setter functions. defineProperty can create properties with explicit behavior."
+        },
+        {
+          "name": "Proxy",
+          "explanation": "Proxy traps operations such as get, set, has, ownKeys, and apply. Traps must respect language invariants or operations can throw."
+        },
+        {
+          "name": "Reflect",
+          "explanation": "Reflect methods mirror many internal operations and are useful inside proxy traps for forwarding default behavior cleanly."
+        }
+      ],
+      "example": "const target = { score: 80 };\nconst guarded = new Proxy(target, {\n  set(object, property, value) {\n    if (property === \"score\" && (value < 0 || value > 100)) {\n      throw new RangeError(\"Score out of range\");\n    }\n    return Reflect.set(object, property, value);\n  }\n});\n\nguarded.score = 95;\nconsole.log(guarded.score);",
+      "challenge": "Create a Proxy that validates one property in a set trap and forwards valid writes with Reflect.set.",
+      "hint": "A good proxy trap usually forwards the normal operation through the matching Reflect method after applying extra behavior.",
+      "solution": "const target = { score: 80 };\nconst guarded = new Proxy(target, {\n  set(object, property, value) {\n    if (property === \"score\" && (value < 0 || value > 100)) {\n      throw new RangeError(\"Score out of range\");\n    }\n    return Reflect.set(object, property, value);\n  }\n});\n\nguarded.score = 95;\nconsole.log(guarded.score);",
+      "groups": [
+        [
+          "new Proxy"
+        ],
+        [
+          "set("
+        ],
+        [
+          "Reflect.set"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Typed Arrays, ArrayBuffer & Binary Data",
+      "summary": "Work with fixed-width numeric views over raw memory buffers for files, graphics, networking, and other binary protocols.",
+      "concepts": [
+        {
+          "name": "ArrayBuffer",
+          "explanation": "ArrayBuffer represents a fixed-length region of raw bytes. It does not by itself describe how those bytes should be interpreted."
+        },
+        {
+          "name": "Typed arrays",
+          "explanation": "Uint8Array, Int32Array, Float32Array, and related types provide indexed numeric views over buffers using a fixed element representation."
+        },
+        {
+          "name": "DataView",
+          "explanation": "DataView reads/writes different numeric types at explicit byte offsets and lets you control byte order, making it useful for binary formats."
+        }
+      ],
+      "example": "const buffer = new ArrayBuffer(8);\nconst bytes = new Uint8Array(buffer);\nbytes.set([67, 79, 68, 69]);\n\nconst view = new DataView(buffer);\nview.setUint16(4, 2026, true);\n\nconsole.log(bytes[0], view.getUint16(4, true));",
+      "challenge": "Create an ArrayBuffer, view it with a typed array, and write/read at least one numeric value.",
+      "hint": "The buffer is raw storage; create a typed array or DataView to interpret its bytes.",
+      "solution": "const buffer = new ArrayBuffer(8);\nconst bytes = new Uint8Array(buffer);\nbytes.set([67, 79, 68, 69]);\n\nconst view = new DataView(buffer);\nview.setUint16(4, 2026, true);\n\nconsole.log(bytes[0], view.getUint16(4, true));",
+      "groups": [
+        [
+          "new ArrayBuffer"
+        ],
+        [
+          "Uint8Array",
+          "Int32Array",
+          "Float32Array"
+        ],
+        [
+          "DataView"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Functional Composition, Immutability & API Design",
+      "summary": "Design predictable transformations with pure functions, immutable updates, higher-order functions, and narrow module APIs.",
+      "concepts": [
+        {
+          "name": "Pure functions",
+          "explanation": "A pure function returns the same output for the same inputs and avoids observable side effects. Pure logic is easier to test and compose."
+        },
+        {
+          "name": "Immutable updates",
+          "explanation": "Spread, map, filter, and object reconstruction can produce new values rather than mutating shared state. This reduces hidden coupling but may have allocation costs."
+        },
+        {
+          "name": "Higher-order functions",
+          "explanation": "Functions can accept or return functions, enabling reusable policies such as predicates, mappers, middleware, and configuration factories."
+        }
+      ],
+      "example": "const addBonus = bonus => learner => ({\n  ...learner,\n  score: Math.min(100, learner.score + bonus)\n});\n\nconst learners = [\n  { name: \"A\", score: 72 },\n  { name: \"B\", score: 91 }\n];\n\nconst upgraded = learners.map(addBonus(5));\nconsole.log(upgraded);",
+      "challenge": "Write a higher-order function that returns a transformation function and use it with map without mutating the original objects.",
+      "hint": "Return a new object with spread instead of assigning directly to the input object property.",
+      "solution": "const addBonus = bonus => learner => ({\n  ...learner,\n  score: Math.min(100, learner.score + bonus)\n});\n\nconst learners = [\n  { name: \"A\", score: 72 },\n  { name: \"B\", score: 91 }\n];\n\nconst upgraded = learners.map(addBonus(5));\nconsole.log(upgraded);",
+      "groups": [
+        [
+          "=>"
+        ],
+        [
+          "..."
+        ],
+        [
+          ".map("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "language": "csharp",
+  "difficulty": "intern",
+  "topics": [
+    {
+      "title": "Program Structure, Variables & Types",
+      "summary": "Learn how a C# program is organized and how the compiler uses types to catch many mistakes before the program runs.",
+      "concepts": [
+        {
+          "name": "Strong typing",
+          "explanation": "Every expression has a type. The compiler checks assignments, method calls, operators, and conversions so incompatible operations can be caught at compile time."
+        },
+        {
+          "name": "Built-in types",
+          "explanation": "Common types include int, long, float, double, decimal, bool, char, string, and object. Choose a type based on the data and operations you need, not only on size."
+        },
+        {
+          "name": "Variables and constants",
+          "explanation": "Declare local variables with an explicit type or var when the initializer makes the type clear. const is for compile-time constants; readonly is a separate field concept learned later."
+        }
+      ],
+      "example": "string learnerName = \"Nova\";\nint score = 82;\nbool passed = score >= 80;\nvar nextScore = 91;\n\nConsole.WriteLine($\"{learnerName}: {score} - Passed: {passed}\");\nConsole.WriteLine(nextScore.GetType().Name);",
+      "challenge": "Declare a string, an int, and a bool, calculate whether the score passes 80, and print the values.",
+      "hint": "C# statements normally end with semicolons. Keep the comparison result in a bool variable.",
+      "solution": "string learnerName = \"Nova\";\nint score = 82;\nbool passed = score >= 80;\nvar nextScore = 91;\n\nConsole.WriteLine($\"{learnerName}: {score} - Passed: {passed}\");\nConsole.WriteLine(nextScore.GetType().Name);",
+      "groups": [
+        [
+          "string "
+        ],
+        [
+          "int "
+        ],
+        [
+          "bool "
+        ],
+        [
+          "Console.WriteLine"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Operators, Conditions & Switch",
+      "summary": "Build expressions and select behavior with if/else, comparison and boolean operators, conditional expressions, and switch.",
+      "concepts": [
+        {
+          "name": "Operators",
+          "explanation": "Arithmetic, comparison, equality, and logical operators combine typed values. C# distinguishes boolean logic from bitwise operations even though some operator symbols overlap."
+        },
+        {
+          "name": "if/else",
+          "explanation": "if requires a bool condition; C# does not treat arbitrary numbers or strings as truthy/falsy."
+        },
+        {
+          "name": "switch",
+          "explanation": "switch statements and switch expressions are useful when behavior depends on discrete cases. Modern patterns can test values, types, properties, and ranges."
+        }
+      ],
+      "example": "int score = 86;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}\n\nstring grade = score switch\n{\n    >= 90 => \"Excellent\",\n    >= 80 => \"Pass\",\n    _ => \"Developing\"\n};\nConsole.WriteLine(grade);",
+      "challenge": "Write an if/else that checks an integer score against 80 and also assign a text result with a switch expression.",
+      "hint": "For the switch expression, put the catch-all discard pattern _ last.",
+      "solution": "int score = 86;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}\n\nstring grade = score switch\n{\n    >= 90 => \"Excellent\",\n    >= 80 => \"Pass\",\n    _ => \"Developing\"\n};\nConsole.WriteLine(grade);",
+      "groups": [
+        [
+          "if ("
+        ],
+        [
+          "else"
+        ],
+        [
+          "switch"
+        ],
+        [
+          "=>"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Loops, Arrays & Lists",
+      "summary": "Repeat work with for/while/foreach and store ordered data in arrays and generic List<T> collections.",
+      "concepts": [
+        {
+          "name": "Arrays",
+          "explanation": "Arrays have a fixed length after creation and use zero-based indexing. They are efficient when the number of slots is known."
+        },
+        {
+          "name": "List<T>",
+          "explanation": "List<T> is a resizable generic collection. Add, Remove, Count, indexing, and enumeration cover many everyday collection tasks."
+        },
+        {
+          "name": "Loop choice",
+          "explanation": "Use foreach when you only need each item, for when the index matters, and while/do when repetition is driven by a condition."
+        }
+      ],
+      "example": "int[] scores = { 72, 88, 95 };\nList<string> modules = new() { \"HTML\", \"CSS\", \"C#\" };\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}\n\nfor (int i = 0; i < scores.Length; i++)\n{\n    Console.WriteLine(scores[i]);\n}",
+      "challenge": "Create a List<string> with at least three values, add another value, and print them with foreach.",
+      "hint": "List<T> needs a type argument between angle brackets, such as List<string>.",
+      "solution": "int[] scores = { 72, 88, 95 };\nList<string> modules = new() { \"HTML\", \"CSS\", \"C#\" };\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}\n\nfor (int i = 0; i < scores.Length; i++)\n{\n    Console.WriteLine(scores[i]);\n}",
+      "groups": [
+        [
+          "List<"
+        ],
+        [
+          ".Add("
+        ],
+        [
+          "foreach ("
+        ],
+        [
+          "Console.WriteLine"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Methods, Parameters & Return Values",
+      "summary": "Package behavior into methods with clear inputs/outputs and learn optional, named, ref/out, and expression-bodied forms gradually.",
+      "concepts": [
+        {
+          "name": "Method signature",
+          "explanation": "A method declares accessibility/modifiers, return type, name, and parameters. The parameter types are part of overload selection."
+        },
+        {
+          "name": "Return values",
+          "explanation": "Use void when no value is returned; otherwise every reachable path must satisfy the method return contract unless execution throws."
+        },
+        {
+          "name": "Parameters",
+          "explanation": "Arguments are passed by value by default. ref, out, and in change parameter passing semantics and should be used only when their intent is clear."
+        }
+      ],
+      "example": "static double Average(int first, int second)\n{\n    int total = first + second;\n    return total / 2.0;\n}\n\nstatic bool IsPassing(int score) => score >= 80;\n\nConsole.WriteLine(Average(80, 92));\nConsole.WriteLine(IsPassing(84));",
+      "challenge": "Write one method that accepts two numeric parameters and returns a calculated result, then call it.",
+      "hint": "Choose a non-void return type and return the computed value instead of only printing inside the method.",
+      "solution": "static double Average(int first, int second)\n{\n    int total = first + second;\n    return total / 2.0;\n}\n\nstatic bool IsPassing(int score) => score >= 80;\n\nConsole.WriteLine(Average(80, 92));\nConsole.WriteLine(IsPassing(84));",
+      "groups": [
+        [
+          "static "
+        ],
+        [
+          "return "
+        ],
+        [
+          "("
+        ],
+        [
+          "Console.WriteLine"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Classes, Objects & Basic Encapsulation",
+      "summary": "Create your own reference types with fields/properties, constructors, methods, and controlled access to state.",
+      "concepts": [
+        {
+          "name": "Class and instance",
+          "explanation": "A class describes a type; new creates an instance. Each instance has its own instance state while static members belong to the type itself."
+        },
+        {
+          "name": "Properties",
+          "explanation": "Properties expose get/set accessors and are the normal public data surface for C# objects. Auto-properties are concise when no custom accessor logic is required."
+        },
+        {
+          "name": "Constructors",
+          "explanation": "Constructors establish valid initial state. Prefer objects that cannot exist in obviously invalid states after construction."
+        }
+      ],
+      "example": "class Learner\n{\n    public string Name { get; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}\n\nLearner learner = new(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");",
+      "challenge": "Create a class with two properties, a constructor, and one method that changes controlled state.",
+      "hint": "Use private set when callers should be able to read a property but not assign it directly.",
+      "solution": "class Learner\n{\n    public string Name { get; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}\n\nLearner learner = new(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");",
+      "groups": [
+        [
+          "class "
+        ],
+        [
+          "public "
+        ],
+        [
+          "{ get;"
+        ],
+        [
+          "constructor",
+          "public "
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <AssemblyName>CodeAscensionAcademy</AssemblyName>
+    <RootNamespace>Academy.Desktop</RootNamespace>
+    <Product>Code Ascension Academy</Product>
+    <AssemblyTitle>Code Ascension Academy</AssemblyTitle>
+    <Version>2.0.0</Version>
+    <FileVersion>2.0.0.0</FileVersion>
+    <InformationalVersion>2.0.0</InformationalVersion>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +29,13 @@
     <Content Include="..\..\web\**\*">
       <Link>web\%(RecursiveDir)%(Filename)%(Extension)</Link>
       <TargetPath>web\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+
+    <Content Include="..\..\curriculum\**\*">
+      <Link>web\curriculum\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <TargetPath>web\curriculum\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

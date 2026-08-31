@@ -1,0 +1,216 @@
+{
+  "language": "css",
+  "difficulty": "senior",
+  "topics": [
+    {
+      "title": "Cascade Layers & Specificity Engineering",
+      "summary": "Control large stylesheets by explicitly ordering groups of rules and reducing accidental specificity wars.",
+      "concepts": [
+        {
+          "name": "Cascade layers",
+          "explanation": "@layer lets authors declare an order for style groups. Later layers beat earlier layers before selector specificity is compared within a layer."
+        },
+        {
+          "name": "Specificity control",
+          "explanation": ":where() contributes zero specificity, while :is(), :not(), and :has() use the specificity of their most specific argument."
+        },
+        {
+          "name": "Overrides as design",
+          "explanation": "A healthy system defines where resets, base styles, components, utilities, and overrides belong instead of relying on ever-larger selectors."
+        }
+      ],
+      "example": "@layer reset, base, components, utilities;\n\n@layer base {\n  :where(body) { margin: 0; font-family: system-ui, sans-serif; }\n}\n\n@layer components {\n  .button { padding: .75rem 1rem; }\n}\n\n@layer utilities {\n  .hidden { display: none !important; }\n}",
+      "challenge": "Declare at least three cascade layers and place rules into two of them.",
+      "hint": "Declare the layer order once near the top so future files can join the same ordered system.",
+      "solution": "@layer reset, base, components, utilities;\n\n@layer base {\n  :where(body) { margin: 0; font-family: system-ui, sans-serif; }\n}\n\n@layer components {\n  .button { padding: .75rem 1rem; }\n}\n\n@layer utilities {\n  .hidden { display: none !important; }\n}",
+      "groups": [
+        [
+          "@layer"
+        ],
+        [
+          ":where("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Container Queries & Component Responsiveness",
+      "summary": "Make components respond to the space they actually receive rather than assuming viewport width describes their layout context.",
+      "concepts": [
+        {
+          "name": "Containment context",
+          "explanation": "container-type establishes an element as a query container, commonly inline-size for width-based component queries."
+        },
+        {
+          "name": "@container",
+          "explanation": "Container queries conditionally style descendants based on the container instead of the viewport."
+        },
+        {
+          "name": "Container units",
+          "explanation": "Units such as cqw and cqi are relative to query-container dimensions and can support local fluid sizing."
+        }
+      ],
+      "example": ".course-shell {\n  container-type: inline-size;\n  container-name: course;\n}\n\n.course-card { display: grid; gap: 1rem; }\n\n@container course (min-width: 640px) {\n  .course-card { grid-template-columns: 160px 1fr; }\n}",
+      "challenge": "Create a named inline-size container and a @container rule that changes a child layout.",
+      "hint": "The query container belongs on the ancestor; the @container rule styles descendants based on that ancestor size.",
+      "solution": ".course-shell {\n  container-type: inline-size;\n  container-name: course;\n}\n\n.course-card { display: grid; gap: 1rem; }\n\n@container course (min-width: 640px) {\n  .course-card { grid-template-columns: 160px 1fr; }\n}",
+      "groups": [
+        [
+          "container-type"
+        ],
+        [
+          "@container"
+        ],
+        [
+          "grid-template-columns"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Subgrid & Shared Alignment",
+      "summary": "Use subgrid when nested components need to participate in the track sizing of an ancestor grid.",
+      "concepts": [
+        {
+          "name": "Subgrid",
+          "explanation": "A nested grid can use grid-template-columns: subgrid or grid-template-rows: subgrid to reuse the parent tracks it spans."
+        },
+        {
+          "name": "Shared alignment",
+          "explanation": "Subgrid solves cases where cards contain independent internal grids but headings, metadata, and actions need to line up across cards."
+        },
+        {
+          "name": "Span matters",
+          "explanation": "The subgridded element only receives tracks across the grid area it spans, so parent placement still determines the available track set."
+        }
+      ],
+      "example": ".cards {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 1rem;\n}\n\n.card {\n  display: grid;\n  grid-template-rows: subgrid;\n  grid-row: span 3;\n}",
+      "challenge": "Create a parent grid and a card that uses subgrid for rows while spanning multiple parent rows.",
+      "hint": "A subgrid needs an ancestor grid and a meaningful span across the inherited tracks.",
+      "solution": ".cards {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 1rem;\n}\n\n.card {\n  display: grid;\n  grid-template-rows: subgrid;\n  grid-row: span 3;\n}",
+      "groups": [
+        [
+          "display: grid",
+          "display:grid"
+        ],
+        [
+          "subgrid"
+        ],
+        [
+          "grid-row"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Logical Properties & Writing Modes",
+      "summary": "Write layouts that adapt naturally to left-to-right, right-to-left, and vertical writing modes by styling logical directions instead of physical ones.",
+      "concepts": [
+        {
+          "name": "Logical edges",
+          "explanation": "margin-inline, padding-block, border-inline-start, inset-inline-end, and similar properties map to directions according to writing mode and text direction."
+        },
+        {
+          "name": "Logical sizes",
+          "explanation": "inline-size and block-size correspond to the inline and block axes instead of always meaning physical width and height."
+        },
+        {
+          "name": "International layout",
+          "explanation": "Logical properties reduce special-case RTL overrides and make components more robust when content direction changes."
+        }
+      ],
+      "example": ".notice {\n  inline-size: min(100%, 42rem);\n  padding-block: 1rem;\n  padding-inline: 1.25rem;\n  border-inline-start: .25rem solid #4fdcff;\n  margin-inline: auto;\n}",
+      "challenge": "Style a notice using only logical padding/margin/border properties for its main spacing.",
+      "hint": "Translate “left/right/top/bottom” into “inline/block start/end” before writing the rule.",
+      "solution": ".notice {\n  inline-size: min(100%, 42rem);\n  padding-block: 1rem;\n  padding-inline: 1.25rem;\n  border-inline-start: .25rem solid #4fdcff;\n  margin-inline: auto;\n}",
+      "groups": [
+        [
+          "padding-inline"
+        ],
+        [
+          "padding-block"
+        ],
+        [
+          "border-inline"
+        ],
+        [
+          "inline-size"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Rendering Performance, Containment & content-visibility",
+      "summary": "Reduce rendering work in large interfaces by understanding layout/paint costs and applying containment only where component boundaries are real.",
+      "concepts": [
+        {
+          "name": "Containment",
+          "explanation": "contain can isolate layout, paint, size, or style behavior. Strong containment changes how an element participates in layout, so apply it deliberately."
+        },
+        {
+          "name": "content-visibility",
+          "explanation": "content-visibility: auto can skip rendering work for off-screen subtrees while preserving find-in-page/accessibility behavior better than simply removing content."
+        },
+        {
+          "name": "Measure first",
+          "explanation": "Performance CSS should follow profiling. A rule that improves one page can be irrelevant or harmful elsewhere if it changes layout semantics or memory use."
+        }
+      ],
+      "example": ".long-module-list > section {\n  content-visibility: auto;\n  contain-intrinsic-size: auto 480px;\n}\n\n.chart-shell {\n  contain: layout paint;\n}",
+      "challenge": "Add content-visibility to repeated long sections and apply a deliberate containment mode to a self-contained visual component.",
+      "hint": "Containment is a contract: use it only when the contained component truly does not need to affect outside layout/paint in the contained dimension.",
+      "solution": ".long-module-list > section {\n  content-visibility: auto;\n  contain-intrinsic-size: auto 480px;\n}\n\n.chart-shell {\n  contain: layout paint;\n}",
+      "groups": [
+        [
+          "content-visibility"
+        ],
+        [
+          "contain-intrinsic-size"
+        ],
+        [
+          "contain:"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

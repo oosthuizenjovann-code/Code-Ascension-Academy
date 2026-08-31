@@ -1,0 +1,238 @@
+{
+  "language": "csharp",
+  "difficulty": "advanced",
+  "topics": [
+    {
+      "title": "Span<T>, Memory<T> & Allocation-Aware APIs",
+      "summary": "Work with contiguous memory safely while avoiding unnecessary allocations/copies on measured hot paths.",
+      "concepts": [
+        {
+          "name": "Span<T>",
+          "explanation": "Span<T> is a stack-only ref struct view over contiguous memory. Slicing a span creates another view instead of copying the underlying data."
+        },
+        {
+          "name": "Memory<T>",
+          "explanation": "Memory<T> is not stack-only and can cross async boundaries or be stored on the heap; its Span property exposes synchronous span access."
+        },
+        {
+          "name": "Measure first",
+          "explanation": "Allocation reduction is valuable in hot paths, but ref-heavy APIs increase complexity. Profile before replacing simple string/array code with low-level memory abstractions."
+        }
+      ],
+      "example": "static int SumCsv(ReadOnlySpan<char> text)\n{\n    int total = 0;\n    while (!text.IsEmpty)\n    {\n        int comma = text.IndexOf(',');\n        ReadOnlySpan<char> part = comma < 0 ? text : text[..comma];\n        total += int.Parse(part);\n        if (comma < 0) break;\n        text = text[(comma + 1)..];\n    }\n    return total;\n}\n\nConsole.WriteLine(SumCsv(\"10,20,30\"));",
+      "challenge": "Write a method accepting ReadOnlySpan<char> and slice it at least once without creating a substring for every part.",
+      "hint": "Use range slicing such as span[..index] and span[(index + 1)..].",
+      "solution": "static int SumCsv(ReadOnlySpan<char> text)\n{\n    int total = 0;\n    while (!text.IsEmpty)\n    {\n        int comma = text.IndexOf(',');\n        ReadOnlySpan<char> part = comma < 0 ? text : text[..comma];\n        total += int.Parse(part);\n        if (comma < 0) break;\n        text = text[(comma + 1)..];\n    }\n    return total;\n}\n\nConsole.WriteLine(SumCsv(\"10,20,30\"));",
+      "groups": [
+        [
+          "ReadOnlySpan<",
+          "Span<"
+        ],
+        [
+          ".."
+        ],
+        [
+          "Slice",
+          "["
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Reduce allocations and copies",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/performance/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Expression Trees & Code-as-Data",
+      "summary": "Represent lambda expressions as inspectable expression trees for query providers, rules engines, mapping, and dynamic composition.",
+      "concepts": [
+        {
+          "name": "Delegate versus tree",
+          "explanation": "Func<T,...> is executable behavior. Expression<Func<T,...>> is a data structure describing the expression and can later be compiled or translated."
+        },
+        {
+          "name": "Tree nodes",
+          "explanation": "Expression trees contain nodes such as parameters, constants, member access, calls, and binary operations. Libraries can inspect these to build SQL or other representations."
+        },
+        {
+          "name": "Limits",
+          "explanation": "Not every C# construct can appear in an expression tree, and providers support different subsets. Keep translated expressions within the target provider capabilities."
+        }
+      ],
+      "example": "using System.Linq.Expressions;\n\nExpression<Func<int, bool>> passingExpression = score => score >= 80;\n\nBinaryExpression body = (BinaryExpression)passingExpression.Body;\nConsole.WriteLine(body.NodeType);\nConsole.WriteLine(body.Left);\nConsole.WriteLine(body.Right);\n\nFunc<int, bool> passing = passingExpression.Compile();\nConsole.WriteLine(passing(92));",
+      "challenge": "Create an Expression<Func<...>>, inspect at least one property of its Body, then compile and invoke it.",
+      "hint": "The important distinction is that the expression variable stores a tree before Compile turns it into executable delegate behavior.",
+      "solution": "using System.Linq.Expressions;\n\nExpression<Func<int, bool>> passingExpression = score => score >= 80;\n\nBinaryExpression body = (BinaryExpression)passingExpression.Body;\nConsole.WriteLine(body.NodeType);\nConsole.WriteLine(body.Left);\nConsole.WriteLine(body.Right);\n\nFunc<int, bool> passing = passingExpression.Compile();\nConsole.WriteLine(passing(92));",
+      "groups": [
+        [
+          "Expression<Func"
+        ],
+        [
+          ".Body"
+        ],
+        [
+          ".Compile("
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — LINQ",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Async Streams & IAsyncEnumerable<T>",
+      "summary": "Produce and consume values over time with async iterators without waiting for an entire asynchronous collection to materialize.",
+      "concepts": [
+        {
+          "name": "Async iterator",
+          "explanation": "An async iterator returns IAsyncEnumerable<T>, uses yield return, and can await between produced values."
+        },
+        {
+          "name": "await foreach",
+          "explanation": "Consumers enumerate asynchronous streams with await foreach, receiving values as they become available."
+        },
+        {
+          "name": "Cancellation",
+          "explanation": "[EnumeratorCancellation] can connect a cancellation token parameter with WithCancellation/consumer cancellation semantics in custom iterators."
+        }
+      ],
+      "example": "using System.Runtime.CompilerServices;\n\nstatic async IAsyncEnumerable<int> CountAsync(\n    [EnumeratorCancellation] CancellationToken token = default)\n{\n    for (int i = 1; i <= 5; i++)\n    {\n        token.ThrowIfCancellationRequested();\n        await Task.Delay(100, token);\n        yield return i;\n    }\n}\n\nawait foreach (int value in CountAsync())\n    Console.WriteLine(value);",
+      "challenge": "Write an async iterator that awaits between yielded values and consume it with await foreach.",
+      "hint": "The method return type is IAsyncEnumerable<T>; inside it you can combine await and yield return.",
+      "solution": "using System.Runtime.CompilerServices;\n\nstatic async IAsyncEnumerable<int> CountAsync(\n    [EnumeratorCancellation] CancellationToken token = default)\n{\n    for (int i = 1; i <= 5; i++)\n    {\n        token.ThrowIfCancellationRequested();\n        await Task.Delay(100, token);\n        yield return i;\n    }\n}\n\nawait foreach (int value in CountAsync())\n    Console.WriteLine(value);",
+      "groups": [
+        [
+          "IAsyncEnumerable<"
+        ],
+        [
+          "yield return"
+        ],
+        [
+          "await foreach"
+        ],
+        [
+          "await "
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Asynchronous programming",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Variance, Advanced Generic Constraints & Generic Algorithms",
+      "summary": "Understand covariance/contravariance and express generic algorithms over precise capabilities without unsafe casts.",
+      "concepts": [
+        {
+          "name": "Covariance",
+          "explanation": "out type parameters permit a generic interface/delegate to produce a more derived type where a base type is expected, such as IEnumerable<string> used as IEnumerable<object>."
+        },
+        {
+          "name": "Contravariance",
+          "explanation": "in type parameters permit consumers of a base type to stand in for consumers of a derived type in supported generic interfaces/delegates."
+        },
+        {
+          "name": "Constraints as capabilities",
+          "explanation": "Multiple constraints can require interfaces, constructors, nullability/value/reference semantics, or static abstract members so algorithms remain type-safe."
+        }
+      ],
+      "example": "IEnumerable<string> names = new[] { \"HTML\", \"CSS\" };\nIEnumerable<object> objects = names; // covariance\n\nAction<object> printObject = value => Console.WriteLine(value);\nAction<string> printString = printObject; // contravariance\nprintString(\"C#\");\n\nstatic T Create<T>() where T : class, new() => new T();",
+      "challenge": "Demonstrate one valid generic variance assignment and write a generic method with at least two constraints.",
+      "hint": "Remember the direction: producers are commonly covariant (out), consumers are commonly contravariant (in).",
+      "solution": "IEnumerable<string> names = new[] { \"HTML\", \"CSS\" };\nIEnumerable<object> objects = names; // covariance\n\nAction<object> printObject = value => Console.WriteLine(value);\nAction<string> printString = printObject; // contravariance\nprintString(\"C#\");\n\nstatic T Create<T>() where T : class, new() => new T();",
+      "groups": [
+        [
+          "IEnumerable<"
+        ],
+        [
+          "Action<"
+        ],
+        [
+          "where T :"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Generic types and methods",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Unsafe, Interop, GC & Performance Engineering Capstone",
+      "summary": "Recognize when advanced runtime techniques are justified and how to measure allocations, pinning, native boundaries, unsafe code, and garbage-collection behavior.",
+      "concepts": [
+        {
+          "name": "Unsafe and interop",
+          "explanation": "unsafe code and pointers can bypass some runtime safety for specialized memory/native interop scenarios. P/Invoke and source-generated interop cross managed/native boundaries."
+        },
+        {
+          "name": "GC pressure",
+          "explanation": "Allocation rate, object lifetime, large objects, pinning, finalization, and retained references influence garbage-collector work. Optimize from profiler evidence, not folklore."
+        },
+        {
+          "name": "Engineering discipline",
+          "explanation": "Advanced optimization requires a baseline, a reproducible benchmark/profile, one controlled change, and verification that correctness and maintainability remain acceptable."
+        }
+      ],
+      "example": "static unsafe int Sum(int* values, int length)\n{\n    int total = 0;\n    for (int i = 0; i < length; i++)\n        total += values[i];\n    return total;\n}\n\nint[] numbers = { 10, 20, 30 };\nunsafe\n{\n    fixed (int* pointer = numbers)\n    {\n        Console.WriteLine(Sum(pointer, numbers.Length));\n    }\n}",
+      "challenge": "Write a small unsafe pointer example or, if you prefer safe code, rewrite the same operation with Span<T> and explain why you would choose one approach.",
+      "hint": "Unsafe code should be an explicit tool for measured/native requirements, not a badge of seniority. A safe Span<T> solution is often the better answer.",
+      "solution": "static unsafe int Sum(int* values, int length)\n{\n    int total = 0;\n    for (int i = 0; i < length; i++)\n        total += values[i];\n    return total;\n}\n\nint[] numbers = { 10, 20, 30 };\nunsafe\n{\n    fixed (int* pointer = numbers)\n    {\n        Console.WriteLine(Sum(pointer, numbers.Length));\n    }\n}",
+      "groups": [
+        [
+          "unsafe",
+          "Span<"
+        ],
+        [
+          "for ("
+        ],
+        [
+          "Console.WriteLine",
+          "return "
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Reduce allocations and copies",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/performance/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

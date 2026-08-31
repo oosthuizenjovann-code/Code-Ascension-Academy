@@ -1,0 +1,228 @@
+{
+  "language": "javascript",
+  "difficulty": "advanced",
+  "topics": [
+    {
+      "title": "Execution Model, Event Loop & Microtasks",
+      "summary": "Predict ordering between synchronous code, promise reactions, queueMicrotask, timers, rendering opportunities, and long-running tasks.",
+      "concepts": [
+        {
+          "name": "Run to completion",
+          "explanation": "A JavaScript task runs until its stack is empty. Long synchronous work blocks other tasks and can make the UI unresponsive."
+        },
+        {
+          "name": "Microtasks",
+          "explanation": "Promise reactions and queueMicrotask callbacks run from the microtask queue after the current task and before the event loop moves to many other tasks such as timers."
+        },
+        {
+          "name": "Scheduling design",
+          "explanation": "Breaking work into chunks, yielding appropriately, and avoiding accidental microtask starvation are part of responsive application architecture."
+        }
+      ],
+      "example": "console.log(\"sync 1\");\n\nsetTimeout(() => console.log(\"timer\"), 0);\nPromise.resolve().then(() => console.log(\"promise microtask\"));\nqueueMicrotask(() => console.log(\"queued microtask\"));\n\nconsole.log(\"sync 2\");",
+      "challenge": "Write a small ordering experiment containing synchronous logs, one promise microtask, queueMicrotask, and a zero-delay timer.",
+      "hint": "Before running it, predict the order. The synchronous stack finishes before microtasks, and the timer is a later task.",
+      "solution": "console.log(\"sync 1\");\n\nsetTimeout(() => console.log(\"timer\"), 0);\nPromise.resolve().then(() => console.log(\"promise microtask\"));\nqueueMicrotask(() => console.log(\"queued microtask\"));\n\nconsole.log(\"sync 2\");",
+      "groups": [
+        [
+          "setTimeout"
+        ],
+        [
+          "Promise.resolve"
+        ],
+        [
+          "queueMicrotask"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Memory, Reachability & Leak Prevention",
+      "summary": "Reason about garbage collection through reachability and identify common leak patterns involving listeners, timers, caches, closures, and detached DOM.",
+      "concepts": [
+        {
+          "name": "Reachability",
+          "explanation": "Garbage collectors reclaim objects that are no longer reachable from roots. You do not manually free ordinary JavaScript objects."
+        },
+        {
+          "name": "Leaks",
+          "explanation": "An accidental long-lived reference can keep an otherwise unused object reachable: global collections, forgotten event listeners, intervals, caches, and closures are common examples."
+        },
+        {
+          "name": "Weak references",
+          "explanation": "WeakMap and WeakSet are useful when metadata should not keep object keys alive. WeakRef/FinalizationRegistry exist for specialized cases and are not normal cache-management tools."
+        }
+      ],
+      "example": "class ViewController {\n  #onResize = () => console.log(\"resize\");\n\n  mount() {\n    window.addEventListener(\"resize\", this.#onResize);\n  }\n\n  unmount() {\n    window.removeEventListener(\"resize\", this.#onResize);\n  }\n}",
+      "challenge": "Create a small class/object that registers an event listener and provides a cleanup method that removes the same listener.",
+      "hint": "You must retain the exact function reference used during addEventListener so removeEventListener can remove it.",
+      "solution": "class ViewController {\n  #onResize = () => console.log(\"resize\");\n\n  mount() {\n    window.addEventListener(\"resize\", this.#onResize);\n  }\n\n  unmount() {\n    window.removeEventListener(\"resize\", this.#onResize);\n  }\n}",
+      "groups": [
+        [
+          "addEventListener"
+        ],
+        [
+          "removeEventListener"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Symbols, Metaprogramming & Protocol Hooks",
+      "summary": "Use symbols for collision-resistant keys and understand language protocols such as iteration, conversion, and built-in customization points.",
+      "concepts": [
+        {
+          "name": "Symbol keys",
+          "explanation": "Every Symbol() call creates a unique value. Symbol properties are useful for metadata or protocol hooks that should not collide with ordinary string keys."
+        },
+        {
+          "name": "Well-known symbols",
+          "explanation": "Symbol.iterator, Symbol.toPrimitive, Symbol.asyncIterator, and others let objects participate in built-in language operations."
+        },
+        {
+          "name": "Protocol thinking",
+          "explanation": "Instead of asking whether an object has a specific class, many JavaScript features ask whether it implements the expected protocol."
+        }
+      ],
+      "example": "const id = Symbol(\"id\");\nconst learner = {\n  [id]: 42,\n  name: \"Nova\",\n  [Symbol.toPrimitive](hint) {\n    return hint === \"number\" ? this[id] : this.name;\n  }\n};\n\nconsole.log(String(learner));\nconsole.log(Number(learner));",
+      "challenge": "Create an object with a symbol-keyed property and implement one well-known symbol such as Symbol.toPrimitive or Symbol.iterator.",
+      "hint": "Computed property syntax [symbol] lets a Symbol value become the actual property key.",
+      "solution": "const id = Symbol(\"id\");\nconst learner = {\n  [id]: 42,\n  name: \"Nova\",\n  [Symbol.toPrimitive](hint) {\n    return hint === \"number\" ? this[id] : this.name;\n  }\n};\n\nconsole.log(String(learner));\nconsole.log(Number(learner));",
+      "groups": [
+        [
+          "Symbol("
+        ],
+        [
+          "[Symbol."
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Module Architecture, Dynamic Loading & Dependency Boundaries",
+      "summary": "Design larger codebases around explicit dependency direction, stable public APIs, lazy loading, and testable side-effect boundaries.",
+      "concepts": [
+        {
+          "name": "Static graph",
+          "explanation": "Static imports make module dependencies visible to tooling and humans. Circular dependencies are legal but can expose partially initialized bindings and confusing architecture."
+        },
+        {
+          "name": "Dynamic import",
+          "explanation": "import() loads a module asynchronously and is useful for optional features, route-level code, heavy editors, or rarely used admin tools."
+        },
+        {
+          "name": "Side-effect boundaries",
+          "explanation": "Keep network, storage, DOM, and timers near clear boundaries. Core business logic becomes easier to test when it accepts data and returns data rather than reaching into global state."
+        }
+      ],
+      "example": "// academy-service.js\nexport function createAcademyService({ storage, fetchJson }) {\n  return {\n    loadLocal() { return storage.load(); },\n    async loadReference(url) { return fetchJson(url); }\n  };\n}\n\nexport async function loadEditor() {\n  const module = await import(\"./editor.js\");\n  return module.createEditor();\n}",
+      "challenge": "Create a module factory that receives dependencies instead of reading globals directly, and add one dynamic import function.",
+      "hint": "Dependency injection can be as simple as passing an object of required functions into a factory.",
+      "solution": "// academy-service.js\nexport function createAcademyService({ storage, fetchJson }) {\n  return {\n    loadLocal() { return storage.load(); },\n    async loadReference(url) { return fetchJson(url); }\n  };\n}\n\nexport async function loadEditor() {\n  const module = await import(\"./editor.js\");\n  return module.createEditor();\n}",
+      "groups": [
+        [
+          "export "
+        ],
+        [
+          "import("
+        ],
+        [
+          "async "
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Performance, Security & JavaScript Audit Capstone",
+      "summary": "Audit execution cost, DOM work, data flow, network behavior, user input handling, and dangerous APIs as one professional engineering problem.",
+      "concepts": [
+        {
+          "name": "Measure performance",
+          "explanation": "Use browser performance tooling to identify long tasks, expensive rendering, unnecessary network work, and memory growth before “optimizing” code."
+        },
+        {
+          "name": "Treat input as data",
+          "explanation": "Avoid eval and careless innerHTML with untrusted input. Prefer textContent, createElement, trusted templates, and proper server-side validation/sanitization where HTML is unavoidable."
+        },
+        {
+          "name": "Architect for failure",
+          "explanation": "Network calls fail, storage can be unavailable, users double-click, tabs sleep, and data can be malformed. Advanced code makes failure states explicit rather than assuming the happy path."
+        }
+      ],
+      "example": "function renderMessage(container, message) {\n  const paragraph = document.createElement(\"p\");\n  paragraph.textContent = String(message);\n  container.replaceChildren(paragraph);\n}\n\nasync function loadWithTimeout(url, milliseconds = 5000) {\n  const controller = new AbortController();\n  const timer = setTimeout(() => controller.abort(), milliseconds);\n  try {\n    const response = await fetch(url, { signal: controller.signal });\n    if (!response.ok) throw new Error(`HTTP ${response.status}`);\n    return await response.json();\n  } finally {\n    clearTimeout(timer);\n  }\n}",
+      "challenge": "Write a safe DOM rendering function using textContent and an async fetch helper with explicit failure/cleanup behavior.",
+      "hint": "Keep untrusted strings out of innerHTML, and use try/finally when cleanup such as clearTimeout must always happen.",
+      "solution": "function renderMessage(container, message) {\n  const paragraph = document.createElement(\"p\");\n  paragraph.textContent = String(message);\n  container.replaceChildren(paragraph);\n}\n\nasync function loadWithTimeout(url, milliseconds = 5000) {\n  const controller = new AbortController();\n  const timer = setTimeout(() => controller.abort(), milliseconds);\n  try {\n    const response = await fetch(url, { signal: controller.signal });\n    if (!response.ok) throw new Error(`HTTP ${response.status}`);\n    return await response.json();\n  } finally {\n    clearTimeout(timer);\n  }\n}",
+      "groups": [
+        [
+          "textContent"
+        ],
+        [
+          "AbortController"
+        ],
+        [
+          "try {"
+        ],
+        [
+          "finally"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

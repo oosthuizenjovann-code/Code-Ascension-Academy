@@ -1,0 +1,229 @@
+{
+  "language": "css",
+  "difficulty": "advanced",
+  "topics": [
+    {
+      "title": "Native CSS Nesting & Scoped Organization",
+      "summary": "Use modern nesting to keep component rules together without recreating deep preprocessor selector chains.",
+      "concepts": [
+        {
+          "name": "Native nesting",
+          "explanation": "Nested selectors can be written inside a parent rule. The & nesting selector explicitly references the parent selector in states and variants."
+        },
+        {
+          "name": "Keep depth shallow",
+          "explanation": "Nesting is organizational syntax, not a reason to create tightly coupled DOM selectors. Deep nesting makes components hard to move and override."
+        },
+        {
+          "name": "Scope strategy",
+          "explanation": "Modern CSS increasingly supports local scoping tools; even without them, component classes and cascade layers should define intentional boundaries."
+        }
+      ],
+      "example": ".course-card {\n  padding: 1rem;\n\n  & > h3 { margin-block-start: 0; }\n\n  &:hover,\n  &:focus-within {\n    border-color: var(--accent);\n  }\n\n  &.is-complete { opacity: .85; }\n}",
+      "challenge": "Write a component rule using native nesting for a child, a state, and a variant.",
+      "hint": "Use & where the nested selector modifies or extends the parent selector.",
+      "solution": ".course-card {\n  padding: 1rem;\n\n  & > h3 { margin-block-start: 0; }\n\n  &:hover,\n  &:focus-within {\n    border-color: var(--accent);\n  }\n\n  &.is-complete { opacity: .85; }\n}",
+      "groups": [
+        [
+          "&"
+        ],
+        [
+          ":focus-within"
+        ],
+        [
+          ".course-card"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Modern Color Spaces & Color Functions",
+      "summary": "Work with alpha-aware modern syntax, color-mix(), relative color, perceptual spaces, and theme tokens while preserving contrast.",
+      "concepts": [
+        {
+          "name": "Perceptual spaces",
+          "explanation": "oklab() and oklch() are designed around perceptual properties, making lightness and color adjustments more predictable than raw RGB changes."
+        },
+        {
+          "name": "Color mixing",
+          "explanation": "color-mix() creates derived colors at computed-value time and works well with custom properties for borders, hover states, and overlays."
+        },
+        {
+          "name": "Contrast responsibility",
+          "explanation": "A mathematically smooth palette can still be unreadable. Verify text/background contrast and state differences with accessibility tooling."
+        }
+      ],
+      "example": ":root {\n  --accent: oklch(78% .15 210);\n  --danger: oklch(66% .22 25);\n}\n\n.button {\n  background: var(--accent);\n  border-color: color-mix(in oklch, var(--accent) 70%, black);\n}\n\n.button:hover {\n  background: color-mix(in oklch, var(--accent) 86%, white);\n}",
+      "challenge": "Define an OKLCH accent token and derive at least one related color with color-mix().",
+      "hint": "Keep the source color as a custom property so derived states stay related to the same design token.",
+      "solution": ":root {\n  --accent: oklch(78% .15 210);\n  --danger: oklch(66% .22 25);\n}\n\n.button {\n  background: var(--accent);\n  border-color: color-mix(in oklch, var(--accent) 70%, black);\n}\n\n.button:hover {\n  background: color-mix(in oklch, var(--accent) 86%, white);\n}",
+      "groups": [
+        [
+          "oklch("
+        ],
+        [
+          "color-mix("
+        ],
+        [
+          "--accent"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Advanced Grid, Intrinsic Constraints & Overflow",
+      "summary": "Solve dense application layouts by combining grid track sizing, minimum-size behavior, overflow rules, and content constraints.",
+      "concepts": [
+        {
+          "name": "Automatic minimums",
+          "explanation": "Grid and flex items can refuse to shrink because their automatic minimum size is content-based. min-width: 0 or minmax(0, 1fr) often fixes unexpected overflow."
+        },
+        {
+          "name": "Track strategy",
+          "explanation": "Use minmax(), fit-content(), subgrid, and auto-fit/auto-fill intentionally rather than stacking breakpoints to fight content."
+        },
+        {
+          "name": "Overflow is a signal",
+          "explanation": "Clipping or scrolling may be correct, but unexplained overflow often reveals an incorrect minimum size, unbreakable content, or overly rigid track."
+        }
+      ],
+      "example": ".app-layout {\n  display: grid;\n  grid-template-columns: fit-content(18rem) minmax(0, 1fr);\n  min-block-size: 100dvh;\n}\n\n.main-pane {\n  min-inline-size: 0;\n  overflow: auto;\n}",
+      "challenge": "Create a sidebar/main layout that resists content overflow using fit-content and minmax(0, 1fr).",
+      "hint": "When the flexible track still overflows, inspect the grid item minimum size and long unbreakable content.",
+      "solution": ".app-layout {\n  display: grid;\n  grid-template-columns: fit-content(18rem) minmax(0, 1fr);\n  min-block-size: 100dvh;\n}\n\n.main-pane {\n  min-inline-size: 0;\n  overflow: auto;\n}",
+      "groups": [
+        [
+          "fit-content("
+        ],
+        [
+          "minmax(0, 1fr)",
+          "minmax(0,1fr)"
+        ],
+        [
+          "min-inline-size",
+          "min-width"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Accessible Themes, Motion & Forced-Color Resilience",
+      "summary": "Design themes and interaction states that remain understandable across dark mode, reduced motion, high contrast/forced colors, and keyboard input.",
+      "concepts": [
+        {
+          "name": "Color-scheme",
+          "explanation": "color-scheme can inform the browser which light/dark schemes native controls and default surfaces support."
+        },
+        {
+          "name": "Forced colors",
+          "explanation": "forced-colors environments may replace author colors. Avoid communicating state only through subtle color and test system high-contrast modes."
+        },
+        {
+          "name": "Motion and focus",
+          "explanation": "Respect reduced-motion preference and keep clear focus-visible indicators. Accessibility variants should be part of the design system, not emergency patches."
+        }
+      ],
+      "example": ":root { color-scheme: dark; }\n\n.button:focus-visible {\n  outline: 3px solid CanvasText;\n  outline-offset: 3px;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .button { transition-duration: 0.01ms; }\n}\n\n@media (forced-colors: active) {\n  .button { border: 2px solid ButtonText; }\n}",
+      "challenge": "Add focus-visible styling plus reduced-motion and forced-colors adaptations.",
+      "hint": "Test meaning with author colors removed; borders, text, and native control states should still communicate structure.",
+      "solution": ":root { color-scheme: dark; }\n\n.button:focus-visible {\n  outline: 3px solid CanvasText;\n  outline-offset: 3px;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .button { transition-duration: 0.01ms; }\n}\n\n@media (forced-colors: active) {\n  .button { border: 2px solid ButtonText; }\n}",
+      "groups": [
+        [
+          ":focus-visible"
+        ],
+        [
+          "prefers-reduced-motion"
+        ],
+        [
+          "forced-colors"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Professional CSS Systems & Debugging Capstone",
+      "summary": "Diagnose cascade, layout, overflow, stacking, responsiveness, and rendering problems systematically while keeping a scalable architecture.",
+      "concepts": [
+        {
+          "name": "Debug the computed result",
+          "explanation": "Use developer tools to inspect which declaration won, which values were inherited, and which rules are crossed out before adding overrides."
+        },
+        {
+          "name": "Debug layout from the container outward",
+          "explanation": "Check the formatting context, available size, minimums, overflow, and track/flex rules before changing child margins at random."
+        },
+        {
+          "name": "Architecture and measurement",
+          "explanation": "Use layers, tokens, component boundaries, responsive containers, and performance measurements as parts of one system. Avoid “fixes” that only work at the current viewport."
+        }
+      ],
+      "example": "@layer base, components, utilities;\n\n:root { --space-3: .75rem; --accent: oklch(78% .15 210); }\n\n@layer components {\n  .course-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));\n    gap: var(--space-3);\n  }\n}\n\n@layer utilities {\n  .focus-ring:focus-visible { outline: 3px solid var(--accent); }\n}",
+      "challenge": "Build a compact CSS system using a layer order, tokens, a responsive grid, and an accessible focus utility.",
+      "hint": "Treat the challenge as architecture: the rules should still make sense when there are twenty components, not only one demo card.",
+      "solution": "@layer base, components, utilities;\n\n:root { --space-3: .75rem; --accent: oklch(78% .15 210); }\n\n@layer components {\n  .course-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));\n    gap: var(--space-3);\n  }\n}\n\n@layer utilities {\n  .focus-ring:focus-visible { outline: 3px solid var(--accent); }\n}",
+      "groups": [
+        [
+          "@layer"
+        ],
+        [
+          "--"
+        ],
+        [
+          "display: grid",
+          "display:grid"
+        ],
+        [
+          ":focus-visible"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS styling basics",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+        },
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "language": "css",
+  "difficulty": "junior",
+  "topics": [
+    {
+      "title": "Sizing, Units & Functions",
+      "summary": "Choose units based on what a value should respond to, then use min(), max(), clamp(), and calc() to express relationships instead of magic numbers.",
+      "concepts": [
+        {
+          "name": "Relative units",
+          "explanation": "rem responds to the root font size, em responds to the current element, percentages depend on a reference size, and viewport units respond to the viewport."
+        },
+        {
+          "name": "Content constraints",
+          "explanation": "min-width, max-width, min-height, and max-height let a component be flexible without becoming unusably small or large."
+        },
+        {
+          "name": "Math functions",
+          "explanation": "calc() combines compatible units. min(), max(), and clamp() encode lower/upper bounds and fluid scaling directly in CSS."
+        }
+      ],
+      "example": ".page {\n  width: min(92vw, 1100px);\n  margin-inline: auto;\n}\n\nh1 {\n  font-size: clamp(2rem, 5vw, 4.5rem);\n}",
+      "challenge": "Create a centered container with a maximum width and a heading that scales fluidly using clamp().",
+      "hint": "Use min() for container width and clamp(min, preferred, max) for the font size.",
+      "solution": ".page {\n  width: min(92vw, 1100px);\n  margin-inline: auto;\n}\n\nh1 {\n  font-size: clamp(2rem, 5vw, 4.5rem);\n}",
+      "groups": [
+        [
+          "min("
+        ],
+        [
+          "clamp("
+        ],
+        [
+          "margin-inline"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS styling basics",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Positioning, Containing Blocks & z-index",
+      "summary": "Control normal flow, offsets, sticky/fixed behavior, and stacking without using positioning as a substitute for layout.",
+      "concepts": [
+        {
+          "name": "Position modes",
+          "explanation": "relative keeps the element in normal flow while allowing offsets; absolute removes it from normal flow and positions it against a containing block; fixed attaches to a viewport-like reference."
+        },
+        {
+          "name": "Sticky",
+          "explanation": "position: sticky behaves like relative until a threshold such as top: 0 is crossed, then remains stuck within its scroll container."
+        },
+        {
+          "name": "Stacking",
+          "explanation": "z-index participates in stacking contexts. A huge z-index cannot escape an ancestor stacking context; first understand which element created the context."
+        }
+      ],
+      "example": ".card {\n  position: relative;\n}\n\n.card__badge {\n  position: absolute;\n  top: 12px;\n  right: 12px;\n  z-index: 1;\n}\n\n.sidebar {\n  position: sticky;\n  top: 16px;\n}",
+      "challenge": "Place a badge in the top-right of a card and make a sidebar sticky.",
+      "hint": "The absolute badge needs a positioned ancestor; give the card position: relative.",
+      "solution": ".card {\n  position: relative;\n}\n\n.card__badge {\n  position: absolute;\n  top: 12px;\n  right: 12px;\n  z-index: 1;\n}\n\n.sidebar {\n  position: sticky;\n  top: 16px;\n}",
+      "groups": [
+        [
+          "position: relative",
+          "position:relative"
+        ],
+        [
+          "position: absolute",
+          "position:absolute"
+        ],
+        [
+          "position: sticky",
+          "position:sticky"
+        ],
+        [
+          "z-index"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "CSS Grid Fundamentals",
+      "summary": "Use explicit rows and columns, flexible tracks, named areas, and item placement for two-dimensional layouts.",
+      "concepts": [
+        {
+          "name": "Tracks",
+          "explanation": "grid-template-columns and grid-template-rows define tracks. fr shares leftover space; minmax() gives a track flexible limits."
+        },
+        {
+          "name": "Placement",
+          "explanation": "Items can be placed with grid-column/grid-row or named areas. Auto-placement handles the rest of the items."
+        },
+        {
+          "name": "Responsive grids",
+          "explanation": "repeat(auto-fit, minmax(...)) can create grids that adapt to available width without a breakpoint for every card count."
+        }
+      ],
+      "example": ".course-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 18px;\n}\n\n.featured {\n  grid-column: span 2;\n}",
+      "challenge": "Create an auto-fitting card grid using minmax() and make one item span two columns.",
+      "hint": "A useful responsive pattern is repeat(auto-fit, minmax(minimum, 1fr)).",
+      "solution": ".course-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 18px;\n}\n\n.featured {\n  grid-column: span 2;\n}",
+      "groups": [
+        [
+          "display: grid",
+          "display:grid"
+        ],
+        [
+          "repeat("
+        ],
+        [
+          "minmax("
+        ],
+        [
+          "grid-column"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Media Queries & Responsive Strategy",
+      "summary": "Choose breakpoints when content needs them, and query user preferences and interaction capabilities in addition to width.",
+      "concepts": [
+        {
+          "name": "Content breakpoints",
+          "explanation": "Resize until the design stops working, then add a breakpoint. Device-name breakpoints age poorly because real devices vary."
+        },
+        {
+          "name": "Preference queries",
+          "explanation": "prefers-reduced-motion and prefers-color-scheme let your interface respect system-level user preferences."
+        },
+        {
+          "name": "Capability queries",
+          "explanation": "hover and pointer media features can help avoid hover-only experiences on touch-oriented devices."
+        }
+      ],
+      "example": ".card-grid { grid-template-columns: repeat(3, 1fr); }\n\n@media (max-width: 820px) {\n  .card-grid { grid-template-columns: 1fr; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  * { scroll-behavior: auto !important; }\n}",
+      "challenge": "Add one layout breakpoint and one prefers-reduced-motion rule.",
+      "hint": "Responsive CSS is not only about width. Treat accessibility preferences as responsive inputs too.",
+      "solution": ".card-grid { grid-template-columns: repeat(3, 1fr); }\n\n@media (max-width: 820px) {\n  .card-grid { grid-template-columns: 1fr; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  * { scroll-behavior: auto !important; }\n}",
+      "groups": [
+        [
+          "@media"
+        ],
+        [
+          "prefers-reduced-motion"
+        ],
+        [
+          "max-width"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Transforms, Transitions & State Feedback",
+      "summary": "Animate state changes efficiently with transforms and opacity while keeping motion purposeful and accessible.",
+      "concepts": [
+        {
+          "name": "Transforms",
+          "explanation": "transform can translate, scale, rotate, or skew an element without changing normal document flow."
+        },
+        {
+          "name": "Transitions",
+          "explanation": "transition animates between old and new computed values when a property changes. Prefer naming properties instead of transition: all."
+        },
+        {
+          "name": "State design",
+          "explanation": "Hover, focus-visible, active, disabled, and selected states should communicate meaning. Motion should support state feedback rather than distract from it."
+        }
+      ],
+      "example": ".button {\n  transform: translateY(0);\n  transition: transform 160ms ease, box-shadow 160ms ease;\n}\n\n.button:hover,\n.button:focus-visible {\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgb(0 180 255 / 0.22);\n}",
+      "challenge": "Create a button hover/focus transition using transform and one other visual property.",
+      "hint": "Animate a small set of deliberate properties and include :focus-visible, not only :hover.",
+      "solution": ".button {\n  transform: translateY(0);\n  transition: transform 160ms ease, box-shadow 160ms ease;\n}\n\n.button:hover,\n.button:focus-visible {\n  transform: translateY(-2px);\n  box-shadow: 0 8px 24px rgb(0 180 255 / 0.22);\n}",
+      "groups": [
+        [
+          "transition:",
+          "transition :"
+        ],
+        [
+          "transform:",
+          "transform :"
+        ],
+        [
+          ":focus-visible"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

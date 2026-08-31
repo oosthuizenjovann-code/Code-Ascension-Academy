@@ -1,0 +1,235 @@
+{
+  "language": "csharp",
+  "difficulty": "senior",
+  "topics": [
+    {
+      "title": "Value Types, Reference Types, ref & Nullability",
+      "summary": "Reason precisely about copying, aliasing, nullable reference analysis, structs, readonly data, and by-reference APIs.",
+      "concepts": [
+        {
+          "name": "Value versus reference",
+          "explanation": "Struct values are copied by value; class variables copy references to objects. This semantic distinction matters more than memorizing “stack versus heap” shortcuts."
+        },
+        {
+          "name": "ref family",
+          "explanation": "ref, in, out, ref readonly, ref returns, and ref locals allow code to alias storage rather than copy values. These tools improve specific APIs but increase lifetime/aliasing complexity."
+        },
+        {
+          "name": "Nullable references",
+          "explanation": "Nullable reference types add compile-time flow analysis. string and string? express different nullability intent, but the feature does not magically prevent every runtime null."
+        }
+      ],
+      "example": "#nullable enable\n\nreadonly struct Score\n{\n    public int Value { get; }\n    public Score(int value) => Value = value;\n}\n\nstatic int Max(in Score first, in Score second) =>\n    first.Value >= second.Value ? first.Value : second.Value;\n\nScore a = new(88);\nScore b = new(93);\nstring? optionalNote = null;\nConsole.WriteLine(Max(in a, in b));\nConsole.WriteLine(optionalNote?.Length ?? 0);",
+      "challenge": "Create a readonly struct and pass at least one struct argument with in/ref readonly semantics; also demonstrate one nullable reference.",
+      "hint": "Focus on semantics: readonly struct protects mutation, while in avoids copying/communicates readonly by-reference intent in suitable APIs.",
+      "solution": "#nullable enable\n\nreadonly struct Score\n{\n    public int Value { get; }\n    public Score(int value) => Value = value;\n}\n\nstatic int Max(in Score first, in Score second) =>\n    first.Value >= second.Value ? first.Value : second.Value;\n\nScore a = new(88);\nScore b = new(93);\nstring? optionalNote = null;\nConsole.WriteLine(Max(in a, in b));\nConsole.WriteLine(optionalNote?.Length ?? 0);",
+      "groups": [
+        [
+          "readonly struct"
+        ],
+        [
+          " in ",
+          "in "
+        ],
+        [
+          "string?",
+          "? "
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — Reduce allocations and copies",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/performance/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Advanced Interfaces, Abstractions & API Contracts",
+      "summary": "Design stable abstractions with interfaces, generic contracts, default/static interface members where appropriate, and explicit dependency direction.",
+      "concepts": [
+        {
+          "name": "Interface evolution",
+          "explanation": "Default interface members can add implementation to interfaces, but they change design tradeoffs and should not become a substitute for coherent base abstractions."
+        },
+        {
+          "name": "Static abstract members",
+          "explanation": "Modern C# interfaces can require static abstract members, enabling generic algorithms over operator-like capabilities and powering generic math patterns."
+        },
+        {
+          "name": "Dependency direction",
+          "explanation": "High-level logic should depend on contracts that describe needed behavior. Keep interfaces focused enough that implementations can satisfy them honestly."
+        }
+      ],
+      "example": "public interface IScorer<TSelf> where TSelf : IScorer<TSelf>\n{\n    static abstract TSelf FromScore(int value);\n    int Value { get; }\n}\n\npublic readonly record struct Score(int Value) : IScorer<Score>\n{\n    public static Score FromScore(int value) => new(value);\n}\n\nstatic T CreatePerfect<T>() where T : IScorer<T> => T.FromScore(100);\nConsole.WriteLine(CreatePerfect<Score>().Value);",
+      "challenge": "Create an interface with a static abstract member and a generic method constrained to that interface.",
+      "hint": "Static abstract interface members are consumed through a constrained type parameter, not an interface instance.",
+      "solution": "public interface IScorer<TSelf> where TSelf : IScorer<TSelf>\n{\n    static abstract TSelf FromScore(int value);\n    int Value { get; }\n}\n\npublic readonly record struct Score(int Value) : IScorer<Score>\n{\n    public static Score FromScore(int value) => new(value);\n}\n\nstatic T CreatePerfect<T>() where T : IScorer<T> => T.FromScore(100);\nConsole.WriteLine(CreatePerfect<Score>().Value);",
+      "groups": [
+        [
+          "interface "
+        ],
+        [
+          "static abstract"
+        ],
+        [
+          "where T :"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        },
+        {
+          "title": "Microsoft Learn — Generic types and methods",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Task Coordination, Cancellation & Concurrent Design",
+      "summary": "Compose asynchronous operations under cancellation and failure while distinguishing I/O concurrency from CPU parallelism.",
+      "concepts": [
+        {
+          "name": "Cancellation tokens",
+          "explanation": "CancellationToken is cooperative: pass it through layers and check or forward it to APIs that support cancellation."
+        },
+        {
+          "name": "Task coordination",
+          "explanation": "Task.WhenAll, WhenAny, SemaphoreSlim, and channels/queues solve different coordination problems. Avoid starting unbounded work just because async makes it easy."
+        },
+        {
+          "name": "CPU versus I/O",
+          "explanation": "Async improves nonblocking waits; it does not automatically make CPU-heavy work parallel. Parallelism uses threads/cores and has separate synchronization costs."
+        }
+      ],
+      "example": "static async Task<IReadOnlyList<string>> LoadAllAsync(\n    IEnumerable<string> paths,\n    int maxConcurrency,\n    CancellationToken token)\n{\n    using SemaphoreSlim gate = new(maxConcurrency);\n    var tasks = paths.Select(async path =>\n    {\n        await gate.WaitAsync(token);\n        try { return await File.ReadAllTextAsync(path, token); }\n        finally { gate.Release(); }\n    });\n\n    return await Task.WhenAll(tasks);\n}",
+      "challenge": "Write an async workflow that forwards CancellationToken and limits concurrency with SemaphoreSlim or a similar gate.",
+      "hint": "The concurrency limit should wrap each operation with WaitAsync in try/finally so the permit is always released.",
+      "solution": "static async Task<IReadOnlyList<string>> LoadAllAsync(\n    IEnumerable<string> paths,\n    int maxConcurrency,\n    CancellationToken token)\n{\n    using SemaphoreSlim gate = new(maxConcurrency);\n    var tasks = paths.Select(async path =>\n    {\n        await gate.WaitAsync(token);\n        try { return await File.ReadAllTextAsync(path, token); }\n        finally { gate.Release(); }\n    });\n\n    return await Task.WhenAll(tasks);\n}",
+      "groups": [
+        [
+          "CancellationToken"
+        ],
+        [
+          "SemaphoreSlim"
+        ],
+        [
+          "WaitAsync"
+        ],
+        [
+          "Task.WhenAll"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Asynchronous programming",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Reflection, Attributes & Runtime Metadata",
+      "summary": "Inspect type metadata, annotate code with attributes, and invoke discovery-based behavior without losing sight of compile-time alternatives.",
+      "concepts": [
+        {
+          "name": "Attributes",
+          "explanation": "Attributes attach metadata to assemblies, types, members, parameters, and more. Attribute classes derive from System.Attribute."
+        },
+        {
+          "name": "Reflection",
+          "explanation": "System.Reflection can inspect types, members, generic arguments, attributes, and sometimes invoke members dynamically."
+        },
+        {
+          "name": "Tradeoffs",
+          "explanation": "Reflection is flexible but reduces compile-time visibility and may have trimming/AOT/performance implications. Source generation or explicit registration can be better for hot paths and deployment-sensitive code."
+        }
+      ],
+      "example": "[AttributeUsage(AttributeTargets.Class)]\nsealed class AcademyModuleAttribute : Attribute\n{\n    public string Name { get; }\n    public AcademyModuleAttribute(string name) => Name = name;\n}\n\n[AcademyModule(\"C# Senior\")]\nclass SeniorCourse { }\n\nType type = typeof(SeniorCourse);\nvar attribute = type.GetCustomAttributes(typeof(AcademyModuleAttribute), inherit: false)\n    .Cast<AcademyModuleAttribute>()\n    .Single();\nConsole.WriteLine(attribute.Name);",
+      "challenge": "Create a custom attribute, apply it to a type, and read that attribute through reflection.",
+      "hint": "Derive the attribute from Attribute and limit its valid targets with AttributeUsage.",
+      "solution": "[AttributeUsage(AttributeTargets.Class)]\nsealed class AcademyModuleAttribute : Attribute\n{\n    public string Name { get; }\n    public AcademyModuleAttribute(string name) => Name = name;\n}\n\n[AcademyModule(\"C# Senior\")]\nclass SeniorCourse { }\n\nType type = typeof(SeniorCourse);\nvar attribute = type.GetCustomAttributes(typeof(AcademyModuleAttribute), inherit: false)\n    .Cast<AcademyModuleAttribute>()\n    .Single();\nConsole.WriteLine(attribute.Name);",
+      "groups": [
+        [
+          ": Attribute"
+        ],
+        [
+          "AttributeUsage"
+        ],
+        [
+          "typeof("
+        ],
+        [
+          "GetCustomAttributes"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Testing, SOLID Tradeoffs & Maintainable C# Design",
+      "summary": "Design testable code by separating pure logic from effects and apply design principles as tradeoff tools rather than rigid slogans.",
+      "concepts": [
+        {
+          "name": "Test seams",
+          "explanation": "Inject clocks, storage, HTTP clients, or repositories behind narrow abstractions when deterministic tests need control over those dependencies."
+        },
+        {
+          "name": "Single responsibility",
+          "explanation": "A type should have a coherent reason to change. Splitting every three-line method into a new class is not automatically better design."
+        },
+        {
+          "name": "Dependency inversion",
+          "explanation": "High-level policy should not be forced to construct low-level infrastructure. Constructor/function injection makes dependencies explicit and replaceable."
+        }
+      ],
+      "example": "public interface IProgressStore\n{\n    Task SaveAsync(int score, CancellationToken token);\n}\n\npublic sealed class AcademyService\n{\n    private readonly IProgressStore _store;\n    public AcademyService(IProgressStore store) => _store = store;\n\n    public Task SavePassingScoreAsync(int score, CancellationToken token)\n    {\n        if (score < 80) throw new InvalidOperationException(\"Score is not passing.\");\n        return _store.SaveAsync(score, token);\n    }\n}",
+      "challenge": "Create a service that receives one dependency through its constructor and uses that abstraction instead of constructing the dependency internally.",
+      "hint": "The constructor should clearly show what the service needs in order to do its work.",
+      "solution": "public interface IProgressStore\n{\n    Task SaveAsync(int score, CancellationToken token);\n}\n\npublic sealed class AcademyService\n{\n    private readonly IProgressStore _store;\n    public AcademyService(IProgressStore store) => _store = store;\n\n    public Task SavePassingScoreAsync(int score, CancellationToken token)\n    {\n        if (score < 80) throw new InvalidOperationException(\"Score is not passing.\");\n        return _store.SaveAsync(score, token);\n    }\n}",
+      "groups": [
+        [
+          "interface "
+        ],
+        [
+          "private readonly"
+        ],
+        [
+          "public "
+        ],
+        [
+          "constructor",
+          "("
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

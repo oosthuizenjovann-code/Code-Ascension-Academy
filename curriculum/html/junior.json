@@ -1,0 +1,260 @@
+{
+  "language": "html",
+  "difficulty": "junior",
+  "topics": [
+    {
+      "title": "Tables & Data Semantics",
+      "summary": "Represent genuinely tabular data with captions, header cells, row/column scope, and a structure that remains understandable to assistive technology.",
+      "concepts": [
+        {
+          "name": "Table anatomy",
+          "explanation": "table contains rows. thead, tbody, and tfoot group row regions; tr is a row, th is a header cell, and td is a data cell."
+        },
+        {
+          "name": "Headers and scope",
+          "explanation": "Use th for headers and scope=\"col\" or scope=\"row\" when the relationship is not obvious. These relationships help screen readers announce context."
+        },
+        {
+          "name": "Use tables for data",
+          "explanation": "Tables are for data relationships, not page layout. CSS Grid and Flexbox are the correct tools for general visual layout."
+        }
+      ],
+      "example": "<table>\n  <caption>Class test results</caption>\n  <thead><tr><th scope=\"col\">Module</th><th scope=\"col\">Score</th></tr></thead>\n  <tbody>\n    <tr><th scope=\"row\">HTML</th><td>92%</td></tr>\n    <tr><th scope=\"row\">CSS</th><td>88%</td></tr>\n  </tbody>\n</table>",
+      "challenge": "Create a two-column data table with a caption, column headers, and at least two data rows.",
+      "hint": "Start with table and caption, then create thead for column labels and tbody for the records.",
+      "solution": "<table>\n  <caption>Class test results</caption>\n  <thead><tr><th scope=\"col\">Module</th><th scope=\"col\">Score</th></tr></thead>\n  <tbody>\n    <tr><th scope=\"row\">HTML</th><td>92%</td></tr>\n    <tr><th scope=\"row\">CSS</th><td>88%</td></tr>\n  </tbody>\n</table>",
+      "groups": [
+        [
+          "<table"
+        ],
+        [
+          "<caption"
+        ],
+        [
+          "<th"
+        ],
+        [
+          "scope="
+        ],
+        [
+          "<td"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Audio, Video & Timed Tracks",
+      "summary": "Embed media with native controls, fallbacks, captions, and multiple sources where useful.",
+      "concepts": [
+        {
+          "name": "Native media",
+          "explanation": "audio and video can expose built-in controls with the controls attribute. Browsers can select from multiple source elements."
+        },
+        {
+          "name": "Captions and subtitles",
+          "explanation": "track can provide captions, subtitles, descriptions, chapters, or metadata using WebVTT files. Captions are important for accessibility."
+        },
+        {
+          "name": "Fallbacks and preload",
+          "explanation": "Provide fallback text or links when media cannot play. preload is a hint; do not assume the browser will always download exactly as requested."
+        }
+      ],
+      "example": "<video controls width=\"640\" poster=\"lesson-poster.jpg\">\n  <source src=\"lesson.webm\" type=\"video/webm\">\n  <source src=\"lesson.mp4\" type=\"video/mp4\">\n  <track src=\"lesson-en.vtt\" kind=\"captions\" srclang=\"en\" label=\"English\" default>\n  <p><a href=\"lesson.mp4\">Download the lesson video</a>.</p>\n</video>",
+      "challenge": "Create a video element with controls, at least one source, and a captions track.",
+      "hint": "The important nesting is video → source/track/fallback content.",
+      "solution": "<video controls width=\"640\" poster=\"lesson-poster.jpg\">\n  <source src=\"lesson.webm\" type=\"video/webm\">\n  <source src=\"lesson.mp4\" type=\"video/mp4\">\n  <track src=\"lesson-en.vtt\" kind=\"captions\" srclang=\"en\" label=\"English\" default>\n  <p><a href=\"lesson.mp4\">Download the lesson video</a>.</p>\n</video>",
+      "groups": [
+        [
+          "<video"
+        ],
+        [
+          "controls"
+        ],
+        [
+          "<source"
+        ],
+        [
+          "<track"
+        ],
+        [
+          "kind=\"captions\"",
+          "kind=captions"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Advanced Forms & Native Validation",
+      "summary": "Use richer input types, grouping, autocomplete, constraint attributes, and accessible error-friendly structure before adding JavaScript.",
+      "concepts": [
+        {
+          "name": "Constraint attributes",
+          "explanation": "required, minlength, maxlength, min, max, step, and pattern let browsers reject many invalid values without custom JavaScript."
+        },
+        {
+          "name": "Grouping controls",
+          "explanation": "fieldset groups related controls and legend gives the group a name. This is especially helpful for radio buttons and related checkboxes."
+        },
+        {
+          "name": "Autocomplete",
+          "explanation": "autocomplete tokens help browsers and password managers understand what a field represents. Correct tokens can improve both speed and accessibility."
+        }
+      ],
+      "example": "<form>\n  <fieldset>\n    <legend>Notification preference</legend>\n    <label><input type=\"radio\" name=\"notice\" value=\"email\" required> Email</label>\n    <label><input type=\"radio\" name=\"notice\" value=\"sms\"> SMS</label>\n  </fieldset>\n  <label for=\"age\">Age</label>\n  <input id=\"age\" name=\"age\" type=\"number\" min=\"13\" max=\"120\" required>\n  <button>Continue</button>\n</form>",
+      "challenge": "Build a form that uses fieldset/legend and at least two native validation attributes.",
+      "hint": "Use required plus a type-specific constraint such as min/max, minlength, or pattern.",
+      "solution": "<form>\n  <fieldset>\n    <legend>Notification preference</legend>\n    <label><input type=\"radio\" name=\"notice\" value=\"email\" required> Email</label>\n    <label><input type=\"radio\" name=\"notice\" value=\"sms\"> SMS</label>\n  </fieldset>\n  <label for=\"age\">Age</label>\n  <input id=\"age\" name=\"age\" type=\"number\" min=\"13\" max=\"120\" required>\n  <button>Continue</button>\n</form>",
+      "groups": [
+        [
+          "<fieldset"
+        ],
+        [
+          "<legend"
+        ],
+        [
+          "required"
+        ],
+        [
+          "min=",
+          "max=",
+          "minlength=",
+          "pattern="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Web forms",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Metadata, SEO & Document Head",
+      "summary": "Use the head to describe encoding, viewport behavior, page identity, canonical resources, stylesheets, icons, and metadata for sharing/search.",
+      "concepts": [
+        {
+          "name": "Essential metadata",
+          "explanation": "charset should appear early. viewport metadata is important for mobile layout. title gives each document a meaningful browser/tab and search result label."
+        },
+        {
+          "name": "Links and relationships",
+          "explanation": "link can connect stylesheets, icons, canonical URLs, preloads, and other related resources to the document."
+        },
+        {
+          "name": "Descriptions and robots",
+          "explanation": "meta name=\"description\" can summarize the page for search results. Robots directives influence indexing but are not a security mechanism."
+        }
+      ],
+      "example": "<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>HTML Junior — Code Ascension</title>\n  <meta name=\"description\" content=\"Study HTML Junior lessons and class tests.\">\n  <link rel=\"stylesheet\" href=\"styles.css\">\n  <link rel=\"icon\" href=\"favicon.svg\" type=\"image/svg+xml\">\n</head>",
+      "challenge": "Write a head section with charset, viewport, title, description and stylesheet link.",
+      "hint": "Metadata belongs inside head, not body. Treat the title and description as user-facing content.",
+      "solution": "<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>HTML Junior — Code Ascension</title>\n  <meta name=\"description\" content=\"Study HTML Junior lessons and class tests.\">\n  <link rel=\"stylesheet\" href=\"styles.css\">\n  <link rel=\"icon\" href=\"favicon.svg\" type=\"image/svg+xml\">\n</head>",
+      "groups": [
+        [
+          "<head"
+        ],
+        [
+          "charset="
+        ],
+        [
+          "name=\"viewport\"",
+          "name=viewport"
+        ],
+        [
+          "<title"
+        ],
+        [
+          "name=\"description\"",
+          "name=description"
+        ],
+        [
+          "rel=\"stylesheet\"",
+          "rel=stylesheet"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Responsive Images & Art Direction",
+      "summary": "Serve appropriate images for different pixel densities, viewport sizes, and compositions with srcset, sizes, picture, and source.",
+      "concepts": [
+        {
+          "name": "Resolution switching",
+          "explanation": "srcset can offer multiple image widths or pixel densities. sizes describes the displayed width so the browser can choose an efficient candidate."
+        },
+        {
+          "name": "Art direction",
+          "explanation": "picture and source let you provide different crops or formats for different conditions rather than merely resizing the same composition."
+        },
+        {
+          "name": "Fallback image",
+          "explanation": "picture still ends with an img element. That img supplies the fallback source and the alt text for the image as a whole."
+        }
+      ],
+      "example": "<picture>\n  <source media=\"(max-width: 600px)\" srcset=\"academy-mobile.jpg\">\n  <source type=\"image/avif\" srcset=\"academy.avif\">\n  <img src=\"academy.jpg\" srcset=\"academy-800.jpg 800w, academy-1600.jpg 1600w\"\n       sizes=\"(max-width: 700px) 100vw, 700px\" alt=\"Code Ascension roadmap\">\n</picture>",
+      "challenge": "Create a responsive image using picture/source and an img fallback with srcset or sizes.",
+      "hint": "The img element is still required at the end of picture and owns the alt text.",
+      "solution": "<picture>\n  <source media=\"(max-width: 600px)\" srcset=\"academy-mobile.jpg\">\n  <source type=\"image/avif\" srcset=\"academy.avif\">\n  <img src=\"academy.jpg\" srcset=\"academy-800.jpg 800w, academy-1600.jpg 1600w\"\n       sizes=\"(max-width: 700px) 100vw, 700px\" alt=\"Code Ascension roadmap\">\n</picture>",
+      "groups": [
+        [
+          "<picture"
+        ],
+        [
+          "<source"
+        ],
+        [
+          "<img"
+        ],
+        [
+          "srcset="
+        ],
+        [
+          "alt="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

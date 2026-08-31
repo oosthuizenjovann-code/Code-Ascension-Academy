@@ -1,0 +1,243 @@
+{
+  "language": "javascript",
+  "difficulty": "intermediate",
+  "topics": [
+    {
+      "title": "Closures, Lexical Scope & this",
+      "summary": "Understand how functions remember surrounding bindings, how this is determined by call style, and when arrow functions intentionally capture lexical this.",
+      "concepts": [
+        {
+          "name": "Closures",
+          "explanation": "A function keeps access to the lexical environment where it was created even after that outer function has returned. This enables private state and function factories."
+        },
+        {
+          "name": "this",
+          "explanation": "For normal functions, this depends on how the function is called. Method calls, constructors, explicit bind/call/apply, and plain calls can produce different values."
+        },
+        {
+          "name": "Arrow functions",
+          "explanation": "Arrow functions do not create their own this, arguments, or prototype. They are excellent callbacks but are not drop-in replacements for every method/constructor."
+        }
+      ],
+      "example": "function createCounter(start = 0) {\n  let value = start;\n  return {\n    increment() { value += 1; return value; },\n    current() { return value; }\n  };\n}\n\nconst counter = createCounter(10);\nconsole.log(counter.increment());\nconsole.log(counter.current());",
+      "challenge": "Create a function factory whose returned function or object method remembers private state from the outer function.",
+      "hint": "Declare the state in the outer function and return a function that reads or changes it.",
+      "solution": "function createCounter(start = 0) {\n  let value = start;\n  return {\n    increment() { value += 1; return value; },\n    current() { return value; }\n  };\n}\n\nconst counter = createCounter(10);\nconsole.log(counter.increment());\nconsole.log(counter.current());",
+      "groups": [
+        [
+          "return "
+        ],
+        [
+          "let "
+        ],
+        [
+          "function ",
+          "=>"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Prototypes, Classes & Object Design",
+      "summary": "Connect class syntax to JavaScript's prototype model and design objects with constructors, methods, inheritance, private fields, and composition.",
+      "concepts": [
+        {
+          "name": "Prototype chain",
+          "explanation": "Property lookup walks an object's own properties and then its prototype chain. Methods shared through a prototype avoid copying the same function onto every instance."
+        },
+        {
+          "name": "Class syntax",
+          "explanation": "class offers constructor, instance methods, static members, fields, private #fields, inheritance with extends, and super calls."
+        },
+        {
+          "name": "Composition",
+          "explanation": "Inheritance is one tool, not the default answer. Small objects/functions composed around capabilities often reduce fragile superclass relationships."
+        }
+      ],
+      "example": "class Course {\n  #completed = false;\n\n  constructor(name) {\n    this.name = name;\n  }\n\n  complete() { this.#completed = true; }\n  get status() { return this.#completed ? \"complete\" : \"active\"; }\n}\n\nconst course = new Course(\"JavaScript\");\ncourse.complete();\nconsole.log(course.status);",
+      "challenge": "Create a class with a constructor, one private field, one method, and one getter.",
+      "hint": "Private fields begin with # and can only be accessed inside the class body.",
+      "solution": "class Course {\n  #completed = false;\n\n  constructor(name) {\n    this.name = name;\n  }\n\n  complete() { this.#completed = true; }\n  get status() { return this.#completed ? \"complete\" : \"active\"; }\n}\n\nconst course = new Course(\"JavaScript\");\ncourse.complete();\nconsole.log(course.status);",
+      "groups": [
+        [
+          "class "
+        ],
+        [
+          "constructor("
+        ],
+        [
+          "#"
+        ],
+        [
+          "get "
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Promises, async/await & Fetch",
+      "summary": "Represent future results with promises, compose asynchronous work, handle errors, and avoid blocking or deeply nested callbacks.",
+      "concepts": [
+        {
+          "name": "Promises",
+          "explanation": "A promise is pending, fulfilled, or rejected. then/catch/finally compose outcomes without exposing manual completion to consumers."
+        },
+        {
+          "name": "async/await",
+          "explanation": "async functions return promises. await pauses that async function until a promise settles while allowing the JavaScript runtime to continue other work."
+        },
+        {
+          "name": "Fetch",
+          "explanation": "fetch returns a promise for an HTTP Response. HTTP error status codes do not reject automatically, so check response.ok before parsing data."
+        }
+      ],
+      "example": "async function loadCourse(url) {\n  const response = await fetch(url);\n  if (!response.ok) {\n    throw new Error(`Request failed: ${response.status}`);\n  }\n  return response.json();\n}\n\nloadCourse(\"/course.json\")\n  .then(course => console.log(course))\n  .catch(error => console.error(error));",
+      "challenge": "Write an async function that awaits fetch, checks response.ok, and returns parsed JSON.",
+      "hint": "Network failure can reject fetch, but an HTTP 404/500 still requires an explicit response.ok check.",
+      "solution": "async function loadCourse(url) {\n  const response = await fetch(url);\n  if (!response.ok) {\n    throw new Error(`Request failed: ${response.status}`);\n  }\n  return response.json();\n}\n\nloadCourse(\"/course.json\")\n  .then(course => console.log(course))\n  .catch(error => console.error(error));",
+      "groups": [
+        [
+          "async function",
+          "async ("
+        ],
+        [
+          "await fetch"
+        ],
+        [
+          "response.ok"
+        ],
+        [
+          ".json("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Map, Set, Weak Collections & Data Modeling",
+      "summary": "Choose collection types based on identity, uniqueness, key flexibility, and lifetime semantics instead of forcing everything into arrays or plain objects.",
+      "concepts": [
+        {
+          "name": "Map",
+          "explanation": "Map accepts keys of any value type, preserves insertion order, exposes size, and has explicit get/set/has/delete methods."
+        },
+        {
+          "name": "Set",
+          "explanation": "Set stores unique values. It is useful for membership tests and deduplicating values without manually scanning an array."
+        },
+        {
+          "name": "WeakMap/WeakSet",
+          "explanation": "Weak collections hold object keys weakly and are not enumerable. They are useful for associating metadata with objects without extending object lifetime."
+        }
+      ],
+      "example": "const completed = new Set([\"html\", \"css\"]);\ncompleted.add(\"javascript\");\n\nconst scores = new Map();\nscores.set(\"html\", 92);\nscores.set(\"javascript\", 88);\n\nconsole.log(completed.has(\"css\"));\nconsole.log(scores.get(\"html\"));",
+      "challenge": "Create a Set for unique completed items and a Map that stores at least two key/value scores.",
+      "hint": "Use Set.add/has and Map.set/get rather than array methods.",
+      "solution": "const completed = new Set([\"html\", \"css\"]);\ncompleted.add(\"javascript\");\n\nconst scores = new Map();\nscores.set(\"html\", 92);\nscores.set(\"javascript\", 88);\n\nconsole.log(completed.has(\"css\"));\nconsole.log(scores.get(\"html\"));",
+      "groups": [
+        [
+          "new Set"
+        ],
+        [
+          "new Map"
+        ],
+        [
+          ".add("
+        ],
+        [
+          ".set("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Modules, Regular Expressions & Internationalization",
+      "summary": "Work with richer standard-library capabilities while keeping parsing, formatting, and module boundaries explicit.",
+      "concepts": [
+        {
+          "name": "Regular expressions",
+          "explanation": "RegExp can search and validate text patterns, but complex patterns should be documented and tested. Do not use regex where a proper parser is required."
+        },
+        {
+          "name": "Intl",
+          "explanation": "Intl.NumberFormat, DateTimeFormat, RelativeTimeFormat, Collator, and related APIs format/compare values according to locale rules."
+        },
+        {
+          "name": "Module loading",
+          "explanation": "Static import is analyzable up front. dynamic import() returns a promise and can load optional code only when needed."
+        }
+      ],
+      "example": "const codePattern = /^[A-Z]{2}-\\d{4}$/;\nconsole.log(codePattern.test(\"JS-2026\"));\n\nconst formatter = new Intl.NumberFormat(\"en-ZA\", {\n  style: \"currency\",\n  currency: \"ZAR\"\n});\nconsole.log(formatter.format(1299.5));\n\nasync function loadAdvancedTools() {\n  return import(\"./advanced-tools.js\");\n}",
+      "challenge": "Create one regular expression test and format a number with Intl.NumberFormat.",
+      "hint": "Keep validation patterns small enough to explain; use Intl instead of manually concatenating currency symbols and separators.",
+      "solution": "const codePattern = /^[A-Z]{2}-\\d{4}$/;\nconsole.log(codePattern.test(\"JS-2026\"));\n\nconst formatter = new Intl.NumberFormat(\"en-ZA\", {\n  style: \"currency\",\n  currency: \"ZAR\"\n});\nconsole.log(formatter.format(1299.5));\n\nasync function loadAdvancedTools() {\n  return import(\"./advanced-tools.js\");\n}",
+      "groups": [
+        [
+          "RegExp",
+          "/"
+        ],
+        [
+          "Intl.NumberFormat"
+        ],
+        [
+          ".test("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

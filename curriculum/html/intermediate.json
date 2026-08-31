@@ -1,0 +1,222 @@
+{
+  "language": "html",
+  "difficulty": "intermediate",
+  "topics": [
+    {
+      "title": "Accessible Naming, Landmarks & Source Order",
+      "summary": "Go beyond basic semantics by reasoning about accessible names, landmark labels, keyboard order, and how DOM source order affects users.",
+      "concepts": [
+        {
+          "name": "Accessible names",
+          "explanation": "Controls need a reliable name from visible text, label, alt, aria-label, or aria-labelledby. Prefer visible native labels when possible."
+        },
+        {
+          "name": "Landmark labels",
+          "explanation": "When several nav or region landmarks exist, label them so users can distinguish “Primary navigation” from “Course navigation”."
+        },
+        {
+          "name": "Source order",
+          "explanation": "Keyboard and screen-reader navigation generally follow DOM order. Avoid using CSS to create a visual order that contradicts the logical reading order."
+        }
+      ],
+      "example": "<header>\n  <nav aria-label=\"Primary\"><a href=\"/\">Home</a></nav>\n</header>\n<main>\n  <section aria-labelledby=\"progress-title\">\n    <h2 id=\"progress-title\">Progress</h2>\n    <button type=\"button\">Open progress details</button>\n  </section>\n</main>",
+      "challenge": "Create two nav landmarks with distinct accessible labels and one section labelled by its heading.",
+      "hint": "Use aria-label on repeated nav landmarks and aria-labelledby to connect a section with an existing visible heading.",
+      "solution": "<header>\n  <nav aria-label=\"Primary\"><a href=\"/\">Home</a></nav>\n</header>\n<main>\n  <section aria-labelledby=\"progress-title\">\n    <h2 id=\"progress-title\">Progress</h2>\n    <button type=\"button\">Open progress details</button>\n  </section>\n</main>",
+      "groups": [
+        [
+          "<nav"
+        ],
+        [
+          "aria-label="
+        ],
+        [
+          "aria-labelledby="
+        ],
+        [
+          "<h2",
+          "<h1"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Embedded Content & Sandboxed Frames",
+      "summary": "Embed external documents deliberately and restrict capabilities when third-party content does not need full trust.",
+      "concepts": [
+        {
+          "name": "iframe",
+          "explanation": "iframe embeds another browsing context. Always give important frames a useful title so assistive technology can identify them."
+        },
+        {
+          "name": "sandbox",
+          "explanation": "sandbox removes capabilities from framed content until specific tokens are granted. Add only the permissions the embedded content actually needs."
+        },
+        {
+          "name": "Loading and privacy",
+          "explanation": "loading=\"lazy\" can defer off-screen frames. referrerpolicy can control what referrer information is sent to the embedded resource."
+        }
+      ],
+      "example": "<iframe\n  src=\"practice-preview.html\"\n  title=\"Practice preview\"\n  loading=\"lazy\"\n  sandbox=\"allow-scripts\"\n  referrerpolicy=\"no-referrer\">\n</iframe>",
+      "challenge": "Create an iframe with a title, lazy loading, and a sandbox attribute.",
+      "hint": "Start from the most restricted sandbox and add permissions only when the embedded page needs them.",
+      "solution": "<iframe\n  src=\"practice-preview.html\"\n  title=\"Practice preview\"\n  loading=\"lazy\"\n  sandbox=\"allow-scripts\"\n  referrerpolicy=\"no-referrer\">\n</iframe>",
+      "groups": [
+        [
+          "<iframe"
+        ],
+        [
+          "title="
+        ],
+        [
+          "loading=\"lazy\"",
+          "loading=lazy"
+        ],
+        [
+          "sandbox="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Native Interactive Elements",
+      "summary": "Use built-in disclosure, dialog, and popover primitives before recreating their behavior with generic div elements.",
+      "concepts": [
+        {
+          "name": "details and summary",
+          "explanation": "details creates a disclosure widget and summary supplies its label. The open attribute controls initial state."
+        },
+        {
+          "name": "dialog",
+          "explanation": "dialog represents a dialog box. JavaScript can use show(), showModal(), and close(); method=\"dialog\" forms can close a dialog with a return value."
+        },
+        {
+          "name": "Popover",
+          "explanation": "The popover attribute gives lightweight top-layer behavior to ordinary elements, while popovertarget connects controls to them without a full custom widget implementation."
+        }
+      ],
+      "example": "<details>\n  <summary>Show hint</summary>\n  <p>Remember to associate labels with inputs.</p>\n</details>\n\n<button popovertarget=\"reference-card\">Open reference</button>\n<div id=\"reference-card\" popover>\n  <p>Read the HTML reference.</p>\n</div>",
+      "challenge": "Create one details/summary disclosure and one popover controlled by a button.",
+      "hint": "Use the id of the popover as the button's popovertarget value.",
+      "solution": "<details>\n  <summary>Show hint</summary>\n  <p>Remember to associate labels with inputs.</p>\n</details>\n\n<button popovertarget=\"reference-card\">Open reference</button>\n<div id=\"reference-card\" popover>\n  <p>Read the HTML reference.</p>\n</div>",
+      "groups": [
+        [
+          "<details"
+        ],
+        [
+          "<summary"
+        ],
+        [
+          "popover"
+        ],
+        [
+          "popovertarget="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Data Attributes & Machine-Readable Values",
+      "summary": "Attach application-specific metadata with data-* while keeping visible meaning in normal HTML and using dedicated elements for dates, measurements, and machine values.",
+      "concepts": [
+        {
+          "name": "data-* attributes",
+          "explanation": "Custom data attributes store small pieces of application metadata on elements. JavaScript reads them through element.dataset."
+        },
+        {
+          "name": "time",
+          "explanation": "time can pair human-readable text with a machine-readable datetime value, useful for dates and durations."
+        },
+        {
+          "name": "data and meter",
+          "explanation": "data associates displayed content with a machine-readable value. meter represents a scalar measurement within a known range; progress represents task completion."
+        }
+      ],
+      "example": "<article data-course=\"html\" data-rank=\"intermediate\">\n  <h2>Assessment window</h2>\n  <p>Opens <time datetime=\"2026-09-01T09:00:00+02:00\">tomorrow morning</time>.</p>\n  <label for=\"mastery\">Mastery</label>\n  <meter id=\"mastery\" min=\"0\" max=\"100\" value=\"82\">82%</meter>\n</article>",
+      "challenge": "Create an element with two data-* attributes and include a time element with datetime.",
+      "hint": "Custom data names must start with data-. Use datetime for the machine-readable date or time.",
+      "solution": "<article data-course=\"html\" data-rank=\"intermediate\">\n  <h2>Assessment window</h2>\n  <p>Opens <time datetime=\"2026-09-01T09:00:00+02:00\">tomorrow morning</time>.</p>\n  <label for=\"mastery\">Mastery</label>\n  <meter id=\"mastery\" min=\"0\" max=\"100\" value=\"82\">82%</meter>\n</article>",
+      "groups": [
+        [
+          "data-"
+        ],
+        [
+          "<time"
+        ],
+        [
+          "datetime="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Templates, Slots & Component-Friendly Markup",
+      "summary": "Prepare reusable DOM fragments and meaningful fallback structures that work well with JavaScript and Web Components.",
+      "concepts": [
+        {
+          "name": "template",
+          "explanation": "template stores inert DOM content. Its children are parsed but are not rendered or executed until JavaScript clones the template content."
+        },
+        {
+          "name": "slot",
+          "explanation": "Inside a shadow tree, slot defines insertion points for light-DOM content. Named slots let consumers provide different pieces of a component."
+        },
+        {
+          "name": "Fallback content",
+          "explanation": "Component-friendly markup should still consider meaningful fallback content and progressive enhancement instead of assuming JavaScript always succeeds."
+        }
+      ],
+      "example": "<template id=\"lesson-card-template\">\n  <article class=\"lesson-card\">\n    <h3 class=\"lesson-title\"></h3>\n    <p class=\"lesson-summary\"></p>\n  </article>\n</template>\n\n<code-academy-card>\n  <span slot=\"title\">HTML Intermediate</span>\n</code-academy-card>",
+      "challenge": "Create a template containing a reusable article and demonstrate a named slot assignment on custom-element content.",
+      "hint": "The template itself is inert. Put the reusable markup inside it, then use slot=\"name\" on content intended for a named slot.",
+      "solution": "<template id=\"lesson-card-template\">\n  <article class=\"lesson-card\">\n    <h3 class=\"lesson-title\"></h3>\n    <p class=\"lesson-summary\"></p>\n  </article>\n</template>\n\n<code-academy-card>\n  <span slot=\"title\">HTML Intermediate</span>\n</code-academy-card>",
+      "groups": [
+        [
+          "<template"
+        ],
+        [
+          "<article"
+        ],
+        [
+          "slot="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

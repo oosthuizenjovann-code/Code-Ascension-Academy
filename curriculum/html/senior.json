@@ -1,0 +1,233 @@
+{
+  "language": "html",
+  "difficulty": "senior",
+  "topics": [
+    {
+      "title": "Parsing, DOM Construction & Content Models",
+      "summary": "Reason about how browsers parse markup into a DOM tree, recover from invalid markup, and apply element content rules.",
+      "concepts": [
+        {
+          "name": "Parsing is corrective",
+          "explanation": "HTML parsers perform error recovery. Invalid source can produce a DOM tree that differs from what the indentation suggests, especially around tables and misnested formatting elements."
+        },
+        {
+          "name": "Content models",
+          "explanation": "Elements have rules describing what categories of content they may contain and where they may appear. Valid markup reduces cross-browser surprises and accessibility defects."
+        },
+        {
+          "name": "DOM versus source",
+          "explanation": "Developer tools show the parsed DOM, not necessarily the exact source text. Debug structural bugs by comparing the DOM tree with the markup you intended."
+        }
+      ],
+      "example": "<!doctype html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\"><title>Parsing Lab</title></head>\n<body>\n  <main>\n    <section>\n      <h1>Valid nesting</h1>\n      <p>Inspect this DOM in developer tools.</p>\n    </section>\n  </main>\n</body>\n</html>",
+      "challenge": "Write a small document with intentionally careful, valid nesting and explain its main DOM parent/child relationships in comments.",
+      "hint": "Keep block-level structure explicit and close every non-void element in the reverse order in which it was opened.",
+      "solution": "<!doctype html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\"><title>Parsing Lab</title></head>\n<body>\n  <main>\n    <section>\n      <h1>Valid nesting</h1>\n      <p>Inspect this DOM in developer tools.</p>\n    </section>\n  </main>\n</body>\n</html>",
+      "groups": [
+        [
+          "<!doctype html>"
+        ],
+        [
+          "<html"
+        ],
+        [
+          "<main"
+        ],
+        [
+          "<section"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Form Semantics, Ownership & Constraint Strategy",
+      "summary": "Design larger forms by understanding form ownership, successful controls, submission names, button behavior, and native constraint validation.",
+      "concepts": [
+        {
+          "name": "Names drive submission",
+          "explanation": "A form control normally needs a name to contribute a name/value pair to form submission. id is for document identity; name is for submitted data."
+        },
+        {
+          "name": "Form-associated controls",
+          "explanation": "Some controls can be associated with a form using the form attribute even when they are not physically nested inside it."
+        },
+        {
+          "name": "Validation strategy",
+          "explanation": "Use HTML constraints for rules the browser can express, then layer JavaScript and server-side validation for business rules. Client-side validation is never a security boundary."
+        }
+      ],
+      "example": "<form id=\"profile-form\" action=\"/profile\" method=\"post\">\n  <label for=\"username\">Username</label>\n  <input id=\"username\" name=\"username\" minlength=\"3\" maxlength=\"24\" required>\n</form>\n<button type=\"submit\" form=\"profile-form\">Save profile</button>",
+      "challenge": "Create a form with a named required input and place its submit button outside the form using the form attribute.",
+      "hint": "The button form value must equal the form element id.",
+      "solution": "<form id=\"profile-form\" action=\"/profile\" method=\"post\">\n  <label for=\"username\">Username</label>\n  <input id=\"username\" name=\"username\" minlength=\"3\" maxlength=\"24\" required>\n</form>\n<button type=\"submit\" form=\"profile-form\">Save profile</button>",
+      "groups": [
+        [
+          "<form"
+        ],
+        [
+          "name="
+        ],
+        [
+          "required"
+        ],
+        [
+          "form="
+        ],
+        [
+          "type=\"submit\"",
+          "type=submit"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Web forms",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Resource Loading & HTML Performance Hints",
+      "summary": "Use native loading controls to reduce unnecessary work while understanding that hints are advisory rather than guarantees.",
+      "concepts": [
+        {
+          "name": "Lazy loading",
+          "explanation": "loading=\"lazy\" can defer off-screen images and iframes, reducing initial network and decoding work when those resources are not immediately needed."
+        },
+        {
+          "name": "Priority hints",
+          "explanation": "fetchpriority can hint whether a resource deserves high or low priority. Use it sparingly; incorrect priorities can make the page slower."
+        },
+        {
+          "name": "Preload and preconnect",
+          "explanation": "link rel=\"preload\" can request a known critical resource early, while preconnect can establish a connection to an important origin. Measure before adding many hints."
+        }
+      ],
+      "example": "<head>\n  <link rel=\"preload\" href=\"hero.avif\" as=\"image\" type=\"image/avif\" fetchpriority=\"high\">\n  <link rel=\"preconnect\" href=\"https://fonts.example.com\" crossorigin>\n</head>\n<body>\n  <img src=\"hero.avif\" alt=\"Academy dashboard\" fetchpriority=\"high\">\n  <img src=\"optional-chart.png\" alt=\"Progress chart\" loading=\"lazy\" decoding=\"async\">\n</body>",
+      "challenge": "Create markup that eagerly prioritizes one hero image and lazily loads a noncritical image.",
+      "hint": "Use fetchpriority on the critical image and loading=\"lazy\" on content that starts off-screen.",
+      "solution": "<head>\n  <link rel=\"preload\" href=\"hero.avif\" as=\"image\" type=\"image/avif\" fetchpriority=\"high\">\n  <link rel=\"preconnect\" href=\"https://fonts.example.com\" crossorigin>\n</head>\n<body>\n  <img src=\"hero.avif\" alt=\"Academy dashboard\" fetchpriority=\"high\">\n  <img src=\"optional-chart.png\" alt=\"Progress chart\" loading=\"lazy\" decoding=\"async\">\n</body>",
+      "groups": [
+        [
+          "fetchpriority="
+        ],
+        [
+          "loading=\"lazy\"",
+          "loading=lazy"
+        ],
+        [
+          "<img"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Internationalization & Bidirectional Text",
+      "summary": "Mark language and direction correctly so pronunciation, line breaking, fonts, search, and bidirectional text behave predictably.",
+      "concepts": [
+        {
+          "name": "Language metadata",
+          "explanation": "lang should describe the natural language of a document or a specific fragment. Assistive technology may use it to choose pronunciation rules."
+        },
+        {
+          "name": "Direction",
+          "explanation": "dir can be ltr, rtl, or auto. Use bdi to isolate text whose direction is unknown so it does not disturb surrounding punctuation."
+        },
+        {
+          "name": "Language-specific markup",
+          "explanation": "ruby can annotate East Asian text, while time and data can pair localized display text with machine-readable values."
+        }
+      ],
+      "example": "<html lang=\"en\">\n<body>\n  <p>English text with an Arabic username: <bdi>مريم</bdi>.</p>\n  <p lang=\"ar\" dir=\"rtl\">مرحبا بكم في الأكاديمية</p>\n  <time datetime=\"2026-08-31\">31 August 2026</time>\n</body>\n</html>",
+      "challenge": "Create one fragment in a second language with lang and dir, and isolate an unknown-direction username using bdi.",
+      "hint": "Language and text direction are separate ideas; set both when the fragment needs both.",
+      "solution": "<html lang=\"en\">\n<body>\n  <p>English text with an Arabic username: <bdi>مريم</bdi>.</p>\n  <p lang=\"ar\" dir=\"rtl\">مرحبا بكم في الأكاديمية</p>\n  <time datetime=\"2026-08-31\">31 August 2026</time>\n</body>\n</html>",
+      "groups": [
+        [
+          "lang="
+        ],
+        [
+          "dir="
+        ],
+        [
+          "<bdi"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Markup Security Boundaries",
+      "summary": "Recognize which HTML features affect trust boundaries and how attributes can reduce risk without replacing server security.",
+      "concepts": [
+        {
+          "name": "Untrusted frames",
+          "explanation": "Sandbox third-party iframes and grant the smallest capability set possible. Combining broad tokens can weaken the isolation you expected."
+        },
+        {
+          "name": "External navigation",
+          "explanation": "When opening external pages in a new tab, understand opener relationships and use appropriate rel values when needed. Modern browsers add protections, but explicit intent is clearer."
+        },
+        {
+          "name": "HTML is not sanitization",
+          "explanation": "Never insert untrusted HTML simply because it “looks like text”. Sanitization and safe DOM APIs are application responsibilities beyond markup alone."
+        }
+      ],
+      "example": "<a href=\"https://example.org\" target=\"_blank\" rel=\"noopener noreferrer\">External reference</a>\n<iframe\n  src=\"https://third-party.example/widget\"\n  title=\"External widget\"\n  sandbox=\"allow-scripts\"\n  referrerpolicy=\"no-referrer\">\n</iframe>",
+      "challenge": "Create a safe external link that opens a new tab and a sandboxed third-party iframe with a title.",
+      "hint": "Think in capabilities: navigation relationship, referrer information, scripts, forms, and same-origin access are separate concerns.",
+      "solution": "<a href=\"https://example.org\" target=\"_blank\" rel=\"noopener noreferrer\">External reference</a>\n<iframe\n  src=\"https://third-party.example/widget\"\n  title=\"External widget\"\n  sandbox=\"allow-scripts\"\n  referrerpolicy=\"no-referrer\">\n</iframe>",
+      "groups": [
+        [
+          "target=\"_blank\"",
+          "target=_blank"
+        ],
+        [
+          "rel="
+        ],
+        [
+          "<iframe"
+        ],
+        [
+          "sandbox="
+        ],
+        [
+          "title="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

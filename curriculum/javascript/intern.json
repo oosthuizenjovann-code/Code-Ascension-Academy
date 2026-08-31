@@ -1,0 +1,236 @@
+{
+  "language": "javascript",
+  "difficulty": "intern",
+  "topics": [
+    {
+      "title": "Variables, Values & Types",
+      "summary": "Store and inspect data with let and const, recognize JavaScript primitive values, and understand that variables have values while values have types.",
+      "concepts": [
+        {
+          "name": "let and const",
+          "explanation": "Use const when a binding should not be reassigned and let when reassignment is part of the design. Avoid var in new beginner code until you understand its older scoping rules."
+        },
+        {
+          "name": "Primitive values",
+          "explanation": "Common primitive types are string, number, bigint, boolean, undefined, symbol, and null. Objects are the major non-primitive category."
+        },
+        {
+          "name": "Dynamic typing",
+          "explanation": "A JavaScript variable is not permanently locked to one value type. typeof helps inspect many values, but null is a famous historical edge case because typeof null is \"object\"."
+        }
+      ],
+      "example": "const playerName = \"Nova\";\nlet health = 100;\nconst alive = true;\n\nhealth = health - 25;\nconsole.log(playerName, health, alive);\nconsole.log(typeof health);",
+      "challenge": "Declare a const name, a mutable numeric score/health variable, change the number, and log both values.",
+      "hint": "Use const for the name and let for the value you intend to reassign.",
+      "solution": "const playerName = \"Nova\";\nlet health = 100;\nconst alive = true;\n\nhealth = health - 25;\nconsole.log(playerName, health, alive);\nconsole.log(typeof health);",
+      "groups": [
+        [
+          "const "
+        ],
+        [
+          "let "
+        ],
+        [
+          "console.log"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Operators, Conditions & Boolean Logic",
+      "summary": "Combine expressions with arithmetic, comparison, logical operators, and if/switch control flow.",
+      "concepts": [
+        {
+          "name": "Comparisons",
+          "explanation": "Prefer strict equality === and !== for predictable comparisons. Relational operators such as <, >, <=, and >= compare ordered values."
+        },
+        {
+          "name": "Boolean logic",
+          "explanation": "&& requires both sides to be truthy, || chooses when at least one side is truthy, and ! negates a truthy/falsy result."
+        },
+        {
+          "name": "Branches",
+          "explanation": "if/else is flexible for arbitrary conditions. switch is useful when one expression is matched against many known cases."
+        }
+      ],
+      "example": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Review and retry\");\n}\n\nconst rank = score >= 90 ? \"excellent\" : \"developing\";\nconsole.log(rank);",
+      "challenge": "Write a condition that prints Pass when a score is at least 80 and Retry otherwise.",
+      "hint": "Your condition should compare the score with 80 using >=.",
+      "solution": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Review and retry\");\n}\n\nconst rank = score >= 90 ? \"excellent\" : \"developing\";\nconsole.log(rank);",
+      "groups": [
+        [
+          "if ("
+        ],
+        [
+          ">= 80",
+          ">=80"
+        ],
+        [
+          "else"
+        ],
+        [
+          "console.log"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Loops & Arrays",
+      "summary": "Store ordered values in arrays and repeat work with for, for...of, while, and array indexing.",
+      "concepts": [
+        {
+          "name": "Arrays",
+          "explanation": "Arrays are ordered, zero-indexed collections. length tells you how many entries exist, and methods such as push/pop modify the end."
+        },
+        {
+          "name": "for and while",
+          "explanation": "for is convenient when setup, condition, and update fit together. while is useful when repetition depends on a condition rather than a known count."
+        },
+        {
+          "name": "for...of",
+          "explanation": "for...of reads iterable values directly and is often clearer than manual indexing when you only need each value."
+        }
+      ],
+      "example": "const modules = [\"HTML\", \"CSS\", \"JavaScript\", \"C#\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}\n\nfor (let i = 0; i < modules.length; i++) {\n  console.log(i, modules[i]);\n}",
+      "challenge": "Create an array with at least three values and print every value using a loop.",
+      "hint": "for...of is the simplest choice when you do not need the array index.",
+      "solution": "const modules = [\"HTML\", \"CSS\", \"JavaScript\", \"C#\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}\n\nfor (let i = 0; i < modules.length; i++) {\n  console.log(i, modules[i]);\n}",
+      "groups": [
+        [
+          "["
+        ],
+        [
+          "for ("
+        ],
+        [
+          "console.log"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Functions, Parameters & Scope",
+      "summary": "Package behavior into reusable functions, pass data through parameters, return results, and reason about where names are visible.",
+      "concepts": [
+        {
+          "name": "Function contracts",
+          "explanation": "Parameters describe inputs and return describes the output. A focused function should have a clear purpose that can be described in one sentence."
+        },
+        {
+          "name": "Function forms",
+          "explanation": "Function declarations, function expressions, and arrow functions all create callable values, but they differ in details such as hoisting and this behavior."
+        },
+        {
+          "name": "Scope",
+          "explanation": "let and const are block scoped. Names declared inside a function are normally unavailable outside it; inner scopes can access names from outer scopes."
+        }
+      ],
+      "example": "function calculateAverage(a, b) {\n  const total = a + b;\n  return total / 2;\n}\n\nconst result = calculateAverage(80, 92);\nconsole.log(result);",
+      "challenge": "Write a function that accepts two numbers, returns a calculated result, and log the returned value.",
+      "hint": "Put the reusable calculation inside the function and use return rather than logging only inside the function.",
+      "solution": "function calculateAverage(a, b) {\n  const total = a + b;\n  return total / 2;\n}\n\nconst result = calculateAverage(80, 92);\nconsole.log(result);",
+      "groups": [
+        [
+          "function "
+        ],
+        [
+          "return "
+        ],
+        [
+          "console.log"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "DOM Selection & Events",
+      "summary": "Connect JavaScript to HTML by selecting elements, changing content/classes, and responding to user events.",
+      "concepts": [
+        {
+          "name": "Selecting elements",
+          "explanation": "querySelector returns the first matching element; querySelectorAll returns a static NodeList of matches. Check for null when a selector may not find anything."
+        },
+        {
+          "name": "Updating the DOM",
+          "explanation": "textContent changes text safely, classList manages classes, and createElement/append can build new nodes without composing raw HTML strings."
+        },
+        {
+          "name": "Events",
+          "explanation": "addEventListener registers behavior without overwriting other listeners. Event objects describe what happened and which target was involved."
+        }
+      ],
+      "example": "const button = document.querySelector(\"#complete-button\");\nconst status = document.querySelector(\"#status\");\n\nbutton?.addEventListener(\"click\", () => {\n  status.textContent = \"Lesson complete\";\n  status.classList.add(\"complete\");\n});",
+      "challenge": "Select a button and another element, then update the second element when the button is clicked.",
+      "hint": "Use querySelector twice, then attach a click listener with addEventListener.",
+      "solution": "const button = document.querySelector(\"#complete-button\");\nconst status = document.querySelector(\"#status\");\n\nbutton?.addEventListener(\"click\", () => {\n  status.textContent = \"Lesson complete\";\n  status.classList.add(\"complete\");\n});",
+      "groups": [
+        [
+          "querySelector"
+        ],
+        [
+          "addEventListener"
+        ],
+        [
+          "textContent",
+          "classList"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

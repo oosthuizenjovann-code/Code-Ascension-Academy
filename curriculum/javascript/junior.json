@@ -1,0 +1,239 @@
+{
+  "language": "javascript",
+  "difficulty": "junior",
+  "topics": [
+    {
+      "title": "Objects, Properties & Destructuring",
+      "summary": "Model related data with objects, access properties safely, copy/merge records, and unpack values with destructuring.",
+      "concepts": [
+        {
+          "name": "Objects",
+          "explanation": "Object literals group named properties. Dot notation is concise for known names; bracket notation supports computed property names."
+        },
+        {
+          "name": "Destructuring",
+          "explanation": "Object and array destructuring extract values into variables and can provide defaults or rename bindings."
+        },
+        {
+          "name": "Spread",
+          "explanation": "Object spread creates a shallow copy/merge. Array spread expands iterable values into a new array; neither performs a deep clone of nested objects."
+        }
+      ],
+      "example": "const learner = {\n  name: \"Nova\",\n  level: \"Junior\",\n  scores: [82, 91, 88]\n};\n\nconst { name, level } = learner;\nconst updated = { ...learner, level: \"Intermediate\" };\nconsole.log(name, level, updated.level);",
+      "challenge": "Create an object with at least three properties, destructure two properties, and create a modified copy using spread.",
+      "hint": "Destructure with const { propertyA, propertyB } = object and copy with { ...object, changed: value }.",
+      "solution": "const learner = {\n  name: \"Nova\",\n  level: \"Junior\",\n  scores: [82, 91, 88]\n};\n\nconst { name, level } = learner;\nconst updated = { ...learner, level: \"Intermediate\" };\nconsole.log(name, level, updated.level);",
+      "groups": [
+        [
+          "{"
+        ],
+        [
+          "..."
+        ],
+        [
+          "const {"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Array Methods & Data Transformation",
+      "summary": "Use map, filter, find, some, every, reduce, and sorting patterns to express collection work without manual indexing.",
+      "concepts": [
+        {
+          "name": "Transformation",
+          "explanation": "map returns a new array with one result per input. filter returns only items that pass a predicate. Neither mutates the source array by itself."
+        },
+        {
+          "name": "Search and tests",
+          "explanation": "find returns the first matching item; some asks whether any item matches; every asks whether all items match."
+        },
+        {
+          "name": "Reduction",
+          "explanation": "reduce combines many values into one accumulator. Use it when the accumulator idea is genuinely clearer than a simpler loop or specialized method."
+        }
+      ],
+      "example": "const scores = [72, 88, 95, 61, 84];\nconst passing = scores.filter(score => score >= 80);\nconst curved = scores.map(score => Math.min(100, score + 5));\nconst average = scores.reduce((sum, score) => sum + score, 0) / scores.length;\n\nconsole.log(passing, curved, average);",
+      "challenge": "Given an array of numbers, create a filtered array and a mapped array, then print both.",
+      "hint": "Write one callback returning a boolean for filter and one callback returning a transformed value for map.",
+      "solution": "const scores = [72, 88, 95, 61, 84];\nconst passing = scores.filter(score => score >= 80);\nconst curved = scores.map(score => Math.min(100, score + 5));\nconst average = scores.reduce((sum, score) => sum + score, 0) / scores.length;\n\nconsole.log(passing, curved, average);",
+      "groups": [
+        [
+          ".filter("
+        ],
+        [
+          ".map("
+        ],
+        [
+          "console.log"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Forms, State & UI Rendering",
+      "summary": "Read form values, validate at the application layer, store UI state, and update the page from that state instead of scattering unrelated mutations.",
+      "concepts": [
+        {
+          "name": "Form events",
+          "explanation": "submit events belong to forms. preventDefault can stop navigation when JavaScript handles the interaction locally."
+        },
+        {
+          "name": "Reading data",
+          "explanation": "FormData can read successful controls by name. Input properties such as value and checked are useful for individual controls."
+        },
+        {
+          "name": "Single source of truth",
+          "explanation": "Keep important UI state in a clear object, then render elements from that state. This makes behavior easier to debug than treating the DOM as hidden storage."
+        }
+      ],
+      "example": "const state = { learnerName: \"\", saved: false };\nconst form = document.querySelector(\"#profile-form\");\nconst output = document.querySelector(\"#profile-status\");\n\nform?.addEventListener(\"submit\", event => {\n  event.preventDefault();\n  const data = new FormData(form);\n  state.learnerName = String(data.get(\"name\") ?? \"\");\n  state.saved = true;\n  output.textContent = `Saved ${state.learnerName}`;\n});",
+      "challenge": "Handle a form submit event, prevent the default submission, read at least one form value, and update text on the page.",
+      "hint": "Use the form submit event rather than only listening to a button click.",
+      "solution": "const state = { learnerName: \"\", saved: false };\nconst form = document.querySelector(\"#profile-form\");\nconst output = document.querySelector(\"#profile-status\");\n\nform?.addEventListener(\"submit\", event => {\n  event.preventDefault();\n  const data = new FormData(form);\n  state.learnerName = String(data.get(\"name\") ?? \"\");\n  state.saved = true;\n  output.textContent = `Saved ${state.learnerName}`;\n});",
+      "groups": [
+        [
+          "addEventListener(\"submit\"",
+          "addEventListener('submit'"
+        ],
+        [
+          "preventDefault"
+        ],
+        [
+          "FormData",
+          "value"
+        ],
+        [
+          "textContent"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Errors, Exceptions & Debugging",
+      "summary": "Distinguish syntax/runtime/logical errors, throw meaningful exceptions, handle recoverable failures, and debug from evidence instead of guesses.",
+      "concepts": [
+        {
+          "name": "Error categories",
+          "explanation": "Syntax errors prevent parsing, runtime errors occur during execution, and logical errors produce the wrong result without necessarily throwing."
+        },
+        {
+          "name": "try/catch/finally",
+          "explanation": "Use try/catch for failures you can meaningfully handle. finally runs cleanup code whether or not an exception occurred."
+        },
+        {
+          "name": "Debugging workflow",
+          "explanation": "Read the first relevant error, inspect the stack trace, reproduce consistently, isolate inputs, and use breakpoints/watch values before changing several things at once."
+        }
+      ],
+      "example": "function parseScore(text) {\n  const score = Number(text);\n  if (!Number.isFinite(score)) {\n    throw new TypeError(\"Score must be a number\");\n  }\n  return score;\n}\n\ntry {\n  console.log(parseScore(\"91\"));\n} catch (error) {\n  console.error(error.message);\n}",
+      "challenge": "Write a function that throws an Error or TypeError for invalid input and handle it with try/catch.",
+      "hint": "Validate first, throw a meaningful exception, then catch only where you can respond usefully.",
+      "solution": "function parseScore(text) {\n  const score = Number(text);\n  if (!Number.isFinite(score)) {\n    throw new TypeError(\"Score must be a number\");\n  }\n  return score;\n}\n\ntry {\n  console.log(parseScore(\"91\"));\n} catch (error) {\n  console.error(error.message);\n}",
+      "groups": [
+        [
+          "throw new"
+        ],
+        [
+          "try {"
+        ],
+        [
+          "catch ("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Modules, Storage & Project Structure",
+      "summary": "Split code into modules with explicit imports/exports and use browser storage only for appropriate client-side state.",
+      "concepts": [
+        {
+          "name": "ES modules",
+          "explanation": "export exposes bindings from a module; import consumes them. Module scripts have their own scope and are deferred by default in browsers."
+        },
+        {
+          "name": "Module boundaries",
+          "explanation": "Group code by responsibility rather than creating one giant utility file. Public exports should form a small understandable API."
+        },
+        {
+          "name": "Web storage",
+          "explanation": "localStorage stores string key/value data per origin and persists across sessions. Parse/stringify structured data and remember that storage is not a secure secret vault."
+        }
+      ],
+      "example": "// progress.js\nexport function saveProgress(progress) {\n  localStorage.setItem(\"academy-progress\", JSON.stringify(progress));\n}\n\nexport function loadProgress() {\n  const raw = localStorage.getItem(\"academy-progress\");\n  return raw ? JSON.parse(raw) : {};\n}",
+      "challenge": "Write one exported function that saves an object to localStorage and another that loads/parses it.",
+      "hint": "JSON.stringify before storing objects and JSON.parse after reading them back.",
+      "solution": "// progress.js\nexport function saveProgress(progress) {\n  localStorage.setItem(\"academy-progress\", JSON.stringify(progress));\n}\n\nexport function loadProgress() {\n  const raw = localStorage.getItem(\"academy-progress\");\n  return raw ? JSON.parse(raw) : {};\n}",
+      "groups": [
+        [
+          "export "
+        ],
+        [
+          "localStorage"
+        ],
+        [
+          "JSON.stringify"
+        ],
+        [
+          "JSON.parse"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — JavaScript Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+        },
+        {
+          "title": "MDN — JavaScript reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

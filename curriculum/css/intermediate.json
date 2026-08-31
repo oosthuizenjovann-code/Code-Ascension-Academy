@@ -1,0 +1,220 @@
+{
+  "language": "css",
+  "difficulty": "intermediate",
+  "topics": [
+    {
+      "title": "Custom Properties, calc() & Design Tokens",
+      "summary": "Create reusable values that participate in the cascade and can be overridden per component, theme, or state.",
+      "concepts": [
+        {
+          "name": "Custom properties",
+          "explanation": "Names beginning with -- store token-like values. var(--name, fallback) reads them at computed-value time and can provide a fallback."
+        },
+        {
+          "name": "Cascade-powered theming",
+          "explanation": "Because custom properties inherit and cascade, changing a token on an ancestor can theme an entire subtree without rewriting every component rule."
+        },
+        {
+          "name": "Derived values",
+          "explanation": "Combine tokens with calc(), min(), max(), clamp(), and color functions to derive component values instead of duplicating constants."
+        }
+      ],
+      "example": ":root {\n  --space: 1rem;\n  --accent: #38d9ff;\n  --panel: #101a2a;\n}\n\n.card {\n  padding: calc(var(--space) * 1.5);\n  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);\n  background: var(--panel);\n}",
+      "challenge": "Define at least three custom properties and use them in a component, including one calc() or color-mix() expression.",
+      "hint": "Put global defaults on :root, then override tokens closer to a component when you need a local theme.",
+      "solution": ":root {\n  --space: 1rem;\n  --accent: #38d9ff;\n  --panel: #101a2a;\n}\n\n.card {\n  padding: calc(var(--space) * 1.5);\n  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);\n  background: var(--panel);\n}",
+      "groups": [
+        [
+          "--"
+        ],
+        [
+          "var("
+        ],
+        [
+          "calc(",
+          "color-mix("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Advanced Selectors & Relational Styling",
+      "summary": "Use attribute selectors, combinators, structural pseudo-classes, :is(), :where(), :not(), and :has() while keeping selector intent readable.",
+      "concepts": [
+        {
+          "name": "Functional pseudo-classes",
+          "explanation": ":is() groups selector alternatives, :where() does the same with zero specificity, and :not() excludes matches."
+        },
+        {
+          "name": "Relational selection",
+          "explanation": ":has() can style an element based on matching descendants or relative selectors, enabling parent-like conditions that previously needed JavaScript."
+        },
+        {
+          "name": "Selector cost is secondary",
+          "explanation": "Modern engines handle selectors well; prioritize maintainability, scope, and predictable specificity before micro-optimizing selector speed."
+        }
+      ],
+      "example": ".card:has(input:checked) {\n  border-color: #4fef9d;\n}\n\n:is(h1, h2, h3):where(.section-title) {\n  text-wrap: balance;\n}\n\nbutton:not(:disabled):hover {\n  transform: translateY(-1px);\n}",
+      "challenge": "Write one :has() rule and one grouped rule using :is() or :where().",
+      "hint": ":where() is especially useful when you want matching power without adding specificity.",
+      "solution": ".card:has(input:checked) {\n  border-color: #4fef9d;\n}\n\n:is(h1, h2, h3):where(.section-title) {\n  text-wrap: balance;\n}\n\nbutton:not(:disabled):hover {\n  transform: translateY(-1px);\n}",
+      "groups": [
+        [
+          ":has("
+        ],
+        [
+          ":is(",
+          ":where("
+        ],
+        [
+          ":not("
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Keyframe Animation & Motion Systems",
+      "summary": "Build multi-stage animations, compose timing and fill behavior, and provide reduced-motion alternatives.",
+      "concepts": [
+        {
+          "name": "Keyframes",
+          "explanation": "@keyframes defines intermediate states. animation-name, duration, timing-function, iteration-count, direction, and fill-mode control playback."
+        },
+        {
+          "name": "Composable motion",
+          "explanation": "Animate transform and opacity where possible for smooth visual feedback, and avoid motion that changes layout every frame unless necessary."
+        },
+        {
+          "name": "Reduced motion",
+          "explanation": "Use prefers-reduced-motion to remove or simplify nonessential animations. The goal is not always “zero motion”; it is avoiding harmful or distracting motion."
+        }
+      ],
+      "example": "@keyframes pulse-ring {\n  0% { transform: scale(.95); opacity: .45; }\n  70% { transform: scale(1.08); opacity: .08; }\n  100% { transform: scale(1.08); opacity: 0; }\n}\n\n.active-node::after {\n  animation: pulse-ring 1.8s ease-out infinite;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .active-node::after { animation: none; }\n}",
+      "challenge": "Create a keyframe animation with at least three stages and disable it for reduced-motion users.",
+      "hint": "Separate the @keyframes definition from the element that applies the animation.",
+      "solution": "@keyframes pulse-ring {\n  0% { transform: scale(.95); opacity: .45; }\n  70% { transform: scale(1.08); opacity: .08; }\n  100% { transform: scale(1.08); opacity: 0; }\n}\n\n.active-node::after {\n  animation: pulse-ring 1.8s ease-out infinite;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .active-node::after { animation: none; }\n}",
+      "groups": [
+        [
+          "@keyframes"
+        ],
+        [
+          "animation:",
+          "animation-name"
+        ],
+        [
+          "prefers-reduced-motion"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Intrinsic Sizing & Content-Driven Layout",
+      "summary": "Use min-content, max-content, fit-content(), minmax(), aspect-ratio, and overflow-aware sizing to let content participate in layout decisions.",
+      "concepts": [
+        {
+          "name": "Intrinsic keywords",
+          "explanation": "min-content represents the smallest width without avoidable overflow, while max-content represents the unwrapped preferred width."
+        },
+        {
+          "name": "fit-content",
+          "explanation": "fit-content() grows toward the ideal size but respects an available-space limit, useful for labels, sidebars, and content-sized tracks."
+        },
+        {
+          "name": "Aspect ratio",
+          "explanation": "aspect-ratio reserves proportional space and helps components remain stable before media loads."
+        }
+      ],
+      "example": ".layout {\n  display: grid;\n  grid-template-columns: minmax(14rem, max-content) minmax(0, 1fr);\n  gap: 1.5rem;\n}\n\n.preview {\n  width: min(100%, 48rem);\n  aspect-ratio: 16 / 9;\n}",
+      "challenge": "Build a two-column grid where the sidebar has content-aware sizing and the main area can shrink safely.",
+      "hint": "minmax(0, 1fr) is useful when long content would otherwise force a grid track wider than expected.",
+      "solution": ".layout {\n  display: grid;\n  grid-template-columns: minmax(14rem, max-content) minmax(0, 1fr);\n  gap: 1.5rem;\n}\n\n.preview {\n  width: min(100%, 48rem);\n  aspect-ratio: 16 / 9;\n}",
+      "groups": [
+        [
+          "minmax("
+        ],
+        [
+          "max-content",
+          "min-content",
+          "fit-content("
+        ],
+        [
+          "aspect-ratio"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Component CSS Architecture",
+      "summary": "Organize selectors, tokens, variants, state, and layout responsibilities so components remain reusable and predictable as a project grows.",
+      "concepts": [
+        {
+          "name": "Separate responsibilities",
+          "explanation": "Page layout rules should not quietly depend on deep component internals. Give components explicit classes and modifiers for their public styling contract."
+        },
+        {
+          "name": "Low specificity",
+          "explanation": "Class-based selectors, :where(), and thoughtful nesting make overrides easier than long descendant chains or frequent !important."
+        },
+        {
+          "name": "State naming",
+          "explanation": "Use clear state hooks such as [aria-current=\"page\"], .is-active, or data-state rather than styling by incidental DOM position when state is semantic."
+        }
+      ],
+      "example": ".course-card {\n  --card-accent: #52d8ff;\n  padding: 1.25rem;\n  border: 1px solid rgb(255 255 255 / .12);\n}\n\n.course-card--advanced { --card-accent: #ff4c5f; }\n.course-card[data-state=\"complete\"] { border-color: var(--card-accent); }\n.course-card__title { color: var(--card-accent); }",
+      "challenge": "Create a component class, one variant, one state selector, and one element/subpart selector.",
+      "hint": "Treat classes and data attributes as an API: a future developer should understand why each selector exists.",
+      "solution": ".course-card {\n  --card-accent: #52d8ff;\n  padding: 1.25rem;\n  border: 1px solid rgb(255 255 255 / .12);\n}\n\n.course-card--advanced { --card-accent: #ff4c5f; }\n.course-card[data-state=\"complete\"] { border-color: var(--card-accent); }\n.course-card__title { color: var(--card-accent); }",
+      "groups": [
+        [
+          ".course-card"
+        ],
+        [
+          "data-state"
+        ],
+        [
+          "--card-accent"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "language": "css",
+  "difficulty": "intern",
+  "topics": [
+    {
+      "title": "Selectors, Rules & the Cascade",
+      "summary": "Learn the basic grammar of CSS: choose elements with selectors, declare properties and values, and understand why one competing rule wins.",
+      "concepts": [
+        {
+          "name": "Rulesets",
+          "explanation": "A ruleset combines a selector with a declaration block. Each declaration is a property/value pair such as color: white."
+        },
+        {
+          "name": "Selectors",
+          "explanation": "Type, class, and id selectors target different sets of elements. Classes are the normal reusable styling hook; ids are unique document identifiers."
+        },
+        {
+          "name": "Cascade basics",
+          "explanation": "When rules target the same property, origin, importance, specificity, and source order determine which declaration wins."
+        }
+      ],
+      "example": "body {\n  background: #0b1220;\n  color: #eaf2ff;\n}\n\n.card {\n  border: 1px solid #28405f;\n  padding: 1rem;\n}",
+      "challenge": "Style the page background/text and create a reusable .card class with padding and a border.",
+      "hint": "Use one body rule and one class selector beginning with a dot.",
+      "solution": "body {\n  background: #0b1220;\n  color: #eaf2ff;\n}\n\n.card {\n  border: 1px solid #28405f;\n  padding: 1rem;\n}",
+      "groups": [
+        [
+          "body"
+        ],
+        [
+          ".card"
+        ],
+        [
+          "padding"
+        ],
+        [
+          "border"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS styling basics",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Color, Fonts & Text",
+      "summary": "Control readable typography using color, font families, sizes, weights, line height, alignment, and spacing.",
+      "concepts": [
+        {
+          "name": "Color values",
+          "explanation": "CSS accepts named colors, hex, rgb()/rgba(), hsl(), and newer color functions. Good contrast matters more than choosing a fashionable notation."
+        },
+        {
+          "name": "Font stack",
+          "explanation": "font-family should normally include fallback fonts or a generic family such as sans-serif or monospace."
+        },
+        {
+          "name": "Readable text",
+          "explanation": "font-size, line-height, letter-spacing, max-width, and spacing all affect readability. Avoid using tiny text or low contrast as decoration."
+        }
+      ],
+      "example": "body {\n  color: #dce8f7;\n  font-family: Inter, system-ui, sans-serif;\n  line-height: 1.6;\n}\n\nh1 {\n  font-size: 2.5rem;\n  letter-spacing: 0.03em;\n}",
+      "challenge": "Create readable body typography and give h1 a larger size and deliberate letter spacing.",
+      "hint": "Start with font-family and line-height on body so descendants inherit useful defaults.",
+      "solution": "body {\n  color: #dce8f7;\n  font-family: Inter, system-ui, sans-serif;\n  line-height: 1.6;\n}\n\nh1 {\n  font-size: 2.5rem;\n  letter-spacing: 0.03em;\n}",
+      "groups": [
+        [
+          "font-family"
+        ],
+        [
+          "line-height"
+        ],
+        [
+          "font-size"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS styling basics",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Box Model & Spacing",
+      "summary": "Reason about every element as content surrounded by padding, border, and margin, then control sizing predictably with box-sizing.",
+      "concepts": [
+        {
+          "name": "Four layers",
+          "explanation": "Content is the inner box. Padding adds interior space, border surrounds padding, and margin creates space outside the border."
+        },
+        {
+          "name": "box-sizing",
+          "explanation": "With border-box, declared width and height include padding and border. Many projects apply box-sizing: border-box globally for easier sizing."
+        },
+        {
+          "name": "Margin behavior",
+          "explanation": "Vertical margins between normal block elements can collapse in some situations. Gap, padding, or layout systems can be clearer when you need explicit spacing."
+        }
+      ],
+      "example": "*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.panel {\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}",
+      "challenge": "Create a .panel with width, padding, border and margin, and enable border-box sizing.",
+      "hint": "Remember that margin is outside the border while padding is inside it.",
+      "solution": "*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.panel {\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}",
+      "groups": [
+        [
+          "box-sizing"
+        ],
+        [
+          "padding"
+        ],
+        [
+          "border"
+        ],
+        [
+          "margin"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS styling basics",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Flexbox Fundamentals",
+      "summary": "Lay out items in one dimension and control direction, wrapping, alignment, flexible growth, and spacing.",
+      "concepts": [
+        {
+          "name": "Main and cross axes",
+          "explanation": "flex-direction defines the main axis. justify-content distributes items along the main axis; align-items controls the cross axis."
+        },
+        {
+          "name": "Flexible sizing",
+          "explanation": "flex-grow, flex-shrink, and flex-basis describe how an item participates when space is added or removed. The flex shorthand combines them."
+        },
+        {
+          "name": "Wrapping and gap",
+          "explanation": "flex-wrap allows items to move to another line. gap creates consistent spacing without margin tricks."
+        }
+      ],
+      "example": ".toolbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  flex-wrap: wrap;\n}\n\n.toolbar__actions {\n  display: flex;\n  gap: 8px;\n}",
+      "challenge": "Create a flex row that spaces major groups apart and allows wrapping on smaller widths.",
+      "hint": "Set display:flex first, then think separately about main-axis and cross-axis alignment.",
+      "solution": ".toolbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  flex-wrap: wrap;\n}\n\n.toolbar__actions {\n  display: flex;\n  gap: 8px;\n}",
+      "groups": [
+        [
+          "display: flex",
+          "display:flex"
+        ],
+        [
+          "justify-content"
+        ],
+        [
+          "align-items"
+        ],
+        [
+          "gap"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Responsive Foundations",
+      "summary": "Build layouts that adapt to available space using fluid dimensions, media queries, and content-driven breakpoints.",
+      "concepts": [
+        {
+          "name": "Fluid first",
+          "explanation": "Prefer flexible widths such as percentages, fr units, max-width, and min() before adding many media queries."
+        },
+        {
+          "name": "Media queries",
+          "explanation": "@media conditionally applies rules based on features such as viewport width, input capability, motion preference, or color scheme."
+        },
+        {
+          "name": "Mobile-friendly sizing",
+          "explanation": "The viewport meta tag belongs in HTML; CSS should then avoid fixed widths that force horizontal scrolling on narrow screens."
+        }
+      ],
+      "example": ".course-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 1rem;\n}\n\n@media (max-width: 700px) {\n  .course-grid {\n    grid-template-columns: 1fr;\n  }\n}",
+      "challenge": "Create a two-column layout that becomes one column below 700px.",
+      "hint": "Write the base layout first, then override only the property that must change inside @media.",
+      "solution": ".course-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 1rem;\n}\n\n@media (max-width: 700px) {\n  .course-grid {\n    grid-template-columns: 1fr;\n  }\n}",
+      "groups": [
+        [
+          "@media"
+        ],
+        [
+          "max-width"
+        ],
+        [
+          "grid-template-columns"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — CSS layout",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        {
+          "title": "MDN — CSS reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "language": "html",
+  "difficulty": "intern",
+  "topics": [
+    {
+      "title": "Document Structure & Syntax",
+      "summary": "Learn the skeleton every HTML page is built from and how elements, attributes, nesting, and document metadata fit together.",
+      "concepts": [
+        {
+          "name": "Document skeleton",
+          "explanation": "A modern document starts with a doctype, then an html root. The head stores metadata and resource links; the body contains content that participates in the visible page."
+        },
+        {
+          "name": "Elements and attributes",
+          "explanation": "Elements give content structure. Attributes add extra information such as an id, language, URL, or input type. Attribute values should be quoted consistently."
+        },
+        {
+          "name": "Nesting and validity",
+          "explanation": "Elements form a tree. Closing tags should match the element you opened, and child elements must be placed where the HTML content model permits them."
+        }
+      ],
+      "example": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Academy Profile</title>\n</head>\n<body>\n  <h1>Code Ascension</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>",
+      "challenge": "Create a valid small HTML document with a doctype, a title, one h1, and one paragraph.",
+      "hint": "Start with <!doctype html>, then create html, head, title, body, h1 and p in that nesting order.",
+      "solution": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Academy Profile</title>\n</head>\n<body>\n  <h1>Code Ascension</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>",
+      "groups": [
+        [
+          "<!doctype html>"
+        ],
+        [
+          "<title"
+        ],
+        [
+          "<h1"
+        ],
+        [
+          "<p"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Structuring content with HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+        },
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Text, Headings & Meaning",
+      "summary": "Use text-level elements to communicate hierarchy and meaning instead of choosing tags only for their default appearance.",
+      "concepts": [
+        {
+          "name": "Heading hierarchy",
+          "explanation": "Use h1 through h6 to describe section hierarchy. Avoid skipping levels simply to make text look smaller; CSS is responsible for appearance."
+        },
+        {
+          "name": "Paragraphs and phrasing",
+          "explanation": "Paragraphs group prose. strong marks importance, em adds stress emphasis, and elements such as code, mark, small, sub, and sup carry specific meaning."
+        },
+        {
+          "name": "Semantics first",
+          "explanation": "Semantic HTML helps browsers, search engines, and assistive technology understand content. A meaningful element is usually better than a generic div plus styling."
+        }
+      ],
+      "example": "<article>\n  <h1>Learning Log</h1>\n  <h2>Day One</h2>\n  <p>I learned that <strong>meaning matters</strong> in HTML.</p>\n  <p>Use <code>&lt;em&gt;</code> for <em>stress emphasis</em>.</p>\n</article>",
+      "challenge": "Write an article with an h1, an h2, two paragraphs, and at least one strong or em element.",
+      "hint": "Build the heading hierarchy first, then add prose beneath the correct heading.",
+      "solution": "<article>\n  <h1>Learning Log</h1>\n  <h2>Day One</h2>\n  <p>I learned that <strong>meaning matters</strong> in HTML.</p>\n  <p>Use <code>&lt;em&gt;</code> for <em>stress emphasis</em>.</p>\n</article>",
+      "groups": [
+        [
+          "<article"
+        ],
+        [
+          "<h1"
+        ],
+        [
+          "<h2"
+        ],
+        [
+          "<p"
+        ],
+        [
+          "<strong",
+          "<em"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Structuring content with HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Links, Images & Lists",
+      "summary": "Connect documents, embed meaningful images, and represent grouped or ordered information with the correct list structure.",
+      "concepts": [
+        {
+          "name": "Anchors",
+          "explanation": "The a element creates a hyperlink. href identifies the destination; link text should explain where the link goes instead of saying only “click here”."
+        },
+        {
+          "name": "Images and alternatives",
+          "explanation": "img uses src for the image resource and alt for a text alternative. Decorative images normally use an empty alt value so screen readers can ignore them."
+        },
+        {
+          "name": "Lists",
+          "explanation": "Use ul when order does not matter, ol when sequence matters, and li for each item. Description lists use dl, dt, and dd for terms and descriptions."
+        }
+      ],
+      "example": "<nav aria-label=\"Learning links\">\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"tests.html\">Tests</a></li>\n  </ul>\n</nav>\n<img src=\"academy-badge.png\" alt=\"Code Ascension academy badge\">",
+      "challenge": "Create a list containing at least three useful links and add an image with alt text.",
+      "hint": "Use one ul or ol, place each link inside an li, and remember both src and alt on the image.",
+      "solution": "<nav aria-label=\"Learning links\">\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"tests.html\">Tests</a></li>\n  </ul>\n</nav>\n<img src=\"academy-badge.png\" alt=\"Code Ascension academy badge\">",
+      "groups": [
+        [
+          "<ul",
+          "<ol"
+        ],
+        [
+          "<li"
+        ],
+        [
+          "<a"
+        ],
+        [
+          "href="
+        ],
+        [
+          "<img"
+        ],
+        [
+          "alt="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Structuring content with HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Forms & Basic Controls",
+      "summary": "Collect user input with native controls that already provide keyboard behavior, semantics, and browser features.",
+      "concepts": [
+        {
+          "name": "Form ownership",
+          "explanation": "form groups controls that belong to one submission. action describes where data goes and method describes how it is submitted."
+        },
+        {
+          "name": "Labels",
+          "explanation": "A label should be programmatically associated with its input, usually with for=\"id\". This enlarges the clickable target and gives assistive technology a usable name."
+        },
+        {
+          "name": "Control types",
+          "explanation": "input supports many types including text, email, number, checkbox, radio, date, and password. textarea and select cover longer text and predefined choices."
+        }
+      ],
+      "example": "<form action=\"/profile\" method=\"post\">\n  <label for=\"name\">Display name</label>\n  <input id=\"name\" name=\"name\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>",
+      "challenge": "Create a form with labelled name and email fields plus a submit button.",
+      "hint": "Give each input an id, then point the matching label for attribute at that id.",
+      "solution": "<form action=\"/profile\" method=\"post\">\n  <label for=\"name\">Display name</label>\n  <input id=\"name\" name=\"name\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>",
+      "groups": [
+        [
+          "<form"
+        ],
+        [
+          "<label"
+        ],
+        [
+          "type=\"email\"",
+          "type=email"
+        ],
+        [
+          "<button"
+        ],
+        [
+          "type=\"submit\"",
+          "type=submit"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Web forms",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Semantic Page Structure & Accessibility Basics",
+      "summary": "Combine structural elements into a page that is understandable when styles are removed or when it is navigated with assistive technology.",
+      "concepts": [
+        {
+          "name": "Landmarks",
+          "explanation": "header, nav, main, aside, and footer create useful page regions. A document should normally have one main landmark for its primary content."
+        },
+        {
+          "name": "Sections and articles",
+          "explanation": "section groups a themed part of a document and typically has a heading. article is for self-contained content that could stand on its own."
+        },
+        {
+          "name": "Built-in accessibility",
+          "explanation": "Start with correct native elements, meaningful headings, useful link text, alt text, and labels. ARIA is not a substitute for correct HTML."
+        }
+      ],
+      "example": "<header>\n  <h1>Code Ascension</h1>\n  <nav aria-label=\"Primary\"><a href=\"#roadmap\">Roadmap</a></nav>\n</header>\n<main id=\"roadmap\">\n  <section>\n    <h2>Current path</h2>\n    <article><h3>HTML Intern</h3><p>Five modules in progress.</p></article>\n  </section>\n</main>\n<footer><p>Local learning build</p></footer>",
+      "challenge": "Build a page fragment with header, nav, main, section, article and footer, using headings in a logical hierarchy.",
+      "hint": "Imagine the page with all CSS disabled. The structure and reading order should still make sense.",
+      "solution": "<header>\n  <h1>Code Ascension</h1>\n  <nav aria-label=\"Primary\"><a href=\"#roadmap\">Roadmap</a></nav>\n</header>\n<main id=\"roadmap\">\n  <section>\n    <h2>Current path</h2>\n    <article><h3>HTML Intern</h3><p>Five modules in progress.</p></article>\n  </section>\n</main>\n<footer><p>Local learning build</p></footer>",
+      "groups": [
+        [
+          "<header"
+        ],
+        [
+          "<nav"
+        ],
+        [
+          "<main"
+        ],
+        [
+          "<section"
+        ],
+        [
+          "<article"
+        ],
+        [
+          "<footer"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Structuring content with HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

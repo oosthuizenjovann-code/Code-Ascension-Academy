@@ -1,0 +1,243 @@
+{
+  "language": "csharp",
+  "difficulty": "intermediate",
+  "topics": [
+    {
+      "title": "Generics & Type Constraints",
+      "summary": "Write reusable code that remains type-safe by parameterizing classes and methods with types and constraining capabilities when necessary.",
+      "concepts": [
+        {
+          "name": "Generic parameters",
+          "explanation": "T is a placeholder resolved when the generic type or method is used. The compiler still knows the actual type and checks operations at compile time."
+        },
+        {
+          "name": "Constraints",
+          "explanation": "where clauses express requirements such as class, struct, notnull, new(), a base type, or an interface. Constraints enable safe operations on T."
+        },
+        {
+          "name": "Reusable APIs",
+          "explanation": "Generics power List<T>, Dictionary<TKey,TValue>, Task<T>, Func<T,...>, LINQ, and many .NET APIs because they combine reuse with static type information."
+        }
+      ],
+      "example": "static T ChooseHigher<T>(T first, T second) where T : IComparable<T>\n{\n    return first.CompareTo(second) >= 0 ? first : second;\n}\n\nConsole.WriteLine(ChooseHigher(10, 7));\nConsole.WriteLine(ChooseHigher(\"CSS\", \"C#\"));",
+      "challenge": "Write a generic method with one type parameter and an interface constraint, then call it with two different types.",
+      "hint": "The constraint should describe the capability your implementation needs from T.",
+      "solution": "static T ChooseHigher<T>(T first, T second) where T : IComparable<T>\n{\n    return first.CompareTo(second) >= 0 ? first : second;\n}\n\nConsole.WriteLine(ChooseHigher(10, 7));\nConsole.WriteLine(ChooseHigher(\"CSS\", \"C#\"));",
+      "groups": [
+        [
+          "<T>"
+        ],
+        [
+          "where T :"
+        ],
+        [
+          "IComparable"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Generic types and methods",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Delegates, Lambdas & Events",
+      "summary": "Treat behavior as data through delegates/lambdas and expose opt-in notifications through events.",
+      "concepts": [
+        {
+          "name": "Delegates",
+          "explanation": "A delegate type describes a method signature. Func<...> and Action<...> are general-purpose delegate types for return-value and void callbacks."
+        },
+        {
+          "name": "Lambdas",
+          "explanation": "Lambda expressions provide compact function values and capture lexical variables. Captured mutable state should be used deliberately."
+        },
+        {
+          "name": "Events",
+          "explanation": "event wraps delegate-based publication with restrictions: outside code can subscribe/unsubscribe but only the declaring type can raise the event."
+        }
+      ],
+      "example": "class CourseProgress\n{\n    public event EventHandler<int>? ScoreChanged;\n    public int Score { get; private set; }\n\n    public void UpdateScore(int score)\n    {\n        Score = score;\n        ScoreChanged?.Invoke(this, score);\n    }\n}\n\nCourseProgress progress = new();\nprogress.ScoreChanged += (_, score) => Console.WriteLine($\"New score: {score}\");\nprogress.UpdateScore(93);",
+      "challenge": "Create a class with an event, raise it from a method, and subscribe with a lambda.",
+      "hint": "The publisher declares and raises the event; subscribers attach with +=.",
+      "solution": "class CourseProgress\n{\n    public event EventHandler<int>? ScoreChanged;\n    public int Score { get; private set; }\n\n    public void UpdateScore(int score)\n    {\n        Score = score;\n        ScoreChanged?.Invoke(this, score);\n    }\n}\n\nCourseProgress progress = new();\nprogress.ScoreChanged += (_, score) => Console.WriteLine($\"New score: {score}\");\nprogress.UpdateScore(93);",
+      "groups": [
+        [
+          "event "
+        ],
+        [
+          "+="
+        ],
+        [
+          "=>"
+        ],
+        [
+          "Invoke"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Lambdas, delegates, and events",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/delegates-lambdas"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "LINQ & Declarative Data Queries",
+      "summary": "Filter, project, order, group, aggregate, and compose sequences with strongly typed query operators.",
+      "concepts": [
+        {
+          "name": "Deferred execution",
+          "explanation": "Many LINQ operators return an IEnumerable<T> pipeline that executes when enumerated, so later source changes may affect results unless you materialize with ToList/ToArray."
+        },
+        {
+          "name": "Core operators",
+          "explanation": "Where filters, Select transforms, OrderBy sorts, GroupBy groups, Any/All test conditions, and aggregate operators combine values."
+        },
+        {
+          "name": "Method/query syntax",
+          "explanation": "Most queries can be expressed with method syntax or query-expression syntax. Prefer whichever makes the transformation easier to read."
+        }
+      ],
+      "example": "List<int> scores = new() { 72, 91, 84, 67, 95 };\n\nvar passing = scores\n    .Where(score => score >= 80)\n    .OrderByDescending(score => score)\n    .Select(score => $\"{score}%\")\n    .ToList();\n\nforeach (string score in passing)\n    Console.WriteLine(score);",
+      "challenge": "Use LINQ to filter passing scores, order them, project them into another form, and materialize the result.",
+      "hint": "Think of the pipeline as steps: Where → OrderBy/OrderByDescending → Select → ToList.",
+      "solution": "List<int> scores = new() { 72, 91, 84, 67, 95 };\n\nvar passing = scores\n    .Where(score => score >= 80)\n    .OrderByDescending(score => score)\n    .Select(score => $\"{score}%\")\n    .ToList();\n\nforeach (string score in passing)\n    Console.WriteLine(score);",
+      "groups": [
+        [
+          ".Where("
+        ],
+        [
+          ".Select("
+        ],
+        [
+          ".OrderBy"
+        ],
+        [
+          ".ToList("
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — LINQ",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "async/await & Task-Based Asynchrony",
+      "summary": "Write nonblocking asynchronous workflows, compose tasks, propagate cancellation, and preserve exception behavior.",
+      "concepts": [
+        {
+          "name": "Task model",
+          "explanation": "Task represents an ongoing async operation; Task<T> produces a value. async methods normally return Task, Task<T>, ValueTask, or specialized async-stream forms."
+        },
+        {
+          "name": "await",
+          "explanation": "await asynchronously waits for a task and resumes the method when it completes. Avoid blocking on Task.Result/Wait in async workflows."
+        },
+        {
+          "name": "Composition",
+          "explanation": "Start independent operations before awaiting them and use Task.WhenAll/WhenAny when the work can overlap. CancellationToken communicates cooperative cancellation."
+        }
+      ],
+      "example": "static async Task<string[]> LoadFilesAsync(IEnumerable<string> paths, CancellationToken token)\n{\n    Task<string>[] reads = paths\n        .Select(path => File.ReadAllTextAsync(path, token))\n        .ToArray();\n\n    return await Task.WhenAll(reads);\n}\n\nusing CancellationTokenSource cts = new();\nstring[] content = await LoadFilesAsync(new[] { \"a.txt\", \"b.txt\" }, cts.Token);\nConsole.WriteLine(content.Length);",
+      "challenge": "Write an async method returning Task<T>, await at least one async operation, and accept/forward a CancellationToken.",
+      "hint": "Do not replace async file/network APIs with Task.Run unless you actually need to offload CPU-bound work.",
+      "solution": "static async Task<string[]> LoadFilesAsync(IEnumerable<string> paths, CancellationToken token)\n{\n    Task<string>[] reads = paths\n        .Select(path => File.ReadAllTextAsync(path, token))\n        .ToArray();\n\n    return await Task.WhenAll(reads);\n}\n\nusing CancellationTokenSource cts = new();\nstring[] content = await LoadFilesAsync(new[] { \"a.txt\", \"b.txt\" }, cts.Token);\nConsole.WriteLine(content.Length);",
+      "groups": [
+        [
+          "async "
+        ],
+        [
+          "Task<"
+        ],
+        [
+          "await "
+        ],
+        [
+          "CancellationToken"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Asynchronous programming",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Records, Pattern Matching & Modern Data Modeling",
+      "summary": "Use records for value-oriented models and pattern matching for expressive, type-safe branching over data shape.",
+      "concepts": [
+        {
+          "name": "Records",
+          "explanation": "record class and record struct synthesize value-based equality and support with expressions, making them useful for immutable-ish data models and messages."
+        },
+        {
+          "name": "Patterns",
+          "explanation": "Type, property, relational, list, logical, and positional patterns can test data while extracting values."
+        },
+        {
+          "name": "Switch expressions",
+          "explanation": "Switch expressions pair patterns with result expressions and encourage exhaustive, expression-oriented decision logic."
+        }
+      ],
+      "example": "public record Assessment(string Module, int Score);\n\nstatic string Classify(Assessment assessment) => assessment switch\n{\n    { Score: >= 90 } => \"Excellent\",\n    { Score: >= 80 } => \"Pass\",\n    { Score: >= 0 } => \"Retry\",\n    _ => throw new ArgumentOutOfRangeException(nameof(assessment))\n};\n\nAssessment result = new(\"C#\", 92);\nAssessment revised = result with { Score = 95 };\nConsole.WriteLine(Classify(revised));",
+      "challenge": "Create a record with at least two values and classify it with a switch expression using property/relational patterns.",
+      "hint": "A record is useful here because the data has identity-by-value semantics and can be copied with with { ... }.",
+      "solution": "public record Assessment(string Module, int Score);\n\nstatic string Classify(Assessment assessment) => assessment switch\n{\n    { Score: >= 90 } => \"Excellent\",\n    { Score: >= 80 } => \"Pass\",\n    { Score: >= 0 } => \"Retry\",\n    _ => throw new ArgumentOutOfRangeException(nameof(assessment))\n};\n\nAssessment result = new(\"C#\", 92);\nAssessment revised = result with { Score = 95 };\nConsole.WriteLine(Classify(revised));",
+      "groups": [
+        [
+          "record "
+        ],
+        [
+          "switch"
+        ],
+        [
+          "with {"
+        ],
+        [
+          "=>"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — A tour of C#",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+        },
+        {
+          "title": "Microsoft Learn — C# documentation",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

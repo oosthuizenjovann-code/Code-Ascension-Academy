@@ -1,0 +1,265 @@
+{
+  "language": "html",
+  "difficulty": "advanced",
+  "topics": [
+    {
+      "title": "Complex Accessible Data & Controls",
+      "summary": "Build dense documents where tables, forms, descriptions, and native controls preserve relationships for keyboard and screen-reader users.",
+      "concepts": [
+        {
+          "name": "Complex table headers",
+          "explanation": "For multi-level tables, use multiple th cells and id/headers relationships when simple scope is insufficient to express the header associations."
+        },
+        {
+          "name": "Control instructions",
+          "explanation": "Instructions and errors should be connected to controls using visible text and relationships such as aria-describedby when native labeling alone is not enough."
+        },
+        {
+          "name": "Native first",
+          "explanation": "Use button, input, select, details, and dialog before inventing custom controls. Every custom interaction adds focus, keyboard, state, and announcement responsibilities."
+        }
+      ],
+      "example": "<table>\n  <caption>Module scores</caption>\n  <thead>\n    <tr><th id=\"student\">Student</th><th id=\"html\">HTML</th><th id=\"css\">CSS</th></tr>\n  </thead>\n  <tbody>\n    <tr><th id=\"diaan\" headers=\"student\">Learner</th><td headers=\"diaan html\">92</td><td headers=\"diaan css\">88</td></tr>\n  </tbody>\n</table>",
+      "challenge": "Create a table that demonstrates explicit id/headers relationships for at least one data cell.",
+      "hint": "Give header cells ids, then list the relevant header ids in the data cell headers attribute.",
+      "solution": "<table>\n  <caption>Module scores</caption>\n  <thead>\n    <tr><th id=\"student\">Student</th><th id=\"html\">HTML</th><th id=\"css\">CSS</th></tr>\n  </thead>\n  <tbody>\n    <tr><th id=\"diaan\" headers=\"student\">Learner</th><td headers=\"diaan html\">92</td><td headers=\"diaan css\">88</td></tr>\n  </tbody>\n</table>",
+      "groups": [
+        [
+          "<table"
+        ],
+        [
+          "id="
+        ],
+        [
+          "headers="
+        ],
+        [
+          "<th"
+        ],
+        [
+          "<td"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        },
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Progressive Enhancement & Resilient Markup",
+      "summary": "Design the HTML layer so core content and actions remain understandable before CSS and JavaScript enhance them.",
+      "concepts": [
+        {
+          "name": "Baseline first",
+          "explanation": "Start with a meaningful document, real links, real buttons, and real form submission. Enhancement should add convenience without erasing the baseline capability."
+        },
+        {
+          "name": "Fallback strategy",
+          "explanation": "Use fallback text, source alternatives, noscript only when appropriate, and server-compatible links/forms when a feature is important."
+        },
+        {
+          "name": "Component contracts",
+          "explanation": "Reusable components should define clear semantic input: heading levels, labels, link destinations, and form names. Styling hooks should not be the only meaning."
+        }
+      ],
+      "example": "<form action=\"/search\" method=\"get\" class=\"search-widget\">\n  <label for=\"q\">Search lessons</label>\n  <input id=\"q\" name=\"q\" type=\"search\">\n  <button type=\"submit\">Search</button>\n</form>\n<p class=\"enhancement-note\">JavaScript may enhance results without removing the normal form action.</p>",
+      "challenge": "Build a useful interaction that still has a meaningful native behavior before JavaScript runs.",
+      "hint": "Forms with real action/method values and anchors with real href values are strong progressive-enhancement foundations.",
+      "solution": "<form action=\"/search\" method=\"get\" class=\"search-widget\">\n  <label for=\"q\">Search lessons</label>\n  <input id=\"q\" name=\"q\" type=\"search\">\n  <button type=\"submit\">Search</button>\n</form>\n<p class=\"enhancement-note\">JavaScript may enhance results without removing the normal form action.</p>",
+      "groups": [
+        [
+          "<form"
+        ],
+        [
+          "action="
+        ],
+        [
+          "method="
+        ],
+        [
+          "<button"
+        ],
+        [
+          "name="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Structuring content with HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "High-Performance Media Markup",
+      "summary": "Combine responsive source selection, modern formats, intrinsic dimensions, loading priorities, and accessible alternatives for media-heavy pages.",
+      "concepts": [
+        {
+          "name": "Avoid layout shifts",
+          "explanation": "Give images width and height when the intrinsic ratio is known so the browser can reserve space before the file finishes loading."
+        },
+        {
+          "name": "Format selection",
+          "explanation": "picture can offer modern formats such as AVIF or WebP before a broadly supported fallback. The browser chooses the first supported source that matches."
+        },
+        {
+          "name": "Loading priority",
+          "explanation": "Critical above-the-fold media may need eager loading and high priority, while below-the-fold media can be lazy. Measure real page behavior instead of applying one rule everywhere."
+        }
+      ],
+      "example": "<picture>\n  <source type=\"image/avif\" srcset=\"hero-800.avif 800w, hero-1600.avif 1600w\">\n  <source type=\"image/webp\" srcset=\"hero-800.webp 800w, hero-1600.webp 1600w\">\n  <img src=\"hero-800.jpg\" srcset=\"hero-1600.jpg 1600w\" sizes=\"100vw\"\n       width=\"1600\" height=\"900\" fetchpriority=\"high\" alt=\"Academy learning roadmap\">\n</picture>",
+      "challenge": "Create a picture with two modern-format source elements and a sized img fallback.",
+      "hint": "Order source elements from preferred modern format to fallback; the final img carries alt and intrinsic dimensions.",
+      "solution": "<picture>\n  <source type=\"image/avif\" srcset=\"hero-800.avif 800w, hero-1600.avif 1600w\">\n  <source type=\"image/webp\" srcset=\"hero-800.webp 800w, hero-1600.webp 1600w\">\n  <img src=\"hero-800.jpg\" srcset=\"hero-1600.jpg 1600w\" sizes=\"100vw\"\n       width=\"1600\" height=\"900\" fetchpriority=\"high\" alt=\"Academy learning roadmap\">\n</picture>",
+      "groups": [
+        [
+          "<picture"
+        ],
+        [
+          "type=\"image/avif\"",
+          "type=image/avif"
+        ],
+        [
+          "<img"
+        ],
+        [
+          "width="
+        ],
+        [
+          "height="
+        ],
+        [
+          "alt="
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Parser Edge Cases, Validation & Debugging",
+      "summary": "Diagnose markup that appears valid at a glance but produces unexpected DOM trees because the HTML parser repairs or relocates nodes.",
+      "concepts": [
+        {
+          "name": "Inspect the DOM",
+          "explanation": "When layout or scripting behaves inexplicably, inspect the DOM tree. Invalid table descendants, omitted elements, and misnesting can cause parser corrections."
+        },
+        {
+          "name": "Validate systematically",
+          "explanation": "Use an HTML validator during development, but also test semantics and accessibility; syntactic validity does not automatically mean the document is usable."
+        },
+        {
+          "name": "Minimize ambiguity",
+          "explanation": "Prefer explicit structure in complex components. Clear sectioning, form ownership, and table grouping make both maintenance and parser behavior easier to reason about."
+        }
+      ],
+      "example": "<table>\n  <caption>Validated structure</caption>\n  <thead><tr><th scope=\"col\">Topic</th><th scope=\"col\">Status</th></tr></thead>\n  <tbody><tr><td>HTML</td><td>Valid</td></tr></tbody>\n</table>",
+      "challenge": "Create a valid table and add HTML comments identifying its parent/child structure for debugging practice.",
+      "hint": "After writing it, inspect the Elements/DOM panel and verify the tree matches your mental model.",
+      "solution": "<table>\n  <caption>Validated structure</caption>\n  <thead><tr><th scope=\"col\">Topic</th><th scope=\"col\">Status</th></tr></thead>\n  <tbody><tr><td>HTML</td><td>Valid</td></tr></tbody>\n</table>",
+      "groups": [
+        [
+          "<table"
+        ],
+        [
+          "<thead"
+        ],
+        [
+          "<tbody"
+        ],
+        [
+          "<tr"
+        ],
+        [
+          "<td"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    },
+    {
+      "title": "Professional HTML Audit Capstone",
+      "summary": "Audit a realistic document for semantics, accessibility, forms, metadata, performance, internationalization, and maintainability as one connected system.",
+      "concepts": [
+        {
+          "name": "Audit by layers",
+          "explanation": "Review document metadata, landmark structure, heading hierarchy, links/images, forms, tables/media, loading behavior, and language information separately before judging the whole page."
+        },
+        {
+          "name": "Prefer native solutions",
+          "explanation": "Replacing generic clickable containers with native controls often removes several bugs at once: keyboard behavior, semantics, focusability, and activation."
+        },
+        {
+          "name": "Document tradeoffs",
+          "explanation": "Senior work includes explaining why a chosen structure is appropriate, which browser behavior it relies on, and what fallback exists if enhancement fails."
+        }
+      ],
+      "example": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Code Ascension Dashboard</title>\n  <meta name=\"description\" content=\"Private programming learning dashboard.\">\n</head>\n<body>\n  <header><h1>Code Ascension</h1><nav aria-label=\"Primary\"><a href=\"#courses\">Courses</a></nav></header>\n  <main id=\"courses\"><section aria-labelledby=\"course-title\"><h2 id=\"course-title\">Courses</h2><button type=\"button\">Resume lesson</button></section></main>\n  <footer><p>Progress stored locally.</p></footer>\n</body>\n</html>",
+      "challenge": "Create a compact but production-minded HTML document that includes metadata, landmarks, meaningful headings, and one native interaction.",
+      "hint": "Treat this as a code review exercise: every element should have a reason to exist, and the page should still make sense with CSS and JS disabled.",
+      "solution": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Code Ascension Dashboard</title>\n  <meta name=\"description\" content=\"Private programming learning dashboard.\">\n</head>\n<body>\n  <header><h1>Code Ascension</h1><nav aria-label=\"Primary\"><a href=\"#courses\">Courses</a></nav></header>\n  <main id=\"courses\"><section aria-labelledby=\"course-title\"><h2 id=\"course-title\">Courses</h2><button type=\"button\">Resume lesson</button></section></main>\n  <footer><p>Progress stored locally.</p></footer>\n</body>\n</html>",
+      "groups": [
+        [
+          "<!doctype html>"
+        ],
+        [
+          "name=\"viewport\"",
+          "name=viewport"
+        ],
+        [
+          "<header"
+        ],
+        [
+          "<nav"
+        ],
+        [
+          "<main"
+        ],
+        [
+          "<button"
+        ]
+      ],
+      "references": [
+        {
+          "title": "MDN — Structuring content with HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+        },
+        {
+          "title": "MDN — HTML accessibility",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+        },
+        {
+          "title": "MDN — HTML reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        }
+      ],
+      "pitfalls": [],
+      "mastery": []
+    }
+  ]
+}

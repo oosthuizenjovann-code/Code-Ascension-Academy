@@ -30,6 +30,15 @@
           <h2>Choose Your Discipline</h2>
         </div>
         <div class="topbar-actions">
+          <button class="icon-button" data-action="open-search" title="Search the entire Academy (Ctrl+K)">SEARCH</button>
+          <button class="icon-button" data-action="open-learning-paths" title="Integrated cross-language roadmaps">LEARNING PATHS</button>
+          <button class="icon-button" data-action="open-boss-arena" title="Final boss evaluations">BOSS ARENA</button>
+          <button class="icon-button" data-action="open-achievements" title="Achievements and medals">ACHIEVEMENTS</button>
+          <button class="icon-button" data-action="open-study-library" title="Notes, bookmarks and cheat sheets">STUDY LIBRARY</button>
+          <button class="icon-button" data-action="open-revision" title="Adaptive revision and spaced repetition">REVISION</button>
+          <button class="icon-button" data-action="open-challenges" title="Advanced coding challenges">CHALLENGES</button>
+          <button class="icon-button" data-action="open-practice-lab" title="Free practice workspace">PRACTICE LAB</button>
+          <button class="icon-button" data-action="open-mastery" title="Mastery overview">MASTERY</button>
           <button class="icon-button" data-action="open-references" title="Official reference library">REFERENCES</button>
           <button class="icon-button" data-action="open-profile" title="Profile">PROFILE</button>
           <button class="icon-button" data-action="open-settings" title="Settings">SETTINGS</button>
@@ -47,6 +56,685 @@
       </div>
 
       <div id="languageGrid" class="language-grid"></div>
+    </section>
+
+    <section id="searchScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="search-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow">GLOBAL ACADEMY SEARCH</div>
+          <h2>Find Anything</h2>
+        </div>
+        <div class="mini-stat"><span>Shortcut</span><strong>Ctrl + K</strong></div>
+      </header>
+
+      <div class="search-shell">
+        <section class="search-hero glass-panel">
+          <div class="eyebrow">100 MODULES + ACADEMY TOOLS</div>
+          <h3>Search lessons, references, cheat sheets and features</h3>
+          <p>Jump directly to what you need instead of navigating through every roadmap.</p>
+          <div class="search-input-wrap">
+            <input id="globalSearchInput" class="global-search-input" type="search" placeholder="Try: loops, flexbox, LINQ, forms, Unity, debugging…" autocomplete="off" />
+          </div>
+        </section>
+
+        <div class="search-toolbar">
+          <div class="search-filters">
+            <button class="search-filter active" data-search-filter="all">ALL</button>
+            <button class="search-filter" data-search-filter="lesson">LESSONS</button>
+            <button class="search-filter" data-search-filter="cheat">CHEAT SHEETS</button>
+            <button class="search-filter" data-search-filter="feature">FEATURES</button>
+            <button class="search-filter" data-search-filter="reference">REFERENCES</button>
+          </div>
+          <div id="globalSearchCount" class="search-count"></div>
+        </div>
+
+        <div id="globalSearchResults" class="search-results"></div>
+      </div>
+    </section>
+
+    <section id="pathsScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="learning-paths-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow">INTEGRATED LEARNING</div>
+          <h2>Learning Paths</h2>
+        </div>
+        <div class="mini-stat"><span>Available</span><strong>2 Paths</strong></div>
+      </header>
+
+      <section class="paths-intro glass-panel">
+        <div>
+          <div class="eyebrow">BEYOND ISOLATED LANGUAGES</div>
+          <h3>Combine the skills you have earned</h3>
+          <p>Learning Paths are larger roadmaps that require multiple disciplines at the same time. They do not replace HTML, CSS, JavaScript or C# progression; they prove that you can combine those skills into complete applications.</p>
+        </div>
+      </section>
+
+      <div class="paths-grid">
+        <article class="path-card glass-panel">
+          <div class="path-card-header">
+            <div>
+              <div class="eyebrow">HTML + CSS + JAVASCRIPT</div>
+              <h3>Web Development</h3>
+            </div>
+            <span id="webPathGateText" class="path-status-pill">PREVIEW AVAILABLE</span>
+          </div>
+          <p>Build complete browser interfaces that combine semantic structure, responsive styling, DOM interaction and persistent state.</p>
+          <div id="webPathRequirements" class="path-gate-list"></div>
+          <div class="path-card-meta">
+            <div><span>PROGRESS</span><strong id="webPathProgressText">0%</strong></div>
+            <div><span>MISSIONS</span><strong id="webPathMissionSummary">0/5 missions</strong></div>
+            <div><span>FINAL PROJECT</span><strong id="webPathCapstoneSummary">Capstone pending</strong></div>
+            <div><span>UNLOCK RULE</span><strong>Reach Junior in all 3 web languages</strong></div>
+          </div>
+          <button class="glow-button primary" data-action="open-web-path">OPEN PATH</button>
+        </article>
+
+        <article class="path-card glass-panel game-development-card">
+          <div class="path-card-header">
+            <div>
+              <div class="eyebrow">UNITY + C# GAME PROGRAMMING</div>
+              <h3>Game Development Foundations</h3>
+            </div>
+            <span id="gamePathGateText" class="path-status-pill">PREVIEW AVAILABLE</span>
+          </div>
+          <p>Build transferable gameplay systems in real C#, then map them into Unity 6 workflows using official Unity learning material and documentation.</p>
+          <div id="gamePathRequirement" class="path-gate-list"></div>
+          <div class="path-card-meta">
+            <div><span>PROGRESS</span><strong id="gamePathProgressText">0%</strong></div>
+            <div><span>MISSIONS</span><strong id="gamePathMissionSummary">0/6 missions</strong></div>
+            <div><span>FINAL PROJECT</span><strong id="gamePathCapstoneSummary">Capstone pending</strong></div>
+            <div><span>UNLOCK RULE</span><strong>Reach C# Junior</strong></div>
+          </div>
+          <button class="glow-button primary" data-action="open-game-path">OPEN PATH</button>
+        </article>
+
+        <article class="path-card glass-panel future-path">
+          <div class="path-card-header">
+            <div>
+              <div class="eyebrow">WEB + C#</div>
+              <h3>Full Stack Foundations</h3>
+            </div>
+            <span class="path-status-pill">FUTURE PATH</span>
+          </div>
+          <p>A later integrated path will connect browser applications to C#/.NET backend concepts. It will unlock only after the Web Development path and the required C# ranks are complete.</p>
+          <div class="path-card-meta">
+            <div><span>STATUS</span><strong>Not yet available</strong></div>
+            <div><span>FOCUS</span><strong>ASP.NET + Web UI</strong></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="webPathScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="web-path-back">← LEARNING PATHS</button>
+        <div class="header-title">
+          <div class="eyebrow">HTML + CSS + JAVASCRIPT</div>
+          <h2>Web Development Roadmap</h2>
+        </div>
+        <div class="mini-stat"><span>Path Progress</span><strong id="webPathRoadmapProgress">0%</strong></div>
+      </header>
+
+      <section class="web-path-hero glass-panel">
+        <div>
+          <div class="eyebrow">INTEGRATED PATH</div>
+          <h3>From pages to complete browser applications</h3>
+          <p>Five integrated missions build toward a final Game Companion Dashboard capstone.</p>
+        </div>
+        <div id="webPathRoadmapStatus" class="web-path-roadmap-status preview">Preview mode</div>
+      </section>
+
+      <div id="webPathNodes" class="web-path-nodes"></div>
+    </section>
+
+    <section id="pathWorkScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="path-work-back">← ROADMAP</button>
+        <div class="header-title">
+          <div class="eyebrow" id="pathWorkEyebrow">WEB DEVELOPMENT • MISSION 1</div>
+          <h2 id="pathWorkTitle">Integrated Mission</h2>
+        </div>
+        <span id="pathWorkMode" class="path-mode preview">PREVIEW</span>
+      </header>
+
+      <div class="path-work-layout">
+        <aside class="path-work-brief glass-panel">
+          <div class="eyebrow">MISSION BRIEF</div>
+          <h3>Build across three files</h3>
+          <p id="pathWorkSummary"></p>
+          <div id="pathRequirementList" class="path-requirements"></div>
+        </aside>
+
+        <div class="path-workspace">
+          <section class="path-editor-shell glass-panel">
+            <div class="path-editor-toolbar">
+              <div class="path-editor-tabs">
+                <button class="path-editor-tab active" data-path-editor-tab="html">HTML</button>
+                <button class="path-editor-tab" data-path-editor-tab="css">CSS</button>
+                <button class="path-editor-tab" data-path-editor-tab="javascript">JAVASCRIPT</button>
+              </div>
+              <strong id="pathEditorFilename">index.html</strong>
+            </div>
+            <textarea id="pathHtmlEditor" class="path-code-editor active" spellcheck="false"></textarea>
+            <textarea id="pathCssEditor" class="path-code-editor" spellcheck="false"></textarea>
+            <textarea id="pathJsEditor" class="path-code-editor" spellcheck="false"></textarea>
+            <div class="path-work-actions">
+              <button class="glow-button small primary" data-action="path-run">▶ RUN PREVIEW</button>
+              <button class="glow-button small ghost" data-action="path-save">SAVE DRAFT</button>
+              <button class="glow-button small ghost" data-action="path-reset">RESET STARTER</button>
+              <button id="pathSubmitButton" class="glow-button small primary" data-action="path-submit">SUBMIT MISSION</button>
+            </div>
+          </section>
+
+          <section class="path-preview-panel glass-panel">
+            <div class="path-preview-header">LIVE COMBINED PREVIEW</div>
+            <iframe id="pathPreview" class="path-preview" sandbox="allow-scripts allow-forms" title="Integrated web project preview"></iframe>
+          </section>
+
+          <section class="path-feedback-panel glass-panel">
+            <span>FEEDBACK / RUBRIC</span>
+            <pre id="pathFeedback">Build the project, then submit when ready.</pre>
+            <div id="pathRubricResults" class="path-rubric-results"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="gamePathScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="game-path-center-back">← LEARNING PATHS</button>
+        <div class="header-title"><div class="eyebrow">UNITY + C#</div><h2>Game Development Foundations</h2></div>
+        <div class="mini-stat"><span>Path Progress</span><strong id="gamePathRoadmapProgress">0%</strong></div>
+      </header>
+      <section class="web-path-hero game-path-hero glass-panel">
+        <div><div class="eyebrow">RESEARCH-GROUNDED GAME PROGRAMMING</div><h3>Learn the systems first, then translate them into Unity</h3><p>Six C# missions cover game loops, input, physics/spawning, state/UI, pooling/performance and architecture before a 2D arena-survival systems capstone.</p></div>
+        <div id="gamePathRoadmapStatus" class="web-path-roadmap-status preview">Preview mode</div>
+      </section>
+      <div id="gamePathNodes" class="web-path-nodes"></div>
+    </section>
+
+    <section id="gamePathWorkScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="game-path-work-back">← ROADMAP</button>
+        <div class="header-title"><div class="eyebrow" id="gameWorkEyebrow">GAME DEVELOPMENT • MISSION 1</div><h2 id="gameWorkTitle">Game Programming Mission</h2></div>
+        <span id="gameWorkMode" class="path-mode preview">PREVIEW</span>
+      </header>
+      <div class="game-path-work-layout">
+        <aside class="game-path-brief glass-panel">
+          <div class="eyebrow">MISSION BRIEF</div>
+          <p id="gameWorkSummary"></p>
+          <h3>Unity Translation</h3>
+          <p id="gameWorkUnityTranslation"></p>
+          <div id="gameWorkConcepts" class="game-concept-tags"></div>
+          <h3>Requirements</h3>
+          <div id="gameRequirementList" class="path-requirements"></div>
+          <h3>Official References</h3>
+          <div id="gameWorkReferences" class="reference-links game-reference-links"></div>
+        </aside>
+        <div class="game-path-workspace">
+          <section class="path-editor-shell glass-panel">
+            <div class="path-editor-toolbar"><strong>Program.cs</strong><span>REAL .NET RUNNER</span></div>
+            <textarea id="gameCodeEditor" class="game-code-editor" spellcheck="false"></textarea>
+            <div class="path-work-actions">
+              <button class="glow-button small primary" data-action="game-path-run">▶ RUN C#</button>
+              <button class="glow-button small ghost" data-action="game-path-save">SAVE DRAFT</button>
+              <button class="glow-button small ghost" data-action="game-path-reset">RESET STARTER</button>
+              <button id="gameSubmitButton" class="glow-button small primary" data-action="game-path-submit">SUBMIT MISSION</button>
+            </div>
+          </section>
+          <section class="path-feedback-panel glass-panel"><span>COMPILER / FEEDBACK</span><pre id="gameOutput">Ready.</pre><div id="gameRubricResults" class="path-rubric-results"></div></section>
+        </div>
+      </div>
+    </section>
+
+    <section id="bossArenaScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="boss-arena-back">← BACK</button>
+        <div class="header-title"><div class="eyebrow">FINAL EVALUATION</div><h2>Boss Arena</h2></div>
+        <div class="mini-stat"><span>Bosses Defeated</span><strong id="bossPassedCount">0/4</strong></div>
+      </header>
+      <section class="boss-arena-hero glass-panel"><div><div class="eyebrow">NO HINTS • 85% PASS MARK</div><h3>Prove you can retain the whole path</h3><p>Each language boss mixes material from Intern through Advanced. Bosses remain previewable until that language is fully completed.</p></div></section>
+      <div id="bossLanguageGrid" class="boss-language-grid"></div>
+      <section class="grand-boss-card glass-panel">
+        <div><div class="eyebrow">ULTIMATE EVALUATION</div><h3>Academy Grand Boss</h3><p>Mixed HTML, CSS, JavaScript and C# questions. Unlocks after all four language bosses are defeated.</p></div>
+        <div class="grand-boss-stats"><span>STATUS <strong id="bossGrandStatus">LOCKED</strong></span><span>BEST <strong id="bossGrandBest">0%</strong></span></div>
+        <button id="grandBossButton" class="glow-button primary" data-action="boss-start-grand" disabled>PASS ALL 4 LANGUAGE BOSSES</button>
+      </section>
+    </section>
+
+    <section id="bossWorkScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="boss-work-back">← BOSS ARENA</button>
+        <div class="header-title"><div class="eyebrow" id="bossWorkEyebrow">HTML • FINAL BOSS</div><h2 id="bossWorkTitle">Final Evaluation</h2></div>
+        <span id="bossWorkMode" class="path-mode preview">PREVIEW</span>
+      </header>
+      <div class="boss-test-container glass-panel">
+        <div class="test-progress"><div id="bossProgressFill"></div></div>
+        <div class="boss-question-meta"><span id="bossSource">Advanced • Module</span><strong id="bossQuestionCounter">1/10</strong></div>
+        <h3 id="bossQuestion"></h3>
+        <div id="bossAnswerArea" class="answer-area"></div>
+        <pre id="bossFeedback" class="boss-feedback">Pass mark: 85%.</pre>
+        <div class="test-actions"><button class="glow-button primary" data-action="boss-submit">SUBMIT ANSWER</button></div>
+      </div>
+    </section>
+
+    <section id="bossResultScreen" class="screen">
+      <div class="results-card glass-panel boss-result-card">
+        <div id="bossResultScore" class="result-badge">85%</div>
+        <div class="eyebrow">FINAL EVALUATION COMPLETE</div>
+        <h2 id="bossResultTitle">BOSS DEFEATED</h2>
+        <p id="bossResultMessage"></p>
+        <div id="bossResultBreakdown" class="result-breakdown"></div>
+        <button class="glow-button primary" data-action="boss-result-back">RETURN TO BOSS ARENA</button>
+      </div>
+    </section>
+
+    <section id="achievementsScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="achievements-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow">LEARNING MILESTONES</div>
+          <h2>Achievements</h2>
+        </div>
+        <div class="mini-stat"><span>Collection</span><strong id="achievementCollectionText">0 / 0</strong></div>
+      </header>
+
+      <div class="achievement-summary-grid">
+        <article class="glass-panel achievement-summary-card hero-stat"><span>UNLOCKED</span><strong id="achievementUnlockedCount">0</strong><p>Permanent milestones earned through real learning progress.</p></article>
+        <article class="glass-panel achievement-summary-card"><span>GOLD MEDALS</span><strong id="achievementGoldCount">0</strong><p>Perfect 100% assessment and project results.</p></article>
+        <article class="glass-panel achievement-summary-card"><span>RANKS MASTERED</span><strong id="achievementRankCount">0</strong><p>Language difficulty ranks completed end to end.</p></article>
+        <article class="glass-panel achievement-summary-card"><span>COLLECTION</span><strong id="achievementPercent">0%</strong><p>Overall achievement collection completion.</p></article>
+      </div>
+
+      <section class="medal-cabinet glass-panel">
+        <div>
+          <div class="eyebrow">ASSESSMENT MEDALS</div>
+          <h3>Medal Cabinet</h3>
+          <p>Best scores from class tests, exams and capstones. Bronze starts at the 80% pass mark.</p>
+        </div>
+        <div class="medal-row">
+          <div class="medal bronze"><span>III</span><strong id="bronzeMedals">0</strong><small>BRONZE</small></div>
+          <div class="medal silver"><span>II</span><strong id="silverMedals">0</strong><small>SILVER</small></div>
+          <div class="medal gold"><span>I</span><strong id="goldMedals">0</strong><small>GOLD</small></div>
+        </div>
+      </section>
+
+      <div class="achievement-filter-bar glass-panel">
+        <button class="achievement-filter active" data-achievement-filter="all">ALL</button>
+        <button class="achievement-filter" data-achievement-filter="unlocked">UNLOCKED</button>
+        <button class="achievement-filter" data-achievement-filter="learning">LEARNING</button>
+        <button class="achievement-filter" data-achievement-filter="challenges">CHALLENGES</button>
+        <button class="achievement-filter" data-achievement-filter="projects">PROJECTS</button>
+        <button class="achievement-filter" data-achievement-filter="mastery">MASTERY</button>
+        <button class="achievement-filter" data-achievement-filter="ranks">RANKS</button>
+        <button class="achievement-filter" data-achievement-filter="paths">LEARNING PATHS</button>
+      </div>
+
+      <div id="achievementGrid" class="achievement-grid"></div>
+    </section>
+
+    <section id="studyLibraryScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="study-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow">PERSONAL STUDY SYSTEM</div>
+          <h2>Study Library</h2>
+        </div>
+        <div class="mini-stat"><span>Storage</span><strong>LOCAL</strong></div>
+      </header>
+
+      <div class="study-summary-grid">
+        <article class="glass-panel study-summary-card hero-stat"><span>NOTES</span><strong id="studyNotesCount">0</strong></article>
+        <article class="glass-panel study-summary-card"><span>BOOKMARKS</span><strong id="studyBookmarksCount">0</strong></article>
+        <article class="glass-panel study-summary-card"><span>REVISION PINS</span><strong id="studyRevisionPinsCount">0</strong></article>
+        <article class="glass-panel study-summary-card"><span>CHEAT SHEETS</span><strong id="studyCheatCount">0</strong></article>
+      </div>
+
+      <div class="study-toolbar glass-panel">
+        <input id="studySearch" class="study-search" type="search" placeholder="Search your notes, bookmarks and cheat sheets…" autocomplete="off" />
+        <div class="study-filters">
+          <button class="study-filter active" data-study-filter="all">ALL</button>
+          <button class="study-filter" data-study-filter="notes">NOTES</button>
+          <button class="study-filter" data-study-filter="bookmarks">BOOKMARKS</button>
+          <button class="study-filter" data-study-filter="cheats">CHEAT SHEETS</button>
+        </div>
+      </div>
+
+      <div id="studyResults" class="study-results"></div>
+    </section>
+
+    <section id="cheatSheetScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="cheat-back">← STUDY LIBRARY</button>
+        <div class="header-title">
+          <div class="eyebrow" id="cheatSheetEyebrow">HTML</div>
+          <h2 id="cheatSheetTitle">Cheat Sheet</h2>
+        </div>
+        <button class="icon-button" data-action="print-cheat">STUDY PDF</button>
+      </header>
+      <div class="cheat-sheet-shell">
+        <article class="cheat-sheet-hero glass-panel">
+          <div class="eyebrow">QUICK REFERENCE</div>
+          <h2 id="cheatSheetHeroTitle" class="hidden">Cheat Sheet</h2>
+          <p id="cheatSheetSummary"></p>
+        </article>
+        <div id="cheatSheetBody" class="cheat-sheet-body"></div>
+      </div>
+    </section>
+
+    <section id="revisionScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="revision-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow">ADAPTIVE REVISION</div>
+          <h2>Revision Center</h2>
+        </div>
+        <div class="mini-stat"><span>Next review</span><strong id="revisionNextDue">—</strong></div>
+      </header>
+
+      <div class="revision-summary-grid">
+        <article class="glass-panel revision-summary-card hero-stat"><span>DUE NOW</span><strong id="revisionDueCount">0</strong><p>Modules ready for scheduled reinforcement.</p></article>
+        <article class="glass-panel revision-summary-card"><span>WEAK TOPICS</span><strong id="revisionWeakCount">0</strong><p>Engaged modules currently below 75% mastery.</p></article>
+        <article class="glass-panel revision-summary-card"><span>SESSIONS</span><strong id="revisionSessionCount">0</strong><p>Completed adaptive revision sessions.</p></article>
+        <article class="glass-panel revision-summary-card"><span>RECENT AVERAGE</span><strong id="revisionAverage">—</strong><p>Your average across the ten most recent sessions.</p></article>
+      </div>
+
+      <section class="revision-recommendation glass-panel">
+        <div>
+          <div class="eyebrow">TOP RECOMMENDATION</div>
+          <div id="revisionRecommendation" class="revision-recommendation-text">
+            <strong>No revision queue yet.</strong>
+            <span>Complete lessons and assessments to build your schedule.</span>
+          </div>
+        </div>
+        <button id="revisionStartButton" class="glow-button primary" data-action="revision-start">START SMART REVISION</button>
+      </section>
+
+      <div class="revision-filter-bar glass-panel">
+        <button class="revision-filter active" data-revision-filter="smart">SMART QUEUE</button>
+        <button class="revision-filter" data-revision-filter="due">DUE NOW</button>
+        <button class="revision-filter" data-revision-filter="weak">WEAK TOPICS</button>
+        <button class="revision-filter" data-revision-filter="all">ALL SCHEDULED</button>
+      </div>
+
+      <div id="revisionLastResult" class="revision-last-result glass-panel hidden"></div>
+
+      <div class="revision-layout">
+        <section>
+          <div class="revision-section-heading"><div><div class="eyebrow">ADAPTIVE QUEUE</div><h3>What to revise next</h3></div></div>
+          <div id="revisionQueue" class="revision-queue"></div>
+        </section>
+        <aside class="revision-history-panel glass-panel">
+          <div class="eyebrow">SESSION HISTORY</div>
+          <h3>Recent revision</h3>
+          <div id="revisionHistory" class="revision-history"></div>
+          <div class="revision-schedule-note">
+            <strong>Spaced repetition</strong>
+            <p>Correct reviews grow from 1 → 3 → 7 → 14 → 30 → 60 days. A missed review returns that module to a short interval.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="revisionWorkScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="revision-work-back">← REVISION CENTER</button>
+        <div class="header-title">
+          <div class="eyebrow" id="revisionWorkEyebrow">HTML • INTERN • MODULE 1</div>
+          <h2 id="revisionWorkTitle">Revision</h2>
+        </div>
+        <div class="mini-stat"><span>Review</span><strong id="revisionWorkCounter">1/5</strong></div>
+      </header>
+
+      <div class="revision-work-progress"><div id="revisionWorkProgress"></div></div>
+
+      <div class="revision-work-layout">
+        <aside class="revision-why glass-panel">
+          <div class="eyebrow">WHY THIS TOPIC?</div>
+          <p id="revisionWhy">This module is due for review.</p>
+          <div class="revision-memory-tip">
+            <strong>Recall before rereading</strong>
+            <p>Try to answer from memory first. Retrieval is part of the learning process.</p>
+          </div>
+        </aside>
+
+        <section class="revision-question-card glass-panel">
+          <span id="revisionQuestionType" class="question-type">KNOWLEDGE CHECK</span>
+          <h3 id="revisionQuestion">Question</h3>
+          <div id="revisionAnswerArea" class="revision-answer-area"></div>
+          <div id="revisionFeedback" class="revision-feedback hidden"></div>
+          <div class="revision-work-actions">
+            <button id="revisionSubmitButton" class="glow-button primary" data-action="revision-submit">SUBMIT REVIEW</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="challengeHubScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="challenge-hub-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow" id="challengeHubEyebrow">HTML • INTERN</div>
+          <h2 id="challengeHubTitle">Debug the Code</h2>
+        </div>
+        <div class="mini-stat"><span>Optional training</span><strong>Challenge Center</strong></div>
+      </header>
+
+      <div class="challenge-command">
+        <article class="challenge-intro glass-panel">
+          <div class="eyebrow">ADVANCED CHALLENGES</div>
+          <h3>Train the skills tests do not measure well</h3>
+          <p id="challengeHubDescription">Repair, read, explain and refactor code without affecting normal roadmap progression.</p>
+        </article>
+        <div class="challenge-path-stats glass-panel">
+          <div><span>CLEARED</span><strong id="challengeClears">0</strong></div>
+          <div><span>ATTEMPTS</span><strong id="challengeAttempts">0</strong></div>
+        </div>
+      </div>
+
+      <div class="challenge-selector-panel glass-panel">
+        <div class="challenge-selector-row"><span>LANGUAGE</span><div id="challengeLanguageFilters" class="challenge-filter-group"></div></div>
+        <div class="challenge-selector-row"><span>DIFFICULTY</span><div id="challengeDifficultyFilters" class="challenge-filter-group"></div></div>
+        <div class="challenge-selector-row"><span>CHALLENGE TYPE</span><div id="challengeTypeFilters" class="challenge-type-grid"></div></div>
+      </div>
+
+      <div id="challengeGrid" class="challenge-grid"></div>
+    </section>
+
+    <section id="challengeWorkScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="challenge-work-back">← CHALLENGES</button>
+        <div class="header-title">
+          <div class="eyebrow" id="challengeWorkEyebrow">HTML • INTERN • MODULE 1</div>
+          <h2 id="challengeWorkTitle">Challenge</h2>
+        </div>
+        <div class="mini-stat"><span>Type</span><strong id="challengeKind">DEBUG</strong></div>
+      </header>
+
+      <div class="challenge-work-layout">
+        <aside class="challenge-brief glass-panel">
+          <div class="eyebrow">MISSION BRIEF</div>
+          <h3 id="challengePrompt"></h3>
+          <p id="challengeInstructions"></p>
+          <div id="challengeSkillTags" class="challenge-skill-tags"></div>
+          <div id="challengeReferencePanel" class="challenge-reference-panel hidden">
+            <span>REFERENCE CODE</span>
+            <pre id="challengeReferenceCode"></pre>
+          </div>
+          <div class="challenge-actions">
+            <button id="challengeHintButton" class="glow-button warning small" data-action="challenge-show-hint">USE HINT</button>
+          </div>
+          <div id="challengeHintBox" class="challenge-hint-box hidden"></div>
+        </aside>
+
+        <div class="challenge-editor-stack">
+          <section class="code-lab glass-panel challenge-editor-panel">
+            <div class="code-lab-header">
+              <div><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <strong id="challengeFilename">solution.html</strong>
+            </div>
+            <textarea id="challengeEditor" spellcheck="false"></textarea>
+            <div class="editor-actions">
+              <button class="glow-button small primary" data-action="challenge-submit">SUBMIT SOLUTION</button>
+            </div>
+          </section>
+          <section class="challenge-feedback-panel glass-panel">
+            <span>FEEDBACK</span>
+            <pre id="challengeFeedback">Submit when you are ready.</pre>
+          </section>
+          <section class="challenge-attempt-panel glass-panel">
+            <span>RECENT ATTEMPTS</span>
+            <div id="challengeAttemptHistory" class="challenge-attempt-history"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="capstoneScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="capstone-back">← ROADMAP</button>
+        <div class="header-title">
+          <div class="eyebrow" id="capstoneContext">HTML • INTERN • CAPSTONE</div>
+          <h2 id="capstoneTitle">Capstone Project</h2>
+        </div>
+        <div class="capstone-top-stats">
+          <div><span>BEST SCORE</span><strong id="capstoneBestScore">0%</strong></div>
+          <div id="capstoneStatus" class="capstone-status">IN PROGRESS</div>
+        </div>
+      </header>
+
+      <div class="capstone-layout">
+        <aside class="capstone-brief glass-panel">
+          <div class="eyebrow">PROJECT BRIEF</div>
+          <h3>Build something complete</h3>
+          <p id="capstoneMission"></p>
+
+          <div class="capstone-section-title">REQUIREMENTS</div>
+          <div id="capstoneRequirements" class="capstone-requirements"></div>
+
+          <div class="capstone-section-title">SCORING RUBRIC</div>
+          <div id="capstoneRubric" class="capstone-rubric"></div>
+
+          <div class="capstone-note">
+            Your capstone combines all five modules from this difficulty. You need 80% to unlock the three final exams.
+          </div>
+        </aside>
+
+        <div class="capstone-workspace">
+          <section class="code-lab glass-panel capstone-editor-panel">
+            <div class="code-lab-header">
+              <div><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <strong id="capstoneFilename">project.html</strong>
+            </div>
+            <textarea id="capstoneEditor" spellcheck="false"></textarea>
+            <div class="editor-actions capstone-editor-actions">
+              <button class="glow-button small primary" data-action="capstone-run">▶ RUN / PREVIEW</button>
+              <button class="glow-button small ghost" data-action="capstone-save">SAVE DRAFT</button>
+              <button class="glow-button small ghost" data-action="capstone-reset">RESET STARTER</button>
+              <button class="glow-button small capstone-submit-button" data-action="capstone-submit">SUBMIT CAPSTONE</button>
+              <span id="capstoneSaveStatus" class="capstone-save-status"></span>
+            </div>
+          </section>
+
+          <section class="capstone-output-panel glass-panel">
+            <div class="console-title" id="capstoneOutputLabel">PREVIEW</div>
+            <iframe id="capstonePreviewFrame" title="Capstone preview" sandbox="allow-scripts allow-forms"></iframe>
+            <pre id="capstoneOutput" class="hidden">Ready.</pre>
+          </section>
+
+          <section class="capstone-result-panel glass-panel">
+            <div class="console-title">CAPSTONE REVIEW</div>
+            <div id="capstoneResult"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="practiceLabScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="practice-lab-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow" id="labEyebrow">HTML PLAYGROUND</div>
+          <h2 id="labTitle">HTML Practice Workspace</h2>
+        </div>
+        <div class="lab-save-area"><span id="labSaveStatus"></span><button class="icon-button" data-action="lab-save">SAVE WORKSPACE</button></div>
+      </header>
+
+      <div class="lab-language-shell glass-panel">
+        <div>
+          <div class="eyebrow">CHOOSE A WORKSPACE</div>
+          <p>Practice freely without affecting tests, exams, XP or progression.</p>
+        </div>
+        <div id="labLanguageGrid" class="lab-language-grid"></div>
+      </div>
+
+      <div class="lab-toolbar glass-panel">
+        <div class="lab-template-control">
+          <label for="labTemplateSelect">Template</label>
+          <select id="labTemplateSelect"></select>
+          <p id="labTemplateDescription"></p>
+        </div>
+        <div class="lab-toolbar-actions">
+          <button class="glow-button ghost small" data-action="lab-reset">RESET TEMPLATE</button>
+          <button id="labRunButton" class="glow-button primary small" data-action="lab-run">▶ RUN</button>
+        </div>
+      </div>
+
+      <div class="lab-workspace">
+        <section class="code-lab glass-panel lab-editor-panel">
+          <div class="code-lab-header">
+            <div><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+            <strong id="labFilename">index.html</strong>
+          </div>
+          <textarea id="labEditor" spellcheck="false"></textarea>
+        </section>
+
+        <section class="glass-panel lab-output-panel">
+          <div class="lab-output-header">
+            <span id="labOutputTitle">PREVIEW</span>
+            <span>Practice output</span>
+          </div>
+          <iframe id="labPreviewFrame" title="Practice Lab preview" sandbox="allow-scripts allow-forms"></iframe>
+          <pre id="labOutput" class="hidden">Ready.</pre>
+        </section>
+      </div>
+    </section>
+
+    <section id="masteryScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="mastery-back">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow">SKILL MASTERY</div>
+          <h2>Mastery Overview</h2>
+        </div>
+        <div class="mini-stat"><span>Overall mastery</span><strong id="masteryOverall">0%</strong></div>
+      </header>
+
+      <div class="mastery-summary-grid">
+        <article class="glass-panel mastery-summary-card hero-stat"><span>OVERALL MASTERY</span><strong id="masteryOverallCard">—</strong><p>Weighted from lessons, practice, class tests and exams.</p></article>
+        <article class="glass-panel mastery-summary-card"><span>STRONGEST PATH</span><strong id="masteryStrongest">None yet</strong><p>Your highest current language/difficulty mastery.</p></article>
+        <article class="glass-panel mastery-summary-card"><span>MASTERED MODULES</span><strong id="masteryModules">0/100</strong><p>Modules at 90% mastery or higher.</p></article>
+        <article class="glass-panel mastery-summary-card"><span>PRACTICE CLEARS</span><strong id="masteryPractice">0</strong><p>Successful practice challenge completions.</p></article>
+      </div>
+
+      <div class="mastery-recommendation glass-panel">
+        <div class="eyebrow">RECOMMENDED REVISION</div>
+        <p id="masteryRecommendation">Keep learning to build your mastery profile.</p>
+      </div>
+
+      <div id="masteryFilters" class="mastery-filter-bar glass-panel">
+        <button class="mastery-filter active" data-mastery-filter="all">ALL</button>
+        <button class="mastery-filter" data-mastery-filter="html">HTML</button>
+        <button class="mastery-filter" data-mastery-filter="css">CSS</button>
+        <button class="mastery-filter" data-mastery-filter="javascript">JAVASCRIPT</button>
+        <button class="mastery-filter" data-mastery-filter="csharp">C#</button>
+      </div>
+
+      <div id="masteryGrid" class="mastery-grid"></div>
     </section>
 
     <section id="referenceScreen" class="screen">
@@ -73,7 +761,7 @@
       </header>
       <div class="difficulty-intro glass-panel">
         <h3>Select Difficulty</h3>
-        <p>Advance by passing all five class tests and all three final exams with at least 80%.</p>
+        <p>Advance by passing all five class tests, the capstone project, and all three final exams with at least 80%.</p>
       </div>
       <div id="difficultyGrid" class="difficulty-grid"></div>
     </section>
@@ -94,8 +782,10 @@
           <h3 id="rankName">Intern</h3>
           <p id="rankDescription"></p>
           <div class="stat-stack">
+            <div><span>Mastery</span><strong id="difficultyMastery">0%</strong></div>
             <div><span>Lessons</span><strong id="lessonsDone">0/5</strong></div>
             <div><span>Tests Passed</span><strong id="testsDone">0/5</strong></div>
+            <div><span>Capstone</span><strong id="capstoneDone">0%</strong></div>
             <div><span>Exams Passed</span><strong id="examsDone">0/3</strong></div>
           </div>
         </aside>
@@ -118,6 +808,25 @@
       <div class="lesson-layout">
         <article class="lesson-content glass-panel">
           <div id="lessonBody"></div>
+          <section class="lesson-study-panel">
+            <div class="lesson-study-heading">
+              <div>
+                <div class="lesson-kicker">MY STUDY NOTES</div>
+                <h3>Keep the parts that matter to you</h3>
+              </div>
+              <div class="lesson-study-actions">
+                <button id="lessonBookmarkButton" class="glow-button small ghost" data-action="toggle-bookmark">☆ BOOKMARK</button>
+                <button id="lessonRevisionButton" class="glow-button small ghost" data-action="add-to-revision">+ ADD TO REVISION</button>
+              </div>
+            </div>
+            <textarea id="lessonNoteInput" class="lesson-note-editor" placeholder="Write your own explanation, a reminder, an example, or something you want to remember…" spellcheck="true"></textarea>
+            <div class="lesson-note-footer">
+              <span id="lessonNoteStatus">No note saved yet.</span>
+              <button class="glow-button small primary" data-action="save-note">SAVE NOTE</button>
+            </div>
+            <p class="lesson-note-tip">Your note stays attached to this exact lesson and appears in the Study Library.</p>
+          </section>
+
           <div class="lesson-footer-actions">
             <button class="glow-button primary" data-action="complete-lesson">MARK LESSON COMPLETE</button>
             <button class="glow-button ghost" data-action="start-practice">PRACTICE</button>
@@ -213,9 +922,29 @@
     <section id="settingsScreen" class="screen">
       <header class="topbar glass-panel"><button class="icon-button" data-action="settings-back">← BACK</button><div class="header-title"><div class="eyebrow">ACADEMY SETTINGS</div><h2>Settings & Save</h2></div></header>
       <div class="settings-grid">
-        <div class="glass-panel setting-card"><h3>Export Save</h3><p>Download your local academy progress as a JSON backup.</p><button class="glow-button primary" data-action="export-save">EXPORT SAVE</button></div>
-        <div class="glass-panel setting-card"><h3>Import Save</h3><p>Restore a previously exported academy save file.</p><label class="glow-button ghost file-label">IMPORT SAVE<input id="importSaveInput" type="file" accept="application/json" hidden></label></div>
-        <div class="glass-panel setting-card danger-card"><h3>Reset Progress</h3><p>Erase all local progress, scores and unlocks.</p><button class="glow-button danger" data-action="reset-progress">RESET EVERYTHING</button></div>
+        <div class="glass-panel setting-card"><h3>Export Save</h3><p>Download your current Academy state as a portable JSON backup that you can keep anywhere.</p><button class="glow-button primary" data-action="export-save">EXPORT SAVE</button></div>
+        <div class="glass-panel setting-card"><h3>Import Save</h3><p>Restore a previously exported Academy save file. The imported data is normalized before it is stored.</p><label class="glow-button ghost file-label">IMPORT SAVE<input id="importSaveInput" type="file" accept="application/json" hidden></label></div>
+        <div class="glass-panel setting-card danger-card"><h3>Reset Progress</h3><p>Erase all local progress, scores and unlocks. Create or export a backup before doing this.</p><button class="glow-button danger" data-action="reset-progress">RESET EVERYTHING</button></div>
+
+        <div class="glass-panel setting-card data-safety-card">
+          <h3>Automatic Backups</h3>
+          <p>Academy keeps rolling local snapshots before saves. Automatic snapshots are throttled to avoid filling your drive, and the newest 30 backups are retained.</p>
+          <p id="backupSummary" class="backup-summary">Checking local backups…</p>
+          <div class="setting-actions">
+            <button class="glow-button small primary" data-action="create-backup">CREATE BACKUP NOW</button>
+            <button class="glow-button small ghost" data-action="restore-backup">RESTORE LATEST</button>
+            <button class="glow-button small ghost" data-action="verify-save">VERIFY SAVE</button>
+            <button class="glow-button small ghost" data-action="open-data-folder">OPEN DATA FOLDER</button>
+          </div>
+          <div id="dataSafetyStatus" class="data-safety-status">Your progress remains local on this PC.</div>
+        </div>
+
+        <div class="glass-panel setting-card release-card">
+          <h3>Academy Release</h3>
+          <p>This is the completed Academy 2.x feature set. Future learning paths and languages can be added as expansions without changing the desktop foundation.</p>
+          <strong>2.0.0</strong>
+          <code>Local desktop build • .NET 10 • WebView2</code>
+        </div>
       </div>
     </section>
   </main>
@@ -223,8 +952,13 @@
   <template id="lessonSectionTemplate">
     <section class="lesson-section"><div class="section-number"></div><div><h3></h3><div class="section-content"></div></div></section>
   </template>
+  <div id="achievementToast" class="achievement-toast" aria-live="polite" aria-atomic="true">
+    <div class="achievement-toast-emblem">★</div>
+    <div><span>ACHIEVEMENT UNLOCKED</span><strong id="achievementToastTitle">Milestone</strong><p id="achievementToastText"></p></div>
+  </div>
+
   <script src="js/curriculum.js"></script>
   <script src="js/desktop-bridge.js"></script>
-  <script src="js/app.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
