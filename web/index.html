@@ -1,76 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Code Ascension Academy</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at top,
-                    #14243d 0%,
-                    #080d16 45%,
-                    #04070c 100%
-                );
-
-            color: #eaf6ff;
-
-            font-family:
-                Inter,
-                Segoe UI,
-                Arial,
-                sans-serif;
-        }
-
-        .academy {
-            text-align: center;
-        }
-
-        .academy h1 {
-            margin: 0;
-
-            font-size: 64px;
-            letter-spacing: -2px;
-        }
-
-        .academy h1 span {
-            color: #38d7ff;
-
-            text-shadow:
-                0 0 22px rgba(56, 215, 255, 0.55);
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Ascension Academy</title>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
-
 <body>
-    <main class="academy">
-        <h1>
-            CODE ASCENSION
-            <span>ACADEMY</span>
-        </h1>
+<div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="grid-overlay"></div>
 
-    </main>
+  <main id="app" class="app-shell">
+    <section id="startupScreen" class="screen active startup-screen">
+      <div class="brand-panel glass-panel">
+        <div class="eyebrow">YOUR CODING JOURNEY</div>
+        <h1>CODE <span>ASCENSION</span></h1>
+        <p class="subtitle">Learn. Practice. Pass. Advance.</p>
+        <div class="startup-actions">
+          <button class="glow-button primary" data-action="start">START</button>
+          <button class="glow-button ghost" data-action="quit">QUIT</button>
+        </div>
+      </div>
+    </section>
+<section id="academyScreen" class="screen dashboard-screen">
+      <header class="topbar glass-panel">
+        <div>
+          <div class="eyebrow">CODE ASCENSION</div>
+          <h2>Choose Your Discipline</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" data-action="open-references" title="Official reference library">REFERENCES</button>
+          <button class="icon-button" data-action="open-profile" title="Profile">PROFILE</button>
+          <button class="icon-button" data-action="open-settings" title="Settings">SETTINGS</button>
+          <button class="icon-button" data-action="back-start" title="Exit">EXIT</button>
+        </div>
+      </header>
+
+      <div class="progress-banner glass-panel">
+        <div>
+          <span class="muted">OVERALL PROGRESS</span>
+          <strong id="overallProgressText">0%</strong>
+        </div>
+        <div class="progress-track"><div id="overallProgressBar" class="progress-fill"></div></div>
+        <div class="streak-box"><span>SESSION XP</span><strong id="xpValue">0</strong></div>
+      </div>
+
+      <div id="languageGrid" class="language-grid"></div>
+    </section>
+
+    <section id="referenceScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="references-back">← BACK</button>
+        <div class="header-title"><div class="eyebrow">AUTHORITATIVE SOURCES</div><h2>Reference Library</h2></div>
+        <div class="mini-stat"><span>Curriculum</span><strong>4 Paths</strong></div>
+      </header>
+      <div class="reference-library-intro glass-panel">
+        <h3>Official documentation behind the Academy</h3>
+        <p>The Academy lessons are written specifically for this learning project. These links take you to the official or primary documentation used to structure the curriculum when you want a deeper reference.</p>
+      </div>
+      <div id="referenceLibraryGrid" class="reference-library-grid"></div>
+    </section>
+
+    <section id="difficultyScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="back-languages">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow" id="difficultyEyebrow">DISCIPLINE</div>
+          <h2 id="difficultyTitle">HTML</h2>
+        </div>
+        <div class="mini-stat"><span>Progress</span><strong id="languageProgress">0%</strong></div>
+      </header>
+      <div class="difficulty-intro glass-panel">
+        <h3>Select Difficulty</h3>
+        <p>Advance by passing all five class tests and all three final exams with at least 80%.</p>
+      </div>
+      <div id="difficultyGrid" class="difficulty-grid"></div>
+    </section>
+
+    <section id="roadmapScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="back-difficulties">← BACK</button>
+        <div class="header-title">
+          <div class="eyebrow" id="roadmapLanguage">HTML</div>
+          <h2 id="roadmapDifficulty">Intern Roadmap</h2>
+        </div>
+        <div class="mini-stat"><span>Difficulty</span><strong id="difficultyProgress">0%</strong></div>
+      </header>
+
+      <div class="roadmap-layout">
+        <aside class="roadmap-sidebar glass-panel">
+          <div class="rank-emblem" id="rankEmblem">I</div>
+          <h3 id="rankName">Intern</h3>
+          <p id="rankDescription"></p>
+          <div class="stat-stack">
+            <div><span>Lessons</span><strong id="lessonsDone">0/5</strong></div>
+            <div><span>Tests Passed</span><strong id="testsDone">0/5</strong></div>
+            <div><span>Exams Passed</span><strong id="examsDone">0/3</strong></div>
+          </div>
+        </aside>
+        <div class="roadmap-panel glass-panel">
+          <div id="roadmapNodes" class="roadmap-nodes"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lessonScreen" class="screen lesson-screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="back-roadmap">← ROADMAP</button>
+        <div class="header-title">
+          <div class="eyebrow" id="lessonContext">HTML // INTERN // LEVEL 1</div>
+          <h2 id="lessonTitle">Lesson</h2>
+        </div>
+        <button class="icon-button" data-action="print-lesson">STUDY PDF</button>
+      </header>
+
+      <div class="lesson-layout">
+        <article class="lesson-content glass-panel">
+          <div id="lessonBody"></div>
+          <div class="lesson-footer-actions">
+            <button class="glow-button primary" data-action="complete-lesson">MARK LESSON COMPLETE</button>
+            <button class="glow-button ghost" data-action="start-practice">PRACTICE</button>
+          </div>
+        </article>
+
+        <aside class="code-lab glass-panel">
+          <div class="code-lab-header">
+            <div><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+            <strong id="editorFilename">index.html</strong>
+          </div>
+          <textarea id="lessonEditor" spellcheck="false"></textarea>
+          <div class="editor-actions">
+            <button class="glow-button small primary" data-action="run-code">▶ RUN</button>
+            <button class="glow-button small ghost" data-action="reset-code">RESET</button>
+          </div>
+          <div class="console-panel">
+            <div class="console-title">OUTPUT</div>
+            <pre id="lessonOutput">Ready.</pre>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="practiceScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="back-lesson">← LESSON</button>
+        <div class="header-title">
+          <div class="eyebrow">PRACTICE LAB</div>
+          <h2 id="practiceTitle">Challenge</h2>
+        </div>
+        <div class="timer-box"><span>Hint</span><strong id="hintTimer">05:00</strong></div>
+      </header>
+      <div class="assessment-layout">
+        <section class="question-card glass-panel">
+          <span class="question-type">CODING CHALLENGE</span>
+          <h3 id="practicePrompt"></h3>
+          <p id="practiceDetails" class="muted"></p>
+          <button id="hintButton" class="glow-button warning" data-action="show-hint" disabled>HINT LOCKED</button>
+          <div id="hintBox" class="hint-box hidden"></div>
+        </section>
+        <section class="code-lab glass-panel">
+          <div class="code-lab-header"><strong id="practiceFilename">solution.html</strong></div>
+          <textarea id="practiceEditor" spellcheck="false"></textarea>
+          <div class="editor-actions">
+            <button class="glow-button small primary" data-action="check-practice">CHECK ANSWER</button>
+            <button class="glow-button small ghost" data-action="run-practice">RUN</button>
+          </div>
+          <div class="console-panel"><div class="console-title">FEEDBACK</div><pre id="practiceOutput">Write your solution, then check your answer.</pre></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="testScreen" class="screen">
+      <header class="topbar glass-panel">
+        <button class="icon-button" data-action="abort-test">← ROADMAP</button>
+        <div class="header-title"><div class="eyebrow" id="testEyebrow">CLASS TEST</div><h2 id="testTitle">Assessment</h2></div>
+        <div class="mini-stat"><span>Question</span><strong id="questionCounter">1/5</strong></div>
+      </header>
+      <div class="test-container glass-panel">
+        <div class="test-progress"><div id="testProgressFill"></div></div>
+        <span id="testQuestionType" class="question-type">MULTIPLE CHOICE</span>
+        <h3 id="testQuestion"></h3>
+        <div id="answerArea" class="answer-area"></div>
+        <div class="test-actions">
+          <button class="glow-button primary" data-action="submit-answer">SUBMIT ANSWER</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultsScreen" class="screen">
+      <div class="results-card glass-panel">
+        <div id="resultBadge" class="result-badge">80%</div>
+        <div class="eyebrow" id="resultEyebrow">CLASS TEST COMPLETE</div>
+        <h2 id="resultTitle">PASS</h2>
+        <p id="resultMessage"></p>
+        <div id="resultBreakdown" class="result-breakdown"></div>
+        <button class="glow-button primary" data-action="results-roadmap">RETURN TO ROADMAP</button>
+      </div>
+    </section>
+
+    <section id="profileScreen" class="screen">
+      <header class="topbar glass-panel"><button class="icon-button" data-action="profile-back">← BACK</button><div class="header-title"><div class="eyebrow">LEARNING PROFILE</div><h2>Learning Record</h2></div></header>
+      <div class="profile-grid">
+        <div class="glass-panel profile-card hero-stat"><span>TOTAL XP</span><strong id="profileXp">0</strong></div>
+        <div class="glass-panel profile-card"><span>CLASS TESTS PASSED</span><strong id="profileTests">0</strong></div>
+        <div class="glass-panel profile-card"><span>EXAMS PASSED</span><strong id="profileExams">0</strong></div>
+        <div class="glass-panel profile-card"><span>HINTS USED</span><strong id="profileHints">0</strong></div>
+      </div>
+      <div id="profileLanguages" class="glass-panel profile-language-list"></div>
+    </section>
+
+    <section id="settingsScreen" class="screen">
+      <header class="topbar glass-panel"><button class="icon-button" data-action="settings-back">← BACK</button><div class="header-title"><div class="eyebrow">ACADEMY SETTINGS</div><h2>Settings & Save</h2></div></header>
+      <div class="settings-grid">
+        <div class="glass-panel setting-card"><h3>Export Save</h3><p>Download your local academy progress as a JSON backup.</p><button class="glow-button primary" data-action="export-save">EXPORT SAVE</button></div>
+        <div class="glass-panel setting-card"><h3>Import Save</h3><p>Restore a previously exported academy save file.</p><label class="glow-button ghost file-label">IMPORT SAVE<input id="importSaveInput" type="file" accept="application/json" hidden></label></div>
+        <div class="glass-panel setting-card danger-card"><h3>Reset Progress</h3><p>Erase all local progress, scores and unlocks.</p><button class="glow-button danger" data-action="reset-progress">RESET EVERYTHING</button></div>
+      </div>
+    </section>
+  </main>
+
+  <template id="lessonSectionTemplate">
+    <section class="lesson-section"><div class="section-number"></div><div><h3></h3><div class="section-content"></div></div></section>
+  </template>
+  <script src="js/curriculum.js"></script>
+  <script src="js/desktop-bridge.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
