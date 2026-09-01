@@ -4,25 +4,241 @@
   "topics": [
     {
       "title": "Variables, Values & Types",
-      "summary": "Store and inspect data with let and const, recognize JavaScript primitive values, and understand that variables have values while values have types.",
+      "summary": "Start from zero: learn what JavaScript is, how to display output, how variables store values, why names matter, and how string, number, and boolean values are written.",
       "concepts": [
         {
-          "name": "let and const",
-          "explanation": "Use const when a binding should not be reassigned and let when reassignment is part of the design. Avoid var in new beginner code until you understand its older scoping rules."
+          "name": "JavaScript instructions and output",
+          "explanation": "JavaScript is a programming language used to give a computer instructions. In this lesson, each small instruction is a statement. You will use console.log to display values so you can see what your program is doing."
         },
         {
-          "name": "Primitive values",
-          "explanation": "Common primitive types are string, number, bigint, boolean, undefined, symbol, and null. Objects are the major non-primitive category."
+          "name": "Variables with const and let",
+          "explanation": "A variable gives a value a useful name. Use const when that variable should keep the same assigned value, and let when you plan to assign a different value later. Variable names are identifiers: they cannot contain spaces, they cannot begin with a number, and JavaScript is case-sensitive."
         },
         {
-          "name": "Dynamic typing",
-          "explanation": "A JavaScript variable is not permanently locked to one value type. typeof helps inspect many values, but null is a famous historical edge case because typeof null is \"object\"."
+          "name": "String, number, and boolean values",
+          "explanation": "A string is text written inside quotation marks, a number is numeric data written without quotation marks, and a boolean is either true or false. These are three fundamental kinds of values you will use throughout JavaScript."
         }
       ],
-      "example": "const playerName = \"Nova\";\nlet health = 100;\nconst alive = true;\n\nhealth = health - 25;\nconsole.log(playerName, health, alive);\nconsole.log(typeof health);",
-      "challenge": "Declare a const name, a mutable numeric score/health variable, change the number, and log both values.",
-      "hint": "Use const for the name and let for the value you intend to reassign.",
-      "solution": "const playerName = \"Nova\";\nlet health = 100;\nconst alive = true;\n\nhealth = health - 25;\nconsole.log(playerName, health, alive);\nconsole.log(typeof health);",
+      "starter": "console.log(\"Hello, Academy!\");",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what JavaScript code is, display simple output with console.log, create variables with const and let, follow basic variable-naming rules, store string/number/boolean values, reassign a let variable, and recognize a few beginner console errors.",
+        "whyItMatters": "Almost every JavaScript program works with named values. Scores, player names, menu states, form data, counters, and settings all begin with the same foundation: create a variable, give it a value, and use that value later.",
+        "terms": [
+          {
+            "term": "Programming",
+            "meaning": "Writing instructions that tell a computer what you want it to do."
+          },
+          {
+            "term": "JavaScript",
+            "meaning": "The programming language you are learning in this track. Browsers can run JavaScript to add logic and behaviour to webpages, and JavaScript can also run in other environments."
+          },
+          {
+            "term": "Source code",
+            "meaning": "The human-readable JavaScript text that you write."
+          },
+          {
+            "term": "Statement",
+            "meaning": "A JavaScript instruction, such as creating a variable or displaying a value."
+          },
+          {
+            "term": "Variable",
+            "meaning": "A named place your program uses to keep track of a value."
+          },
+          {
+            "term": "Identifier",
+            "meaning": "A name you choose in code, such as learnerName or score."
+          },
+          {
+            "term": "Value",
+            "meaning": "The actual data being stored or used, such as \"Nova\", 80, or true."
+          },
+          {
+            "term": "String",
+            "meaning": "Text data. In this lesson, strings are written inside quotation marks."
+          },
+          {
+            "term": "Number",
+            "meaning": "Numeric data such as 80, 12.5, or -3. JavaScript uses one common number type for ordinary whole and decimal numbers."
+          },
+          {
+            "term": "Boolean",
+            "meaning": "A true/false value. The only boolean values are true and false."
+          },
+          {
+            "term": "Console",
+            "meaning": "A place where a program can display developer messages and errors. The Academy shows console output when you run JavaScript."
+          },
+          {
+            "term": "Reassign",
+            "meaning": "Give an existing variable a different value after it was created."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "console.log(\"Hello\");",
+            "meaning": "Displays a value in the console. console is the object, the dot accesses log, parentheses hold the argument, and the semicolon ends the statement in the Academy's beginner style."
+          },
+          {
+            "symbol": "const",
+            "meaning": "Creates a variable whose binding cannot be reassigned later. Use it when you do not plan to replace the stored value."
+          },
+          {
+            "symbol": "let",
+            "meaning": "Creates a variable that may be reassigned later."
+          },
+          {
+            "symbol": "=",
+            "meaning": "Assignment. It puts the value on the right into the variable on the left. It is not a comparison in this lesson."
+          },
+          {
+            "symbol": "\"text\"",
+            "meaning": "Quotation marks tell JavaScript that the characters inside are a string value."
+          },
+          {
+            "symbol": "80",
+            "meaning": "A number value. Ordinary numbers are written without quotation marks."
+          },
+          {
+            "symbol": "true / false",
+            "meaning": "Boolean values. They are written without quotation marks and in lowercase."
+          },
+          {
+            "symbol": ";",
+            "meaning": "Ends a statement in the style used by the Academy. JavaScript can sometimes insert missing semicolons automatically, but using them consistently makes statement boundaries clear while you learn."
+          },
+          {
+            "symbol": ".",
+            "meaning": "The dot accesses something that belongs to another value or object. In console.log, log is accessed from console."
+          },
+          {
+            "symbol": "()",
+            "meaning": "Parentheses after log contain the value you want to display. That supplied value is called an argument."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Display one message",
+            "explanation": "Start with one instruction only. The text inside quotation marks is the value that console.log displays.",
+            "code": "console.log(\"Hello, Academy!\");"
+          },
+          {
+            "title": "Step 2 — Create your first variable",
+            "explanation": "const creates a variable. learnerName is the identifier you chose. = assigns the string value \"Nova\" to that variable.",
+            "code": "const learnerName = \"Nova\";"
+          },
+          {
+            "title": "Step 3 — Use the variable",
+            "explanation": "Once a variable exists, you can use its name instead of repeating the original value.",
+            "code": "const learnerName = \"Nova\";\nconsole.log(learnerName);"
+          },
+          {
+            "title": "Step 4 — Store a number",
+            "explanation": "Numbers do not need quotation marks. Here score stores the number 80.",
+            "code": "let score = 80;\nconsole.log(score);"
+          },
+          {
+            "title": "Step 5 — Reassign a let variable",
+            "explanation": "Because score was created with let, you may later assign a different value to the same variable. Do not write let again when reassigning it.",
+            "code": "let score = 80;\nscore = 90;\nconsole.log(score);"
+          },
+          {
+            "title": "Step 6 — Store true or false",
+            "explanation": "A boolean stores one of two values: true or false. These words are lowercase and do not use quotation marks.",
+            "code": "const enrolled = true;\nconsole.log(enrolled);"
+          },
+          {
+            "title": "Step 7 — Combine the three value types",
+            "explanation": "This example creates one string, one mutable number, and one boolean. Each value is printed separately so every line has one clear job.",
+            "code": "const learnerName = \"Nova\";\nlet score = 80;\nconst enrolled = true;\n\nscore = 90;\n\nconsole.log(learnerName);\nconsole.log(score);\nconsole.log(enrolled);"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "const learnerName = \"Nova\";",
+            "meaning": "Create learnerName and assign the string value \"Nova\". Because const is used, learnerName will not be reassigned in this example."
+          },
+          {
+            "piece": "let score = 80;",
+            "meaning": "Create score with the number value 80. let is used because the lesson will change the score later."
+          },
+          {
+            "piece": "const enrolled = true;",
+            "meaning": "Create enrolled and store the boolean value true."
+          },
+          {
+            "piece": "score = 90;",
+            "meaning": "Reassign the existing score variable. The let keyword is not repeated because score already exists."
+          },
+          {
+            "piece": "console.log(score);",
+            "meaning": "Ask JavaScript to display the current value stored in score."
+          }
+        ],
+        "computerSteps": [
+          "JavaScript reads the source code in order from top to bottom for this simple example.",
+          "It creates learnerName and stores the string value \"Nova\".",
+          "It creates score and stores the number 80.",
+          "It creates enrolled and stores the boolean true.",
+          "It reaches score = 90 and replaces score's previous value with 90 because score was declared with let.",
+          "Each console.log call looks up the current value and displays it.",
+          "If JavaScript cannot understand the syntax or find a name you used, the console can show an error message instead of the expected output."
+        ],
+        "guidedChanges": [
+          "Change \"Nova\" to your own name and run the code again. Notice that only the displayed name changes.",
+          "Change the starting score and final score. Predict the number that will be printed before you run it.",
+          "Change enrolled from true to false. Keep it lowercase and without quotation marks.",
+          "Temporarily change learnerName to learnername in one console.log call. Read the error, then restore the correct capitalization.",
+          "Temporarily put quotation marks around a number, for example \"80\". The output looks similar, but you have changed the value from a number to text. Remove the quotation marks again."
+        ],
+        "workedExampleIntro": "Every important piece in the combined example has already appeared separately above. Read each line and identify whether it creates a variable, changes a variable, or displays a value before you run it.",
+        "errorExamples": [
+          {
+            "mistake": "const learner name = \"Nova\";",
+            "explanation": "Variable identifiers cannot contain spaces. JavaScript reads learner and name as separate pieces instead of one variable name.",
+            "fix": "Use a valid identifier such as learnerName or learner_name."
+          },
+          {
+            "mistake": "console.Log(\"Hello\");",
+            "explanation": "JavaScript is case-sensitive. Log and log are different names, and console does not have a method named Log.",
+            "fix": "Use console.log(\"Hello\"); with a lowercase l."
+          },
+          {
+            "mistake": "const score = 80;\nscore = 90;",
+            "explanation": "const does not allow the variable binding to be reassigned. Running this produces an error such as Assignment to constant variable.",
+            "fix": "Use let score = 80; if reassignment is part of the plan."
+          },
+          {
+            "mistake": "console.log(learnername);",
+            "explanation": "If the variable was declared as learnerName, learnername is a different identifier because capitalization matters. JavaScript can report that the name is not defined.",
+            "fix": "Use the exact declared name: console.log(learnerName);"
+          },
+          {
+            "mistake": "const learnerName = \"Nova;",
+            "explanation": "The opening quotation mark has no matching closing quotation mark, so JavaScript cannot correctly understand where the string ends.",
+            "fix": "Close the string: const learnerName = \"Nova\";"
+          },
+          {
+            "mistake": "const enrolled = \"true\";",
+            "explanation": "This is valid JavaScript, but it stores the text \"true\", not the boolean value true. That can cause confusing behaviour later.",
+            "fix": "Use const enrolled = true; without quotation marks when you need a boolean."
+          }
+        ],
+        "recap": [
+          "JavaScript source code contains instructions that the JavaScript engine runs.",
+          "console.log displays a value so you can inspect what your program is doing.",
+          "A variable gives a value a useful name.",
+          "Use const when you do not plan to reassign the variable and let when you do.",
+          "Identifiers cannot contain spaces, cannot begin with a number, and are case-sensitive.",
+          "Strings use quotation marks, ordinary numbers do not, and booleans are lowercase true or false without quotation marks.",
+          "= assigns a value to a variable.",
+          "Errors such as an unknown identifier or reassignment of a const are information that helps you find what needs fixing."
+        ]
+      },
+      "example": "const learnerName = \"Nova\";\nlet score = 80;\nconst enrolled = true;\n\nscore = 90;\n\nconsole.log(learnerName);\nconsole.log(score);\nconsole.log(enrolled);",
+      "challenge": "Create a const variable named learnerName containing a string, a let variable named score containing a number, and a const variable named enrolled containing a boolean. Reassign score once, then use console.log to display learnerName, score, and enrolled.",
+      "practiceDetails": "Everything required here has been introduced step by step in this lesson. Do not use comparisons, conditions, loops, functions, DOM code, or other syntax from later modules.",
+      "hint": "Build it in small steps: const learnerName = \"...\"; then let score = ...; then const enrolled = true; change score with score = ...; and finally print each variable with console.log(...);.",
+      "solution": "const learnerName = \"Nova\";\nlet score = 80;\nconst enrolled = true;\n\nscore = 90;\n\nconsole.log(learnerName);\nconsole.log(score);\nconsole.log(enrolled);",
       "groups": [
         [
           "const "
@@ -34,6 +250,80 @@
           "console.log"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "const "
+          ],
+          [
+            "let "
+          ],
+          [
+            "console.log"
+          ]
+        ],
+        "practiceMinLength": 45,
+        "testCodeQuestions": [
+          {
+            "prompt": "Declare a const variable containing a learner name string, then display that variable with console.log. Use a valid identifier with no spaces.",
+            "groups": [
+              [
+                "const "
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 25
+          },
+          {
+            "prompt": "Declare a let variable named score containing a number, then display score with console.log.",
+            "groups": [
+              [
+                "let "
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 22
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "const "
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "2": [
+            [
+              "let "
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "3": [
+            [
+              "const "
+            ],
+            [
+              "let "
+            ],
+            [
+              "console.log"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create a const variable containing a text value and display the variable with console.log.",
+          "2": "Exam 2: Create a let variable containing a number and display the variable with console.log.",
+          "3": "Exam 3: Create a const learner name, a let numeric score, and a const boolean value. Display the variables with console.log."
+        }
+      },
       "references": [
         {
           "title": "MDN — JavaScript Guide",
@@ -44,30 +334,308 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not put spaces inside variable identifiers. Use learnerName instead of learner name.",
+        "JavaScript is case-sensitive. learnerName and learnername are different identifiers, and console.log uses lowercase log.",
+        "Use const when you do not plan to reassign a variable. Use let when reassignment is part of the program.",
+        "Strings need quotation marks. Numbers and boolean true/false values in this lesson do not.",
+        "Do not write const or let again when merely reassigning an existing let variable.",
+        "A quoted \"true\" is a string, not the boolean true, even though the text looks similar when printed.",
+        "Read console errors as clues. Check the first useful message, the identifier spelling/capitalization, and the line that JavaScript points you toward."
+      ],
+      "mastery": [
+        "Explain in simple words what JavaScript source code is and what console.log is used for.",
+        "Create a const string variable with a valid identifier and display it.",
+        "Create a let number variable, reassign it, and explain why let was chosen instead of const.",
+        "Create boolean values using lowercase true or false without quotation marks.",
+        "Explain the difference between a string such as \"80\" and a number such as 80.",
+        "Explain why learnerName and learnername are different identifiers.",
+        "Recognize and correct a simple undefined-name, bad-capitalization, missing-quote, or const-reassignment error."
+      ]
     },
     {
       "title": "Operators, Conditions & Boolean Logic",
-      "summary": "Combine expressions with arithmetic, comparison, logical operators, and if/switch control flow.",
+      "summary": "Build decisions from the ground up: calculate values, compare them, combine true/false conditions, and choose which code runs with if, else, and a simple switch.",
       "concepts": [
         {
-          "name": "Comparisons",
-          "explanation": "Prefer strict equality === and !== for predictable comparisons. Relational operators such as <, >, <=, and >= compare ordered values."
+          "name": "Operators and expressions",
+          "explanation": "An operator tells JavaScript to perform an action with values. Arithmetic operators calculate numbers, while comparison operators compare values and produce a boolean result: true or false."
         },
         {
-          "name": "Boolean logic",
-          "explanation": "&& requires both sides to be truthy, || chooses when at least one side is truthy, and ! negates a truthy/falsy result."
+          "name": "Conditions and boolean logic",
+          "explanation": "A condition is an expression JavaScript can treat as true or false. Logical operators let you combine or reverse boolean conditions after each individual comparison already makes sense."
         },
         {
-          "name": "Branches",
-          "explanation": "if/else is flexible for arbitrary conditions. switch is useful when one expression is matched against many known cases."
+          "name": "Choosing a branch",
+          "explanation": "if and else let a program choose which block of code runs. A simple switch can later choose between several known exact values. Compact shortcuts such as the ternary operator are intentionally left for later."
         }
       ],
-      "example": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Review and retry\");\n}\n\nconst rank = score >= 90 ? \"excellent\" : \"developing\";\nconsole.log(rank);",
-      "challenge": "Write a condition that prints Pass when a score is at least 80 and Retry otherwise.",
-      "hint": "Your condition should compare the score with 80 using >=.",
-      "solution": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Review and retry\");\n}\n\nconst rank = score >= 90 ? \"excellent\" : \"developing\";\nconsole.log(rank);",
+      "starter": "const score = 86;\nconst passing = score >= 80;\nconsole.log(passing);",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to use basic arithmetic operators, explain the difference between assignment and comparison, create boolean comparisons with ===, !==, >, <, >=, and <=, combine simple boolean conditions with &&, ||, and !, and write clear if/else and simple switch decisions.",
+        "whyItMatters": "Programs constantly make decisions. A game checks whether health is above zero, a form checks whether required information exists, and the Academy checks whether a score reaches a pass mark. Those decisions all begin with values, comparisons, booleans, and branches.",
+        "terms": [
+          {
+            "term": "Operator",
+            "meaning": "A symbol that tells JavaScript to perform an action, such as + for addition or >= for a comparison."
+          },
+          {
+            "term": "Operand",
+            "meaning": "A value used by an operator. In 5 + 3, the values 5 and 3 are operands."
+          },
+          {
+            "term": "Expression",
+            "meaning": "Code that JavaScript evaluates to produce a value. The expression score >= 80 produces either true or false."
+          },
+          {
+            "term": "Arithmetic",
+            "meaning": "Number calculations such as addition, subtraction, multiplication, division, and remainder."
+          },
+          {
+            "term": "Comparison",
+            "meaning": "Checking how two values relate to each other. A comparison produces the boolean value true or false."
+          },
+          {
+            "term": "Condition",
+            "meaning": "A true/false expression used to decide whether a block of code should run."
+          },
+          {
+            "term": "Branch",
+            "meaning": "One possible path through a program. if and else choose between different branches."
+          },
+          {
+            "term": "Code block",
+            "meaning": "A group of statements inside { and }. The braces show which statements belong together."
+          },
+          {
+            "term": "Logical operator",
+            "meaning": "An operator that combines or reverses boolean conditions, such as &&, ||, or !."
+          },
+          {
+            "term": "switch",
+            "meaning": "A decision structure that compares one value against several known cases."
+          },
+          {
+            "term": "case",
+            "meaning": "One possible value handled inside a switch."
+          },
+          {
+            "term": "default",
+            "meaning": "The switch branch used when none of the listed cases match."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "+  -  *  /  %",
+            "meaning": "Basic arithmetic operators: add, subtract, multiply, divide, and remainder. For example, 10 % 3 produces 1 because 1 remains after dividing 10 by 3."
+          },
+          {
+            "symbol": "=",
+            "meaning": "Assignment, learned in Module 1. It stores the value on the right in the variable on the left. It does not ask whether two values are equal."
+          },
+          {
+            "symbol": "===",
+            "meaning": "Strict equality comparison. It asks whether two values are equal without automatically converting them to other types. The result is true or false."
+          },
+          {
+            "symbol": "!==",
+            "meaning": "Strict inequality comparison. It asks whether two values are not equal."
+          },
+          {
+            "symbol": ">  <  >=  <=",
+            "meaning": "Relational comparisons: greater than, less than, greater than or equal to, and less than or equal to."
+          },
+          {
+            "symbol": "if (condition) { ... }",
+            "meaning": "Run the block only when the condition evaluates to true. Parentheses hold the condition and braces hold the statements in the branch."
+          },
+          {
+            "symbol": "else { ... }",
+            "meaning": "Run this alternative block when the preceding if condition is false."
+          },
+          {
+            "symbol": "&&",
+            "meaning": "Logical AND. The combined condition is true only when both sides are true."
+          },
+          {
+            "symbol": "||",
+            "meaning": "Logical OR. The combined condition is true when at least one side is true."
+          },
+          {
+            "symbol": "!",
+            "meaning": "Logical NOT. It reverses a boolean: !true is false and !false is true."
+          },
+          {
+            "symbol": "switch (value)",
+            "meaning": "Compare one value against several cases. This lesson uses switch only after if/else is understood."
+          },
+          {
+            "symbol": "case \"value\":",
+            "meaning": "A possible exact match inside a switch. The colon marks the beginning of the statements for that case."
+          },
+          {
+            "symbol": "break;",
+            "meaning": "Stop the current switch case so execution does not continue into the next case."
+          },
+          {
+            "symbol": "default:",
+            "meaning": "The fallback switch branch used when no case matches."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Perform one calculation",
+            "explanation": "Start with arithmetic only. The + operator combines the two number operands and produces a new number value.",
+            "code": "const total = 5 + 3;\nconsole.log(total);"
+          },
+          {
+            "title": "Step 2 — Compare two numbers",
+            "explanation": "A comparison does not change score. It asks a question and produces a boolean result.",
+            "code": "const score = 86;\nconst passing = score >= 80;\nconsole.log(passing);"
+          },
+          {
+            "title": "Step 3 — See assignment and equality side by side",
+            "explanation": "The first = assigns a value. The === comparison later asks whether the current score is exactly 86.",
+            "code": "let score = 80;\nscore = 86;\n\nconst exactMatch = score === 86;\nconsole.log(exactMatch);"
+          },
+          {
+            "title": "Step 4 — Run code only when a condition is true",
+            "explanation": "if checks the condition inside its parentheses. Because 86 >= 80 is true, the statement inside the braces runs.",
+            "code": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n}"
+          },
+          {
+            "title": "Step 5 — Add an alternative with else",
+            "explanation": "Exactly one of these two branches runs: Pass when the condition is true, otherwise Retry.",
+            "code": "const score = 72;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Retry\");\n}"
+          },
+          {
+            "title": "Step 6 — Require two conditions with &&",
+            "explanation": "Both comparisons must be true. This is useful when a decision has more than one requirement.",
+            "code": "const score = 86;\nconst lessonsComplete = true;\n\nif (score >= 80 && lessonsComplete === true) {\n  console.log(\"Rank ready\");\n}"
+          },
+          {
+            "title": "Step 7 — Allow either condition with ||",
+            "explanation": "OR becomes true when at least one side is true. Here the learner may enter practice when either condition is satisfied.",
+            "code": "const revisionDue = false;\nconst learnerRequestedPractice = true;\n\nif (revisionDue === true || learnerRequestedPractice === true) {\n  console.log(\"Open practice\");\n}"
+          },
+          {
+            "title": "Step 8 — Reverse a boolean with !",
+            "explanation": "The ! operator reverses true and false. Because locked is false, !locked is true and the branch runs.",
+            "code": "const locked = false;\n\nif (!locked) {\n  console.log(\"Lesson available\");\n}"
+          },
+          {
+            "title": "Step 9 — Choose between several exact values with switch",
+            "explanation": "Use switch when one value has several known exact cases. break ends each matched case, and default handles anything not listed.",
+            "code": "const rank = \"Intern\";\n\nswitch (rank) {\n  case \"Intern\":\n    console.log(\"Foundation lessons\");\n    break;\n  case \"Junior\":\n    console.log(\"Junior lessons\");\n    break;\n  default:\n    console.log(\"Other rank\");\n    break;\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "const score = 86;",
+            "meaning": "Create score and store the number 86. The = symbol performs assignment."
+          },
+          {
+            "piece": "score >= 80",
+            "meaning": "Compare score with 80. The expression becomes true when score is 80 or higher and false otherwise."
+          },
+          {
+            "piece": "if (score >= 80)",
+            "meaning": "Ask JavaScript to run the following block only when the comparison is true."
+          },
+          {
+            "piece": "{ console.log(\"Pass\"); }",
+            "meaning": "The braces contain the statements belonging to the true branch."
+          },
+          {
+            "piece": "else",
+            "meaning": "Choose the alternative branch when the if condition was false."
+          },
+          {
+            "piece": "score === 80",
+            "meaning": "Ask whether score is exactly equal to the number 80. This is a comparison, unlike score = 80, which assigns 80."
+          },
+          {
+            "piece": "conditionA && conditionB",
+            "meaning": "Require both boolean conditions to be true."
+          },
+          {
+            "piece": "conditionA || conditionB",
+            "meaning": "Require at least one of the two boolean conditions to be true."
+          }
+        ],
+        "computerSteps": [
+          "JavaScript evaluates simple expressions before using their results in a decision.",
+          "For score >= 80, it reads the current score value, compares it with 80, and produces true or false.",
+          "if looks at that boolean result.",
+          "When the result is true, JavaScript enters the if block and runs its statements.",
+          "When the result is false and an else exists, JavaScript skips the if block and runs the else block instead.",
+          "Logical operators combine boolean results before if makes its decision.",
+          "A switch evaluates its value once, looks for a matching case, and uses default when no listed case matches.",
+          "A syntax error can prevent the program from running; a logically wrong comparison may still run but choose the wrong branch, so both syntax and reasoning matter."
+        ],
+        "guidedChanges": [
+          "Change a passing score from 86 to 70. Predict which if/else branch will run before executing the code.",
+          "Change >= to > and test the exact score 80. Explain why the result changes.",
+          "Change score === 86 to score !== 86 and predict the new boolean value.",
+          "In the && example, change lessonsComplete from true to false. Notice that both requirements are now not satisfied.",
+          "In the || example, set both booleans to false and observe that the branch no longer runs.",
+          "Add another simple case to the switch and test both a matching value and a value that reaches default."
+        ],
+        "workedExampleIntro": "The final practice deliberately uses the clearest decision form rather than a shortcut. You will compare a score with the pass mark and use if/else to display exactly one result. Every required symbol has already been introduced above.",
+        "errorExamples": [
+          {
+            "mistake": "if (score = 80) {\n  console.log(\"Pass\");\n}",
+            "explanation": "= performs assignment. It changes score instead of asking whether score equals 80. This can run without a syntax error and still produce wrong program behaviour.",
+            "fix": "Use a comparison, for example if (score === 80) for exact equality or if (score >= 80) for the pass rule."
+          },
+          {
+            "mistake": "if score >= 80 {\n  console.log(\"Pass\");\n}",
+            "explanation": "In the syntax taught here, the if condition must be inside parentheses.",
+            "fix": "Write if (score >= 80) { ... }."
+          },
+          {
+            "mistake": "if (score >= 80)\n  console.log(\"Pass\");\nelse {\n  console.log(\"Retry\");\n}",
+            "explanation": "JavaScript allows some one-line branches without braces, but mixing styles is easy to misread as a beginner and can lead to mistakes when another statement is added.",
+            "fix": "Use braces consistently in Intern lessons: if (...) { ... } else { ... }."
+          },
+          {
+            "mistake": "if (score => 80) {\n  console.log(\"Pass\");\n}",
+            "explanation": "=> is not the greater-than-or-equal comparison. The comparison symbol is >=. The reversed characters mean something entirely different in JavaScript.",
+            "fix": "Use if (score >= 80) { ... }."
+          },
+          {
+            "mistake": "if (score >= 80 & lessonsComplete === true) { ... }",
+            "explanation": "A single & is not the logical AND operator taught here. Logical AND uses two ampersands.",
+            "fix": "Use && when both boolean conditions must be true."
+          },
+          {
+            "mistake": "switch (rank) {\n  case \"Intern\":\n    console.log(\"Foundation lessons\");\n  case \"Junior\":\n    console.log(\"Junior lessons\");\n}",
+            "explanation": "Without break, execution can continue into the following case after a match. That can print more than you intended.",
+            "fix": "Add break; at the end of each case in the simple switch style taught here."
+          },
+          {
+            "mistake": "const passing = score >= \"80\";",
+            "explanation": "This mixes a number with a string. JavaScript may convert values in some relational comparisons, but relying on automatic conversion makes beginner code harder to reason about.",
+            "fix": "Compare number with number: const passing = score >= 80;"
+          }
+        ],
+        "recap": [
+          "Arithmetic operators create new number results from number values.",
+          "= assigns a value; it is not an equality comparison.",
+          "=== and !== compare exact equality/inequality without the loose conversion behaviour of == and !=.",
+          ">, <, >=, and <= compare ordered values and produce booleans.",
+          "if runs a block when its condition is true; else provides an alternative when it is false.",
+          "&& means both conditions must be true, || means at least one must be true, and ! reverses a boolean.",
+          "Braces group the statements that belong to a branch.",
+          "A simple switch is useful when one value is compared with several known exact cases.",
+          "Readable beginner code is preferred over compact shortcuts such as the ternary operator."
+        ]
+      },
+      "example": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Retry\");\n}",
+      "challenge": "Create a number variable named score. Use if/else to print Pass when score is at least 80 and Retry otherwise.",
+      "practiceDetails": "Use only Module 1 foundations plus the comparison and if/else syntax taught in this lesson. You do not need a ternary operator, loop, function, array, object, DOM API, or event.",
+      "hint": "Start with const score = 86;. Then write if (score >= 80) { console.log(\"Pass\"); } else { console.log(\"Retry\"); }.",
+      "solution": "const score = 86;\n\nif (score >= 80) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Retry\");\n}",
       "groups": [
         [
           "if ("
@@ -83,6 +651,102 @@
           "console.log"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "if ("
+          ],
+          [
+            ">= 80",
+            ">=80"
+          ],
+          [
+            "else"
+          ],
+          [
+            "console.log"
+          ]
+        ],
+        "practiceMinLength": 55,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create a numeric score and use if/else to display Pass when the score is at least 80 and Retry otherwise.",
+            "groups": [
+              [
+                "if ("
+              ],
+              [
+                ">= 80",
+                ">=80"
+              ],
+              [
+                "else"
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 55
+          },
+          {
+            "prompt": "Create two number variables and store the result of a strict equality comparison using === in a boolean variable. Display that boolean with console.log.",
+            "groups": [
+              [
+                "==="
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 40
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "if ("
+            ],
+            [
+              ">= 80",
+              ">=80"
+            ],
+            [
+              "else"
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "2": [
+            [
+              "==="
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "3": [
+            [
+              "if ("
+            ],
+            [
+              ">= 80",
+              ">=80"
+            ],
+            [
+              "else"
+            ],
+            [
+              "console.log"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create a score and use if/else to print Pass when it is at least 80 and Retry otherwise.",
+          "2": "Exam 2: Create two values of the same taught type, compare them with ===, store the boolean result, and display it with console.log.",
+          "3": "Exam 3: Use a comparison and clear if/else branches to make a simple decision and display the selected result."
+        }
+      },
       "references": [
         {
           "title": "MDN — JavaScript Guide",
@@ -93,41 +757,366 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not confuse assignment = with strict equality ===. Assignment stores a value; equality asks a question.",
+        "Use >= for greater than or equal to. => is not that comparison operator.",
+        "Use braces around beginner if/else blocks so it is obvious which statements belong to each branch.",
+        "&& requires both conditions; || requires at least one; ! reverses a boolean.",
+        "Prefer === and !== at Intern level. Loose == and != perform type conversion rules that are intentionally deferred.",
+        "Do not use a ternary expression just to make the code shorter. First learn to express decisions clearly with if/else.",
+        "In the simple switch style taught here, remember break; so one matching case does not continue into the next case."
+      ],
+      "mastery": [
+        "Explain the difference between an operator, an operand, and an expression using a simple arithmetic example.",
+        "Explain why = and === have different jobs and choose the correct one for assignment versus comparison.",
+        "Use >, <, >=, <=, ===, and !== to produce boolean results.",
+        "Write an if block that runs only when a comparison is true.",
+        "Write an if/else decision and predict which branch will execute for a given value.",
+        "Combine two already-understood boolean conditions with && or || and explain the result.",
+        "Use ! to reverse a boolean condition.",
+        "Read and correct common mistakes such as => instead of >=, missing parentheses, or a single & instead of &&.",
+        "Explain when a simple switch is appropriate and why break; matters in the taught switch form."
+      ]
     },
     {
       "title": "Loops & Arrays",
-      "summary": "Store ordered values in arrays and repeat work with for, for...of, while, and array indexing.",
+      "summary": "Learn repetition from the ground up, then store ordered values in arrays and visit those values safely with while, for, array indexes, length, and for...of.",
       "concepts": [
         {
-          "name": "Arrays",
-          "explanation": "Arrays are ordered, zero-indexed collections. length tells you how many entries exist, and methods such as push/pop modify the end."
+          "name": "Loops repeat instructions",
+          "explanation": "A loop repeats a block of code while a rule says it should continue. Start with a tiny counter so you can see exactly when the condition is checked, when the body runs, and when the counter changes."
         },
         {
-          "name": "for and while",
-          "explanation": "for is convenient when setup, condition, and update fit together. while is useful when repetition depends on a condition rather than a known count."
+          "name": "Arrays store ordered values",
+          "explanation": "An array stores several values together in a specific order. Each value is an element, and each element has a numeric position called an index. JavaScript array indexes begin at 0."
         },
         {
-          "name": "for...of",
-          "explanation": "for...of reads iterable values directly and is often clearer than manual indexing when you only need each value."
+          "name": "Choose a clear way to repeat",
+          "explanation": "while is useful when repetition depends on a condition, for keeps a counter's setup/condition/update together, and for...of is usually the clearest choice when you simply want every value from an array."
         }
       ],
-      "example": "const modules = [\"HTML\", \"CSS\", \"JavaScript\", \"C#\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}\n\nfor (let i = 0; i < modules.length; i++) {\n  console.log(i, modules[i]);\n}",
-      "challenge": "Create an array with at least three values and print every value using a loop.",
-      "hint": "for...of is the simplest choice when you do not need the array index.",
-      "solution": "const modules = [\"HTML\", \"CSS\", \"JavaScript\", \"C#\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}\n\nfor (let i = 0; i < modules.length; i++) {\n  console.log(i, modules[i]);\n}",
+      "starter": "let counter = 1;\n\nwhile (counter <= 3) {\n  console.log(counter);\n  counter = counter + 1;\n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain why loops exist, trace a small while loop, read a basic for loop, create an array, explain zero-based indexes and .length, access array elements, and use for...of to display every value in an array.",
+        "whyItMatters": "Programs often need to do the same kind of work more than once. A game may inspect every enemy, a website may display every message, and the Academy may show every lesson in a list. Loops provide the repetition, while arrays give related values an ordered place to live.",
+        "terms": [
+          {
+            "term": "Loop",
+            "meaning": "A structure that repeats a block of code according to a condition or a collection of values."
+          },
+          {
+            "term": "Iteration",
+            "meaning": "One complete pass through a loop body. If a loop runs three times, it performs three iterations."
+          },
+          {
+            "term": "Counter",
+            "meaning": "A variable used to keep track of how many times something has happened or which numeric position is being processed."
+          },
+          {
+            "term": "Infinite loop",
+            "meaning": "A loop that never reaches a stopping condition. It can make a program appear frozen or keep producing output until execution is stopped."
+          },
+          {
+            "term": "Array",
+            "meaning": "An ordered collection of values stored together. JavaScript array literals use square brackets."
+          },
+          {
+            "term": "Element",
+            "meaning": "One value stored inside an array."
+          },
+          {
+            "term": "Index",
+            "meaning": "The numeric position used to access an array element. JavaScript arrays start at index 0, not index 1."
+          },
+          {
+            "term": "Zero-based indexing",
+            "meaning": "A numbering system where the first element is position 0, the second is 1, the third is 2, and so on."
+          },
+          {
+            "term": "Length",
+            "meaning": "The number of elements currently stored in an array. In JavaScript, array.length is a property, not a function call."
+          },
+          {
+            "term": "undefined",
+            "meaning": "A special JavaScript value that often means no value was found. For example, asking a three-item array for index 3 reaches beyond its valid indexes 0, 1, and 2 and produces undefined."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "while (condition) { ... }",
+            "meaning": "Repeat the block while the condition is true. Something inside the loop normally needs to change so the condition can eventually become false."
+          },
+          {
+            "symbol": "counter = counter + 1;",
+            "meaning": "Take the current counter value, add 1, and assign the new value back to counter. This uses assignment and arithmetic already learned in Modules 1–2."
+          },
+          {
+            "symbol": "for (let i = 0; i < 3; i++) { ... }",
+            "meaning": "A counted loop. The first part creates the counter, the middle part is the continue condition, and the final part updates the counter after each iteration."
+          },
+          {
+            "symbol": "i++",
+            "meaning": "Increase i by 1. For the simple counters in this lesson, it has the same practical effect as i = i + 1."
+          },
+          {
+            "symbol": "[\"HTML\", \"CSS\", \"JavaScript\"]",
+            "meaning": "An array literal containing three string elements. Square brackets mark the array and commas separate the elements."
+          },
+          {
+            "symbol": "modules[0]",
+            "meaning": "Access the element at index 0. Because arrays are zero-based, this is the first element."
+          },
+          {
+            "symbol": "modules.length",
+            "meaning": "Read how many elements the array contains. Do not add parentheses: length is a property in this use."
+          },
+          {
+            "symbol": "for (const moduleName of modules) { ... }",
+            "meaning": "Visit each value in modules one at a time. On each iteration, moduleName temporarily refers to the current array element."
+          },
+          {
+            "symbol": "of",
+            "meaning": "Inside for...of, of means take values from this iterable collection one by one. This lesson uses it with arrays."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Repeat with while",
+            "explanation": "Begin with a counter you can trace by hand. The loop prints 1, 2, and 3 because counter changes after each iteration and eventually makes counter <= 3 false.",
+            "code": "let counter = 1;\n\nwhile (counter <= 3) {\n  console.log(counter);\n  counter = counter + 1;\n}"
+          },
+          {
+            "title": "Step 2 — Put a counted loop on one line",
+            "explanation": "A for loop keeps the counter setup, continue condition, and update together. Read the three pieces from left to right before looking at the body.",
+            "code": "for (let i = 0; i < 3; i++) {\n  console.log(i);\n}"
+          },
+          {
+            "title": "Step 3 — Create an array",
+            "explanation": "Square brackets create the array. The commas separate three string elements, and their order is preserved.",
+            "code": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];\nconsole.log(modules);"
+          },
+          {
+            "title": "Step 4 — Read values by index",
+            "explanation": "Index 0 is the first element and index 2 is the third. The number inside square brackets chooses a position; it is not the number of the item in ordinary human counting.",
+            "code": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];\n\nconsole.log(modules[0]);\nconsole.log(modules[2]);"
+          },
+          {
+            "title": "Step 5 — Ask how many elements exist",
+            "explanation": "length reports the number of elements. A three-element array has length 3 even though its final valid index is 2.",
+            "code": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];\nconsole.log(modules.length);"
+          },
+          {
+            "title": "Step 6 — Visit every value with for...of",
+            "explanation": "When you only need each array value, for...of avoids managing an index manually. moduleName becomes each string in turn.",
+            "code": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}"
+          },
+          {
+            "title": "Step 7 — Connect indexes with length",
+            "explanation": "This version uses a counter as an index. i starts at 0 and stays smaller than modules.length, so modules[i] visits every valid position without going one step too far.",
+            "code": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];\n\nfor (let i = 0; i < modules.length; i++) {\n  console.log(modules[i]);\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];",
+            "meaning": "Create one array containing three ordered string elements."
+          },
+          {
+            "piece": "for (const moduleName of modules)",
+            "meaning": "Start a loop that takes each value from modules. moduleName is the temporary name for the current value."
+          },
+          {
+            "piece": "{ ... }",
+            "meaning": "The braces contain the statements that repeat once for each array element."
+          },
+          {
+            "piece": "console.log(moduleName);",
+            "meaning": "Display the current array value during this iteration."
+          }
+        ],
+        "computerSteps": [
+          "JavaScript creates the modules variable and stores one array containing three strings.",
+          "The for...of loop asks the array for its values in order.",
+          "On the first iteration, moduleName refers to \"HTML\", so that value is displayed.",
+          "On the second iteration, moduleName refers to \"CSS\".",
+          "On the third iteration, moduleName refers to \"JavaScript\".",
+          "After the final value has been processed, there are no more elements and the loop ends automatically.",
+          "A counter-based loop is different: it must rely on its condition and update to stop, which is why a missing update can cause an infinite loop."
+        ],
+        "guidedChanges": [
+          "Change the while loop's starting counter from 1 to 2. Predict the output before running it.",
+          "Change the for loop condition from i < 3 to i < 5 and predict how many numbers will be displayed.",
+          "Replace the array values with three game genres or three programming languages of your choice.",
+          "Print modules[1] and say which item you expect before running the code.",
+          "Add a fourth string to the array, then print modules.length and predict its new value.",
+          "Add a fourth value to the for...of example. Notice that the loop body does not need to change to handle the extra element.",
+          "In the indexed for loop, change i < modules.length to i <= modules.length and observe the extra undefined result. Restore < afterward and explain the off-by-one mistake."
+        ],
+        "workedExampleIntro": "The final practice uses the clearest combination for this stage: create an array and use for...of to display every element. You do not need to manually track an index, call array methods, or write a function.",
+        "errorExamples": [
+          {
+            "mistake": "let counter = 1;\nwhile (counter <= 3) {\n  console.log(counter);\n}",
+            "explanation": "counter never changes, so counter <= 3 stays true forever. This creates an infinite loop and can flood the console or make the program appear stuck.",
+            "fix": "Update the counter inside the loop, for example counter = counter + 1;."
+          },
+          {
+            "mistake": "const modules = [\"HTML\" \"CSS\" \"JavaScript\"];",
+            "explanation": "Array elements need commas between them. Without the commas, JavaScript cannot understand where one value ends and the next begins.",
+            "fix": "Write [\"HTML\", \"CSS\", \"JavaScript\"]."
+          },
+          {
+            "mistake": "console.log(modules[3]);",
+            "explanation": "For a three-item array, the valid indexes are 0, 1, and 2. Index 3 is one position beyond the final element, so JavaScript produces undefined.",
+            "fix": "Use an existing index such as modules[2], or use a loop when you want every element."
+          },
+          {
+            "mistake": "console.log(modules.length());",
+            "explanation": "length is a property in this use, not a function. Adding parentheses tries to call the number as though it were a function.",
+            "fix": "Write console.log(modules.length);."
+          },
+          {
+            "mistake": "for const moduleName of modules {\n  console.log(moduleName);\n}",
+            "explanation": "The for...of syntax taught here requires parentheses around const moduleName of modules.",
+            "fix": "Write for (const moduleName of modules) { ... }."
+          },
+          {
+            "mistake": "for (const moduleName in modules) {\n  console.log(moduleName);\n}",
+            "explanation": "in and of have different jobs in JavaScript. For the array-value loop taught here, for...of gives you the values, while for...in would give property/index names instead.",
+            "fix": "Use for (const moduleName of modules) when you want each array value."
+          },
+          {
+            "mistake": "for (let i = 0; i <= modules.length; i++) {\n  console.log(modules[i]);\n}",
+            "explanation": "<= allows i to become exactly modules.length. That position is already one past the final valid index, producing an extra undefined value.",
+            "fix": "Use i < modules.length so the final index is length - 1."
+          }
+        ],
+        "recap": [
+          "A loop repeats a block of code; one pass is an iteration.",
+          "A loop needs a way to stop. Counter-based loops usually change a counter until the condition becomes false.",
+          "while is useful when repetition is driven by a condition; for keeps setup, condition, and update together.",
+          "An array stores ordered values inside square brackets, separated by commas.",
+          "Array indexes begin at 0, so a three-item array uses indexes 0, 1, and 2.",
+          "array.length reports how many elements are in the array and does not use parentheses.",
+          "for...of is a clear way to visit each array value without manually managing an index.",
+          "An off-by-one condition such as i <= array.length can reach one position beyond the array.",
+          "Array methods, callbacks, higher-order functions, and advanced iteration techniques are intentionally deferred until later."
+        ]
+      },
+      "example": "const modules = [\"HTML\", \"CSS\", \"JavaScript\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}",
+      "challenge": "Create an array containing at least three string values. Use for...of to display every value with console.log.",
+      "practiceDetails": "Use only syntax taught through JavaScript Intern Module 3. The intended solution is an array literal plus a clear for...of loop. You do not need push, pop, map, forEach, callbacks, functions, objects, DOM APIs, or events.",
+      "hint": "Create something like const modules = [\"HTML\", \"CSS\", \"JavaScript\"]; then write for (const moduleName of modules) { console.log(moduleName); }.",
+      "solution": "const modules = [\"HTML\", \"CSS\", \"JavaScript\", \"C#\"];\n\nfor (const moduleName of modules) {\n  console.log(moduleName);\n}",
       "groups": [
+        [
+          "const "
+        ],
         [
           "["
         ],
         [
-          "for ("
+          " of "
         ],
         [
           "console.log"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "const "
+          ],
+          [
+            "["
+          ],
+          [
+            " of "
+          ],
+          [
+            "console.log"
+          ]
+        ],
+        "practiceMinLength": 65,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create an array with at least three string values and use for...of to display every value with console.log.",
+            "groups": [
+              [
+                "["
+              ],
+              [
+                " of "
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 55
+          },
+          {
+            "prompt": "Write a for loop with a numeric counter that starts at 0, repeats while the counter is less than 3, increases the counter with ++, and displays the counter.",
+            "groups": [
+              [
+                "for ("
+              ],
+              [
+                "< 3",
+                "<3"
+              ],
+              [
+                "++"
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 45
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "["
+            ],
+            [
+              " of "
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "2": [
+            [
+              "for ("
+            ],
+            [
+              "++"
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "3": [
+            [
+              "["
+            ],
+            [
+              ".length"
+            ],
+            [
+              "for ("
+            ],
+            [
+              "console.log"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create an array of at least three values and use for...of to display each value.",
+          "2": "Exam 2: Write a small counted for loop that starts at 0, increases its counter, and displays each counter value.",
+          "3": "Exam 3: Create an array and use its .length in a counted for-loop condition so every valid array element is displayed without going one position too far."
+        }
+      },
       "references": [
         {
           "title": "MDN — JavaScript Guide",
@@ -138,30 +1127,282 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "A counter-based loop must make progress toward its stopping condition. If the controlling value never changes, the loop may never end.",
+        "Array indexes start at 0. The first element is [0], not [1].",
+        "A three-item array has length 3 but its final valid index is 2.",
+        "Use array.length without parentheses. It is a property in this lesson, not a function call.",
+        "Use for...of when you want array values directly. Do not swap in for...in and expect the same result.",
+        "Use i < array.length for normal zero-based indexed traversal. i <= array.length goes one position too far.",
+        "Do not jump ahead to map, forEach, callbacks, or other compact array techniques before basic loops and indexes make sense."
+      ],
+      "mastery": [
+        "Explain what a loop and an iteration are in your own words.",
+        "Trace a small while loop and identify the starting value, continue condition, body, and update.",
+        "Read a basic for loop and explain the three expressions inside its parentheses.",
+        "Create an array literal and explain the purpose of square brackets and commas.",
+        "Identify the first, second, and third elements of an array using indexes 0, 1, and 2.",
+        "Explain why an array can have length 3 while its final valid index is 2.",
+        "Use for...of to display every value in an array.",
+        "Recognize an infinite-loop mistake and an off-by-one array mistake.",
+        "Choose for...of instead of manual indexing when you only need each array value."
+      ]
     },
     {
       "title": "Functions, Parameters & Scope",
-      "summary": "Package behavior into reusable functions, pass data through parameters, return results, and reason about where names are visible.",
+      "summary": "Build reusable pieces of JavaScript one step at a time: declare a function, call it, pass values through parameters, return a result, and understand where local variable names can be used.",
       "concepts": [
         {
-          "name": "Function contracts",
-          "explanation": "Parameters describe inputs and return describes the output. A focused function should have a clear purpose that can be described in one sentence."
+          "name": "Declare a function, then call it",
+          "explanation": "A function groups instructions under a name so you can run those instructions when you need them. Writing the function creates the reusable instructions; calling the function tells JavaScript to run them. In the Academy's beginner examples, define the function first and call it afterward so the execution order is easy to follow."
         },
         {
-          "name": "Function forms",
-          "explanation": "Function declarations, function expressions, and arrow functions all create callable values, but they differ in details such as hoisting and this behavior."
+          "name": "Parameters, arguments & returned values",
+          "explanation": "Parameters are names written in a function declaration to receive input. Arguments are the actual values supplied when the function is called. return sends a value back to the code that called the function, so the result can be stored in a variable or used somewhere else."
         },
         {
-          "name": "Scope",
-          "explanation": "let and const are block scoped. Names declared inside a function are normally unavailable outside it; inner scopes can access names from outer scopes."
+          "name": "Scope & local variables",
+          "explanation": "Scope describes where a name can be used. A variable declared inside a function is local to that function and cannot normally be used outside it. Code inside a function can also read names from an outer scope. At Intern level, focus on this basic inside-versus-outside rule; closures and advanced scope behaviour come later."
         }
       ],
-      "example": "function calculateAverage(a, b) {\n  const total = a + b;\n  return total / 2;\n}\n\nconst result = calculateAverage(80, 92);\nconsole.log(result);",
-      "challenge": "Write a function that accepts two numbers, returns a calculated result, and log the returned value.",
-      "hint": "Put the reusable calculation inside the function and use return rather than logging only inside the function.",
-      "solution": "function calculateAverage(a, b) {\n  const total = a + b;\n  return total / 2;\n}\n\nconst result = calculateAverage(80, 92);\nconsole.log(result);",
+      "starter": "function sayHello() {\n  console.log(\"Hello!\");\n}\n\nsayHello();",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain why functions exist, declare and call a simple function, distinguish parameters from arguments, return a value, store a returned value, and explain why a variable created inside a function is not available everywhere in the program.",
+        "whyItMatters": "Without functions, useful instructions would have to be copied every time you needed them. Functions let you give a task a name, reuse it, send different values into it, and receive a result back. Games, webpages, tools, and applications are all built from many small pieces of behaviour like this.",
+        "terms": [
+          {
+            "term": "Function",
+            "meaning": "A named reusable group of instructions that can be run when it is called."
+          },
+          {
+            "term": "Declare",
+            "meaning": "Create something in your source code. Declaring a function gives its instructions a name and defines what should happen when it runs."
+          },
+          {
+            "term": "Call",
+            "meaning": "Tell JavaScript to run a function. A call uses the function name followed by parentheses, such as sayHello()."
+          },
+          {
+            "term": "Function body",
+            "meaning": "The instructions between the function's curly braces. These instructions run when the function is called."
+          },
+          {
+            "term": "Parameter",
+            "meaning": "A name inside a function declaration that receives an input value when the function is called."
+          },
+          {
+            "term": "Argument",
+            "meaning": "The actual value supplied in a function call. In greet(\"Nova\"), \"Nova\" is the argument."
+          },
+          {
+            "term": "Return value",
+            "meaning": "A value sent back from a function to the code that called it."
+          },
+          {
+            "term": "Caller",
+            "meaning": "The part of your program that calls a function and may receive its returned value."
+          },
+          {
+            "term": "Scope",
+            "meaning": "The region of code in which a particular name is available to use."
+          },
+          {
+            "term": "Local variable",
+            "meaning": "A variable declared inside a function. Its name is local to that function."
+          },
+          {
+            "term": "Outer scope",
+            "meaning": "Code surrounding a function. A simple function can read names declared in an accessible outer scope."
+          },
+          {
+            "term": "undefined",
+            "meaning": "A special JavaScript value meaning that no useful value was provided or produced. A function with no explicit return statement returns undefined."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "function",
+            "meaning": "The keyword used here to declare a normal JavaScript function."
+          },
+          {
+            "symbol": "function sayHello() { ... }",
+            "meaning": "Declares a function named sayHello. The parentheses contain its parameter list; the curly braces contain its body."
+          },
+          {
+            "symbol": "sayHello();",
+            "meaning": "Calls sayHello. The empty parentheses mean this call supplies no arguments."
+          },
+          {
+            "symbol": "function greet(name)",
+            "meaning": "Declares one parameter named name. Each time greet is called, the supplied argument becomes the value of name during that call."
+          },
+          {
+            "symbol": "greet(\"Nova\");",
+            "meaning": "Calls greet and supplies the string \"Nova\" as an argument."
+          },
+          {
+            "symbol": "function add(first, second)",
+            "meaning": "Declares two parameters. A comma separates parameter names just as commas separate multiple arguments in a call."
+          },
+          {
+            "symbol": "return",
+            "meaning": "Stops the current function and sends a value back to its caller. In this lesson, use it when a function calculates a result that other code needs."
+          },
+          {
+            "symbol": "const answer = add(5, 3);",
+            "meaning": "Calls add with two arguments, receives the returned value, and stores that value in answer."
+          },
+          {
+            "symbol": "{ }",
+            "meaning": "Curly braces mark the function body. Names declared with const or let inside that body are local to that function."
+          },
+          {
+            "symbol": ",",
+            "meaning": "Separates multiple parameters in a declaration and multiple arguments in a call."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Declare and call one simple function",
+            "explanation": "Start with a function that receives no input and returns no useful value. Read the declaration first, then the call at the bottom. The message appears only when sayHello() runs.",
+            "code": "function sayHello() {\n  console.log(\"Hello!\");\n}\n\nsayHello();"
+          },
+          {
+            "title": "Step 2 — Call the same function more than once",
+            "explanation": "A function is reusable. You do not copy the console.log statement three times; you call the named function three times.",
+            "code": "function sayHello() {\n  console.log(\"Hello!\");\n}\n\nsayHello();\nsayHello();\nsayHello();"
+          },
+          {
+            "title": "Step 3 — Receive one value with a parameter",
+            "explanation": "name is a parameter. When greet is called with \"Nova\", that argument becomes the value of name for that call.",
+            "code": "function greet(name) {\n  console.log(name);\n}\n\ngreet(\"Nova\");"
+          },
+          {
+            "title": "Step 4 — Supply different arguments",
+            "explanation": "The same function can work with different values. Each call supplies its own argument.",
+            "code": "function greet(name) {\n  console.log(name);\n}\n\ngreet(\"Nova\");\ngreet(\"Kai\");"
+          },
+          {
+            "title": "Step 5 — Use more than one parameter",
+            "explanation": "Parameters are separated by commas. The first argument goes to the first parameter and the second argument goes to the second parameter.",
+            "code": "function showScore(name, score) {\n  console.log(name);\n  console.log(score);\n}\n\nshowScore(\"Nova\", 84);"
+          },
+          {
+            "title": "Step 6 — Return a calculated value",
+            "explanation": "This function does not merely display the answer. return sends the calculated total back to the caller, and the caller stores it in answer.",
+            "code": "function add(first, second) {\n  const total = first + second;\n  return total;\n}\n\nconst answer = add(5, 3);\nconsole.log(answer);"
+          },
+          {
+            "title": "Step 7 — See what local scope means",
+            "explanation": "message is created inside showMessage, so it can be used inside that function. Do not try to use message outside the function; its name is local to the function body.",
+            "code": "function showMessage() {\n  const message = \"Inside the function\";\n  console.log(message);\n}\n\nshowMessage();"
+          },
+          {
+            "title": "Step 8 — Read a simple outer value from inside a function",
+            "explanation": "academyName is declared outside the function. The function can read that accessible outer value. This is enough scope knowledge for Intern; nested functions and closures are deliberately saved for later ranks.",
+            "code": "const academyName = \"Code Ascension Academy\";\n\nfunction showAcademy() {\n  console.log(academyName);\n}\n\nshowAcademy();"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "function calculateAverage(first, second)",
+            "meaning": "Declares calculateAverage with two input parameters named first and second."
+          },
+          {
+            "piece": "const total = first + second;",
+            "meaning": "Creates a local variable called total inside the function and stores the sum of the two parameter values."
+          },
+          {
+            "piece": "return total / 2;",
+            "meaning": "Calculates the average and sends that value back to the caller."
+          },
+          {
+            "piece": "const result = calculateAverage(80, 92);",
+            "meaning": "Calls the function with two number arguments and stores its returned value in result."
+          },
+          {
+            "piece": "console.log(result);",
+            "meaning": "Displays the returned result after the function call has finished."
+          }
+        ],
+        "computerSteps": [
+          "JavaScript reads the function declaration and creates a callable function named calculateAverage.",
+          "The function body does not perform its calculation merely because the declaration exists; the calculation happens when the function is called.",
+          "calculateAverage(80, 92) supplies 80 to first and 92 to second for this call.",
+          "Inside the function, total becomes 172. That local variable name exists only inside the function's scope.",
+          "return total / 2 sends 86 back to the caller and ends this function call.",
+          "The caller stores the returned value 86 in result.",
+          "console.log(result) displays 86. The local name total is not needed and is not available outside calculateAverage."
+        ],
+        "guidedChanges": [
+          "Change the text inside sayHello and call the function again. Confirm that changing the function body changes every call.",
+          "Call greet with your own name, then add a second greet call with another name. Watch the same parameter receive a different argument each time.",
+          "Change showScore(\"Nova\", 84) to different argument values and predict both output lines before running it.",
+          "Change add so it subtracts second from first. Keep return and confirm that the caller receives the new result.",
+          "Change calculateAverage(80, 92) to two other scores. Calculate the expected answer yourself, then run the code.",
+          "Inside showMessage, rename message to localMessage everywhere it is used. This reinforces that local variable names follow the same identifier rules learned earlier.",
+          "After you understand local scope, deliberately add console.log(message); after showMessage(); and read the ReferenceError. Then remove that line again."
+        ],
+        "workedExampleIntro": "The worked example combines only ideas already introduced: a normal function declaration, two parameters, a local const variable, arithmetic from Module 2, return, a function call with two arguments, a returned value stored in const, and console.log.",
+        "errorExamples": [
+          {
+            "mistake": "function say hello() { }",
+            "explanation": "Function names are identifiers. Spaces cannot appear inside one identifier, so JavaScript cannot parse say hello as a single function name.",
+            "fix": "Use a valid identifier such as function sayHello() { }."
+          },
+          {
+            "mistake": "function greet(name) { console.log(name); }\nGreet(\"Nova\");",
+            "explanation": "JavaScript is case-sensitive. greet and Greet are different identifiers, so Greet is not the function you declared.",
+            "fix": "Call greet(\"Nova\"); with the same capitalization as the declaration."
+          },
+          {
+            "mistake": "sayHello;",
+            "explanation": "This refers to the function value but does not call it, so the function body does not run and you see no greeting.",
+            "fix": "Use sayHello(); to call the function."
+          },
+          {
+            "mistake": "function showScore(name score) { }",
+            "explanation": "Two parameters need a comma between them. Without the comma, the parameter list is invalid syntax.",
+            "fix": "Write function showScore(name, score) { }."
+          },
+          {
+            "mistake": "function greet(name) { console.log(name); }\ngreet();",
+            "explanation": "JavaScript allows the call, but no argument was supplied for name, so name receives undefined. That is usually an unexpected result for this function.",
+            "fix": "Supply the required value, for example greet(\"Nova\");."
+          },
+          {
+            "mistake": "function add(first, second) {\n  const total = first + second;\n}\nconst answer = add(5, 3);\nconsole.log(answer);",
+            "explanation": "The function calculates total but never returns it. A JavaScript function with no explicit return value produces undefined for its caller.",
+            "fix": "Add return total; before the closing brace."
+          },
+          {
+            "mistake": "function showMessage() {\n  const message = \"Hello\";\n}\nconsole.log(message);",
+            "explanation": "message is local to showMessage. Code outside that function cannot use the local name, so this produces a ReferenceError.",
+            "fix": "Use message inside the function, or return a value that outside code can store and use."
+          },
+          {
+            "mistake": "return 10;",
+            "explanation": "return belongs inside a function body. At ordinary script level there is no current function to return from, so this is invalid.",
+            "fix": "Place return inside a function that needs to send a value back to its caller."
+          }
+        ],
+        "recap": [
+          "A function groups reusable instructions under a name.",
+          "Declaring a function defines it; calling the function runs its body.",
+          "Parameters are input names in the declaration; arguments are the actual values supplied by a call.",
+          "Multiple parameters and arguments are separated by commas and matched by position.",
+          "return sends a value back to the caller. Without an explicit returned value, a JavaScript function returns undefined.",
+          "A returned value can be stored in a variable and used after the function call finishes.",
+          "Scope describes where a name is available. Variables declared inside a function are local to that function.",
+          "A simple function can read accessible names from an outer scope, but advanced closure behaviour is intentionally deferred.",
+          "Arrow functions, function expressions, callbacks, hoisting details, this, and closures are not required in this Intern module."
+        ]
+      },
+      "example": "function calculateAverage(first, second) {\n  const total = first + second;\n  return total / 2;\n}\n\nconst result = calculateAverage(80, 92);\nconsole.log(result);",
+      "challenge": "Write a function named calculateTotal that accepts two number parameters, adds them, returns the result, then call it with two numbers and display the returned value with console.log.",
+      "practiceDetails": "Use only syntax taught through JavaScript Intern Module 4. The intended solution is a normal function declaration using the function keyword, two parameters, a returned result, a call with two arguments, a variable that stores the returned value, and console.log. You do not need arrow functions, function expressions, callbacks, closures, this, DOM APIs, or events.",
+      "hint": "Start with function calculateTotal(first, second) { ... }. Add the numbers inside the function, return the result, then call calculateTotal with two number arguments and console.log the returned value.",
+      "solution": "function calculateTotal(first, second) {\n  const total = first + second;\n  return total;\n}\n\nconst result = calculateTotal(40, 15);\nconsole.log(result);",
       "groups": [
         [
           "function "
@@ -173,6 +1414,95 @@
           "console.log"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "function calculateTotal"
+          ],
+          [
+            "return "
+          ],
+          [
+            "console.log"
+          ]
+        ],
+        "practiceMinLength": 95,
+        "testCodeQuestions": [
+          {
+            "prompt": "Declare a function named sayHello that displays a greeting with console.log, then call sayHello.",
+            "groups": [
+              [
+                "function sayHello"
+              ],
+              [
+                "console.log"
+              ],
+              [
+                "sayHello()"
+              ]
+            ],
+            "minLength": 55
+          },
+          {
+            "prompt": "Declare a function named add with two parameters. Return their sum, call add with two number arguments, store the returned value, and display it with console.log.",
+            "groups": [
+              [
+                "function add"
+              ],
+              [
+                "return "
+              ],
+              [
+                "add("
+              ],
+              [
+                "console.log"
+              ]
+            ],
+            "minLength": 90
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "function "
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "2": [
+            [
+              "function "
+            ],
+            [
+              "return "
+            ],
+            [
+              "console.log"
+            ]
+          ],
+          "3": [
+            [
+              "function "
+            ],
+            [
+              "const "
+            ],
+            [
+              "return "
+            ],
+            [
+              "console.log"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Declare a normal function with the function keyword that displays a message, then call it.",
+          "2": "Exam 2: Declare a function that accepts at least one parameter, returns a value based on that parameter, call the function with an argument, and display the returned value.",
+          "3": "Exam 3: Declare a function with two number parameters, create a local const value from them, return a calculated result, store the returned value after calling the function, and display it."
+        }
+      },
       "references": [
         {
           "title": "MDN — JavaScript Guide",
@@ -183,54 +1513,448 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Declaring a function and calling a function are different actions. A function body does not do useful work for your program until the function is called.",
+        "Function names and parameter names are identifiers, so they follow the same naming and case-sensitivity rules learned in Module 1.",
+        "Parameters belong in the declaration; arguments are the values supplied by a call. Do not use the terms as if they mean exactly the same thing.",
+        "Separate multiple parameters and arguments with commas and keep their order meaningful.",
+        "If a function is meant to produce a value for other code, forgetting return makes the caller receive undefined.",
+        "A variable declared inside a function is local to that function. Trying to use its name outside normally causes a ReferenceError.",
+        "Calling a function without a needed argument may give a parameter the value undefined instead of producing an immediate syntax error.",
+        "Do not jump ahead to arrow functions, callbacks, closures, hoisting details, or this before normal function declarations and simple scope feel natural."
+      ],
+      "mastery": [
+        "Explain the difference between declaring a function and calling it.",
+        "Declare and call a no-parameter function that displays a message.",
+        "Explain the difference between a parameter and an argument using your own example.",
+        "Declare a function with two parameters and call it with two arguments.",
+        "Write a function that returns a calculated value and store that returned value in a variable.",
+        "Explain what undefined means when a function does not return a useful value.",
+        "Identify which variables in a small example are local to a function.",
+        "Recognize a case-sensitive function-name mistake, a missing comma, a forgotten call, and a missing return.",
+        "Complete the practice without using arrow functions, callbacks, closures, DOM APIs, or other syntax that has not yet been taught."
+      ]
     },
     {
       "title": "DOM Selection & Events",
-      "summary": "Connect JavaScript to HTML by selecting elements, changing content/classes, and responding to user events.",
+      "summary": "Connect JavaScript to a webpage carefully: understand what the DOM is, select one HTML element, change its text, and respond to a click using a normal function you already know how to write.",
       "concepts": [
         {
-          "name": "Selecting elements",
-          "explanation": "querySelector returns the first matching element; querySelectorAll returns a static NodeList of matches. Check for null when a selector may not find anything."
+          "name": "The browser turns HTML into the DOM",
+          "explanation": "When a browser loads HTML, it creates an in-memory representation of the page called the Document Object Model, or DOM. JavaScript can use the DOM to find page elements and change what the user sees without rewriting the original HTML file by hand."
         },
         {
-          "name": "Updating the DOM",
-          "explanation": "textContent changes text safely, classList manages classes, and createElement/append can build new nodes without composing raw HTML strings."
+          "name": "Select an element before using it",
+          "explanation": "document represents the currently loaded webpage. document.querySelector(...) asks the browser for the first element matching a selector. A selector such as #demo-status means 'the element whose id is demo-status'. The result can be stored in a variable so later statements can use that element."
         },
         {
-          "name": "Events",
-          "explanation": "addEventListener registers behavior without overwriting other listeners. Event objects describe what happened and which target was involved."
+          "name": "Events let the page react to the user",
+          "explanation": "An event is something that happens, such as a button click. addEventListener connects an event name to a function. The browser waits for the event and then calls that function for you. At Intern level, use a normal named function as the event handler so the relationship stays easy to see."
         }
       ],
-      "example": "const button = document.querySelector(\"#complete-button\");\nconst status = document.querySelector(\"#status\");\n\nbutton?.addEventListener(\"click\", () => {\n  status.textContent = \"Lesson complete\";\n  status.classList.add(\"complete\");\n});",
-      "challenge": "Select a button and another element, then update the second element when the button is clicked.",
-      "hint": "Use querySelector twice, then attach a click listener with addEventListener.",
-      "solution": "const button = document.querySelector(\"#complete-button\");\nconst status = document.querySelector(\"#status\");\n\nbutton?.addEventListener(\"click\", () => {\n  status.textContent = \"Lesson complete\";\n  status.classList.add(\"complete\");\n});",
+      "starter": "const button = document.querySelector(\"#demo-button\");\nconst status = document.querySelector(\"#demo-status\");\n\nfunction showMessage() {\n  // Change the status text here.\n}\n\nbutton.addEventListener(\"click\", showMessage);",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what the DOM is, use document.querySelector to find one HTML element, understand what a selector string such as #demo-status means, read and change an element's textContent, connect a click event with addEventListener, and recognize what null means when an element cannot be found.",
+        "whyItMatters": "JavaScript becomes interactive when it can respond to the page and the person using it. Buttons, menus, score displays, validation messages, game HUDs, settings panels, and many other interfaces use the same basic pattern: find an element, wait for an event, then update something.",
+        "terms": [
+          {
+            "term": "Browser",
+            "meaning": "A program such as Edge, Chrome, or Firefox that reads web files and displays webpages."
+          },
+          {
+            "term": "DOM",
+            "meaning": "Document Object Model. The browser's in-memory representation of the loaded HTML page that JavaScript can read and change."
+          },
+          {
+            "term": "Document",
+            "meaning": "The webpage currently loaded in the browser. JavaScript accesses it through the built-in document object."
+          },
+          {
+            "term": "Element",
+            "meaning": "One item in the webpage, such as a button, paragraph, heading, or input."
+          },
+          {
+            "term": "Selector",
+            "meaning": "A pattern used to identify an element. In this lesson, #demo-button means an element with id=\"demo-button\"."
+          },
+          {
+            "term": "Reference",
+            "meaning": "A value that lets your JavaScript refer to the selected DOM element later. We store that value in a variable such as button or status."
+          },
+          {
+            "term": "Property",
+            "meaning": "A value that belongs to an object. textContent is a property that represents an element's text."
+          },
+          {
+            "term": "Event",
+            "meaning": "Something that happens in the browser, such as a click."
+          },
+          {
+            "term": "Event listener",
+            "meaning": "A connection that tells the browser which function to run when a particular event happens."
+          },
+          {
+            "term": "Event handler",
+            "meaning": "The function that runs in response to an event. In this lesson it is an ordinary named function, using what you learned in Module 4."
+          },
+          {
+            "term": "null",
+            "meaning": "A special JavaScript value that can mean 'no object was found'. querySelector returns null when no element matches the selector."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "document",
+            "meaning": "The browser-provided object representing the current webpage."
+          },
+          {
+            "symbol": "document.querySelector(\"#demo-status\")",
+            "meaning": "Ask the document for the first element matching the selector string #demo-status."
+          },
+          {
+            "symbol": "#demo-status",
+            "meaning": "Selector syntax meaning 'the element whose id is demo-status'. The # is inside a string; here it is selector syntax, not a JavaScript operator."
+          },
+          {
+            "symbol": "status.textContent",
+            "meaning": "Read the current text stored in the selected status element's textContent property."
+          },
+          {
+            "symbol": "status.textContent = \"Ready\";",
+            "meaning": "Assign new text to the selected element so the browser updates what the page displays."
+          },
+          {
+            "symbol": "button.addEventListener(\"click\", showMessage);",
+            "meaning": "Tell the browser to run the existing showMessage function whenever button receives a click event."
+          },
+          {
+            "symbol": "\"click\"",
+            "meaning": "The event name. It is written as a string because addEventListener is being told which kind of event to listen for."
+          },
+          {
+            "symbol": "showMessage",
+            "meaning": "The function is passed by name without parentheses. The browser should call it later when the click happens; writing showMessage() here would call it immediately instead."
+          },
+          {
+            "symbol": "null",
+            "meaning": "The value querySelector gives back when it cannot find a matching element."
+          },
+          {
+            "symbol": "!==",
+            "meaning": "Strict 'not equal' comparison, introduced with comparisons in Module 2. It can be used to check that a selection is not null before using it."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Meet document",
+            "explanation": "document is provided by the browser. You do not create it yourself. It represents the webpage that JavaScript is currently connected to.",
+            "code": "console.log(document);"
+          },
+          {
+            "title": "Step 2 — Select one element",
+            "explanation": "querySelector receives a selector string and returns the first matching element. The Academy DOM preview provides an element whose id is demo-status.",
+            "code": "const status = document.querySelector(\"#demo-status\");\nconsole.log(status);"
+          },
+          {
+            "title": "Step 3 — Read an element's text",
+            "explanation": "After the element reference is stored in status, dot notation lets you access the textContent property that belongs to that element.",
+            "code": "const status = document.querySelector(\"#demo-status\");\nconsole.log(status.textContent);"
+          },
+          {
+            "title": "Step 4 — Change what the page displays",
+            "explanation": "Assignment works here just like it did with variables. The difference is that you are assigning a new value to the element's textContent property, so the visible page changes.",
+            "code": "const status = document.querySelector(\"#demo-status\");\nstatus.textContent = \"JavaScript changed this text.\";"
+          },
+          {
+            "title": "Step 5 — Prepare a normal event-handler function",
+            "explanation": "This is the same kind of normal function declaration you learned in Module 4. Nothing runs yet merely because the function exists.",
+            "code": "function showMessage() {\n  console.log(\"The button was clicked.\");\n}"
+          },
+          {
+            "title": "Step 6 — Listen for a click",
+            "explanation": "Select the button, then give addEventListener two arguments: the event name \"click\" and the function that should run later. Notice that showMessage has no parentheses here.",
+            "code": "const button = document.querySelector(\"#demo-button\");\n\nfunction showMessage() {\n  console.log(\"The button was clicked.\");\n}\n\nbutton.addEventListener(\"click\", showMessage);"
+          },
+          {
+            "title": "Step 7 — Let the click update another element",
+            "explanation": "Now combine two selections with the named function. When the browser receives the click, it calls showMessage, and showMessage changes the status element's text.",
+            "code": "const button = document.querySelector(\"#demo-button\");\nconst status = document.querySelector(\"#demo-status\");\n\nfunction showMessage() {\n  status.textContent = \"Button clicked!\";\n}\n\nbutton.addEventListener(\"click\", showMessage);"
+          },
+          {
+            "title": "Step 8 — Understand a missing selection",
+            "explanation": "If no element matches, querySelector returns null. The Academy preview does not contain #does-not-exist, so this example prints null rather than an element.",
+            "code": "const missing = document.querySelector(\"#does-not-exist\");\nconsole.log(missing);"
+          },
+          {
+            "title": "Step 9 — Guard code when an element might be missing",
+            "explanation": "On a real page, you may not be certain the expected elements exist. Comparisons and && from Module 2 can protect the event wiring so the code only uses the selections when both were found.",
+            "code": "const button = document.querySelector(\"#demo-button\");\nconst status = document.querySelector(\"#demo-status\");\n\nfunction showMessage() {\n  status.textContent = \"Button clicked safely!\";\n}\n\nif (button !== null && status !== null) {\n  button.addEventListener(\"click\", showMessage);\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "const button = document.querySelector(\"#demo-button\");",
+            "meaning": "Ask the current document for the element whose id is demo-button and store the returned element reference in button."
+          },
+          {
+            "piece": "const status = document.querySelector(\"#demo-status\");",
+            "meaning": "Select the element whose id is demo-status and store its reference in status."
+          },
+          {
+            "piece": "function showMessage() { ... }",
+            "meaning": "Declare the normal function that should run later when the click happens."
+          },
+          {
+            "piece": "status.textContent = \"Button clicked!\";",
+            "meaning": "Change the selected status element's displayed text when showMessage runs."
+          },
+          {
+            "piece": "button.addEventListener(\"click\", showMessage);",
+            "meaning": "Register showMessage as the function the browser should call when this button is clicked."
+          },
+          {
+            "piece": "showMessage (without parentheses)",
+            "meaning": "Pass the function itself to the browser for later. Do not call it immediately while registering the listener."
+          }
+        ],
+        "computerSteps": [
+          "The browser has already loaded the Academy's small DOM practice page and created its DOM.",
+          "JavaScript asks document.querySelector for #demo-button. The browser searches the DOM and returns that button element.",
+          "JavaScript asks for #demo-status and stores the returned status element as well.",
+          "JavaScript reads the function declaration for showMessage. The function body is ready but has not run because the button has not been clicked yet.",
+          "addEventListener tells the browser to remember: when this button receives a click, call showMessage.",
+          "The script finishes its initial setup and waits. Nothing needs to loop while the browser waits for the user.",
+          "When you click the button, the browser calls showMessage.",
+          "showMessage assigns a new string to status.textContent, and the browser updates the visible text on the page."
+        ],
+        "guidedChanges": [
+          "Run the DOM preview and click the provided demo button. Confirm that the status text changes only after the click.",
+          "Change the string inside showMessage to your own message. Predict the new text before clicking the button.",
+          "Change #demo-status to #does-not-exist and run again. Read the resulting error or null behaviour, then restore the correct selector.",
+          "Temporarily change \"click\" to \"dblclick\". The browser now waits for a double-click instead. Restore \"click\" afterward.",
+          "Temporarily write showMessage() instead of showMessage in addEventListener. Observe that the function runs immediately during setup and the listener does not receive the function in the intended way. Restore the version without parentheses.",
+          "Add the null guard shown in Step 9 and confirm the working preview still behaves the same when both elements exist."
+        ],
+        "workedExampleIntro": "The worked example now combines only previously introduced pieces: const variables from Module 1, a normal function from Module 4, dot property access, two DOM selections, textContent assignment, and a click listener. The Academy opens this code in a small isolated DOM preview containing #demo-button and #demo-status so your experiment cannot accidentally modify the Academy interface itself.",
+        "errorExamples": [
+          {
+            "mistake": "document.queryselector(\"#demo-button\")",
+            "explanation": "JavaScript is case-sensitive. queryselector and querySelector are different names, and document does not provide the lowercase-s version.",
+            "fix": "Write document.querySelector(\"#demo-button\")."
+          },
+          {
+            "mistake": "document.querySelector(#demo-button)",
+            "explanation": "The selector must be a string. Without quotation marks, #demo-button is not valid JavaScript source code.",
+            "fix": "Write document.querySelector(\"#demo-button\")."
+          },
+          {
+            "mistake": "document.querySelector(\"demo-button\")",
+            "explanation": "Without #, the selector asks for an HTML element named demo-button rather than an element with that id. The preview therefore will not find the intended button.",
+            "fix": "Use the id selector \"#demo-button\"."
+          },
+          {
+            "mistake": "status.textcontent = \"Done\";",
+            "explanation": "Property names are case-sensitive. textcontent is not the same property as textContent.",
+            "fix": "Write status.textContent = \"Done\";."
+          },
+          {
+            "mistake": "button.addEventListener(click, showMessage);",
+            "explanation": "The event name click must be a string here. Without quotation marks, JavaScript tries to find a variable named click.",
+            "fix": "Write button.addEventListener(\"click\", showMessage);."
+          },
+          {
+            "mistake": "button.addEventListener(\"click\", showMessage());",
+            "explanation": "showMessage() calls the function immediately and passes its returned value to addEventListener. The browser needs the function itself so it can call it later when the event happens.",
+            "fix": "Pass showMessage without parentheses."
+          },
+          {
+            "mistake": "const button = document.querySelector(\"#missing\");\nbutton.addEventListener(\"click\", showMessage);",
+            "explanation": "If #missing does not exist, button is null. null has no addEventListener method, so trying to use it produces a runtime error.",
+            "fix": "Use the correct selector or check that button !== null before using it."
+          },
+          {
+            "mistake": "status.textContent(\"Done\");",
+            "explanation": "textContent is a property, not a function. Parentheses try to call it like a function.",
+            "fix": "Assign to the property: status.textContent = \"Done\";."
+          }
+        ],
+        "recap": [
+          "The browser turns loaded HTML into the DOM, which JavaScript can read and change.",
+          "document represents the current webpage in browser JavaScript.",
+          "querySelector accepts a selector string and returns the first matching element or null when nothing matches.",
+          "An id selector starts with #, so #demo-status means the element whose id is demo-status.",
+          "textContent is an element property. Assigning a new string to it updates the element's displayed text.",
+          "An event is something that happens in the browser, such as a click.",
+          "addEventListener connects an event name to a function that the browser should call later.",
+          "Passing showMessage without () gives the browser the function for later; showMessage() would call it immediately.",
+          "A null check is useful when a selector might fail to find an element.",
+          "querySelectorAll, classList, createElement, forms, event objects, anonymous callbacks, arrow functions, and larger state/rendering patterns are intentionally deferred until later modules/ranks."
+        ]
+      },
+      "example": "const button = document.querySelector(\"#demo-button\");\nconst status = document.querySelector(\"#demo-status\");\n\nfunction showMessage() {\n  status.textContent = \"Button clicked!\";\n}\n\nbutton.addEventListener(\"click\", showMessage);",
+      "challenge": "In the Academy DOM preview, select #demo-button and #demo-status. Declare a normal function named showMessage that changes the status element's textContent, then register showMessage for the button's click event with addEventListener.",
+      "practiceDetails": "Use only syntax taught through JavaScript Intern Module 5. The Academy DOM preview already contains #demo-button and #demo-status. Use querySelector, a normal named function, textContent assignment, and addEventListener. You do not need arrow functions, optional chaining, querySelectorAll, classList, createElement, forms, or an event object.",
+      "hint": "Select both elements with document.querySelector. Write function showMessage() { ... } and assign a string to status.textContent inside it. Finally use button.addEventListener(\"click\", showMessage); — notice there are no parentheses after showMessage in the listener.",
+      "solution": "const button = document.querySelector(\"#demo-button\");\nconst status = document.querySelector(\"#demo-status\");\n\nfunction showMessage() {\n  status.textContent = \"Button clicked!\";\n}\n\nbutton.addEventListener(\"click\", showMessage);",
       "groups": [
         [
           "querySelector"
         ],
         [
-          "addEventListener"
+          "textContent"
         ],
         [
-          "textContent",
-          "classList"
+          "addEventListener"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "querySelector"
+          ],
+          [
+            "#demo-button"
+          ],
+          [
+            "#demo-status"
+          ],
+          [
+            "function showMessage"
+          ],
+          [
+            "textContent"
+          ],
+          [
+            "addEventListener"
+          ],
+          [
+            "click"
+          ]
+        ],
+        "practiceMinLength": 145,
+        "testCodeQuestions": [
+          {
+            "prompt": "Select the element with id demo-status using document.querySelector, then change its textContent to a new message.",
+            "groups": [
+              [
+                "querySelector"
+              ],
+              [
+                "#demo-status"
+              ],
+              [
+                "textContent"
+              ]
+            ],
+            "minLength": 70
+          },
+          {
+            "prompt": "Select #demo-button and #demo-status. Declare a normal function named handleClick that changes the status textContent, then register handleClick for the button's click event with addEventListener.",
+            "groups": [
+              [
+                "querySelector"
+              ],
+              [
+                "#demo-button"
+              ],
+              [
+                "#demo-status"
+              ],
+              [
+                "function handleClick"
+              ],
+              [
+                "textContent"
+              ],
+              [
+                "addEventListener"
+              ],
+              [
+                "click"
+              ]
+            ],
+            "minLength": 150
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "querySelector"
+            ],
+            [
+              "textContent"
+            ]
+          ],
+          "2": [
+            [
+              "querySelector"
+            ],
+            [
+              "function "
+            ],
+            [
+              "addEventListener"
+            ],
+            [
+              "click"
+            ]
+          ],
+          "3": [
+            [
+              "querySelector"
+            ],
+            [
+              "function "
+            ],
+            [
+              "textContent"
+            ],
+            [
+              "addEventListener"
+            ],
+            [
+              "click"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Select a page element by id with document.querySelector and change that element's textContent.",
+          "2": "Exam 2: Select a button, declare a normal named function, and register that function for the button's click event with addEventListener.",
+          "3": "Exam 3: Select a button and a status element, declare a normal named function that changes the status textContent, and register that function for the button's click event."
+        }
+      },
       "references": [
         {
-          "title": "MDN — JavaScript Guide",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+          "title": "MDN — Document.querySelector()",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"
         },
         {
-          "title": "MDN — JavaScript reference",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference"
+          "title": "MDN — EventTarget.addEventListener()",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"
+        },
+        {
+          "title": "MDN — Node.textContent",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Selectors are strings. Keep the quotation marks around #demo-button and #demo-status.",
+        "JavaScript and DOM property/method names are case-sensitive: querySelector and textContent must use the correct capitalization.",
+        "Pass the event-handler function to addEventListener without calling it immediately: showMessage, not showMessage().",
+        "querySelector can return null. When an element is not guaranteed to exist, check the result before using its properties or methods."
+      ],
+      "mastery": [
+        "Explain the DOM in your own words without saying only 'it is HTML'.",
+        "Explain what document represents in browser JavaScript.",
+        "Explain what # means inside the selector string #demo-status.",
+        "Select one element with querySelector and store the returned reference in a const variable.",
+        "Read and change an element's textContent.",
+        "Explain the difference between an event and an event-handler function.",
+        "Register a normal named function for a click with addEventListener.",
+        "Explain why the function name has no parentheses when it is passed to addEventListener.",
+        "Explain what null means when querySelector cannot find a matching element.",
+        "Complete the practice without using optional chaining, arrow functions, or DOM features that have not yet been taught."
+      ]
     }
   ]
 }

@@ -4,25 +4,248 @@
   "topics": [
     {
       "title": "Program Structure, Variables & Types",
-      "summary": "Learn how a C# program is organized and how the compiler uses types to catch many mistakes before the program runs.",
+      "summary": "Start from zero: learn what C# code is, what compiling and running mean, how statements and names work, and how variables store string, number, and true/false values.",
       "concepts": [
         {
-          "name": "Strong typing",
-          "explanation": "Every expression has a type. The compiler checks assignments, method calls, operators, and conversions so incompatible operations can be caught at compile time."
+          "name": "Source code, compiling, and running",
+          "explanation": "Source code is the text you write. C# source code is checked by a compiler before it runs. Compiling means checking and translating the code into a form .NET can execute. Running means the program is actually executing its instructions."
         },
         {
-          "name": "Built-in types",
-          "explanation": "Common types include int, long, float, double, decimal, bool, char, string, and object. Choose a type based on the data and operations you need, not only on size."
+          "name": "Statements and identifiers",
+          "explanation": "A statement is an instruction in your program. Many simple C# statements end with a semicolon (;). An identifier is a name you give to something such as a variable. C# identifiers cannot contain spaces, and C# is case-sensitive, so score, Score, and SCORE are three different names."
         },
         {
-          "name": "Variables and constants",
-          "explanation": "Declare local variables with an explicit type or var when the initializer makes the type clear. const is for compile-time constants; readonly is a separate field concept learned later."
+          "name": "Variables, values, and types",
+          "explanation": "A variable is a named place where your program keeps a value. The type describes what kind of value may be stored. In this lesson you use string for text, int for whole numbers, double for decimal numbers, and bool for true/false values."
         }
       ],
-      "example": "string learnerName = \"Nova\";\nint score = 82;\nbool passed = score >= 80;\nvar nextScore = 91;\n\nConsole.WriteLine($\"{learnerName}: {score} - Passed: {passed}\");\nConsole.WriteLine(nextScore.GetType().Name);",
-      "challenge": "Declare a string, an int, and a bool, calculate whether the score passes 80, and print the values.",
-      "hint": "C# statements normally end with semicolons. Keep the comparison result in a bool variable.",
-      "solution": "string learnerName = \"Nova\";\nint score = 82;\nbool passed = score >= 80;\nvar nextScore = 91;\n\nConsole.WriteLine($\"{learnerName}: {score} - Passed: {passed}\");\nConsole.WriteLine(nextScore.GetType().Name);",
+      "starter": "Console.WriteLine(\"Hello, Academy!\");",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to read and write a tiny C# program using Console.WriteLine, create simple variables, follow C# naming rules, compare a score with >=, store the result in a bool, and read basic compiler line/column information when something is wrong.",
+        "whyItMatters": "Every larger C# program is built from these foundations. If statements, methods, classes, Unity scripts, and full applications all depend on being comfortable with instructions, names, values, types, and compiler feedback first.",
+        "terms": [
+          {
+            "term": "Programming",
+            "meaning": "Writing instructions that tell a computer what you want it to do."
+          },
+          {
+            "term": "Source code",
+            "meaning": "The human-readable text you write in a programming language such as C#."
+          },
+          {
+            "term": "C#",
+            "meaning": "The programming language you are learning in this track."
+          },
+          {
+            "term": ".NET",
+            "meaning": "The platform that provides the runtime and libraries used by C# programs. At Intern level, think of it as the environment that helps your compiled C# program run."
+          },
+          {
+            "term": "Compiler",
+            "meaning": "A tool that checks your C# source code and translates valid code so it can run."
+          },
+          {
+            "term": "Compile",
+            "meaning": "To ask the compiler to check and translate your source code."
+          },
+          {
+            "term": "Run",
+            "meaning": "To execute the compiled program so its instructions actually happen."
+          },
+          {
+            "term": "Statement",
+            "meaning": "A complete instruction in your C# program."
+          },
+          {
+            "term": "Identifier",
+            "meaning": "A name you choose for something in code, such as learnerName or score."
+          },
+          {
+            "term": "Variable",
+            "meaning": "A named place that stores a value your program can use."
+          },
+          {
+            "term": "Value",
+            "meaning": "The actual data being stored or used, such as \"Nova\", 80, 12.5, or true."
+          },
+          {
+            "term": "Type",
+            "meaning": "A label that tells C# what kind of value something is, such as text, a whole number, a decimal number, or true/false."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": ";",
+            "meaning": "Ends many simple C# statements. Forgetting it often causes a compiler error such as \"; expected\"."
+          },
+          {
+            "symbol": "=",
+            "meaning": "Assignment. It puts the value on the right into the variable on the left. It does not mean \"is equal to\" in a comparison."
+          },
+          {
+            "symbol": "\"text\"",
+            "meaning": "Quotation marks tell C# that the characters inside are text (a string)."
+          },
+          {
+            "symbol": "()",
+            "meaning": "Parentheses after a method name hold the information you are giving to that method. That supplied information is called an argument."
+          },
+          {
+            "symbol": ".",
+            "meaning": "The dot lets you access something that belongs to another thing. In Console.WriteLine, WriteLine is accessed from Console."
+          },
+          {
+            "symbol": ">=",
+            "meaning": "A comparison meaning \"greater than or equal to\". A comparison produces a bool value: true or false."
+          },
+          {
+            "symbol": "$\"...{name}...\"",
+            "meaning": "An interpolated string. The $ turns on interpolation, and braces insert variable values into the text."
+          },
+          {
+            "symbol": "{name}",
+            "meaning": "Inside an interpolated string, braces mean \"insert the current value of this variable here\"."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Your first C# instruction",
+            "explanation": "Start with one instruction only. Console.WriteLine displays information in the program output. Type it exactly as shown, including the capital W and capital L in WriteLine.",
+            "code": "Console.WriteLine(\"Hello\");"
+          },
+          {
+            "title": "Step 2 — Store and print text",
+            "explanation": "string means the variable stores text. learnerName is the identifier (the name we chose). The = assigns the text value \"Nova\" to that variable. The second line gives the variable to WriteLine, so the stored value is printed.",
+            "code": "string learnerName = \"Nova\";\nConsole.WriteLine(learnerName);"
+          },
+          {
+            "title": "Step 3 — Store and print a whole number",
+            "explanation": "int is a type for whole numbers. The number 80 does not use quotation marks because it is numeric data, not text.",
+            "code": "int score = 80;\nConsole.WriteLine(score);"
+          },
+          {
+            "title": "Step 4 — Meet bool: true or false",
+            "explanation": "bool stores one of two values: true or false. These words do not use quotation marks because they are boolean values, not text.",
+            "code": "bool passingGrade = true;\nConsole.WriteLine(passingGrade);"
+          },
+          {
+            "title": "Step 5 — Let a comparison produce the bool",
+            "explanation": "Now replace the hard-coded true with a comparison. score >= 80 asks, \"Is score greater than or equal to 80?\" C# evaluates that question and stores either true or false in passingGrade.",
+            "code": "int score = 80;\nbool passingGrade = score >= 80;\nConsole.WriteLine(passingGrade);"
+          },
+          {
+            "title": "Step 6 — Put values inside a sentence",
+            "explanation": "The $ before the opening quote enables string interpolation. Each pair of braces inserts the value of the named variable. Without the $, {learnerName} would be ordinary text instead of being replaced by the variable value.",
+            "code": "string learnerName = \"Nova\";\nint score = 80;\nbool passingGrade = score >= 80;\nConsole.WriteLine($\"{learnerName}: {score}: Passing Grade = {passingGrade}\");"
+          },
+          {
+            "title": "Extra type — decimal numbers with double",
+            "explanation": "int is for whole numbers. When you need a basic decimal number in this course, double is a common choice. This example stores 82.5 instead of a whole number.",
+            "code": "double averageScore = 82.5;\nConsole.WriteLine(averageScore);"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "Console",
+            "meaning": "A .NET class that provides console input/output features. For now, you only need to know that it gives us WriteLine."
+          },
+          {
+            "piece": ".",
+            "meaning": "Access something that belongs to Console."
+          },
+          {
+            "piece": "WriteLine",
+            "meaning": "The method name. C# is case-sensitive: WriteLine is correct; Writeline is a different name and is not the method we want."
+          },
+          {
+            "piece": "(",
+            "meaning": "Starts the list of arguments being given to WriteLine."
+          },
+          {
+            "piece": "\"Hello\"",
+            "meaning": "A string value containing text."
+          },
+          {
+            "piece": ")",
+            "meaning": "Ends the argument list."
+          },
+          {
+            "piece": ";",
+            "meaning": "Ends this statement."
+          },
+          {
+            "piece": "string learnerName = \"Nova\";",
+            "meaning": "Declare a text variable named learnerName and assign the text value \"Nova\" to it."
+          },
+          {
+            "piece": "int score = 80;",
+            "meaning": "Declare a whole-number variable named score and assign 80 to it."
+          },
+          {
+            "piece": "bool passingGrade = score >= 80;",
+            "meaning": "Compare score with 80 and store the resulting true/false value in passingGrade."
+          }
+        ],
+        "computerSteps": [
+          "You write C# source code as text.",
+          "When you run the Academy C# checker, the source is sent to the real .NET compiler.",
+          "The compiler reads the code and checks rules such as spelling, capitalization, types, punctuation, and whether names exist.",
+          "If the compiler finds an error, it reports where it noticed the problem. The message commonly includes a line number and column number.",
+          "If compilation succeeds, the program runs and Console.WriteLine output appears in the Academy.",
+          "When several errors appear, fix the first useful compiler error, compile again, and then continue. One early mistake can cause several later error messages."
+        ],
+        "guidedChanges": [
+          "Change \"Nova\" to your own name. Predict what the output will say before running the code.",
+          "Change score from 80 to 79. Predict whether passingGrade becomes true or false.",
+          "Change 79 back to 80. Notice that >= includes 80 itself.",
+          "Temporarily remove a semicolon and run the code. Read the compiler line/column information, then put the semicolon back.",
+          "Temporarily change WriteLine to Writeline. Run it, read the compiler message, then restore the capital L.",
+          "Temporarily remove the $ from the interpolated output string. The program can still compile, but the braces are now ordinary text. Put the $ back and compare the output."
+        ],
+        "workedExampleIntro": "You have now seen every important piece used below separately. Read each line and say what it stores or does before you run the complete example.",
+        "errorExamples": [
+          {
+            "mistake": "bool Passing Grade = true;",
+            "explanation": "A variable identifier cannot contain a space. The compiler cannot treat \"Passing Grade\" as one variable name.",
+            "fix": "Use a single valid name such as passingGrade or passing_grade."
+          },
+          {
+            "mistake": "Console.Writeline(\"Hello\");",
+            "explanation": "C# is case-sensitive. Writeline and WriteLine are different identifiers.",
+            "fix": "Use Console.WriteLine(\"Hello\"); with a capital L."
+          },
+          {
+            "mistake": "Console.WriteLine(\"{learnerName}\");",
+            "explanation": "This is a normal string, so the braces are treated as ordinary characters.",
+            "fix": "Use Console.WriteLine($\"{learnerName}\"); when you want interpolation."
+          },
+          {
+            "mistake": "string learnerName = \"Nova\"",
+            "explanation": "The statement is missing its ending semicolon. The compiler will normally point near the location where it expected the ;.",
+            "fix": "Add ; to the end of the statement."
+          },
+          {
+            "mistake": "Console.WriteLine(score); when the error names line 4, column 19",
+            "explanation": "The line tells you which row of source code the compiler is referring to; the column points roughly to the character position on that line. The true cause can sometimes be slightly earlier, so also inspect the end of the previous line.",
+            "fix": "Start at the reported line/column, read the message, and check that line plus the line immediately above it."
+          }
+        ],
+        "recap": [
+          "C# source code is checked by a compiler before it runs.",
+          "Many simple C# statements end with ;.",
+          "Identifiers are names in code; they cannot contain spaces and capitalization matters.",
+          "string stores text, int stores whole numbers, double stores decimal numbers, and bool stores true/false.",
+          "= assigns a value. >= compares two values and produces true or false.",
+          "Console.WriteLine displays output and must be capitalized exactly.",
+          "String interpolation needs $ before the quoted string and uses {variableName} to insert values.",
+          "Compiler line/column information helps you locate mistakes; fix one useful error at a time."
+        ]
+      },
+      "example": "string learnerName = \"Nova\";\nint score = 82;\nbool passingGrade = score >= 80;\n\nConsole.WriteLine($\"{learnerName}: {score}: Passing Grade = {passingGrade}\");",
+      "challenge": "Create a string variable for a learner name, an int variable for a score, and a bool variable named passingGrade that checks whether the score is greater than or equal to 80. Then use one interpolated Console.WriteLine statement to print the learner name, score, and passingGrade value.",
+      "practiceDetails": "Everything required here has been introduced step by step in this lesson. Your C# answer must also compile successfully before the Academy accepts it.",
+      "hint": "Build it in four small steps: string name, int score, bool passingGrade = score >= 80, then Console.WriteLine($\"...{name}...{score}...{passingGrade}...\");. Remember that variable names cannot contain spaces and WriteLine has a capital L.",
+      "solution": "string learnerName = \"Nova\";\nint score = 82;\nbool passingGrade = score >= 80;\n\nConsole.WriteLine($\"{learnerName}: {score}: Passing Grade = {passingGrade}\");",
       "groups": [
         [
           "string "
@@ -34,9 +257,125 @@
           "bool "
         ],
         [
+          ">="
+        ],
+        [
           "Console.WriteLine"
+        ],
+        [
+          "$\""
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "string "
+          ],
+          [
+            "int "
+          ],
+          [
+            "bool "
+          ],
+          [
+            ">="
+          ],
+          [
+            "Console.WriteLine"
+          ],
+          [
+            "$\""
+          ]
+        ],
+        "practiceMinLength": 45,
+        "testCodeQuestions": [
+          {
+            "prompt": "Declare a string variable with a learner name and print that variable with Console.WriteLine. Use a valid identifier with no spaces.",
+            "groups": [
+              [
+                "string "
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 25
+          },
+          {
+            "prompt": "Declare a string learner name, an int score, and a bool passingGrade calculated with >= 80. Print the values with an interpolated Console.WriteLine string.",
+            "groups": [
+              [
+                "string "
+              ],
+              [
+                "int "
+              ],
+              [
+                "bool "
+              ],
+              [
+                ">="
+              ],
+              [
+                "Console.WriteLine"
+              ],
+              [
+                "$\""
+              ]
+            ],
+            "minLength": 50
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "string "
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ],
+          "2": [
+            [
+              "string "
+            ],
+            [
+              "int "
+            ],
+            [
+              "bool "
+            ],
+            [
+              ">="
+            ]
+          ],
+          "3": [
+            [
+              "string "
+            ],
+            [
+              "int "
+            ],
+            [
+              "bool "
+            ],
+            [
+              ">="
+            ],
+            [
+              "Console.WriteLine"
+            ],
+            [
+              "$\""
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create a small C# example that stores text in a string variable and prints the variable with Console.WriteLine.",
+          "2": "Exam 2: Create variables for a learner name and numeric score, then store the result of score >= 80 in a bool variable.",
+          "3": "Exam 3: Create a learner name, score, and calculated passingGrade bool, then print all three values using an interpolated Console.WriteLine string."
+        }
+      },
       "references": [
         {
           "title": "Microsoft Learn — A tour of C#",
@@ -47,30 +386,275 @@
           "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not put spaces inside a variable name. Use learnerName or passingGrade instead of learner name or Passing Grade.",
+        "C# is case-sensitive. Console.WriteLine is correct; Console.Writeline is not the same method.",
+        "End the simple statements in this lesson with semicolons.",
+        "Use quotation marks around text values, but not around int, double, true, or false values.",
+        "Use = to assign a value. Comparisons such as >= ask a question and produce a bool result.",
+        "Add $ before a quoted string when you want {variableName} placeholders to be replaced with variable values.",
+        "When the compiler reports several errors, start with the first useful line/column message and compile again after fixing it."
+      ],
+      "mastery": [
+        "Explain the difference between writing source code, compiling it, and running it.",
+        "Write Console.WriteLine(\"Hello\"); from memory and explain the dot, parentheses, quotation marks, and semicolon.",
+        "Create valid string, int, double, and bool variables with identifiers that contain no spaces.",
+        "Explain why score, Score, and SCORE are different identifiers in C#.",
+        "Use >= to calculate a bool such as passingGrade.",
+        "Use $ and { } correctly to interpolate variable values into an output string.",
+        "Use compiler line/column information to locate and correct a simple capitalization or punctuation error."
+      ]
     },
     {
       "title": "Operators, Conditions & Switch",
-      "summary": "Build expressions and select behavior with if/else, comparison and boolean operators, conditional expressions, and switch.",
+      "summary": "Learn how C# calculates values, compares them, turns comparisons into true/false answers, and chooses which instructions to run with if/else and a simple switch statement.",
       "concepts": [
         {
-          "name": "Operators",
-          "explanation": "Arithmetic, comparison, equality, and logical operators combine typed values. C# distinguishes boolean logic from bitwise operations even though some operator symbols overlap."
+          "name": "Expressions and operators",
+          "explanation": "An expression is a piece of code that produces a value. Operators are symbols that tell C# what calculation or comparison to perform. For example, 5 + 3 is an expression: 5 and 3 are values, + is the operator, and the expression produces 8."
         },
         {
-          "name": "if/else",
-          "explanation": "if requires a bool condition; C# does not treat arbitrary numbers or strings as truthy/falsy."
+          "name": "Comparisons create bool values",
+          "explanation": "Comparison operators ask yes/no questions. == means equal to, != means not equal to, > and < compare size, and >= and <= include equality. Every comparison produces a bool value: true or false. Remember that = assigns a value, while == compares two values."
         },
         {
-          "name": "switch",
-          "explanation": "switch statements and switch expressions are useful when behavior depends on discrete cases. Modern patterns can test values, types, properties, and ranges."
+          "name": "Conditions choose which code runs",
+          "explanation": "An if statement runs a block only when its condition is true. else provides another block when the condition is false. Logical operators such as &&, ||, and ! can combine or reverse bool conditions. A simple switch is useful when one value can match several exact cases."
         }
       ],
-      "example": "int score = 86;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}\n\nstring grade = score switch\n{\n    >= 90 => \"Excellent\",\n    >= 80 => \"Pass\",\n    _ => \"Developing\"\n};\nConsole.WriteLine(grade);",
-      "challenge": "Write an if/else that checks an integer score against 80 and also assign a text result with a switch expression.",
-      "hint": "For the switch expression, put the catch-all discard pattern _ last.",
-      "solution": "int score = 86;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}\n\nstring grade = score switch\n{\n    >= 90 => \"Excellent\",\n    >= 80 => \"Pass\",\n    _ => \"Developing\"\n};\nConsole.WriteLine(grade);",
+      "starter": "int score = 82;\nbool passingGrade = score >= 80;\nConsole.WriteLine(passingGrade);",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to perform simple arithmetic, compare values with ==, !=, >, <, >=, and <=, explain the difference between = and ==, write an if/else statement, combine simple bool conditions, and use a basic switch statement for exact choices.",
+        "whyItMatters": "Programs become useful when they can make decisions. A game checks whether health reached zero. A website checks whether a form is valid. An Academy checks whether a score is high enough to pass. These decisions are built from expressions, comparisons, booleans, and conditional statements.",
+        "terms": [
+          {
+            "term": "Expression",
+            "meaning": "Code that produces a value, such as 5 + 3 or score >= 80."
+          },
+          {
+            "term": "Operator",
+            "meaning": "A symbol that tells C# to perform an operation, such as + for addition or >= for a comparison."
+          },
+          {
+            "term": "Operand",
+            "meaning": "A value an operator works with. In 5 + 3, the operands are 5 and 3."
+          },
+          {
+            "term": "Comparison",
+            "meaning": "A question that compares values and produces true or false."
+          },
+          {
+            "term": "Condition",
+            "meaning": "A bool expression that decides whether a conditional block should run."
+          },
+          {
+            "term": "Branch",
+            "meaning": "One possible path through the program, such as the if path or the else path."
+          },
+          {
+            "term": "Code block",
+            "meaning": "A group of statements surrounded by { and }."
+          },
+          {
+            "term": "Logical operator",
+            "meaning": "An operator that works with bool values, such as && (AND), || (OR), or ! (NOT)."
+          },
+          {
+            "term": "switch",
+            "meaning": "A conditional statement that compares one value against several exact cases."
+          },
+          {
+            "term": "case",
+            "meaning": "One possible value handled inside a switch statement."
+          },
+          {
+            "term": "default",
+            "meaning": "The switch branch used when none of the listed cases match."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "+  -  *  /  %",
+            "meaning": "Arithmetic operators: add, subtract, multiply, divide, and remainder. Start with +, -, *, and /; % gives the remainder after division."
+          },
+          {
+            "symbol": "==",
+            "meaning": "Compares two values and asks whether they are equal. Do not confuse it with =, which assigns a value."
+          },
+          {
+            "symbol": "!=",
+            "meaning": "Compares two values and asks whether they are different."
+          },
+          {
+            "symbol": ">  <  >=  <=",
+            "meaning": "Numeric comparison operators: greater than, less than, greater than or equal to, and less than or equal to."
+          },
+          {
+            "symbol": "if (condition)",
+            "meaning": "Checks a bool condition. The following block runs only when that condition is true."
+          },
+          {
+            "symbol": "{ ... }",
+            "meaning": "Curly braces mark the beginning and end of a code block. Statements inside the braces belong to that block."
+          },
+          {
+            "symbol": "else",
+            "meaning": "Provides another block to run when the preceding if condition is false."
+          },
+          {
+            "symbol": "&&",
+            "meaning": "Logical AND. The combined condition is true only when both sides are true."
+          },
+          {
+            "symbol": "||",
+            "meaning": "Logical OR. The combined condition is true when at least one side is true."
+          },
+          {
+            "symbol": "!",
+            "meaning": "Logical NOT. It reverses a bool value: true becomes false and false becomes true."
+          },
+          {
+            "symbol": "switch (value)",
+            "meaning": "Starts a switch statement that checks one value against the case labels inside the following block."
+          },
+          {
+            "symbol": "case value:",
+            "meaning": "Defines one exact value that the switch can match. The colon ends the case label."
+          },
+          {
+            "symbol": "break;",
+            "meaning": "Ends the current switch case so execution leaves the switch instead of continuing into another case."
+          },
+          {
+            "symbol": "default:",
+            "meaning": "Handles any value that did not match one of the earlier cases."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Let C# calculate a value",
+            "explanation": "The expression 5 + 3 produces 8. The result is assigned to total, and then Console.WriteLine prints that stored value.",
+            "code": "int total = 5 + 3;\nConsole.WriteLine(total);"
+          },
+          {
+            "title": "Step 2 — Ask a true/false question",
+            "explanation": "score >= 80 asks whether score is at least 80. That comparison produces a bool, so the result can be stored in passingGrade.",
+            "code": "int score = 82;\nbool passingGrade = score >= 80;\nConsole.WriteLine(passingGrade);"
+          },
+          {
+            "title": "Step 3 — Run code only when a condition is true",
+            "explanation": "The code inside the braces runs only because score >= 80 evaluates to true for this score.",
+            "code": "int score = 82;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}"
+          },
+          {
+            "title": "Step 4 — Give the program two paths",
+            "explanation": "if handles the true path. else handles the false path. Only one of these two blocks runs for a single check.",
+            "code": "int score = 72;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}"
+          },
+          {
+            "title": "Step 5 — Combine conditions",
+            "explanation": "&& means both comparisons must be true. Here the score must be at least 80 and no greater than 100. Keep combined conditions small until each individual comparison makes sense on its own.",
+            "code": "int score = 86;\nbool validPassingScore = score >= 80 && score <= 100;\nConsole.WriteLine(validPassingScore);"
+          },
+          {
+            "title": "Step 6 — Use switch for exact choices",
+            "explanation": "switch is useful when one value can equal one of several exact choices. Each case ends with a colon, the matching statements run, and break; leaves the switch. default handles everything else.",
+            "code": "int menuChoice = 2;\n\nswitch (menuChoice)\n{\n    case 1:\n        Console.WriteLine(\"Lessons\");\n        break;\n    case 2:\n        Console.WriteLine(\"Practice\");\n        break;\n    default:\n        Console.WriteLine(\"Unknown choice\");\n        break;\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "int score = 86;",
+            "meaning": "Creates an int variable named score and stores 86 in it. You learned declarations and assignment in Module 1."
+          },
+          {
+            "piece": "if (score >= 80)",
+            "meaning": "Evaluates score >= 80. Because the comparison produces a bool, it can be used as the condition for if."
+          },
+          {
+            "piece": "{ ... }",
+            "meaning": "Groups the statements that belong to the true branch or false branch."
+          },
+          {
+            "piece": "else",
+            "meaning": "Introduces the branch that runs when the if condition was false."
+          },
+          {
+            "piece": "switch (menuChoice)",
+            "meaning": "Takes the current menuChoice value and compares it with the case labels."
+          },
+          {
+            "piece": "case 1:",
+            "meaning": "Matches when menuChoice equals 1. The colon finishes the case label."
+          },
+          {
+            "piece": "break;",
+            "meaning": "Leaves the switch after the matching case has finished."
+          },
+          {
+            "piece": "default:",
+            "meaning": "Runs when menuChoice did not equal any listed case value."
+          }
+        ],
+        "computerSteps": [
+          "C# evaluates the expressions on the right side of assignments before storing their results.",
+          "A comparison such as score >= 80 is evaluated and becomes exactly one bool value: true or false.",
+          "When execution reaches if, C# evaluates the condition inside the parentheses.",
+          "If the condition is true, the if block runs and the else block is skipped; if it is false, the opposite happens.",
+          "For &&, C# needs both bool conditions to be true. For ||, at least one must be true. ! reverses a bool value.",
+          "When execution reaches switch, C# compares the switch value with the case labels, runs the matching case, and break; exits the switch.",
+          "If no case matches, the default block runs when one is present."
+        ],
+        "guidedChanges": [
+          "Change score from 82 to 79 before running the comparison example. Predict whether passingGrade will print True or False.",
+          "In the if/else example, try exactly 80. This helps you see why >= includes the boundary value while > would not.",
+          "Change >= to > and test score 80 again. Explain the different result in your own words.",
+          "Change && to || in the combined-condition example and predict how that changes the question being asked.",
+          "Change menuChoice from 2 to 1, then to 99. Predict which switch branch runs each time before pressing Run."
+        ],
+        "workedExampleIntro": "The worked example below combines two decision patterns you have already seen separately: an if/else for a true/false score check and a switch for exact menu choices. There are no switch expressions, ternary operators, or pattern-matching shortcuts here because those have not been taught yet.",
+        "errorExamples": [
+          {
+            "mistake": "if (score = 80)",
+            "explanation": "= is assignment, not an equality comparison. An if condition must produce a bool value.",
+            "fix": "Use if (score == 80) when you mean 'is score equal to 80?' or if (score >= 80) for the pass rule."
+          },
+          {
+            "mistake": "if score >= 80",
+            "explanation": "C# requires parentheses around the condition of an if statement.",
+            "fix": "Write if (score >= 80)."
+          },
+          {
+            "mistake": "if (score >= 80) Console.WriteLine(\"Pass\")",
+            "explanation": "The Console.WriteLine statement is missing its semicolon, and this Academy lesson uses braces so the branch boundary is visually clear.",
+            "fix": "Use braces around the block and end Console.WriteLine(\"Pass\"); with a semicolon."
+          },
+          {
+            "mistake": "case 1",
+            "explanation": "A switch case label ends with a colon.",
+            "fix": "Write case 1:."
+          },
+          {
+            "mistake": "break",
+            "explanation": "break is a statement and needs a semicolon in this switch.",
+            "fix": "Write break;."
+          }
+        ],
+        "recap": [
+          "Arithmetic operators calculate values; comparison operators ask questions and produce bool values.",
+          "= assigns a value. == compares two values for equality.",
+          "An if condition must be a bool expression.",
+          "else runs when the preceding if condition is false.",
+          "&& means AND, || means OR, and ! means NOT.",
+          "Use a simple switch when one value needs to be matched against several exact cases.",
+          "Curly braces mark code blocks, case labels use a colon, and break; exits a switch case."
+        ]
+      },
+      "example": "int score = 86;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}\n\nint menuChoice = 2;\n\nswitch (menuChoice)\n{\n    case 1:\n        Console.WriteLine(\"Lessons\");\n        break;\n    case 2:\n        Console.WriteLine(\"Practice\");\n        break;\n    default:\n        Console.WriteLine(\"Unknown choice\");\n        break;\n}",
+      "challenge": "Create an int score and use if/else to print \"Pass\" when score is greater than or equal to 80 and \"Retry\" otherwise. Then create an int menuChoice and use a simple switch with at least two case values plus default. Print a different message in each branch and use break; after each switch branch.",
+      "practiceDetails": "Everything required here has been introduced step by step in this lesson. Build the if/else first and run it. Then add the switch. Your C# answer must compile successfully before the Academy accepts it.",
+      "hint": "For the score decision, start with if (score >= 80) { ... } else { ... }. For the switch, use switch (menuChoice) followed by case 1:, case 2:, default:, and break; inside each branch.",
+      "solution": "int score = 86;\n\nif (score >= 80)\n{\n    Console.WriteLine(\"Pass\");\n}\nelse\n{\n    Console.WriteLine(\"Retry\");\n}\n\nint menuChoice = 2;\n\nswitch (menuChoice)\n{\n    case 1:\n        Console.WriteLine(\"Lessons\");\n        break;\n    case 2:\n        Console.WriteLine(\"Practice\");\n        break;\n    default:\n        Console.WriteLine(\"Unknown choice\");\n        break;\n}",
       "groups": [
         [
           "if ("
@@ -79,49 +663,461 @@
           "else"
         ],
         [
-          "switch"
+          ">="
         ],
         [
-          "=>"
+          "switch ("
+        ],
+        [
+          "case "
+        ],
+        [
+          "break;"
+        ],
+        [
+          "default:"
+        ],
+        [
+          "Console.WriteLine"
         ]
       ],
       "references": [
         {
-          "title": "Microsoft Learn — A tour of C#",
-          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+          "title": "Microsoft Learn — Boolean logical operators",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators"
         },
         {
-          "title": "Microsoft Learn — C# documentation",
-          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+          "title": "Microsoft Learn — Selection statements",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not confuse = with ==. Use = to assign; use == to ask whether two values are equal.",
+        "An if condition must produce a bool. C# does not automatically treat arbitrary numbers or strings as true/false conditions.",
+        "Remember the parentheses around an if condition and the braces around the branch blocks used in this lesson.",
+        ">= includes the boundary value. score >= 80 is true when score is exactly 80; score > 80 is not.",
+        "&& requires both sides to be true, while || requires at least one side to be true.",
+        "A switch case label needs a colon, such as case 1:.",
+        "Use break; after each simple switch branch in this lesson so execution leaves the switch cleanly.",
+        "Do not use advanced switch-expression, pattern-matching, or conditional-expression shortcuts in this Intern exercise; those forms have not been taught yet."
+      ],
+      "mastery": [
+        "Explain what an expression is and identify the operator and operands in 5 + 3.",
+        "Use +, -, *, and / in simple numeric expressions and predict their results.",
+        "Explain the difference between = and == without looking at the lesson.",
+        "Use ==, !=, >, <, >=, and <= to create bool comparisons.",
+        "Write an if/else from memory and explain which block runs for true and false conditions.",
+        "Explain &&, ||, and ! using plain-language AND, OR, and NOT examples.",
+        "Write a basic switch with case, default, colons, and break; for exact integer choices.",
+        "Recognize and fix a missing if parenthesis, missing case colon, or missing break semicolon."
+      ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "if ("
+          ],
+          [
+            "else"
+          ],
+          [
+            ">="
+          ],
+          [
+            "switch ("
+          ],
+          [
+            "case "
+          ],
+          [
+            "break;"
+          ],
+          [
+            "default:"
+          ],
+          [
+            "Console.WriteLine"
+          ]
+        ],
+        "practiceMinLength": 90,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create an int score and write an if/else that prints Pass when score >= 80 and Retry otherwise.",
+            "groups": [
+              [
+                "int "
+              ],
+              [
+                "if ("
+              ],
+              [
+                ">="
+              ],
+              [
+                "else"
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 55
+          },
+          {
+            "prompt": "Create an int menuChoice and use a simple switch with at least one case plus default. Print a message in each branch and use break;.",
+            "groups": [
+              [
+                "int "
+              ],
+              [
+                "switch ("
+              ],
+              [
+                "case "
+              ],
+              [
+                "default:"
+              ],
+              [
+                "break;"
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 70
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "if ("
+            ],
+            [
+              ">="
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ],
+          "2": [
+            [
+              "if ("
+            ],
+            [
+              "else"
+            ],
+            [
+              "==",
+              ">=",
+              "<=",
+              "!=",
+              ">",
+              "<"
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ],
+          "3": [
+            [
+              "switch ("
+            ],
+            [
+              "case "
+            ],
+            [
+              "default:"
+            ],
+            [
+              "break;"
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create an int score and use an if statement with score >= 80 to print a message when the condition is true.",
+          "2": "Exam 2: Create a numeric value and use if/else with a comparison operator to print one message for the true branch and another for the false branch.",
+          "3": "Exam 3: Create an int choice and use a simple switch statement with at least one case, a default branch, Console.WriteLine output, and break; statements."
+        }
+      }
     },
     {
       "title": "Loops, Arrays & Lists",
-      "summary": "Repeat work with for/while/foreach and store ordered data in arrays and generic List<T> collections.",
+      "summary": "Learn how C# repeats instructions safely and how arrays and List<string> store several related values. Build from one repeated counter to foreach over a growable list without assuming collection or indexing knowledge.",
       "concepts": [
         {
-          "name": "Arrays",
-          "explanation": "Arrays have a fixed length after creation and use zero-based indexing. They are efficient when the number of slots is known."
+          "name": "Loops repeat instructions",
+          "explanation": "A loop lets the program run a block of code more than once. while repeats while a condition stays true, for is useful when a counter controls the repetition, and foreach repeats once for each item in a collection. Every loop needs a clear reason to stop."
         },
         {
-          "name": "List<T>",
-          "explanation": "List<T> is a resizable generic collection. Add, Remove, Count, indexing, and enumeration cover many everyday collection tasks."
+          "name": "Arrays store a fixed group of values",
+          "explanation": "An array keeps several values of the same type under one variable name. Its length is fixed after creation. Array positions are numbered from zero, so the first item is at index 0, the second at index 1, and so on."
         },
         {
-          "name": "Loop choice",
-          "explanation": "Use foreach when you only need each item, for when the index matters, and while/do when repetition is driven by a condition."
+          "name": "List<T> stores a growable group of values",
+          "explanation": "A List<T> also stores values of one type, but it can grow after creation. The type between < and > tells the list what kind of values it may contain. Add places another value at the end, and Count tells you how many items are currently stored."
         }
       ],
-      "example": "int[] scores = { 72, 88, 95 };\nList<string> modules = new() { \"HTML\", \"CSS\", \"C#\" };\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}\n\nfor (int i = 0; i < scores.Length; i++)\n{\n    Console.WriteLine(scores[i]);\n}",
-      "challenge": "Create a List<string> with at least three values, add another value, and print them with foreach.",
-      "hint": "List<T> needs a type argument between angle brackets, such as List<string>.",
-      "solution": "int[] scores = { 72, 88, 95 };\nList<string> modules = new() { \"HTML\", \"CSS\", \"C#\" };\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}\n\nfor (int i = 0; i < scores.Length; i++)\n{\n    Console.WriteLine(scores[i]);\n}",
+      "starter": "int counter = 1;\n\nwhile (counter <= 3)\n{\n    Console.WriteLine(counter);\n    counter = counter + 1;\n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain why loops exist, write a small while loop that stops, read a basic for loop, create and read an array, explain zero-based indexing, create a List<string>, add values to it, and print every list item with foreach.",
+        "whyItMatters": "Programs constantly work with repeated actions and groups of data. A game may update several enemies, a website may show several products, and the Academy may display several lessons. Loops prevent you from copying the same instruction again and again, while arrays and lists let one variable represent a group of related values.",
+        "terms": [
+          {
+            "term": "Loop",
+            "meaning": "A structure that repeats a block of instructions."
+          },
+          {
+            "term": "Iteration",
+            "meaning": "One trip through a loop. If a loop runs three times, it performs three iterations."
+          },
+          {
+            "term": "Counter",
+            "meaning": "A numeric variable used to keep track of how many times something has happened."
+          },
+          {
+            "term": "Infinite loop",
+            "meaning": "A loop whose stopping condition never becomes false, so it keeps repeating until the program is stopped."
+          },
+          {
+            "term": "Collection",
+            "meaning": "A value that holds several related values together. Arrays and lists are two collection types used in this lesson."
+          },
+          {
+            "term": "Array",
+            "meaning": "A fixed-length collection whose items all use the same element type."
+          },
+          {
+            "term": "Element",
+            "meaning": "One value stored inside an array or list."
+          },
+          {
+            "term": "Index",
+            "meaning": "A numeric position used to access an item. C# collection indexes start at 0."
+          },
+          {
+            "term": "Zero-based indexing",
+            "meaning": "The rule that the first item is index 0, the second is index 1, and the third is index 2."
+          },
+          {
+            "term": "List<T>",
+            "meaning": "A growable collection. T is a placeholder for the item type; List<string> means a list that stores strings."
+          },
+          {
+            "term": "Loop variable",
+            "meaning": "The temporary variable that represents the current item during a foreach loop, such as module in foreach (string module in modules)."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "while (condition)",
+            "meaning": "Checks a bool condition before each iteration. The loop repeats while the condition is true and stops when it becomes false."
+          },
+          {
+            "symbol": "counter = counter + 1;",
+            "meaning": "Reads the current counter value, adds 1, and stores the new value back in counter. Updating a loop counter helps the loop eventually stop."
+          },
+          {
+            "symbol": "for (start; condition; update)",
+            "meaning": "A loop with three control parts inside its parentheses: code that runs once at the start, a condition checked before each iteration, and an update performed after each iteration."
+          },
+          {
+            "symbol": "i++",
+            "meaning": "A short way to increase the variable i by 1. In this lesson it is used as the update part of a for loop."
+          },
+          {
+            "symbol": "int[]",
+            "meaning": "The square brackets after int mean 'array of int values'. string[] would mean an array of strings."
+          },
+          {
+            "symbol": "{ 72, 88, 95 }",
+            "meaning": "An array initializer: the values between the braces become the array's starting elements. Commas separate the values."
+          },
+          {
+            "symbol": "scores[0]",
+            "meaning": "Reads the item at index 0 from scores. Because indexes start at 0, this is the first item."
+          },
+          {
+            "symbol": ".Length",
+            "meaning": "Gives the number of elements in an array. If an array stores three values, its Length is 3 even though its last valid index is 2."
+          },
+          {
+            "symbol": "List<string>",
+            "meaning": "A List whose allowed item type is string. The angle brackets contain the item type."
+          },
+          {
+            "symbol": "new List<string>()",
+            "meaning": "Creates a new empty List<string>. You will study objects and new more deeply later; for now, learn this complete pattern as the way this lesson creates an empty list."
+          },
+          {
+            "symbol": ".Add(value)",
+            "meaning": "Adds one value to the end of a List. The value must match the list's item type."
+          },
+          {
+            "symbol": ".Count",
+            "meaning": "Gives the number of items currently stored in a List."
+          },
+          {
+            "symbol": "foreach (string module in modules)",
+            "meaning": "Repeats once for every item in modules. During each iteration, module holds the current string."
+          },
+          {
+            "symbol": "in",
+            "meaning": "Inside foreach, in separates the loop variable from the collection being read."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Repeat with while",
+            "explanation": "counter begins at 1. while checks counter <= 3 before every iteration. The loop prints the current number and then adds 1 to counter. After printing 3, counter becomes 4, the condition becomes false, and the loop stops.",
+            "code": "int counter = 1;\n\nwhile (counter <= 3)\n{\n    Console.WriteLine(counter);\n    counter = counter + 1;\n}"
+          },
+          {
+            "title": "Step 2 — Read a basic for loop",
+            "explanation": "A for loop puts the starting value, continuation condition, and update together. int i = 0 runs once, i < 3 is checked before each iteration, and i++ increases i after each iteration.",
+            "code": "for (int i = 0; i < 3; i++)\n{\n    Console.WriteLine(i);\n}"
+          },
+          {
+            "title": "Step 3 — Store several numbers in an array",
+            "explanation": "The [] after int means this variable stores an array of int values. This array contains three elements. The array has one variable name, scores, instead of three separate score variables.",
+            "code": "int[] scores = { 72, 88, 95 };\nConsole.WriteLine(scores.Length);"
+          },
+          {
+            "title": "Step 4 — Read an array item by index",
+            "explanation": "Indexes start at zero. scores[0] is 72, scores[1] is 88, and scores[2] is 95. scores[3] would be outside this three-item array and would fail while the program is running.",
+            "code": "int[] scores = { 72, 88, 95 };\nConsole.WriteLine(scores[0]);\nConsole.WriteLine(scores[1]);"
+          },
+          {
+            "title": "Step 5 — Let foreach visit every array item",
+            "explanation": "foreach removes the need to manage the index yourself when you simply want every value. On each iteration, score receives the next int from scores.",
+            "code": "int[] scores = { 72, 88, 95 };\n\nforeach (int score in scores)\n{\n    Console.WriteLine(score);\n}"
+          },
+          {
+            "title": "Step 6 — Create a growable List<string>",
+            "explanation": "The list starts empty. Each Add call appends one string. Count tells you how many items the list currently has. Unlike the array above, this list can grow after it is created.",
+            "code": "List<string> modules = new List<string>();\nmodules.Add(\"HTML\");\nmodules.Add(\"CSS\");\nmodules.Add(\"C#\");\n\nConsole.WriteLine(modules.Count);"
+          },
+          {
+            "title": "Step 7 — Print every list item with foreach",
+            "explanation": "The foreach loop runs once for each string in modules. The loop variable module receives one item at a time, and Console.WriteLine prints that current value.",
+            "code": "List<string> modules = new List<string>();\nmodules.Add(\"HTML\");\nmodules.Add(\"CSS\");\nmodules.Add(\"C#\");\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "int counter = 1;",
+            "meaning": "Creates the counter and gives it the starting value 1."
+          },
+          {
+            "piece": "while (counter <= 3)",
+            "meaning": "Checks whether the counter is still 3 or lower before another iteration is allowed to run."
+          },
+          {
+            "piece": "counter = counter + 1;",
+            "meaning": "Changes the counter so the while condition can eventually become false. Without this update, this particular loop would never stop."
+          },
+          {
+            "piece": "int[] scores",
+            "meaning": "Declares scores as an array that stores int elements."
+          },
+          {
+            "piece": "scores[0]",
+            "meaning": "Reads the first element because C# indexes start at zero."
+          },
+          {
+            "piece": "scores.Length",
+            "meaning": "Reads how many elements are in the array."
+          },
+          {
+            "piece": "List<string> modules",
+            "meaning": "Declares modules as a List whose elements must be strings."
+          },
+          {
+            "piece": "new List<string>()",
+            "meaning": "Creates the empty list that the modules variable will refer to."
+          },
+          {
+            "piece": "modules.Add(\"HTML\");",
+            "meaning": "Calls Add on the list and appends the string HTML."
+          },
+          {
+            "piece": "foreach (string module in modules)",
+            "meaning": "Starts a loop that visits every string in modules, placing the current item in module for that iteration."
+          }
+        ],
+        "computerSteps": [
+          "For a while loop, C# checks the condition before entering the block. If it is false immediately, the block does not run at all.",
+          "After one while iteration finishes, execution goes back to the condition and checks it again.",
+          "For a for loop, C# runs the start part once, checks the condition, runs the block if true, performs the update, and then checks the condition again.",
+          "When an array is created, C# stores the elements in numbered positions beginning at index 0.",
+          "When code reads scores[0], C# looks up the element stored at the first position. An invalid index causes a runtime error rather than a compiler error.",
+          "A List can change size. Add appends a new element and Count changes to reflect the new number of items.",
+          "For foreach, C# obtains the next item from the collection, assigns it to the loop variable, runs the block, and repeats until no items remain."
+        ],
+        "guidedChanges": [
+          "In the while example, change the starting counter from 1 to 2. Predict the printed numbers before pressing Run.",
+          "Change the while condition from <= 3 to < 3. Test counter values and explain why the boundary changes.",
+          "In the for example, change i < 3 to i < 5. Predict how many iterations will run.",
+          "In the array example, print scores[2]. Then deliberately try scores[3] once and read the runtime error. Change it back to a valid index afterward.",
+          "Add a fourth string to the List and print modules.Count before and after the Add call.",
+          "Change one module name in the list and predict the foreach output before running it."
+        ],
+        "workedExampleIntro": "The worked example below combines only the pieces introduced in this lesson: create an empty List<string>, add four strings, then use foreach to print each one. It does not require collection initializers, LINQ, lambdas, advanced generics, or object-oriented design.",
+        "errorExamples": [
+          {
+            "mistake": "while (counter <= 3) { Console.WriteLine(counter); }",
+            "explanation": "counter never changes, so counter <= 3 stays true forever. This creates an infinite loop.",
+            "fix": "Update the counter inside the loop, for example counter = counter + 1;."
+          },
+          {
+            "mistake": "int scores = { 72, 88, 95 };",
+            "explanation": "A single int variable stores one whole number. The declaration needs [] to say that scores is an array of int values.",
+            "fix": "Write int[] scores = { 72, 88, 95 };."
+          },
+          {
+            "mistake": "Console.WriteLine(scores[3]);",
+            "explanation": "A three-item array has valid indexes 0, 1, and 2. Index 3 is outside the array. The code can compile but fails when that line runs.",
+            "fix": "Use a valid index such as scores[2], or use foreach when you simply want every item."
+          },
+          {
+            "mistake": "List<string> modules = new List<int>();",
+            "explanation": "The variable says this is a list of strings, but the new list was created for int values. The item types must agree.",
+            "fix": "Write List<string> modules = new List<string>();."
+          },
+          {
+            "mistake": "modules.Add(HTML);",
+            "explanation": "HTML without quotation marks is treated as an identifier. The list expects a string value.",
+            "fix": "Write modules.Add(\"HTML\");."
+          },
+          {
+            "mistake": "foreach (string module modules)",
+            "explanation": "A foreach header needs the keyword in between the loop variable and the collection.",
+            "fix": "Write foreach (string module in modules)."
+          }
+        ],
+        "recap": [
+          "A loop repeats a block; one pass through that block is an iteration.",
+          "A loop must be able to reach a stopping condition or it can become infinite.",
+          "while is driven by a bool condition; for groups a start, condition, and update; foreach visits each item in a collection.",
+          "An array stores a fixed number of same-type elements.",
+          "C# indexes begin at 0, so an array with three items has valid indexes 0, 1, and 2.",
+          "Array Length tells you how many elements are stored.",
+          "List<string> is a growable collection of strings. new List<string>() creates it, Add appends an item, and Count reports its current size.",
+          "Use foreach when you want each item and do not need to manage an index yourself."
+        ]
+      },
+      "example": "List<string> modules = new List<string>();\nmodules.Add(\"HTML\");\nmodules.Add(\"CSS\");\nmodules.Add(\"C#\");\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}",
+      "challenge": "Create a List<string> named modules. Add at least four string values with Add, then use foreach to print every module with Console.WriteLine.",
+      "practiceDetails": "Everything required here is taught explicitly in this module. Create the list first, add the strings one line at a time, and only then write the foreach loop. You do not need collection-initializer shorthand, a for loop, LINQ, or advanced generic syntax for this practice. Your C# answer must compile successfully before the Academy accepts it.",
+      "hint": "Start with List<string> modules = new List<string>();. Call modules.Add(\"...\"); at least four times. Then use foreach (string module in modules) { Console.WriteLine(module); }.",
+      "solution": "List<string> modules = new List<string>();\nmodules.Add(\"HTML\");\nmodules.Add(\"CSS\");\nmodules.Add(\"C#\");\nmodules.Add(\"JavaScript\");\n\nforeach (string module in modules)\n{\n    Console.WriteLine(module);\n}",
       "groups": [
         [
-          "List<"
+          "List<string>"
+        ],
+        [
+          "new List<string>()"
         ],
         [
           ".Add("
@@ -130,52 +1126,835 @@
           "foreach ("
         ],
         [
+          " in "
+        ],
+        [
           "Console.WriteLine"
         ]
       ],
       "references": [
         {
-          "title": "Microsoft Learn — A tour of C#",
-          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
+          "title": "Microsoft Learn — Arrays",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays"
         },
         {
-          "title": "Microsoft Learn — C# documentation",
-          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+          "title": "Microsoft Learn — Iteration statements",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements"
+        },
+        {
+          "title": "Microsoft Learn — List<T>",
+          "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Make sure a while loop changes something that can eventually make its condition false.",
+        "Do not forget that C# indexes begin at 0. The last valid index is one less than the collection's element count.",
+        "Array Length is the number of elements, not the last valid index.",
+        "The [] in int[] are part of the array type; leaving them out declares a single int instead of an int array.",
+        "List<string> may contain strings. Put text values such as \"HTML\" in quotation marks.",
+        "The type in List<string> and new List<string>() must agree in this lesson.",
+        "foreach needs the keyword in between its loop variable and collection.",
+        "Do not reach for LINQ, lambdas, collection-expression shorthand, or advanced generic syntax yet; those concepts have not been taught."
+      ],
+      "mastery": [
+        "Explain the words loop, iteration, counter, collection, element, and index in your own words.",
+        "Write a while loop that prints 1 through 3 and explain exactly why it stops.",
+        "Read for (int i = 0; i < 3; i++) and explain the start, condition, and update parts.",
+        "Create an int array with three values and correctly identify indexes 0, 1, and 2.",
+        "Explain why scores[3] is invalid for a three-item array even though scores.Length is 3.",
+        "Create a List<string> with new List<string>(), add values with Add, and read its Count.",
+        "Write a foreach loop over a List<string> and explain what the loop variable represents.",
+        "Recognize and fix a simple infinite loop, invalid array declaration, invalid index, mismatched List type, or missing foreach in keyword."
+      ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "List<string>"
+          ],
+          [
+            "new List<string>()"
+          ],
+          [
+            ".Add("
+          ],
+          [
+            "foreach ("
+          ],
+          [
+            " in "
+          ],
+          [
+            "Console.WriteLine"
+          ]
+        ],
+        "practiceMinLength": 115,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create an int[] named scores with at least three numbers. Use foreach to print every score with Console.WriteLine.",
+            "groups": [
+              [
+                "int[]"
+              ],
+              [
+                "scores"
+              ],
+              [
+                "foreach ("
+              ],
+              [
+                " in "
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 70
+          },
+          {
+            "prompt": "Create a List<string> named modules with new List<string>(). Add at least one string with Add, then use foreach to print the items.",
+            "groups": [
+              [
+                "List<string>"
+              ],
+              [
+                "new List<string>()"
+              ],
+              [
+                ".Add("
+              ],
+              [
+                "foreach ("
+              ],
+              [
+                " in "
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 105
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "while ("
+            ],
+            [
+              "<="
+            ],
+            [
+              "Console.WriteLine"
+            ],
+            [
+              "counter = counter + 1"
+            ]
+          ],
+          "2": [
+            [
+              "int[]"
+            ],
+            [
+              "foreach ("
+            ],
+            [
+              " in "
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ],
+          "3": [
+            [
+              "List<string>"
+            ],
+            [
+              "new List<string>()"
+            ],
+            [
+              ".Add("
+            ],
+            [
+              "foreach ("
+            ],
+            [
+              " in "
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create an int counter that starts at 1. Use while (counter <= 3) to print the counter and increase it with counter = counter + 1; so the loop stops.",
+          "2": "Exam 2: Create an int[] with at least three numbers and use foreach to print every value.",
+          "3": "Exam 3: Create a List<string>, add at least two strings with Add, and use foreach to print every list item."
+        }
+      }
     },
     {
       "title": "Methods, Parameters & Return Values",
-      "summary": "Package behavior into methods with clear inputs/outputs and learn optional, named, ref/out, and expression-bodied forms gradually.",
+      "summary": "Learn how to give a reusable block of C# code a name, call it when you need it, pass values into it with parameters, and send a result back with return.",
       "concepts": [
         {
-          "name": "Method signature",
-          "explanation": "A method declares accessibility/modifiers, return type, name, and parameters. The parameter types are part of overload selection."
+          "name": "Why reusable code needs a name",
+          "explanation": "So far you have written instructions directly in the program. A method lets you put related instructions behind a name so you can run that behavior again without copying the same lines everywhere. In this Intern lesson, we use simple method-shaped local functions so you can focus on the core idea before classes and object methods arrive in the next module."
+        },
+        {
+          "name": "Parameters and arguments",
+          "explanation": "A parameter is a named input written in the method declaration. An argument is the actual value you provide when you call the method. For example, name is a parameter in Greet(string name), while \"Nova\" is the argument in Greet(\"Nova\")."
         },
         {
           "name": "Return values",
-          "explanation": "Use void when no value is returned; otherwise every reachable path must satisfy the method return contract unless execution throws."
-        },
-        {
-          "name": "Parameters",
-          "explanation": "Arguments are passed by value by default. ref, out, and in change parameter passing semantics and should be used only when their intent is clear."
+          "explanation": "Some methods only perform an action, while others calculate a value for the caller. void means the method does not send a value back. A method with a return type such as int must use return to send an int value back to the code that called it."
         }
       ],
-      "example": "static double Average(int first, int second)\n{\n    int total = first + second;\n    return total / 2.0;\n}\n\nstatic bool IsPassing(int score) => score >= 80;\n\nConsole.WriteLine(Average(80, 92));\nConsole.WriteLine(IsPassing(84));",
-      "challenge": "Write one method that accepts two numeric parameters and returns a calculated result, then call it.",
-      "hint": "Choose a non-void return type and return the computed value instead of only printing inside the method.",
-      "solution": "static double Average(int first, int second)\n{\n    int total = first + second;\n    return total / 2.0;\n}\n\nstatic bool IsPassing(int score) => score >= 80;\n\nConsole.WriteLine(Average(80, 92));\nConsole.WriteLine(IsPassing(84));",
+      "starter": "void SayHello()\n{\n    Console.WriteLine(\"Hello!\");\n}\n\nSayHello();",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what a method is, tell the difference between declaring and calling one, create a simple void method, add parameters, pass arguments, return a value, store that returned value in a variable, and fix common beginner mistakes involving parentheses, commas, parameter types, return, and method names.",
+        "whyItMatters": "Real programs repeat tasks constantly: calculate a score, display a message, check whether a player passed, convert data, save a file, or respond to a button click. Methods let you name those tasks and reuse them. Learning this clearly now will make classes, Unity scripts, web backends, and larger C# programs much easier later.",
+        "terms": [
+          {
+            "term": "Method",
+            "meaning": "A named reusable block of code that performs a task. In this lesson we practise the same core idea using simple functions in the beginner console workspace."
+          },
+          {
+            "term": "Declare",
+            "meaning": "To define something in code. Declaring a method means writing its name, inputs, return type, and body so C# knows what the method does."
+          },
+          {
+            "term": "Call",
+            "meaning": "To ask a method to run by writing its name followed by parentheses, such as SayHello()."
+          },
+          {
+            "term": "Parameter",
+            "meaning": "A named input listed in a method declaration. It acts like a variable that receives a value when the method is called."
+          },
+          {
+            "term": "Argument",
+            "meaning": "The actual value supplied to a parameter when you call a method."
+          },
+          {
+            "term": "Return type",
+            "meaning": "The type of value a method promises to send back. int means it returns a whole number; bool means it returns true/false; void means it returns no value."
+          },
+          {
+            "term": "Return value",
+            "meaning": "The value sent back to the caller by a return statement."
+          },
+          {
+            "term": "Caller",
+            "meaning": "The line of code that calls a method and asks it to run."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "void",
+            "meaning": "A return type meaning this method performs its task but does not send a value back to the caller."
+          },
+          {
+            "symbol": "MethodName()",
+            "meaning": "A method name followed by parentheses. In a declaration, the parentheses list parameters. In a call, the parentheses contain arguments."
+          },
+          {
+            "symbol": "{ }",
+            "meaning": "The braces contain the method body: the statements that run when the method is called."
+          },
+          {
+            "symbol": "string name",
+            "meaning": "A parameter declaration. string is the parameter type and name is the parameter's identifier."
+          },
+          {
+            "symbol": ",",
+            "meaning": "Separates multiple parameters or multiple arguments, such as Add(int first, int second) or Add(5, 3)."
+          },
+          {
+            "symbol": "int Add(...) ",
+            "meaning": "The int before Add is the return type. It promises that this method will send an int back when it finishes normally."
+          },
+          {
+            "symbol": "return value;",
+            "meaning": "Stops the method at that point and sends the value back to the caller. The value must match the method's return type."
+          },
+          {
+            "symbol": "int answer = Add(5, 3);",
+            "meaning": "Calls Add with two arguments, receives the returned int, and stores it in the variable answer."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Put one repeated action behind a name",
+            "explanation": "Start with the simplest possible reusable block. void says no value is returned. SayHello is the name you choose. The braces contain the instruction that belongs to the method. Nothing inside runs until you call SayHello().",
+            "code": "void SayHello()\n{\n    Console.WriteLine(\"Hello!\");\n}\n\nSayHello();"
+          },
+          {
+            "title": "Step 2 — Call the same method more than once",
+            "explanation": "A key reason to create a method is reuse. The declaration is written once, but you can call the method several times without copying the Console.WriteLine statement itself.",
+            "code": "void SayHello()\n{\n    Console.WriteLine(\"Hello!\");\n}\n\nSayHello();\nSayHello();"
+          },
+          {
+            "title": "Step 3 — Give the method one parameter",
+            "explanation": "Now the method needs information from its caller. string name creates a parameter named name. During each call, the argument inside the parentheses is placed into that parameter for that run of the method.",
+            "code": "void Greet(string name)\n{\n    Console.WriteLine($\"Hello, {name}\");\n}\n\nGreet(\"Nova\");\nGreet(\"Diaan\");"
+          },
+          {
+            "title": "Step 4 — Use two parameters",
+            "explanation": "Methods can receive more than one input. Separate parameter declarations with a comma. When calling the method, provide the arguments in the same order.",
+            "code": "void ShowScore(string name, int score)\n{\n    Console.WriteLine($\"{name}: {score}\");\n}\n\nShowScore(\"Nova\", 84);"
+          },
+          {
+            "title": "Step 5 — Return a calculated value",
+            "explanation": "This method does not only print something. The int before Add promises that the method returns an int. return total; sends the calculated value back to the caller.",
+            "code": "int Add(int first, int second)\n{\n    int total = first + second;\n    return total;\n}\n\nint answer = Add(5, 3);\nConsole.WriteLine(answer);"
+          },
+          {
+            "title": "Step 6 — Return a bool from a condition",
+            "explanation": "A return value can use any taught type. Because score >= 80 produces true or false, a bool method can return that comparison result directly.",
+            "code": "bool IsPassing(int score)\n{\n    return score >= 80;\n}\n\nbool passingGrade = IsPassing(84);\nConsole.WriteLine(passingGrade);"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "int Add(int first, int second)",
+            "meaning": "Declares a reusable block named Add. The first int is its return type. first and second are int parameters."
+          },
+          {
+            "piece": "{ ... }",
+            "meaning": "The method body. These statements run whenever Add is called."
+          },
+          {
+            "piece": "int total = first + second;",
+            "meaning": "Uses the parameter values just like normal variables and stores their sum."
+          },
+          {
+            "piece": "return total;",
+            "meaning": "Sends the calculated int back to whoever called Add."
+          },
+          {
+            "piece": "Add(5, 3)",
+            "meaning": "Calls Add. 5 becomes first and 3 becomes second for this call."
+          },
+          {
+            "piece": "int answer = Add(5, 3);",
+            "meaning": "Receives the returned result and stores it in answer."
+          },
+          {
+            "piece": "Console.WriteLine(answer);",
+            "meaning": "Prints the value that came back from the method."
+          }
+        ],
+        "computerSteps": [
+          "The compiler first checks that the method declaration has valid syntax: a return type, name, parentheses, parameter declarations, and a body.",
+          "When execution reaches Add(5, 3), the program enters the Add method and gives 5 to first and 3 to second.",
+          "The method calculates total as 8.",
+          "return total; sends 8 back to the exact place where Add(5, 3) was called.",
+          "The returned 8 is assigned to answer.",
+          "Execution continues with the next statement after the call, which prints answer."
+        ],
+        "guidedChanges": [
+          "Change SayHello so it prints a different message, then call it twice. Notice that you only edit the message in one place.",
+          "Change Greet(\"Nova\") to Greet(\"Alex\") and predict which value the name parameter will contain during that call.",
+          "Add a second call to ShowScore with a different name and score. Keep the argument order the same as the parameter order.",
+          "Change Add(5, 3) to Add(10, 4), predict the returned result, then run it.",
+          "Change IsPassing(84) to IsPassing(70) and predict the bool returned by score >= 80.",
+          "Temporarily remove return total; from Add. Compile the code and read the compiler message before restoring the line."
+        ],
+        "workedExampleIntro": "The final example combines only ideas already introduced in this lesson: a named reusable block, typed parameters, arithmetic from Module 2, an int return type, return, a method call with arguments, a variable receiving the result, and Console.WriteLine.",
+        "errorExamples": [
+          {
+            "mistake": "void Say Hello()",
+            "explanation": "Method names are identifiers, and identifiers cannot contain spaces. C# reads Say and Hello as separate pieces instead of one method name.",
+            "fix": "Use a valid identifier such as SayHello()."
+          },
+          {
+            "mistake": "SayHello;",
+            "explanation": "Writing only the method name does not call it. A method call needs parentheses after the name.",
+            "fix": "Write SayHello();."
+          },
+          {
+            "mistake": "Greet() when Greet(string name) needs one parameter",
+            "explanation": "The declaration says the method needs one string input, but the call supplies no argument.",
+            "fix": "Provide a string argument, for example Greet(\"Nova\");."
+          },
+          {
+            "mistake": "ShowScore(84, \"Nova\")",
+            "explanation": "The arguments are in the wrong order for ShowScore(string name, int score). C# expects a string first and an int second.",
+            "fix": "Write ShowScore(\"Nova\", 84);."
+          },
+          {
+            "mistake": "int Add(int first, int second) { int total = first + second; }",
+            "explanation": "The method promises to return an int, but it reaches the end without returning one. The compiler reports that not all code paths return a value.",
+            "fix": "Add return total; before the closing brace."
+          },
+          {
+            "mistake": "void PrintScore(int score) { return score; }",
+            "explanation": "void says the method does not return a value, so returning an int conflicts with that contract.",
+            "fix": "Either print/use the value inside the void method, or change the method to an int return type when a value should be returned."
+          },
+          {
+            "mistake": "int Add(int first int second)",
+            "explanation": "Multiple parameters must be separated by commas.",
+            "fix": "Write int Add(int first, int second)."
+          },
+          {
+            "mistake": "sayHello(); when the declaration is SayHello()",
+            "explanation": "C# is case-sensitive, so sayHello and SayHello are different identifiers.",
+            "fix": "Call the method using exactly the same capitalization as its declaration."
+          }
+        ],
+        "recap": [
+          "A method gives a reusable block of behavior a name.",
+          "Declaring a method defines it; calling a method asks it to run.",
+          "Parentheses contain parameter declarations in the method definition and argument values in the call.",
+          "A parameter is the named input; an argument is the actual value supplied for one call.",
+          "void means no value is returned.",
+          "A return type such as int or bool tells the caller what kind of value to expect back.",
+          "return sends a value back to the caller and must agree with the method's return type.",
+          "A returned value can be stored in a variable and used by later statements.",
+          "Method names follow the same identifier and case-sensitivity rules you learned in Module 1.",
+          "Optional parameters, named arguments, ref/out/in, overloads, expression-bodied methods, access modifiers, and advanced method design are intentionally left for later ranks."
+        ]
+      },
+      "example": "int Add(int first, int second)\n{\n    int total = first + second;\n    return total;\n}\n\nint answer = Add(5, 3);\nConsole.WriteLine(answer);",
+      "challenge": "Write a method named Add that accepts two int parameters and returns their sum. Call it with two numbers, store the returned value in an int variable, and print that variable with Console.WriteLine.",
+      "practiceDetails": "Use only the method concepts taught in this module. You need an int return type, a valid method name, two int parameters separated by a comma, a return statement, a call with two int arguments, a variable that receives the returned value, and Console.WriteLine. You do not need static, public/private, optional or named arguments, ref/out/in, overloads, expression-bodied syntax, lambdas, or classes. Your C# answer must compile successfully before the Academy accepts it.",
+      "hint": "Start with int Add(int first, int second). Inside the braces, return first + second; or store the sum first and return that variable. Then call Add(5, 3), store the result in an int, and print it.",
+      "solution": "int Add(int first, int second)\n{\n    int total = first + second;\n    return total;\n}\n\nint answer = Add(5, 3);\nConsole.WriteLine(answer);",
       "groups": [
         [
-          "static "
+          "int Add("
+        ],
+        [
+          "int first",
+          "int second"
         ],
         [
           "return "
         ],
         [
-          "("
+          "Add(5, 3)"
+        ],
+        [
+          "Console.WriteLine"
+        ]
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn — Methods",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/methods"
+        },
+        {
+          "title": "Microsoft Learn — Method parameters",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters"
+        },
+        {
+          "title": "Microsoft Learn — return statement",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-return-statement"
+        }
+      ],
+      "pitfalls": [
+        "Method names are identifiers: do not put spaces in them, and remember that C# is case-sensitive.",
+        "A method declaration and a method call are different. The declaration explains what the method is; the call uses its name with arguments to run it.",
+        "A call needs parentheses even when there are no arguments: SayHello();, not SayHello;.",
+        "Arguments must match the expected parameter types and order in this beginner lesson.",
+        "Separate multiple parameters and multiple arguments with commas.",
+        "If a method has an int or bool return type, make sure its normal path returns a value of that type.",
+        "Do not return a value from a void method.",
+        "Do not introduce static, access modifiers, ref/out/in, optional parameters, named arguments, overloads, expression-bodied syntax, or lambdas yet; they are not required for Intern Module 4."
+      ],
+      "mastery": [
+        "Explain the difference between declaring a method and calling a method.",
+        "Explain the difference between a parameter and an argument using your own example.",
+        "Write and call a void method that prints a message.",
+        "Write a method with one string parameter and pass it a string argument.",
+        "Write a method with two int parameters and explain why a comma separates them.",
+        "Explain the difference between void and an int or bool return type.",
+        "Write an int-returning method, return a calculated result, call it, and store its return value in a variable.",
+        "Recognize and fix a missing call parentheses error, wrong argument count/order, missing comma, missing return value, invalid return from void, or capitalization mismatch."
+      ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "int Add("
+          ],
+          [
+            "int first",
+            "int second"
+          ],
+          [
+            "return "
+          ],
+          [
+            "Add(5, 3)"
+          ],
+          [
+            "Console.WriteLine"
+          ]
+        ],
+        "practiceMinLength": 105,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create a void method named Greet that accepts one string parameter named name and prints that parameter with Console.WriteLine. Call Greet with a string argument.",
+            "groups": [
+              [
+                "void Greet("
+              ],
+              [
+                "string name"
+              ],
+              [
+                "Console.WriteLine"
+              ],
+              [
+                "Greet("
+              ]
+            ],
+            "minLength": 75
+          },
+          {
+            "prompt": "Create an int method named Add with two int parameters. Return their sum, call Add with two numbers, store the returned value in an int variable, and print it.",
+            "groups": [
+              [
+                "int Add("
+              ],
+              [
+                "return "
+              ],
+              [
+                "Add("
+              ],
+              [
+                "int "
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 105
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "void "
+            ],
+            [
+              "Console.WriteLine"
+            ],
+            [
+              "();"
+            ]
+          ],
+          "2": [
+            [
+              "string name"
+            ],
+            [
+              "Console.WriteLine"
+            ],
+            [
+              "("
+            ],
+            [
+              ")"
+            ]
+          ],
+          "3": [
+            [
+              "int Add("
+            ],
+            [
+              "return "
+            ],
+            [
+              "Add("
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Declare a simple void method that prints a message with Console.WriteLine, then call that method. Do not use parameters yet.",
+          "2": "Exam 2: Declare a method with one string parameter named name, print the parameter, and call the method with a string argument.",
+          "3": "Exam 3: Declare int Add(int first, int second), return the sum, call Add with two numbers, store the returned result, and print it."
+        }
+      }
+    },
+    {
+      "title": "Classes, Objects & Basic Encapsulation",
+      "summary": "Learn how a class describes a kind of thing, how objects are created from that class, how properties store object state, how constructors give new objects starting values, and how a class can control changes to its own data.",
+      "concepts": [
+        {
+          "name": "Classes and objects",
+          "explanation": "A class is a definition for a kind of thing in your program. An object (also called an instance) is one actual value created from that class. One Learner class can be used to create many separate learner objects."
+        },
+        {
+          "name": "Properties and constructors",
+          "explanation": "Properties hold information that belongs to an object. A constructor runs when a new object is created and gives that object the starting state it needs."
+        },
+        {
+          "name": "Basic encapsulation",
+          "explanation": "A class can decide which parts of its state outside code may read or change. At Intern level, you will use public for members callers may use and private set when a property should be readable from outside but changed only by code inside the class."
+        }
+      ],
+      "starter": "Learner learner = new Learner(\"Nova\");\nConsole.WriteLine(learner.Name);\n\nclass Learner\n{\n    public string Name { get; set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain the difference between a class and an object, declare a small class, add simple properties, create an object with new, use a constructor to give it starting data, call a method on that object, and understand why private set can prevent outside code from changing a property directly.",
+        "whyItMatters": "Real programs need to keep related data and behavior together. A game may have Player, Enemy, or Weapon objects. A business app may have Customer, Invoice, or Product objects. Classes are one of C#'s main tools for describing those things. This lesson gives you the smallest useful foundation before later ranks introduce inheritance, interfaces, advanced access rules, and larger object-oriented design.",
+        "terms": [
+          {
+            "term": "Class",
+            "meaning": "A C# definition that describes what data and behavior a kind of object can have."
+          },
+          {
+            "term": "Object",
+            "meaning": "One actual value created from a class. Object and instance mean the same thing at this level."
+          },
+          {
+            "term": "Instance",
+            "meaning": "Another word for an object created from a class."
+          },
+          {
+            "term": "State",
+            "meaning": "The current information stored by an object, such as a learner's name or score."
+          },
+          {
+            "term": "Property",
+            "meaning": "A named member of a class used to expose or store a piece of an object's state."
+          },
+          {
+            "term": "Constructor",
+            "meaning": "Special code that runs when you create an object. Its name matches the class name and it has no return type."
+          },
+          {
+            "term": "Member",
+            "meaning": "Something that belongs to a class or object, such as a property or method."
+          },
+          {
+            "term": "Access modifier",
+            "meaning": "A keyword such as public or private that controls where a class member may be used."
+          },
+          {
+            "term": "Encapsulation",
+            "meaning": "Keeping an object's state and behavior together and controlling how outside code may interact with that state."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "class Learner",
+            "meaning": "Declares a class named Learner. class is lowercase because it is a C# keyword; Learner is the identifier we chose for the class."
+          },
+          {
+            "symbol": "{ ... }",
+            "meaning": "The braces after a class contain the members that belong to that class."
+          },
+          {
+            "symbol": "public",
+            "meaning": "Allows code outside the class to use that member. We use it here for the small surface we deliberately expose."
+          },
+          {
+            "symbol": "string Name { get; set; }",
+            "meaning": "Declares a string property named Name. get allows its value to be read and set allows its value to be assigned."
+          },
+          {
+            "symbol": "Learner(string name)",
+            "meaning": "A constructor for Learner. It has the same name as the class and receives a string parameter named name."
+          },
+          {
+            "symbol": "new Learner(\"Nova\")",
+            "meaning": "Creates a new Learner object and calls the Learner constructor with the string argument \"Nova\"."
+          },
+          {
+            "symbol": "learner.Name",
+            "meaning": "The dot accesses the Name member belonging to the learner object."
+          },
+          {
+            "symbol": "public int Score { get; private set; }",
+            "meaning": "Outside code may read Score, but only code inside Learner may use its setter to change it."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Declare the smallest class",
+            "explanation": "A class declaration starts with the class keyword, then the class name, then braces. This class has no data or behavior yet. That is okay: first learn the shape of the declaration.",
+            "code": "class Learner\n{\n}"
+          },
+          {
+            "title": "Step 2 — Add one property",
+            "explanation": "Name is a property belonging to every Learner object. public lets outside code use it. string is the property's type. get lets code read the value, while set lets code assign a value.",
+            "code": "class Learner\n{\n    public string Name { get; set; }\n}"
+          },
+          {
+            "title": "Step 3 — Create an object",
+            "explanation": "Now create one actual Learner object. Learner on the left is the type, learner is the variable name, and new Learner() creates the object. The dot then accesses that object's Name property. In these Academy top-level programs, executable statements appear before the class declaration.",
+            "code": "Learner learner = new Learner();\nlearner.Name = \"Nova\";\nConsole.WriteLine(learner.Name);\n\nclass Learner\n{\n    public string Name { get; set; }\n}"
+          },
+          {
+            "title": "Step 4 — Give the object starting data with a constructor",
+            "explanation": "Instead of creating an empty learner and assigning Name afterward, a constructor can require a name when the object is created. The constructor is named Learner because the class is Learner. It has no void or other return type.",
+            "code": "Learner learner = new Learner(\"Nova\");\nConsole.WriteLine(learner.Name);\n\nclass Learner\n{\n    public string Name { get; set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n}"
+          },
+          {
+            "title": "Step 5 — Put behavior inside the class",
+            "explanation": "Methods can belong to a class too. You already learned methods in Module 4. Here ShowName belongs to each Learner object, so we call it through the object with learner.ShowName().",
+            "code": "Learner learner = new Learner(\"Nova\");\nlearner.ShowName();\n\nclass Learner\n{\n    public string Name { get; set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void ShowName()\n    {\n        Console.WriteLine(Name);\n    }\n}"
+          },
+          {
+            "title": "Step 6 — Let the class control a score",
+            "explanation": "Score uses private set. Code outside Learner may read learner.Score, but it cannot directly assign a new score. Instead, RecordScore is the controlled way to change it. This is your first small example of encapsulation.",
+            "code": "Learner learner = new Learner(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");\n\nclass Learner\n{\n    public string Name { get; set; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}"
+          },
+          {
+            "title": "Step 7 — Create two separate objects",
+            "explanation": "A class is not one shared object. Each new Learner(...) call creates a separate instance with its own state. Changing one learner's score does not automatically change the other learner.",
+            "code": "Learner first = new Learner(\"Nova\");\nLearner second = new Learner(\"Alex\");\n\nfirst.RecordScore(91);\nsecond.RecordScore(76);\n\nConsole.WriteLine($\"{first.Name}: {first.Score}\");\nConsole.WriteLine($\"{second.Name}: {second.Score}\");\n\nclass Learner\n{\n    public string Name { get; set; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "class Learner",
+            "meaning": "Declares a new type named Learner."
+          },
+          {
+            "piece": "public string Name { get; set; }",
+            "meaning": "Adds a public string property called Name that outside code may read and assign."
+          },
+          {
+            "piece": "public int Score { get; private set; }",
+            "meaning": "Adds an int property called Score. Outside code may read it, but only Learner code may change it through the setter."
+          },
+          {
+            "piece": "public Learner(string name)",
+            "meaning": "Declares the constructor. It runs when a new Learner is created and receives the starting name."
+          },
+          {
+            "piece": "Name = name;",
+            "meaning": "Copies the constructor parameter value into the object's Name property."
+          },
+          {
+            "piece": "public void RecordScore(int score)",
+            "meaning": "Declares a public method belonging to Learner. It receives one int argument when called."
+          },
+          {
+            "piece": "Score = score;",
+            "meaning": "Changes Score from inside the class. This is allowed even though Score has a private setter."
+          },
+          {
+            "piece": "Learner learner = new Learner(\"Nova\");",
+            "meaning": "Declares a variable of type Learner, creates a new Learner object, calls its constructor with \"Nova\", and stores the resulting object in learner."
+          },
+          {
+            "piece": "learner.RecordScore(91);",
+            "meaning": "Uses the dot to call the RecordScore method on that specific object."
+          },
+          {
+            "piece": "learner.Name / learner.Score",
+            "meaning": "Uses the dot to read properties belonging to that specific object."
+          }
+        ],
+        "computerSteps": [
+          "The compiler reads the whole file and learns that a type named Learner exists, even though the class declaration appears after the top-level executable statements in these Academy snippets.",
+          "When execution reaches new Learner(\"Nova\"), memory is created for one Learner object.",
+          "The Learner constructor runs. Its name parameter receives \"Nova\" and Name = name; stores that value in the new object's Name property.",
+          "The completed object is stored in the variable named learner.",
+          "learner.RecordScore(91) calls the RecordScore method on that exact object. The method receives 91 and changes its Score from inside the class.",
+          "learner.Name and learner.Score read the current state of that object for the final Console.WriteLine call.",
+          "If another Learner object is created with new, it receives its own separate Name and Score state."
+        ],
+        "guidedChanges": [
+          "Change the constructor argument from \"Nova\" to your own chosen name. Predict what learner.Name will print, then run the code.",
+          "Add a second public string property named Track with get and set. Assign a value such as \"C#\" after creating the learner, then print it.",
+          "Change the RecordScore argument from 91 to another whole number and predict learner.Score before running the program.",
+          "Create a second Learner object with a different name. Print both names and confirm that each object keeps its own state.",
+          "Temporarily try learner.Score = 50; outside the class while Score has private set. Compile it and read the accessibility error, then remove that line and use RecordScore instead.",
+          "Temporarily rename the constructor to Student while the class is still Learner. Compile the code, read the error, then restore the matching constructor name."
+        ],
+        "workedExampleIntro": "The final example combines only concepts taught by the end of C# Intern: variables and interpolation from Module 1, arguments and methods from Module 4, plus this module's class, properties, constructor, new object creation, member access, and one small encapsulation rule. It intentionally does not use inheritance, interfaces, static members, fields, this, records, abstract classes, or advanced object-oriented patterns.",
+        "errorExamples": [
+          {
+            "mistake": "Class Learner",
+            "explanation": "C# keywords are case-sensitive. The keyword is lowercase class, not Class.",
+            "fix": "Write class Learner."
+          },
+          {
+            "mistake": "public string Name { get set; }",
+            "explanation": "The get accessor needs its own semicolon. Without get;, the property syntax is incomplete.",
+            "fix": "Write public string Name { get; set; }."
+          },
+          {
+            "mistake": "public void Learner(string name)",
+            "explanation": "A constructor has no return type. Adding void makes this a method named Learner instead of a constructor.",
+            "fix": "Write public Learner(string name)."
+          },
+          {
+            "mistake": "public Student(string name) inside class Learner",
+            "explanation": "A constructor name must exactly match its class name. Student cannot be the constructor for Learner.",
+            "fix": "Rename it to public Learner(string name)."
+          },
+          {
+            "mistake": "Learner learner = new Learner;",
+            "explanation": "Constructor calls use parentheses, even when there are no arguments.",
+            "fix": "Write new Learner() or supply the required constructor arguments."
+          },
+          {
+            "mistake": "learner.name when the property is Name",
+            "explanation": "C# is case-sensitive. name and Name are different identifiers.",
+            "fix": "Use learner.Name with the same capitalization as the property declaration."
+          },
+          {
+            "mistake": "learner.Score = 91; when Score has private set",
+            "explanation": "The property is readable from outside Learner, but its setter is private. The compiler blocks direct assignment from outside the class.",
+            "fix": "Use the public RecordScore(91) method that changes Score from inside Learner."
+          },
+          {
+            "mistake": "Putting class Learner before executable top-level statements, then placing statements after the class",
+            "explanation": "In a C# file that uses top-level statements, the executable top-level statements must come before type declarations. Otherwise the compiler can report that top-level statements must precede namespace and type declarations.",
+            "fix": "For these Academy snippets, put the executable statements first and the class declaration afterward."
+          },
+          {
+            "mistake": "Learner learner = new Learner(); when the only constructor is Learner(string name)",
+            "explanation": "The constructor requires one string argument, but the call supplies none.",
+            "fix": "Call new Learner(\"Nova\") or provide another string value."
+          }
+        ],
+        "recap": [
+          "A class describes a kind of object; an object or instance is one actual value created from that class.",
+          "Properties store or expose information belonging to each object.",
+          "The new keyword creates an object and calls its constructor.",
+          "A constructor has the same name as the class and no return type.",
+          "The dot accesses properties and methods on a specific object.",
+          "Different objects created from the same class keep separate instance state.",
+          "public allows outside code to use a member.",
+          "private set allows outside code to read a property while limiting property assignment to code inside the class.",
+          "Using a method such as RecordScore to control a state change is a small example of encapsulation.",
+          "Inheritance, interfaces, polymorphism, static members, fields, this, records, abstract classes, and larger object-oriented design are intentionally left for later ranks."
+        ]
+      },
+      "example": "Learner learner = new Learner(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");\n\nclass Learner\n{\n    public string Name { get; set; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}",
+      "challenge": "Create a Learner class with a public string Name property, a public int Score property with private set, a constructor that receives the starting name, and a public RecordScore method that receives an int and changes Score. In the top-level statements, create one Learner object with a name, call RecordScore with a score, then print the learner's Name and Score.",
+      "practiceDetails": "Use only concepts taught through C# Intern Module 5. In the Academy's top-level C# layout, put the executable statements first and the class declaration afterward. Your class needs public string Name { get; set; }, public int Score { get; private set; }, a Learner(string name) constructor that assigns Name, and a public void RecordScore(int score) method that assigns Score. Create the object with new Learner(\"Nova\"), call learner.RecordScore(91), and print learner.Name and learner.Score. You do not need static, fields, this, inheritance, interfaces, abstract/virtual/override, records, or other advanced object-oriented features. Your C# answer must compile successfully before the Academy accepts it.",
+      "hint": "Build it in layers: first create the Learner object in the top-level statements, then declare class Learner below those statements. Add Name, add Score with private set, add the constructor, then add RecordScore. Remember that a constructor has the same name as the class and no return type.",
+      "solution": "Learner learner = new Learner(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");\n\nclass Learner\n{\n    public string Name { get; set; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}",
+      "groups": [
+        [
+          "class Learner"
+        ],
+        [
+          "public string Name"
+        ],
+        [
+          "public int Score",
+          "private set"
+        ],
+        [
+          "public Learner("
+        ],
+        [
+          "new Learner("
+        ],
+        [
+          "RecordScore("
         ],
         [
           "Console.WriteLine"
@@ -191,57 +1970,165 @@
           "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
-    },
-    {
-      "title": "Classes, Objects & Basic Encapsulation",
-      "summary": "Create your own reference types with fields/properties, constructors, methods, and controlled access to state.",
-      "concepts": [
-        {
-          "name": "Class and instance",
-          "explanation": "A class describes a type; new creates an instance. Each instance has its own instance state while static members belong to the type itself."
+      "pitfalls": [
+        "C# keywords are case-sensitive: write class, not Class.",
+        "A constructor must match the class name exactly and must not have a return type such as void.",
+        "Creating an object with new calls a constructor; include parentheses and any required arguments.",
+        "Property/member names are case-sensitive. Name and name are different identifiers.",
+        "A property with private set cannot be assigned directly from outside the class.",
+        "In the Academy's top-level program layout, executable statements must come before class declarations.",
+        "A class is the definition; each object created with new is a separate instance with its own state.",
+        "Do not jump to inheritance, interfaces, static members, or advanced object-oriented patterns yet; they are intentionally taught later."
+      ],
+      "mastery": [
+        "I can explain the difference between a class and an object/instance.",
+        "I can declare a small class using the class keyword and braces.",
+        "I can add and read simple public properties.",
+        "I can create an object using new and a constructor call.",
+        "I can explain why a constructor matches the class name and has no return type.",
+        "I can use the dot to access a specific object's properties and methods.",
+        "I can explain that two objects created from the same class keep separate state.",
+        "I can explain and use private set as a basic controlled-state rule.",
+        "I can read common compiler errors involving constructor calls, access, capitalization, and top-level statement ordering."
+      ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "class Learner"
+          ],
+          [
+            "public string Name"
+          ],
+          [
+            "public int Score"
+          ],
+          [
+            "private set"
+          ],
+          [
+            "public Learner("
+          ],
+          [
+            "new Learner("
+          ],
+          [
+            "RecordScore("
+          ],
+          [
+            "Console.WriteLine"
+          ]
+        ],
+        "practiceMinLength": 220,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create a Learner class with a public string Name property using get and set. In the top-level statements, create a new Learner object, assign a name to its Name property, and print learner.Name.",
+            "groups": [
+              [
+                "class Learner"
+              ],
+              [
+                "public string Name"
+              ],
+              [
+                "get;",
+                "set;"
+              ],
+              [
+                "new Learner()"
+              ],
+              [
+                ".Name"
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 130
+          },
+          {
+            "prompt": "Create a Learner class with a public string Name property and a constructor Learner(string name) that assigns Name. In the top-level statements, create a Learner using new Learner with a string argument and print its Name.",
+            "groups": [
+              [
+                "class Learner"
+              ],
+              [
+                "public string Name"
+              ],
+              [
+                "public Learner("
+              ],
+              [
+                "string name"
+              ],
+              [
+                "Name = name"
+              ],
+              [
+                "new Learner("
+              ],
+              [
+                "Console.WriteLine"
+              ]
+            ],
+            "minLength": 155
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "class Learner"
+            ],
+            [
+              "public string Name"
+            ],
+            [
+              "new Learner()"
+            ],
+            [
+              ".Name"
+            ]
+          ],
+          "2": [
+            [
+              "class Learner"
+            ],
+            [
+              "public Learner("
+            ],
+            [
+              "string name"
+            ],
+            [
+              "Name = name"
+            ],
+            [
+              "new Learner("
+            ]
+          ],
+          "3": [
+            [
+              "class Learner"
+            ],
+            [
+              "private set"
+            ],
+            [
+              "RecordScore("
+            ],
+            [
+              "new Learner("
+            ],
+            [
+              "Console.WriteLine"
+            ]
+          ]
         },
-        {
-          "name": "Properties",
-          "explanation": "Properties expose get/set accessors and are the normal public data surface for C# objects. Auto-properties are concise when no custom accessor logic is required."
-        },
-        {
-          "name": "Constructors",
-          "explanation": "Constructors establish valid initial state. Prefer objects that cannot exist in obviously invalid states after construction."
+        "examPrompts": {
+          "1": "Exam 1: Declare a Learner class with a public string Name property using get and set. Create one Learner object with new Learner(), assign a name through the property, and print the name.",
+          "2": "Exam 2: Give Learner a constructor Learner(string name) that stores the supplied name in its Name property. Create a Learner by passing a string argument to new Learner(...), then print Name.",
+          "3": "Exam 3: Build the complete Intern object model: Learner has Name, Score with private set, a name constructor, and RecordScore(int score). Create an object, record a score, and print its name and score."
         }
-      ],
-      "example": "class Learner\n{\n    public string Name { get; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}\n\nLearner learner = new(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");",
-      "challenge": "Create a class with two properties, a constructor, and one method that changes controlled state.",
-      "hint": "Use private set when callers should be able to read a property but not assign it directly.",
-      "solution": "class Learner\n{\n    public string Name { get; }\n    public int Score { get; private set; }\n\n    public Learner(string name)\n    {\n        Name = name;\n    }\n\n    public void RecordScore(int score)\n    {\n        Score = score;\n    }\n}\n\nLearner learner = new(\"Nova\");\nlearner.RecordScore(91);\nConsole.WriteLine($\"{learner.Name}: {learner.Score}\");",
-      "groups": [
-        [
-          "class "
-        ],
-        [
-          "public "
-        ],
-        [
-          "{ get;"
-        ],
-        [
-          "constructor",
-          "public "
-        ]
-      ],
-      "references": [
-        {
-          "title": "Microsoft Learn — A tour of C#",
-          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"
-        },
-        {
-          "title": "Microsoft Learn — C# documentation",
-          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
-        }
-      ],
-      "pitfalls": [],
-      "mastery": []
+      }
     }
   ]
 }

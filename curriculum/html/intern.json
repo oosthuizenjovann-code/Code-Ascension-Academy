@@ -4,31 +4,319 @@
   "topics": [
     {
       "title": "Document Structure & Syntax",
-      "summary": "Learn the skeleton every HTML page is built from and how elements, attributes, nesting, and document metadata fit together.",
+      "summary": "Start from absolute zero: understand what websites, webpages, browsers and HTML files are, then learn tags, elements, attributes, nesting and the small document structure that gives a webpage its meaning.",
       "concepts": [
         {
-          "name": "Document skeleton",
-          "explanation": "A modern document starts with a doctype, then an html root. The head stores metadata and resource links; the body contains content that participates in the visible page."
+          "name": "HTML gives webpage content structure",
+          "explanation": "HTML stands for HyperText Markup Language. It is a markup language, not a programming language. HTML describes the structure and meaning of webpage content so a browser can understand what is a heading, paragraph, title, link, form control and more."
         },
         {
-          "name": "Elements and attributes",
-          "explanation": "Elements give content structure. Attributes add extra information such as an id, language, URL, or input type. Attribute values should be quoted consistently."
+          "name": "Elements are built from markup",
+          "explanation": "Many HTML elements have an opening tag, some content, and a matching closing tag. For example, <code>&lt;p&gt;Hello&lt;/p&gt;</code> is one paragraph element. The angle brackets and slash are part of the markup; they are not meant to appear as ordinary page text."
         },
         {
-          "name": "Nesting and validity",
-          "explanation": "Elements form a tree. Closing tags should match the element you opened, and child elements must be placed where the HTML content model permits them."
+          "name": "Elements form a nested document tree",
+          "explanation": "HTML elements can contain other elements. This is called nesting. A containing element is often called a parent and an element inside it is a child. Correct nesting and clear indentation make the structure easier for both the browser and the person reading the source code to understand."
         }
       ],
-      "example": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Academy Profile</title>\n</head>\n<body>\n  <h1>Code Ascension</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>",
-      "challenge": "Create a valid small HTML document with a doctype, a title, one h1, and one paragraph.",
-      "hint": "Start with <!doctype html>, then create html, head, title, body, h1 and p in that nesting order.",
-      "solution": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Academy Profile</title>\n</head>\n<body>\n  <h1>Code Ascension</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>",
+      "starter": "<p>Hello, Academy!</p>",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain the difference between a website and a webpage, describe what a browser does with an HTML file, recognize opening and closing tags, build simple elements, add a quoted attribute, nest elements correctly, and create a small complete HTML document with a doctype, html, head, title and body.",
+        "whyItMatters": "Every webpage needs structure before styling or interactivity can make sense. HTML is the foundation that tells the browser what each piece of content is. If you understand tags, elements, attributes and nesting now, later HTML, CSS and JavaScript lessons become much easier to reason about instead of feeling like collections of mysterious symbols.",
+        "terms": [
+          {
+            "term": "Website",
+            "meaning": "A collection of related webpages and resources that belong together, usually under the same site or domain."
+          },
+          {
+            "term": "Webpage",
+            "meaning": "One document or page that a browser can display. A website can contain many webpages."
+          },
+          {
+            "term": "Browser",
+            "meaning": "A program such as Edge, Chrome or Firefox that reads web files, interprets their HTML, and displays the resulting webpage."
+          },
+          {
+            "term": "HTML",
+            "meaning": "HyperText Markup Language. A markup language used to describe the structure and meaning of webpage content."
+          },
+          {
+            "term": "Source code / source file",
+            "meaning": "The text you write and save before the browser interprets it. An HTML source file normally ends with the .html extension."
+          },
+          {
+            "term": "Markup",
+            "meaning": "Special text such as tags and attributes that describes the structure or meaning of content."
+          },
+          {
+            "term": "Tag",
+            "meaning": "Markup inside angle brackets, such as <p> or </p>. Tags help mark where an element begins or ends."
+          },
+          {
+            "term": "Element",
+            "meaning": "A complete HTML structure such as <p>Hello</p>. Many elements contain an opening tag, content and a closing tag."
+          },
+          {
+            "term": "Content",
+            "meaning": "The information inside an element, such as the word Hello inside <p>Hello</p>."
+          },
+          {
+            "term": "Attribute",
+            "meaning": "Extra information written inside an opening tag, usually as a name and value such as lang=\"en\"."
+          },
+          {
+            "term": "Nesting",
+            "meaning": "Placing one HTML element inside another element."
+          },
+          {
+            "term": "Parent / child",
+            "meaning": "When one element contains another, the outer element is the parent and the inner element is its child."
+          },
+          {
+            "term": "Indentation",
+            "meaning": "Spaces added at the start of nested lines to make the document structure easier for people to read. Indentation usually does not change the meaning of normal HTML."
+          },
+          {
+            "term": "Metadata",
+            "meaning": "Information about the document rather than the main visible page content. The head contains metadata such as the page title."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": ".html",
+            "meaning": "The normal filename extension for an HTML document, for example index.html."
+          },
+          {
+            "symbol": "< and >",
+            "meaning": "Angle brackets mark the beginning and end of an HTML tag."
+          },
+          {
+            "symbol": "<p>",
+            "meaning": "An opening paragraph tag. It tells the browser that paragraph content begins here."
+          },
+          {
+            "symbol": "</p>",
+            "meaning": "A closing paragraph tag. The slash / tells the browser that this paragraph element ends here."
+          },
+          {
+            "symbol": "/",
+            "meaning": "Inside a closing tag, the forward slash marks that the element is being closed."
+          },
+          {
+            "symbol": "lang=\"en\"",
+            "meaning": "An attribute named lang with the quoted value en. It tells the browser that the content language is English."
+          },
+          {
+            "symbol": "=",
+            "meaning": "Inside an attribute, = connects the attribute name to its value. This is not JavaScript or C# assignment; it is HTML attribute syntax."
+          },
+          {
+            "symbol": "\" \"",
+            "meaning": "Quotation marks surround attribute values in the Academy's beginner HTML style."
+          },
+          {
+            "symbol": "<!doctype html>",
+            "meaning": "A declaration placed at the top of a modern HTML document so the browser uses modern HTML rules. It is a declaration, not a normal opening/closing element pair."
+          },
+          {
+            "symbol": "<html> ... </html>",
+            "meaning": "The root element that contains the HTML document."
+          },
+          {
+            "symbol": "<head> ... </head>",
+            "meaning": "Contains information about the document, such as its title, rather than the main visible page content."
+          },
+          {
+            "symbol": "<title> ... </title>",
+            "meaning": "Sets the document title shown by the browser, for example on the tab or window title."
+          },
+          {
+            "symbol": "<body> ... </body>",
+            "meaning": "Contains the main content that appears in the webpage."
+          },
+          {
+            "symbol": "<h1> ... </h1>",
+            "meaning": "Marks a top-level heading. Detailed heading hierarchy is taught in Module 2."
+          },
+          {
+            "symbol": "<meta charset=\"utf-8\">",
+            "meaning": "A common head element that tells the browser how document text is encoded. meta is a void element, so it does not use a separate closing tag."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — See the difference between text and markup",
+            "explanation": "A browser can display ordinary text, but ordinary text does not explain what role that text has. HTML markup gives the content structure and meaning.",
+            "code": "Hello, Academy!"
+          },
+          {
+            "title": "Step 2 — Build one paragraph element",
+            "explanation": "The opening <p> tag begins the paragraph, Hello, Academy! is the content, and the matching </p> tag closes the paragraph.",
+            "code": "<p>Hello, Academy!</p>"
+          },
+          {
+            "title": "Step 3 — Put two elements next to each other",
+            "explanation": "HTML documents normally contain many elements. Here the heading and paragraph are separate elements. Module 2 will teach heading hierarchy in more detail; for now, focus on recognizing each complete opening/content/closing structure.",
+            "code": "<h1>My First Webpage</h1>\n<p>I am learning HTML.</p>"
+          },
+          {
+            "title": "Step 4 — Add an attribute",
+            "explanation": "Attributes are written inside an opening tag. lang is the attribute name and \"en\" is its quoted value. The closing html tag does not repeat the attribute.",
+            "code": "<html lang=\"en\">\n</html>"
+          },
+          {
+            "title": "Step 5 — Nest visible content inside body",
+            "explanation": "The heading and paragraph are children of body. Indenting the child lines makes that relationship visible to you when reading the source.",
+            "code": "<body>\n  <h1>My First Webpage</h1>\n  <p>I am learning HTML.</p>\n</body>"
+          },
+          {
+            "title": "Step 6 — Give the document a head and title",
+            "explanation": "The head contains document information. The title is not a visible heading in the page body; it supplies the document title used by the browser.",
+            "code": "<head>\n  <title>My First Page</title>\n</head>"
+          },
+          {
+            "title": "Step 7 — Assemble the basic document skeleton",
+            "explanation": "Now combine only pieces already introduced: doctype, html with a language attribute, head/title, and body with visible content.",
+            "code": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>My First Webpage</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>"
+          },
+          {
+            "title": "Step 8 — Add a common character-encoding declaration",
+            "explanation": "meta charset is commonly placed near the start of head. Unlike most elements you have seen so far, meta is a void element: it does not wrap content and does not need a closing </meta> tag. It is useful to recognize, but the Module 1 practice does not require you to memorize it yet.",
+            "code": "<head>\n  <meta charset=\"utf-8\">\n  <title>My First Page</title>\n</head>"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "<!doctype html>",
+            "meaning": "Tell the browser to interpret the document using modern HTML rules."
+          },
+          {
+            "piece": "<html lang=\"en\">",
+            "meaning": "Open the root html element and declare English as the document language."
+          },
+          {
+            "piece": "<head>",
+            "meaning": "Open the part that stores document information rather than the main visible page content."
+          },
+          {
+            "piece": "<title>Academy Profile</title>",
+            "meaning": "Create a title element whose content is Academy Profile."
+          },
+          {
+            "piece": "</head>",
+            "meaning": "Close the head before beginning the visible body."
+          },
+          {
+            "piece": "<body>",
+            "meaning": "Open the container for the main visible webpage content."
+          },
+          {
+            "piece": "<h1>Code Ascension</h1>",
+            "meaning": "Create one visible top-level heading."
+          },
+          {
+            "piece": "<p>I am learning HTML.</p>",
+            "meaning": "Create one visible paragraph."
+          },
+          {
+            "piece": "</body>",
+            "meaning": "Close the visible content area."
+          },
+          {
+            "piece": "</html>",
+            "meaning": "Close the root html element after the head and body are finished."
+          }
+        ],
+        "computerSteps": [
+          "You save text in a file whose name normally ends in .html.",
+          "The browser reads the source from top to bottom and recognizes HTML markup such as tags and attributes.",
+          "The browser builds an internal document tree from the elements and their nesting relationships.",
+          "Information in head helps describe the document, while elements in body become the main page content.",
+          "If markup is malformed, browsers often try to repair it so they can still show a page. That repair can differ from what you intended, so 'something appeared' does not prove the source structure is correct."
+        ],
+        "guidedChanges": [
+          "Change the words inside <p>Hello, Academy!</p> without changing the tags. Predict which part of the page will change.",
+          "Add a second paragraph after the first. Make sure the first </p> is closed before the next <p> begins.",
+          "Change the title element's content and observe the browser tab/window title rather than expecting a new visible heading in body.",
+          "Change lang=\"en\" to another language code only after explaining that the attribute describes document language; it does not translate the text for you.",
+          "Temporarily remove one closing tag, run the preview, and notice that the browser may still display something. Restore the closing tag and explain why relying on browser repair is a bad habit.",
+          "Re-indent the full document so head and body contents line up clearly under their parent elements."
+        ],
+        "workedExampleIntro": "This complete document combines the pieces you have already met. Read the nesting from the outside inward: html contains head and body; head contains title; body contains the visible heading and paragraph.",
+        "errorExamples": [
+          {
+            "mistake": "<p>Hello<p>",
+            "explanation": "The second tag opens another paragraph instead of closing the first one. A browser may repair the markup, but the source does not say what you intended.",
+            "fix": "Use <p>Hello</p>."
+          },
+          {
+            "mistake": "<p>Hello</h1>",
+            "explanation": "The opening and closing tag names do not match.",
+            "fix": "Close the paragraph with </p>."
+          },
+          {
+            "mistake": "< body>",
+            "explanation": "A space directly after < prevents this from being the normal <body> tag syntax.",
+            "fix": "Write <body>."
+          },
+          {
+            "mistake": "<html lang=\"en>",
+            "explanation": "The attribute value starts with a quotation mark but never closes it, so later source can be interpreted incorrectly.",
+            "fix": "Write <html lang=\"en\">."
+          },
+          {
+            "mistake": "<title>My Page<title>",
+            "explanation": "The second title tag is missing the / that marks a closing tag.",
+            "fix": "Write <title>My Page</title>."
+          },
+          {
+            "mistake": "<body><p>Hello</body></p>",
+            "explanation": "The elements close in the wrong order. A child should close before its parent closes.",
+            "fix": "Write <body><p>Hello</p></body>."
+          },
+          {
+            "mistake": "<body><title>My Page</title></body>",
+            "explanation": "title is document metadata and belongs inside head, not in the visible body content.",
+            "fix": "Move <title>My Page</title> into <head>...</head>."
+          },
+          {
+            "mistake": "<!doctype>\n<html>...</html>",
+            "explanation": "The modern HTML doctype declaration includes the word html.",
+            "fix": "Use <!doctype html>."
+          }
+        ],
+        "recap": [
+          "A website can contain many webpages; one HTML file commonly represents one webpage/document.",
+          "A browser reads HTML source and builds a document structure from its elements and nesting.",
+          "Many elements use an opening tag, content and a matching closing tag.",
+          "Attributes add information inside an opening tag; in Academy beginner examples their values are quoted.",
+          "Nesting creates parent/child relationships, and indentation makes those relationships easier for humans to read.",
+          "A basic document uses a doctype, an html root, a head for document information and a body for main visible content.",
+          "Browsers may repair malformed HTML, so visible output alone is not proof that the source is well structured."
+        ]
+      },
+      "example": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <title>Academy Profile</title>\n</head>\n<body>\n  <h1>Code Ascension</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>",
+      "challenge": "Create a small complete HTML document. Include <!doctype html>, an html element with lang=\"en\", a head containing a title, and a body containing one h1 and one paragraph. Close the elements in the correct order and indent the nested lines clearly.",
+      "hint": "Build from the outside inward: <!doctype html>, then <html lang=\"en\">. Inside html, create <head><title>...</title></head>, then <body><h1>...</h1><p>...</p></body>, and finally close </html>.",
+      "solution": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <title>Academy Profile</title>\n</head>\n<body>\n  <h1>Code Ascension</h1>\n  <p>I am learning HTML.</p>\n</body>\n</html>",
       "groups": [
         [
           "<!doctype html>"
         ],
         [
+          "<html"
+        ],
+        [
+          "lang="
+        ],
+        [
+          "<head"
+        ],
+        [
           "<title"
+        ],
+        [
+          "<body"
         ],
         [
           "<h1"
@@ -37,44 +325,391 @@
           "<p"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "<!doctype html>"
+          ],
+          [
+            "<html"
+          ],
+          [
+            "lang="
+          ],
+          [
+            "<head"
+          ],
+          [
+            "<title"
+          ],
+          [
+            "<body"
+          ],
+          [
+            "<h1"
+          ],
+          [
+            "<p"
+          ]
+        ],
+        "practiceMinLength": 110,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write one paragraph element containing the text Hello Academy. Include a matching opening <p> and closing </p> tag.",
+            "groups": [
+              [
+                "<p"
+              ],
+              [
+                "</p>"
+              ]
+            ],
+            "minLength": 18
+          },
+          {
+            "prompt": "Create a small HTML document with <!doctype html>, html, head/title, and body. Put one h1 and one paragraph in the body.",
+            "groups": [
+              [
+                "<!doctype html>"
+              ],
+              [
+                "<html"
+              ],
+              [
+                "<head"
+              ],
+              [
+                "<title"
+              ],
+              [
+                "<body"
+              ],
+              [
+                "<h1"
+              ],
+              [
+                "<p"
+              ]
+            ],
+            "minLength": 90
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "<p"
+            ],
+            [
+              "</p>"
+            ]
+          ],
+          "2": [
+            [
+              "<html"
+            ],
+            [
+              "lang="
+            ],
+            [
+              "<head"
+            ],
+            [
+              "<title"
+            ],
+            [
+              "<body"
+            ]
+          ],
+          "3": [
+            [
+              "<!doctype html>"
+            ],
+            [
+              "<html"
+            ],
+            [
+              "lang="
+            ],
+            [
+              "<head"
+            ],
+            [
+              "<title"
+            ],
+            [
+              "<body"
+            ],
+            [
+              "<h1"
+            ],
+            [
+              "<p"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Write a correctly opened and closed paragraph element containing your own short sentence.",
+          "2": "Exam 2: Create an html root with a quoted language attribute, a head containing a title, and a body containing visible content.",
+          "3": "Exam 3: Create a complete small HTML document with the modern doctype, html language attribute, head/title, body, one h1 and one paragraph."
+        }
+      },
       "references": [
         {
-          "title": "MDN — Structuring content with HTML",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+          "title": "MDN — Basic HTML syntax",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
         },
         {
-          "title": "MDN — HTML reference",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+          "title": "MDN — What's in the head?",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata"
+        },
+        {
+          "title": "MDN — HTML elements reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not confuse a tag with a complete element. <p> is an opening tag; <p>Hello</p> is a complete paragraph element.",
+        "Match closing tags to the element you opened and close nested children before their parent closes.",
+        "Keep attribute values quoted in Academy beginner HTML examples so the boundary of the value is obvious.",
+        "Do not put visible page content such as headings and paragraphs in head; put main visible content in body.",
+        "Do not expect title to create a visible page heading. title describes the document/browser tab; h1 is visible page content.",
+        "HTML tag names are not case-sensitive in normal HTML documents, but lowercase is the modern convention used by the Academy. Do not transfer C#/JavaScript case-sensitivity rules blindly to HTML.",
+        "A browser may repair malformed HTML. If the preview still displays something after a mistake, inspect your source instead of assuming the markup is correct."
+      ],
+      "mastery": [
+        "Explain the difference between a website, a webpage, a browser and an HTML file in your own words.",
+        "Explain why HTML is called a markup language rather than a programming language.",
+        "Point out the opening tag, content and closing tag in <p>Hello</p>.",
+        "Explain what <, > and / mean in the basic tag syntax used in this lesson.",
+        "Add a quoted attribute to an opening tag and identify its name and value.",
+        "Explain parent/child nesting and indent a small nested fragment clearly.",
+        "Explain the different jobs of head, title and body.",
+        "Build a small document with <!doctype html>, html, head/title and body without copying the worked example.",
+        "Recognize a mismatched closing tag, missing quote and incorrect nesting order.",
+        "Explain why 'the browser displayed something' is not enough evidence that malformed HTML is correct."
+      ]
     },
     {
       "title": "Text, Headings & Meaning",
-      "summary": "Use text-level elements to communicate hierarchy and meaning instead of choosing tags only for their default appearance.",
+      "summary": "Learn how HTML gives written content a clear hierarchy and meaning: use headings for structure, paragraphs for prose, and strong/em only when the text carries importance or stress emphasis.",
       "concepts": [
         {
-          "name": "Heading hierarchy",
-          "explanation": "Use h1 through h6 to describe section hierarchy. Avoid skipping levels simply to make text look smaller; CSS is responsible for appearance."
+          "name": "Headings describe hierarchy",
+          "explanation": "Headings are labels for the page and its sections. h1 represents the highest heading level in the structure you are building, followed by h2 for sections beneath it, then h3 for subsections beneath an h2, and so on. Choose heading levels because of structure, not because one happens to look larger or smaller in the browser."
         },
         {
-          "name": "Paragraphs and phrasing",
-          "explanation": "Paragraphs group prose. strong marks importance, em adds stress emphasis, and elements such as code, mark, small, sub, and sup carry specific meaning."
+          "name": "Paragraphs group normal prose",
+          "explanation": "The p element marks a paragraph: a block of related sentences or prose. A paragraph is different from a heading. Headings label sections; paragraphs contain the ordinary explanatory text inside those sections."
         },
         {
-          "name": "Semantics first",
-          "explanation": "Semantic HTML helps browsers, search engines, and assistive technology understand content. A meaningful element is usually better than a generic div plus styling."
+          "name": "strong and em add meaning inside text",
+          "explanation": "strong marks text that is important, while em marks stress emphasis that can change how a sentence is understood when read aloud. Browsers often display strong as bold and em as italic, but their purpose is meaning. CSS should be used later when the goal is purely visual styling."
         }
       ],
-      "example": "<article>\n  <h1>Learning Log</h1>\n  <h2>Day One</h2>\n  <p>I learned that <strong>meaning matters</strong> in HTML.</p>\n  <p>Use <code>&lt;em&gt;</code> for <em>stress emphasis</em>.</p>\n</article>",
-      "challenge": "Write an article with an h1, an h2, two paragraphs, and at least one strong or em element.",
-      "hint": "Build the heading hierarchy first, then add prose beneath the correct heading.",
-      "solution": "<article>\n  <h1>Learning Log</h1>\n  <h2>Day One</h2>\n  <p>I learned that <strong>meaning matters</strong> in HTML.</p>\n  <p>Use <code>&lt;em&gt;</code> for <em>stress emphasis</em>.</p>\n</article>",
-      "groups": [
-        [
-          "<article"
+      "starter": "<h1>My Learning Log</h1>\n<p>Today I learned HTML.</p>",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what headings and paragraphs do, build a logical h1/h2/h3 hierarchy, use p for normal prose, use strong for importance and em for stress emphasis, and choose these elements because of their meaning rather than their default visual appearance.",
+        "whyItMatters": "A webpage is easier to read and understand when its text has a clear structure. Humans can scan headings to find sections, and browsers and assistive technology can use the same semantic structure to understand how the content is organized. If you choose tags only because they look bold, large or italic, the page may look acceptable while communicating the wrong meaning.",
+        "terms": [
+          {
+            "term": "Heading",
+            "meaning": "A short label that introduces the page or a section of content, such as a page title or section title."
+          },
+          {
+            "term": "Heading level",
+            "meaning": "The structural level of a heading, written with h1 through h6. Lower numbers represent higher levels in the hierarchy."
+          },
+          {
+            "term": "Hierarchy",
+            "meaning": "An organized parent/subsection relationship. In headings, an h2 can describe a section under an h1, and an h3 can describe a subsection under that h2."
+          },
+          {
+            "term": "Paragraph",
+            "meaning": "A block of related prose marked with the p element."
+          },
+          {
+            "term": "Semantic / semantics",
+            "meaning": "Meaning. Semantic HTML uses elements whose names and roles describe what the content actually is, not merely how it should look."
+          },
+          {
+            "term": "Importance",
+            "meaning": "Content that should be treated as especially important. The strong element communicates this meaning."
+          },
+          {
+            "term": "Stress emphasis",
+            "meaning": "Emphasis that affects how a word or phrase is stressed when read. The em element communicates this meaning."
+          },
+          {
+            "term": "Assistive technology",
+            "meaning": "Software or hardware that helps people interact with digital content, such as a screen reader. Meaningful HTML structure gives these tools useful information."
+          }
         ],
+        "syntax": [
+          {
+            "symbol": "<h1> ... </h1>",
+            "meaning": "A level-one heading. In a simple beginner page, this is normally the main heading that names the page or its main topic."
+          },
+          {
+            "symbol": "<h2> ... </h2>",
+            "meaning": "A level-two heading used for a section beneath the higher-level heading."
+          },
+          {
+            "symbol": "<h3> ... </h3>",
+            "meaning": "A level-three heading used for a subsection beneath an h2."
+          },
+          {
+            "symbol": "h4, h5, h6",
+            "meaning": "Additional lower heading levels. Intern practice here focuses on h1-h3 so the hierarchy is easy to see, but the full heading range is h1 through h6."
+          },
+          {
+            "symbol": "<p> ... </p>",
+            "meaning": "A paragraph element for ordinary prose or related sentences."
+          },
+          {
+            "symbol": "<strong> ... </strong>",
+            "meaning": "Marks text as strongly important. Its common bold appearance is a browser default, not the reason to choose the element."
+          },
+          {
+            "symbol": "<em> ... </em>",
+            "meaning": "Marks stress emphasis. Its common italic appearance is a browser default, not the reason to choose the element."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Give the page a main heading",
+            "explanation": "The h1 marks the highest heading level in this small page. Think of it as the label for the whole page topic, not simply as 'large text'.",
+            "code": "<h1>Learning Log</h1>"
+          },
+          {
+            "title": "Step 2 — Put ordinary prose in a paragraph",
+            "explanation": "The p element marks normal written content. A heading introduces a topic; a paragraph explains or discusses that topic.",
+            "code": "<p>I am learning how HTML gives text structure.</p>"
+          },
+          {
+            "title": "Step 3 — Add a section heading beneath the page heading",
+            "explanation": "An h2 creates a section below the h1 in the heading hierarchy. The number communicates structural level, not a request for a particular font size.",
+            "code": "<h1>Learning Log</h1>\n<h2>Today</h2>\n<p>I practised headings and paragraphs.</p>"
+          },
+          {
+            "title": "Step 4 — Add a subsection only when the structure needs one",
+            "explanation": "If the Today section needs a smaller subsection, h3 is the next logical level. Do not jump to h5 just because its browser styling looks smaller.",
+            "code": "<h1>Learning Log</h1>\n<h2>Today</h2>\n<h3>HTML practice</h3>\n<p>I built a clear heading hierarchy.</p>"
+          },
+          {
+            "title": "Step 5 — Mark important text with strong",
+            "explanation": "strong belongs inside the paragraph because only part of the sentence needs extra importance. The surrounding sentence remains one paragraph.",
+            "code": "<p><strong>Heading order matters.</strong> It helps readers understand the page.</p>"
+          },
+          {
+            "title": "Step 6 — Mark stress emphasis with em",
+            "explanation": "em marks a word or phrase that should receive stress emphasis. Imagine how the sentence sounds when the emphasized words are spoken more strongly.",
+            "code": "<p>I want to <em>understand the meaning</em>, not only copy the tags.</p>"
+          },
+          {
+            "title": "Step 7 — Combine heading hierarchy and paragraphs",
+            "explanation": "Now combine h1, h2 and p. Each heading introduces the content that follows until the next heading of the same or higher level.",
+            "code": "<h1>Learning Log</h1>\n<p>This page records what I am learning.</p>\n\n<h2>HTML</h2>\n<p>I am learning how elements give content meaning.</p>\n\n<h2>Next goal</h2>\n<p>I will practise the structure again.</p>"
+          },
+          {
+            "title": "Step 8 — Add meaning inside the prose",
+            "explanation": "strong and em can be nested inside a paragraph because they describe meaning within that paragraph. The paragraph itself still represents the complete block of prose.",
+            "code": "<p><strong>Structure matters.</strong> I want to <em>understand why</em> each element is used.</p>"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "<h1>Learning Log</h1>",
+            "meaning": "Name the overall page/topic with the highest heading level used in this small example."
+          },
+          {
+            "piece": "<p>...</p>",
+            "meaning": "Add ordinary prose beneath the heading instead of pretending the paragraph is another heading."
+          },
+          {
+            "piece": "<h2>Today</h2>",
+            "meaning": "Start a section that belongs beneath the h1."
+          },
+          {
+            "piece": "<strong>Heading order matters.</strong>",
+            "meaning": "Mark this part of the paragraph as especially important."
+          },
+          {
+            "piece": "<h2>Next step</h2>",
+            "meaning": "Start another section at the same structural level as Today."
+          },
+          {
+            "piece": "<em>practice the structure</em>",
+            "meaning": "Add stress emphasis to these words while keeping them inside the paragraph."
+          }
+        ],
+        "computerSteps": [
+          "The browser reads each heading and paragraph element from the HTML source and builds them into the document tree.",
+          "The heading element carries a structural level such as h1, h2 or h3; its role is not merely visual size.",
+          "Paragraph elements tell the browser which text belongs together as prose.",
+          "strong and em add meaning to text inside a paragraph. Browsers normally give them default bold/italic styling, but those visual defaults can later be changed with CSS.",
+          "Assistive technology can use semantic heading and text structure to help a person understand and navigate content even when they do not experience the page visually in the same way."
+        ],
+        "guidedChanges": [
+          "Change the text inside the h1 without changing the tags. Confirm that the page topic changes but the heading structure remains the same.",
+          "Add a second h2 section and place one paragraph beneath it.",
+          "Add an h3 beneath one h2, then explain why that h3 is a subsection instead of simply 'smaller text'.",
+          "Move strong around a different important phrase inside a paragraph and read the sentence again.",
+          "Move em around a different phrase and notice how the intended spoken stress changes.",
+          "Temporarily change an h2 to h4. The browser will still show a heading, but explain why the jump from h1 to h4 communicates a confusing hierarchy. Then change it back."
+        ],
+        "workedExampleIntro": "This example combines only the text structures introduced above. Read the hierarchy first: one h1 for the overall learning log, two h2 section headings beneath it, paragraphs for prose, strong for importance, and em for stress emphasis.",
+        "errorExamples": [
+          {
+            "mistake": "<h1>Learning Log<h1>",
+            "explanation": "The second tag opens another h1 instead of closing the first one. Browsers may repair the markup, but the source is not the structure you intended.",
+            "fix": "Close the heading with </h1>."
+          },
+          {
+            "mistake": "<h1>Learning Log</h1><h4>Today</h4>",
+            "explanation": "This jumps from level 1 directly to level 4 without a structural reason. The browser can display it, but the heading hierarchy is confusing.",
+            "fix": "Use <h2>Today</h2> for a direct section beneath the h1."
+          },
+          {
+            "mistake": "<p>First paragraph<p>Second paragraph</p>",
+            "explanation": "The first paragraph was not explicitly closed before the next one began. Browsers have special repair rules for paragraphs, which can hide this mistake from a beginner.",
+            "fix": "Write <p>First paragraph</p><p>Second paragraph</p>."
+          },
+          {
+            "mistake": "<strong>Important</em>",
+            "explanation": "The opening and closing tag names do not match.",
+            "fix": "Use <strong>Important</strong> or <em>Important</em>."
+          },
+          {
+            "mistake": "<p><h2>Today</h2></p>",
+            "explanation": "A heading is not paragraph text. Browsers will repair this invalid relationship instead of keeping the h2 inside the p as written.",
+            "fix": "Write the heading and paragraph as separate sibling elements: <h2>Today</h2><p>...</p>."
+          },
+          {
+            "mistake": "<strong>Make this bold</strong>",
+            "explanation": "This may render bold, but choosing strong only because you want bold styling confuses appearance with meaning.",
+            "fix": "Use strong when the words are important. Pure visual bold styling belongs to CSS later."
+          },
+          {
+            "mistake": "<em>Make this italic</em>",
+            "explanation": "This may render italic, but em should communicate stress emphasis rather than being chosen only for decoration.",
+            "fix": "Use em when the sentence needs stress emphasis. Pure visual italic styling belongs to CSS later."
+          }
+        ],
+        "recap": [
+          "Headings label the page and its sections; paragraphs contain normal prose.",
+          "Heading numbers communicate hierarchy. Do not choose h1-h6 merely by how large or small they look.",
+          "A simple page normally begins its visible heading structure with an h1, then uses h2 for direct sections and h3 for subsections when needed.",
+          "p marks a paragraph of related prose.",
+          "strong communicates strong importance; em communicates stress emphasis.",
+          "Default bold or italic styling does not define the meaning of strong/em.",
+          "Browsers may repair malformed markup, so inspect the source structure rather than trusting appearance alone."
+        ]
+      },
+      "example": "<h1>Learning Log</h1>\n<p>This page records what I am learning.</p>\n\n<h2>Today</h2>\n<p><strong>Heading order matters.</strong> It helps readers understand the page.</p>\n\n<h2>Next step</h2>\n<p>I want to <em>practice the structure</em> without choosing tags only for appearance.</p>",
+      "challenge": "Create a short learning log with one h1, at least one h2, at least two paragraphs, one strong element for important words, and one em element for stress emphasis. Keep the heading hierarchy logical.",
+      "hint": "Start with the h1, add an h2 for a section, then put paragraph text beneath the correct heading. Add strong and em inside paragraph text only after the structure makes sense.",
+      "solution": "<h1>My Learning Log</h1>\n<p>I am learning how HTML gives text meaning.</p>\n\n<h2>What I learned</h2>\n<p><strong>Heading order matters.</strong> It creates a clear structure.</p>\n\n<h2>My next goal</h2>\n<p>I want to <em>understand why</em> each element is used.</p>",
+      "groups": [
         [
           "<h1"
         ],
@@ -85,44 +720,398 @@
           "<p"
         ],
         [
-          "<strong",
+          "<strong"
+        ],
+        [
           "<em"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "<h1"
+          ],
+          [
+            "<h2"
+          ],
+          [
+            "<p"
+          ],
+          [
+            "<strong"
+          ],
+          [
+            "<em"
+          ]
+        ],
+        "practiceMinLength": 130,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write a small text structure with one h1 page heading, one h2 section heading, and one paragraph beneath the section heading.",
+            "groups": [
+              [
+                "<h1"
+              ],
+              [
+                "<h2"
+              ],
+              [
+                "<p"
+              ]
+            ],
+            "minLength": 55
+          },
+          {
+            "prompt": "Write one paragraph that contains one important phrase marked with strong and one stress-emphasized phrase marked with em.",
+            "groups": [
+              [
+                "<p"
+              ],
+              [
+                "<strong"
+              ],
+              [
+                "<em"
+              ]
+            ],
+            "minLength": 55
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "<h1"
+            ],
+            [
+              "<p"
+            ],
+            [
+              "<strong"
+            ]
+          ],
+          "2": [
+            [
+              "<h1"
+            ],
+            [
+              "<h2"
+            ],
+            [
+              "<p"
+            ],
+            [
+              "<em"
+            ]
+          ],
+          "3": [
+            [
+              "<h1"
+            ],
+            [
+              "<h2"
+            ],
+            [
+              "<p"
+            ],
+            [
+              "<strong"
+            ],
+            [
+              "<em"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Create one page heading and one paragraph. Mark one genuinely important phrase inside the paragraph with strong.",
+          "2": "Exam 2: Create an h1 page heading, an h2 section heading, and paragraph text beneath the section. Use em around a phrase that should receive stress emphasis.",
+          "3": "Exam 3: Build a short learning-note fragment with a logical h1/h2 hierarchy, at least two paragraphs, one strong phrase and one em phrase. Choose the elements for meaning, not appearance."
+        }
+      },
       "references": [
         {
-          "title": "MDN — Structuring content with HTML",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+          "title": "MDN — Headings and paragraphs",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Headings_and_paragraphs"
         },
         {
-          "title": "MDN — HTML accessibility",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+          "title": "MDN — Emphasis and importance",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Emphasis_and_importance"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not choose heading levels because one happens to look like the font size you want. Heading levels communicate document hierarchy; CSS controls visual size later.",
+        "Avoid unexplained heading jumps such as h1 directly to h4. Use the next logical level for the structure you are describing.",
+        "Do not use a heading element for an ordinary sentence just because it looks prominent. Use p for normal prose.",
+        "Do not choose strong only to get bold text or em only to get italic text. Use them when the content actually has importance or stress emphasis.",
+        "Match opening and closing tag names, including nested strong/em elements inside paragraphs.",
+        "Do not place headings inside a p element. Headings and paragraphs are separate content structures.",
+        "Remember that browsers may repair malformed paragraph or heading markup; visible output alone does not prove your source hierarchy is correct."
+      ],
+      "mastery": [
+        "Explain the different jobs of a heading and a paragraph in your own words.",
+        "Explain why heading numbers represent hierarchy rather than requested font sizes.",
+        "Build a simple h1 → h2 → h3 hierarchy and explain the relationship between the three levels.",
+        "Write two separate paragraphs with correctly matched p tags.",
+        "Use strong inside a paragraph and explain what importance it communicates.",
+        "Use em inside a paragraph and explain what phrase receives stress emphasis.",
+        "Explain why default bold/italic appearance is not enough reason to choose strong/em.",
+        "Recognize a mismatched heading/text closing tag and repair it.",
+        "Recognize an illogical heading jump and choose a better level.",
+        "Create the practice fragment without using article, links, forms, ARIA, CSS, or other concepts that have not been taught yet."
+      ]
     },
     {
       "title": "Links, Images & Lists",
-      "summary": "Connect documents, embed meaningful images, and represent grouped or ordered information with the correct list structure.",
+      "summary": "Learn how webpages connect to other resources, how images are embedded with useful text alternatives, and how related items are grouped into unordered or ordered lists.",
       "concepts": [
         {
-          "name": "Anchors",
-          "explanation": "The a element creates a hyperlink. href identifies the destination; link text should explain where the link goes instead of saying only “click here”."
+          "name": "Links connect one resource to another",
+          "explanation": "The a element creates a hyperlink. Its href attribute tells the browser where the link should go, while the text between <a> and </a> is what the learner sees and activates. Good link text should describe the destination instead of using vague wording such as only 'click here'."
         },
         {
-          "name": "Images and alternatives",
-          "explanation": "img uses src for the image resource and alt for a text alternative. Decorative images normally use an empty alt value so screen readers can ignore them."
+          "name": "Images need both a source and a text alternative",
+          "explanation": "The img element embeds an image. src tells the browser where the image file is, and alt provides text that communicates the image's meaning or purpose when the image cannot be seen. img is a void element, so it does not wrap content with a separate closing tag."
         },
         {
-          "name": "Lists",
-          "explanation": "Use ul when order does not matter, ol when sequence matters, and li for each item. Description lists use dl, dt, and dd for terms and descriptions."
+          "name": "Lists group related items",
+          "explanation": "ul creates an unordered list when the order is not important, ol creates an ordered list when sequence or ranking matters, and li marks each individual list item. The li elements belong inside the ul or ol that groups them."
         }
       ],
-      "example": "<nav aria-label=\"Learning links\">\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"tests.html\">Tests</a></li>\n  </ul>\n</nav>\n<img src=\"academy-badge.png\" alt=\"Code Ascension academy badge\">",
-      "challenge": "Create a list containing at least three useful links and add an image with alt text.",
-      "hint": "Use one ul or ol, place each link inside an li, and remember both src and alt on the image.",
-      "solution": "<nav aria-label=\"Learning links\">\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"tests.html\">Tests</a></li>\n  </ul>\n</nav>\n<img src=\"academy-badge.png\" alt=\"Code Ascension academy badge\">",
+      "starter": "<a href=\"lessons.html\">Open the lessons</a>",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to create a useful link, explain what href does, recognize the difference between a simple relative destination and a full web address, add an image with src and meaningful alt text, build unordered and ordered lists with li items, and combine links, images and lists without using concepts that have not been taught yet.",
+        "whyItMatters": "Real webpages rarely contain only headings and paragraphs. They connect people to other pages, show useful images, and organize related information into lists. These structures are also building blocks for navigation, galleries, menus and content cards that you will meet later, so understanding their basic HTML now gives you a dependable foundation.",
+        "terms": [
+          {
+            "term": "Hyperlink / link",
+            "meaning": "A piece of content that can take the user to another page, file, location or web resource."
+          },
+          {
+            "term": "Destination",
+            "meaning": "The place a link points to, such as another HTML file or a full website address."
+          },
+          {
+            "term": "URL",
+            "meaning": "A web address. A full URL can look like https://example.com/guide."
+          },
+          {
+            "term": "Relative path",
+            "meaning": "A destination written relative to the current file, such as lessons.html. The browser looks for that resource based on where the current page is stored."
+          },
+          {
+            "term": "Image resource",
+            "meaning": "An image file that the browser can load, such as academy-badge.png."
+          },
+          {
+            "term": "Alternative text / alt text",
+            "meaning": "Text that communicates an image's meaning or purpose when the image is unavailable or cannot be perceived visually."
+          },
+          {
+            "term": "Unordered list",
+            "meaning": "A list whose items belong together but do not need a numbered sequence."
+          },
+          {
+            "term": "Ordered list",
+            "meaning": "A list where sequence, steps or ranking matters."
+          },
+          {
+            "term": "List item",
+            "meaning": "One entry inside an unordered or ordered list."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "<a> ... </a>",
+            "meaning": "The anchor element used to create a hyperlink. The content between the tags becomes the visible link text."
+          },
+          {
+            "symbol": "href=\"lessons.html\"",
+            "meaning": "The href attribute gives the anchor its destination. Here the destination is a relative HTML file named lessons.html."
+          },
+          {
+            "symbol": "href=\"https://example.com\"",
+            "meaning": "An href can also contain a full web address beginning with a scheme such as https://."
+          },
+          {
+            "symbol": "<img ...>",
+            "meaning": "The image element embeds an image resource. img is a void element, so it does not use a separate </img> closing tag."
+          },
+          {
+            "symbol": "src=\"academy-badge.png\"",
+            "meaning": "The src attribute tells the browser which image resource to load."
+          },
+          {
+            "symbol": "alt=\"Code Ascension Academy badge\"",
+            "meaning": "The alt attribute provides a text alternative that describes the image's useful meaning or purpose."
+          },
+          {
+            "symbol": "alt=\"\"",
+            "meaning": "An empty alt value can be used for a purely decorative image so it does not add unnecessary information. You only need to recognize this idea in Intern; the practice uses meaningful alt text."
+          },
+          {
+            "symbol": "<ul> ... </ul>",
+            "meaning": "Creates an unordered list when the items belong together but their order is not important."
+          },
+          {
+            "symbol": "<ol> ... </ol>",
+            "meaning": "Creates an ordered list when sequence, priority or ranking matters."
+          },
+          {
+            "symbol": "<li> ... </li>",
+            "meaning": "Creates one list item inside a ul or ol."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Create one link",
+            "explanation": "The a element wraps the visible link text. href is an attribute on the opening tag and tells the browser where to go when the link is activated.",
+            "code": "<a href=\"lessons.html\">Open the lessons</a>"
+          },
+          {
+            "title": "Step 2 — Compare relative and full destinations",
+            "explanation": "lessons.html is a relative destination: the browser looks for a nearby file based on the current page. A full https:// address can point to a resource on another website. You do not need to master complex folder paths yet.",
+            "code": "<a href=\"lessons.html\">Local lessons page</a>\n<a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>"
+          },
+          {
+            "title": "Step 3 — Use link text that explains the destination",
+            "explanation": "A person should be able to understand the purpose of the link from its text. 'Read the HTML lesson' communicates more than a vague phrase such as 'click here'.",
+            "code": "<a href=\"html-lesson.html\">Read the HTML lesson</a>"
+          },
+          {
+            "title": "Step 4 — Add one image",
+            "explanation": "img does not wrap text, so it has no separate closing tag. src names the image resource and alt provides a useful text alternative.",
+            "code": "<img src=\"academy-badge.png\" alt=\"Code Ascension Academy badge\">"
+          },
+          {
+            "title": "Step 5 — Build an unordered list",
+            "explanation": "Use ul when the items are related but their order does not matter. Each entry is placed inside its own li element.",
+            "code": "<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>"
+          },
+          {
+            "title": "Step 6 — Build an ordered list",
+            "explanation": "Use ol when the order itself carries meaning, such as a short sequence of steps.",
+            "code": "<ol>\n  <li>Open the lesson</li>\n  <li>Read the example</li>\n  <li>Try the practice</li>\n</ol>"
+          },
+          {
+            "title": "Step 7 — Put links inside list items",
+            "explanation": "Elements can be nested. Here each li contains one a element, so the list groups several related links without introducing nav or ARIA concepts that belong later.",
+            "code": "<ul>\n  <li><a href=\"lessons.html\">Lessons</a></li>\n  <li><a href=\"tests.html\">Tests</a></li>\n  <li><a href=\"projects.html\">Projects</a></li>\n</ul>"
+          },
+          {
+            "title": "Step 8 — Combine previous text structure with new elements",
+            "explanation": "Now use concepts from Modules 1–3 together: a heading and paragraph introduce the section, a list groups useful links, and an image adds meaningful visual content with alt text.",
+            "code": "<h1>Study Resources</h1>\n<p>Choose a resource to continue learning.</p>\n\n<ul>\n  <li><a href=\"lessons.html\">Lessons</a></li>\n  <li><a href=\"tests.html\">Tests</a></li>\n  <li><a href=\"projects.html\">Projects</a></li>\n</ul>\n\n<img src=\"academy-badge.png\" alt=\"Code Ascension Academy badge\">"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "<a href=\"lessons.html\">Lessons</a>",
+            "meaning": "Create a link whose visible text is Lessons and whose destination is the relative file lessons.html."
+          },
+          {
+            "piece": "<ul>",
+            "meaning": "Begin a group of related items whose order is not important."
+          },
+          {
+            "piece": "<li> ... </li>",
+            "meaning": "Create one item inside the list. In the worked example, each item contains one link."
+          },
+          {
+            "piece": "</ul>",
+            "meaning": "Close the unordered list after all list items are complete."
+          },
+          {
+            "piece": "<img",
+            "meaning": "Begin an image element. Unlike p or a, img is a void element and does not wrap content."
+          },
+          {
+            "piece": "src=\"academy-badge.png\"",
+            "meaning": "Tell the browser which image file to request."
+          },
+          {
+            "piece": "alt=\"Code Ascension Academy badge\"",
+            "meaning": "Provide a text alternative that communicates what the useful image represents."
+          }
+        ],
+        "computerSteps": [
+          "The browser reads an a element and records the href destination together with the visible link content.",
+          "When the user activates the link, the browser tries to navigate to the resource named by href.",
+          "For img, the browser reads src and requests that image resource. If the resource cannot be loaded, the image may appear broken, but the HTML element still exists.",
+          "The alt value becomes the image's text alternative. It is not a caption that automatically appears below the image.",
+          "For ul or ol, the browser builds a list container and then places each li child inside that list structure.",
+          "Browsers may still display malformed list or link markup after repairing it, so inspect the source structure rather than trusting appearance alone."
+        ],
+        "guidedChanges": [
+          "Change the visible text inside a link without changing href. Notice that the label changes but the destination does not.",
+          "Change href from lessons.html to projects.html and explain which part controls navigation.",
+          "Change the img alt text so it describes a different meaningful image, then explain why alt should match the image's purpose.",
+          "Add a fourth li item to the unordered list without removing the existing items.",
+          "Change the unordered list from ul to ol by changing both the opening and closing container tags. Explain why numbered order now communicates something different.",
+          "Temporarily misspell the image filename in src. The image may fail to load; explain why that does not mean the img syntax itself was necessarily invalid."
+        ],
+        "workedExampleIntro": "This worked example combines only concepts already taught by the end of Module 3: headings and paragraphs from Module 2, links with href, a ul/li list, and one image with src and meaningful alt text. It deliberately does not use nav, ARIA, forms, CSS or advanced image features.",
+        "errorExamples": [
+          {
+            "mistake": "<a>Lessons</a>",
+            "explanation": "The anchor has visible text but no href destination, so it does not perform the normal navigation job expected from the link in this lesson.",
+            "fix": "Add a destination, for example <a href=\"lessons.html\">Lessons</a>."
+          },
+          {
+            "mistake": "<a href=lessons.html>Lessons</a>",
+            "explanation": "HTML can allow some unquoted attribute values, but omitting quotes makes beginner source harder to read and becomes fragile when values contain characters that require quoting.",
+            "fix": "Use the Academy beginner style: href=\"lessons.html\"."
+          },
+          {
+            "mistake": "<a href=\"lessons.html\">Click here</a>",
+            "explanation": "The markup works, but the link text does not explain what destination the user will get.",
+            "fix": "Use descriptive text such as <a href=\"lessons.html\">Read the lessons</a>."
+          },
+          {
+            "mistake": "<img src=\"academy-badge.png\">",
+            "explanation": "The image has a source but no alt attribute, so its useful meaning is not provided as a text alternative.",
+            "fix": "Add meaningful alt text, for example alt=\"Code Ascension Academy badge\"."
+          },
+          {
+            "mistake": "<img src=\"academy-badge.png\" alt=\"image\">",
+            "explanation": "The alt text is technically present but 'image' does not communicate what the image means or does.",
+            "fix": "Describe the useful information or purpose, for example alt=\"Code Ascension Academy badge\"."
+          },
+          {
+            "mistake": "<ul><p>HTML</p><p>CSS</p></ul>",
+            "explanation": "A basic ul/ol list should contain li items. Paragraphs are not replacements for li elements inside the list structure.",
+            "fix": "Use <ul><li>HTML</li><li>CSS</li></ul>."
+          },
+          {
+            "mistake": "<ul><li>HTML</ul></li>",
+            "explanation": "The li is still open when the ul is closed, so the nesting order is wrong.",
+            "fix": "Close the li first: <ul><li>HTML</li></ul>."
+          },
+          {
+            "mistake": "<ol><li>HTML</li><li>CSS</li>",
+            "explanation": "The ordered list container was never closed.",
+            "fix": "Add </ol> after the final li."
+          },
+          {
+            "mistake": "<img src=\"academy-badge.png\" alt=\"Badge\"></img>",
+            "explanation": "img is a void element in HTML. It does not wrap content and does not use a separate </img> closing tag.",
+            "fix": "Write only <img src=\"academy-badge.png\" alt=\"Badge\">."
+          }
+        ],
+        "recap": [
+          "a creates a hyperlink; href gives the destination and the content between the tags is the visible link text.",
+          "Use descriptive link text so the purpose makes sense without vague wording such as only 'click here'.",
+          "A relative destination such as lessons.html refers to a resource based on the current page's location; a full https:// URL can point elsewhere on the web.",
+          "img embeds an image; src identifies the resource and alt provides its text alternative.",
+          "img is a void element and does not use a separate closing tag.",
+          "ul groups items when order is not important; ol groups items when sequence or ranking matters.",
+          "Each list entry belongs in an li element inside its ul or ol container.",
+          "Links can be placed inside list items because HTML elements can be nested.",
+          "Do not assume a resource path is correct just because the HTML syntax is valid; a wrong href or src can still point to something that does not exist."
+        ]
+      },
+      "example": "<h1>Study Resources</h1>\n<p>Choose a resource to continue learning.</p>\n\n<ul>\n  <li><a href=\"lessons.html\">Lessons</a></li>\n  <li><a href=\"tests.html\">Tests</a></li>\n  <li><a href=\"projects.html\">Projects</a></li>\n</ul>\n\n<img src=\"academy-badge.png\" alt=\"Code Ascension Academy badge\">",
+      "challenge": "Create a small study-resources fragment. Include one h1 and one paragraph, an unordered or ordered list containing at least three li items, at least two useful links with href destinations, and one image with both src and meaningful alt text. Do not use nav, ARIA, CSS or form elements yet.",
+      "hint": "Build the text structure first, then create ul or ol with three li items. Put links inside at least two li items using <a href=\"...\">descriptive text</a>. Finish with <img src=\"...\" alt=\"...\">.",
+      "solution": "<h1>Study Resources</h1>\n<p>Choose a resource to continue learning.</p>\n\n<ul>\n  <li><a href=\"lessons.html\">Lessons</a></li>\n  <li><a href=\"tests.html\">Tests</a></li>\n  <li><a href=\"projects.html\">Projects</a></li>\n</ul>\n\n<img src=\"academy-badge.png\" alt=\"Code Ascension Academy badge\">",
       "groups": [
         [
           "<ul",
@@ -141,43 +1130,494 @@
           "<img"
         ],
         [
+          "src="
+        ],
+        [
           "alt="
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "<ul",
+            "<ol"
+          ],
+          [
+            "<li"
+          ],
+          [
+            "<a"
+          ],
+          [
+            "href="
+          ],
+          [
+            "<img"
+          ],
+          [
+            "src="
+          ],
+          [
+            "alt="
+          ]
+        ],
+        "practiceMinLength": 170,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create an unordered list containing at least three list items. Put a descriptive hyperlink inside at least two of the items and give each link an href destination.",
+            "groups": [
+              [
+                "<ul"
+              ],
+              [
+                "<li"
+              ],
+              [
+                "<a"
+              ],
+              [
+                "href="
+              ]
+            ],
+            "minLength": 110
+          },
+          {
+            "prompt": "Create one image element with a src attribute and meaningful alt text, then add an ordered list with at least two li items.",
+            "groups": [
+              [
+                "<img"
+              ],
+              [
+                "src="
+              ],
+              [
+                "alt="
+              ],
+              [
+                "<ol"
+              ],
+              [
+                "<li"
+              ]
+            ],
+            "minLength": 95
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "<a"
+            ],
+            [
+              "href="
+            ],
+            [
+              "<ul",
+              "<ol"
+            ],
+            [
+              "<li"
+            ]
+          ],
+          "2": [
+            [
+              "<img"
+            ],
+            [
+              "src="
+            ],
+            [
+              "alt="
+            ],
+            [
+              "<ul",
+              "<ol"
+            ],
+            [
+              "<li"
+            ]
+          ],
+          "3": [
+            [
+              "<h1"
+            ],
+            [
+              "<p"
+            ],
+            [
+              "<a"
+            ],
+            [
+              "href="
+            ],
+            [
+              "<img"
+            ],
+            [
+              "src="
+            ],
+            [
+              "alt="
+            ],
+            [
+              "<ul",
+              "<ol"
+            ],
+            [
+              "<li"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Build a short list of useful resources with at least two descriptive links. Use ul or ol, li, a and href correctly.",
+          "2": "Exam 2: Add one meaningful image with src and alt, then create a short ul or ol with at least two li items.",
+          "3": "Exam 3: Build a small resources fragment using an h1, a paragraph, a ul or ol with list items and useful links, plus an image with src and meaningful alt text. Use only concepts taught through HTML Intern Module 3."
+        }
+      },
       "references": [
         {
-          "title": "MDN — Structuring content with HTML",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+          "title": "MDN — Creating links",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links"
         },
         {
-          "title": "MDN — HTML accessibility",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+          "title": "MDN — Images in HTML",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_images"
+        },
+        {
+          "title": "MDN — Lists",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not omit href from a normal navigation link in this lesson; href is what gives the anchor its destination.",
+        "Use descriptive link text instead of vague wording such as only 'click here'.",
+        "Do not confuse img src with alt. src identifies the image resource; alt provides the text alternative.",
+        "Do not use alt text such as 'image' when the image communicates something more specific.",
+        "Remember that img is a void element and does not use a separate </img> closing tag.",
+        "Put list entries inside li elements, and put the li elements inside ul or ol.",
+        "Close nested li elements before closing their containing ul or ol.",
+        "Choose ul when order does not matter and ol when sequence or ranking carries meaning.",
+        "A syntactically valid href or src can still point to a missing resource; broken navigation/image loading is not always an HTML syntax error."
+      ],
+      "mastery": [
+        "Create an a element and identify its visible link text and href destination.",
+        "Explain the beginner-level difference between lessons.html and a full https:// URL.",
+        "Replace vague link text with wording that describes the destination.",
+        "Create an img element with both src and meaningful alt text.",
+        "Explain why alt is a text alternative rather than an automatic caption.",
+        "Explain why img does not need a separate closing tag.",
+        "Build an unordered list with at least three li elements.",
+        "Build an ordered list and explain why order matters in that example.",
+        "Place links inside list items with correct nesting.",
+        "Create the Module 3 practice without using nav, ARIA, forms, CSS, responsive images or other later concepts."
+      ]
     },
     {
       "title": "Forms & Basic Controls",
-      "summary": "Collect user input with native controls that already provide keyboard behavior, semantics, and browser features.",
+      "summary": "Learn what a web form is and build simple, understandable controls with labels, text and email inputs, names, required fields, checkboxes, radio buttons, and an explicit submit button.",
       "concepts": [
         {
-          "name": "Form ownership",
-          "explanation": "form groups controls that belong to one submission. action describes where data goes and method describes how it is submitted."
+          "name": "Forms collect related user input",
+          "explanation": "A form groups controls that ask the user for information or choices. At Intern level, focus on the structure of the controls and their labels. Sending form data to a server is a later topic."
         },
         {
-          "name": "Labels",
-          "explanation": "A label should be programmatically associated with its input, usually with for=\"id\". This enlarges the clickable target and gives assistive technology a usable name."
+          "name": "Labels explain controls",
+          "explanation": "A label tells the user what an input is for. Connecting label for=\"...\" to the matching input id=\"...\" makes the relationship explicit and also lets the user click the label to focus or toggle the control."
         },
         {
-          "name": "Control types",
-          "explanation": "input supports many types including text, email, number, checkbox, radio, date, and password. textarea and select cover longer text and predefined choices."
+          "name": "Input type changes the control's job",
+          "explanation": "The input element can represent different controls. type=\"text\" accepts normal text, type=\"email\" asks for an email-shaped value, type=\"checkbox\" represents an independent yes/no choice, and type=\"radio\" represents one choice inside a group."
         }
       ],
-      "example": "<form action=\"/profile\" method=\"post\">\n  <label for=\"name\">Display name</label>\n  <input id=\"name\" name=\"name\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>",
-      "challenge": "Create a form with labelled name and email fields plus a submit button.",
-      "hint": "Give each input an id, then point the matching label for attribute at that id.",
-      "solution": "<form action=\"/profile\" method=\"post\">\n  <label for=\"name\">Display name</label>\n  <input id=\"name\" name=\"name\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>",
+      "starter": "<form>\n  <label for=\"display-name\">Display name</label>\n  <input id=\"display-name\" name=\"displayName\" type=\"text\">\n</form>",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what a form and form control are, connect a label to an input, create text and email inputs, explain the different jobs of id and name, add the required attribute, recognize basic checkbox and radio controls, and build a small form with an explicit submit button.",
+        "whyItMatters": "Forms are how webpages ask people for information and choices. Login screens, search boxes, profile editors, checkout pages and settings screens all build on the same basic ideas. Learning the native HTML controls first gives you working keyboard behavior and useful browser features before CSS or JavaScript is added.",
+        "terms": [
+          {
+            "term": "Form",
+            "meaning": "A container that groups controls which belong to one user-input task."
+          },
+          {
+            "term": "Form control",
+            "meaning": "An interactive element used to enter or choose information, such as an input or button."
+          },
+          {
+            "term": "Label",
+            "meaning": "Text that names or explains a form control. A label should be connected to the control it describes."
+          },
+          {
+            "term": "Input",
+            "meaning": "A void HTML element used for several kinds of user input. Its type attribute changes what kind of control it becomes."
+          },
+          {
+            "term": "Text field",
+            "meaning": "An input that accepts a short piece of normal text, commonly created with type=\"text\"."
+          },
+          {
+            "term": "Email field",
+            "meaning": "An input created with type=\"email\". The browser can check that a supplied value has a basic email-like shape."
+          },
+          {
+            "term": "id",
+            "meaning": "An identifier for one element in the page. In this lesson it lets a label point to its matching input."
+          },
+          {
+            "term": "for",
+            "meaning": "A label attribute whose value should match the id of the control the label describes."
+          },
+          {
+            "term": "name",
+            "meaning": "A form-control name used to identify that piece of data when form data is eventually collected or submitted."
+          },
+          {
+            "term": "required",
+            "meaning": "A boolean HTML attribute that tells the browser the control must have an acceptable value before ordinary form submission is allowed."
+          },
+          {
+            "term": "Checkbox",
+            "meaning": "A control for an independent on/off or yes/no choice. Multiple checkboxes can normally be selected independently."
+          },
+          {
+            "term": "Radio button",
+            "meaning": "A control for choosing one option from a group. Radio buttons belong to the same group when they share the same name."
+          },
+          {
+            "term": "Submit button",
+            "meaning": "A button whose type is submit. Activating it asks the form to submit, after browser validation rules such as required have been checked."
+          },
+          {
+            "term": "Browser validation",
+            "meaning": "Built-in checks the browser can perform, such as noticing an empty required field or a badly shaped email value. These checks help the user but are not a replacement for later server-side validation."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "<form> ... </form>",
+            "meaning": "Group controls that belong to the same form task. This Intern lesson does not require action or method yet."
+          },
+          {
+            "symbol": "<label for=\"display-name\">Display name</label>",
+            "meaning": "Create a visible label and connect it to the element whose id is display-name."
+          },
+          {
+            "symbol": "<input ...>",
+            "meaning": "Create an input control. input is a void element, so it does not use a separate </input> closing tag."
+          },
+          {
+            "symbol": "id=\"display-name\"",
+            "meaning": "Give this element an identifier. The matching label can point to it with for=\"display-name\"."
+          },
+          {
+            "symbol": "name=\"displayName\"",
+            "meaning": "Give the input's data a name. id connects page relationships; name identifies the form value."
+          },
+          {
+            "symbol": "type=\"text\"",
+            "meaning": "Create a normal short text input."
+          },
+          {
+            "symbol": "type=\"email\"",
+            "meaning": "Create an input intended for an email address and enable basic browser email-format checking."
+          },
+          {
+            "symbol": "required",
+            "meaning": "A boolean attribute. Its presence turns the requirement on; you do not need to write required=\"true\"."
+          },
+          {
+            "symbol": "type=\"checkbox\"",
+            "meaning": "Create an independent checkable choice."
+          },
+          {
+            "symbol": "type=\"radio\"",
+            "meaning": "Create one option in a radio group. Radio inputs in the same group share the same name."
+          },
+          {
+            "symbol": "value=\"guided\"",
+            "meaning": "Give a checkbox/radio choice a data value that represents the option when form data is later collected."
+          },
+          {
+            "symbol": "<button type=\"submit\">Save</button>",
+            "meaning": "Create an explicit submit button. Writing the type makes the button's job clear."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Create an empty form container",
+            "explanation": "The form element groups controls that belong to one input task. At this stage it does not need to send anything anywhere.",
+            "code": "<form>\n</form>"
+          },
+          {
+            "title": "Step 2 — Add one visible label",
+            "explanation": "A label gives the user a human-readable description. It becomes much more useful once it is connected to its input in the next step.",
+            "code": "<label for=\"display-name\">Display name</label>"
+          },
+          {
+            "title": "Step 3 — Add a text input and connect the label",
+            "explanation": "The label's for value and the input's id value are identical. That creates the label-control relationship. type=\"text\" makes a normal text field.",
+            "code": "<label for=\"display-name\">Display name</label>\n<input id=\"display-name\" type=\"text\">"
+          },
+          {
+            "title": "Step 4 — Give the form value a name",
+            "explanation": "name is not the same job as id. id helps identify the element in the page; name identifies the piece of form data.",
+            "code": "<label for=\"display-name\">Display name</label>\n<input id=\"display-name\" name=\"displayName\" type=\"text\">"
+          },
+          {
+            "title": "Step 5 — Require a value",
+            "explanation": "required is a boolean attribute. If the user tries normal submission while the field is empty, the browser can stop the submission and ask for a value.",
+            "code": "<label for=\"display-name\">Display name</label>\n<input id=\"display-name\" name=\"displayName\" type=\"text\" required>"
+          },
+          {
+            "title": "Step 6 — Add an email field",
+            "explanation": "The structure is the same, but type=\"email\" tells the browser the value should look like an email address. This is basic browser validation, not proof that the address belongs to the user.",
+            "code": "<label for=\"email\">Email</label>\n<input id=\"email\" name=\"email\" type=\"email\" required>"
+          },
+          {
+            "title": "Step 7 — See a checkbox choice",
+            "explanation": "A checkbox represents an independent choice. Clicking the connected label also toggles the checkbox. This example is for recognition and practice; the final Module 4 task does not require a checkbox.",
+            "code": "<input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n<label for=\"reminders\">Send study reminders</label>"
+          },
+          {
+            "title": "Step 8 — See a radio-button group",
+            "explanation": "Both radio inputs use name=\"studyMode\", so the browser treats them as one group where only one option is normally selected at a time. Each input has its own id so each label points to the correct option.",
+            "code": "<input id=\"guided\" name=\"studyMode\" type=\"radio\" value=\"guided\">\n<label for=\"guided\">Guided</label>\n\n<input id=\"solo\" name=\"studyMode\" type=\"radio\" value=\"solo\">\n<label for=\"solo\">Solo</label>"
+          },
+          {
+            "title": "Step 9 — Add an explicit submit button",
+            "explanation": "A submit button asks the form to submit. Before ordinary submission, the browser checks built-in rules such as required and the basic format expected by type=\"email\".",
+            "code": "<button type=\"submit\">Save profile</button>"
+          },
+          {
+            "title": "Step 10 — Combine the required Module 4 pieces",
+            "explanation": "The final beginner form uses two correctly labelled inputs with names, text/email types, required validation, and one explicit submit button. Server destination details are intentionally left for a later lesson.",
+            "code": "<form>\n  <label for=\"display-name\">Display name</label>\n  <input id=\"display-name\" name=\"displayName\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "<form>",
+            "meaning": "Begin the group of related controls."
+          },
+          {
+            "piece": "<label for=\"display-name\">",
+            "meaning": "Begin a label whose for value points to the input with id display-name."
+          },
+          {
+            "piece": "Display name",
+            "meaning": "The human-readable label text shown to the user."
+          },
+          {
+            "piece": "id=\"display-name\"",
+            "meaning": "Identify this particular input so its label can reference it."
+          },
+          {
+            "piece": "name=\"displayName\"",
+            "meaning": "Name this piece of form data for when data is later collected/submitted."
+          },
+          {
+            "piece": "type=\"text\"",
+            "meaning": "Make this input a normal text field."
+          },
+          {
+            "piece": "required",
+            "meaning": "Ask the browser not to allow ordinary submission while this required control has no acceptable value."
+          },
+          {
+            "piece": "type=\"email\"",
+            "meaning": "Make this input an email field with basic browser email-shape validation."
+          },
+          {
+            "piece": "<button type=\"submit\">",
+            "meaning": "Create a button whose explicit job is to submit the form."
+          },
+          {
+            "piece": "</form>",
+            "meaning": "End the form after all of its controls."
+          }
+        ],
+        "computerSteps": [
+          "The browser parses the form and creates native interactive controls for each input and button.",
+          "For each label with a for value, the browser looks for the control whose id matches that value and connects them.",
+          "The browser uses each input type to decide what control behavior and basic validation should apply.",
+          "The name attribute identifies each control's data value for later form-data collection; it is a different job from id.",
+          "When the user activates the submit button, the browser first checks built-in constraints such as required and the basic format of an email input.",
+          "Because this Intern lesson does not configure a server destination, focus on the form structure and validation behavior rather than real data delivery."
+        ],
+        "guidedChanges": [
+          "Change the visible label text from Display name to Learner name without changing for or id. Explain why the connection still works.",
+          "Change both for=\"display-name\" and id=\"display-name\" to for=\"learner-name\" and id=\"learner-name\". Keep the two values matching.",
+          "Temporarily make the label's for value different from the input's id, then restore them. Notice why matching identifiers matter.",
+          "Remove required from one input and explain which browser requirement you removed.",
+          "Change a type=\"text\" field to type=\"email\" and explain what extra expectation the browser now has for the value.",
+          "Add the checkbox example for study reminders and test clicking its label to toggle it.",
+          "Add the two radio examples with the same name, then change one radio's name and observe why they no longer behave as one group.",
+          "Change the submit button's visible text without changing type=\"submit\". Explain which part changes appearance and which part defines behavior."
+        ],
+        "workedExampleIntro": "This worked example uses only the required Module 4 foundation: a form container, two labels connected with for/id, text and email inputs with names and required validation, and one explicit submit button. Checkbox/radio controls are introduced for recognition but are not required in the final practice. action, method, server handling, JavaScript form events, select, textarea and advanced validation remain later topics.",
+        "errorExamples": [
+          {
+            "mistake": "<label>Display name</label>\n<input id=\"display-name\" type=\"text\">",
+            "explanation": "The label is visible but it is not explicitly connected to the input because it has no for attribute.",
+            "fix": "Use <label for=\"display-name\">Display name</label> with id=\"display-name\" on the input."
+          },
+          {
+            "mistake": "<label for=\"name\">Display name</label>\n<input id=\"display-name\" type=\"text\">",
+            "explanation": "The label points to id name, but the input's id is display-name. The values do not match.",
+            "fix": "Make for and id identical, for example for=\"display-name\" and id=\"display-name\"."
+          },
+          {
+            "mistake": "<input id=\"email\" type=\"email\" required>",
+            "explanation": "The input can still exist, but it has no name. Without a name, this value will not have the expected form-data key when data is later collected or submitted.",
+            "fix": "Add a meaningful name such as name=\"email\"."
+          },
+          {
+            "mistake": "<input id=\"email\" name=\"email\" type=\"text\" required>",
+            "explanation": "This accepts text, but it does not tell the browser that the value is intended to be an email address.",
+            "fix": "Use type=\"email\" for this email field."
+          },
+          {
+            "mistake": "<input id=\"name\" name=\"name\" type=\"text\" required=\"false\">",
+            "explanation": "required is a boolean attribute. In HTML, merely having the required attribute present turns the requirement on; the text value \"false\" does not switch it off.",
+            "fix": "Remove the required attribute when the field should be optional, or write just required when it should be required."
+          },
+          {
+            "mistake": "<input type=\"text\"></input>",
+            "explanation": "input is a void element. It does not wrap content and does not use a separate closing </input> tag.",
+            "fix": "Use only <input type=\"text\">."
+          },
+          {
+            "mistake": "<input id=\"guided\" name=\"guided\" type=\"radio\">\n<input id=\"solo\" name=\"solo\" type=\"radio\">",
+            "explanation": "These radio buttons use different names, so the browser treats them as different groups and both may be selected.",
+            "fix": "Give options in one group the same name, for example name=\"studyMode\"."
+          },
+          {
+            "mistake": "<button>Save profile</button>",
+            "explanation": "Inside a form, a button without an explicit type commonly behaves as a submit button. That can be surprising while learning.",
+            "fix": "Write the intended behavior explicitly: <button type=\"submit\">Save profile</button>."
+          },
+          {
+            "mistake": "type=\"email\" means the email address is real and safe",
+            "explanation": "The browser only performs basic format checks. It cannot prove that the address exists, belongs to the user, or that submitted data is trustworthy.",
+            "fix": "Treat browser validation as helpful user feedback. Real applications also validate data in trusted application/server code, which is a later topic."
+          }
+        ],
+        "recap": [
+          "A form groups controls that belong to one user-input task.",
+          "A label explains a control; for on the label should match id on the control.",
+          "id identifies the page element, while name identifies the form-data value.",
+          "input is a void element whose type changes the control's job.",
+          "type=\"text\" creates normal text input; type=\"email\" adds a basic email-format expectation.",
+          "required is a boolean attribute whose presence enables a browser requirement.",
+          "Checkboxes are independent choices; radio buttons form a one-choice group when they share a name.",
+          "An explicit <button type=\"submit\"> makes the button's job clear.",
+          "Browser validation helps users but does not replace later trusted validation.",
+          "Intern Module 4 focuses on form structure; action, method, server processing and JavaScript form logic are intentionally deferred."
+        ]
+      },
+      "example": "<form>\n  <label for=\"display-name\">Display name</label>\n  <input id=\"display-name\" name=\"displayName\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>",
+      "challenge": "Create a simple profile form with a labelled display-name text field, a labelled email field, and a submit button. Connect each label with for/id, give each input a name, make both fields required, and use type=\"email\" for the email field. Do not add action, method, JavaScript or server code yet.",
+      "hint": "Build one control at a time. For each field, make label for and input id match; then add name, type and required. Finish with <button type=\"submit\">.",
+      "solution": "<form>\n  <label for=\"display-name\">Display name</label>\n  <input id=\"display-name\" name=\"displayName\" type=\"text\" required>\n\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required>\n\n  <button type=\"submit\">Save profile</button>\n</form>",
       "groups": [
         [
           "<form"
@@ -186,8 +1626,23 @@
           "<label"
         ],
         [
+          "for="
+        ],
+        [
+          "<input"
+        ],
+        [
+          "id="
+        ],
+        [
+          "name="
+        ],
+        [
           "type=\"email\"",
           "type=email"
+        ],
+        [
+          "required"
         ],
         [
           "<button"
@@ -197,40 +1652,520 @@
           "type=submit"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "<form"
+          ],
+          [
+            "<label"
+          ],
+          [
+            "for="
+          ],
+          [
+            "<input"
+          ],
+          [
+            "id="
+          ],
+          [
+            "name="
+          ],
+          [
+            "type=\"text\"",
+            "type=text"
+          ],
+          [
+            "type=\"email\"",
+            "type=email"
+          ],
+          [
+            "required"
+          ],
+          [
+            "<button"
+          ],
+          [
+            "type=\"submit\"",
+            "type=submit"
+          ]
+        ],
+        "practiceMinLength": 235,
+        "testCodeQuestions": [
+          {
+            "prompt": "Create one labelled text input for a learner name. Connect label for to the input id, give the input a name, use type=\"text\", and make it required.",
+            "groups": [
+              [
+                "<label"
+              ],
+              [
+                "for="
+              ],
+              [
+                "<input"
+              ],
+              [
+                "id="
+              ],
+              [
+                "name="
+              ],
+              [
+                "type=\"text\"",
+                "type=text"
+              ],
+              [
+                "required"
+              ]
+            ],
+            "minLength": 95
+          },
+          {
+            "prompt": "Create a small form containing one labelled required email input plus an explicit submit button. Use name on the input, type=\"email\", and type=\"submit\" on the button.",
+            "groups": [
+              [
+                "<form"
+              ],
+              [
+                "<label"
+              ],
+              [
+                "<input"
+              ],
+              [
+                "name="
+              ],
+              [
+                "type=\"email\"",
+                "type=email"
+              ],
+              [
+                "required"
+              ],
+              [
+                "<button"
+              ],
+              [
+                "type=\"submit\"",
+                "type=submit"
+              ]
+            ],
+            "minLength": 140
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "<form"
+            ],
+            [
+              "<label"
+            ],
+            [
+              "for="
+            ],
+            [
+              "<input"
+            ],
+            [
+              "id="
+            ],
+            [
+              "name="
+            ],
+            [
+              "type=\"text\"",
+              "type=text"
+            ],
+            [
+              "required"
+            ]
+          ],
+          "2": [
+            [
+              "<form"
+            ],
+            [
+              "<label"
+            ],
+            [
+              "<input"
+            ],
+            [
+              "type=\"email\"",
+              "type=email"
+            ],
+            [
+              "required"
+            ],
+            [
+              "<button"
+            ],
+            [
+              "type=\"submit\"",
+              "type=submit"
+            ]
+          ],
+          "3": [
+            [
+              "<form"
+            ],
+            [
+              "<label"
+            ],
+            [
+              "for="
+            ],
+            [
+              "<input"
+            ],
+            [
+              "id="
+            ],
+            [
+              "name="
+            ],
+            [
+              "type=\"text\"",
+              "type=text"
+            ],
+            [
+              "type=\"email\"",
+              "type=email"
+            ],
+            [
+              "required"
+            ],
+            [
+              "<button"
+            ],
+            [
+              "type=\"submit\"",
+              "type=submit"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Build a form with one correctly labelled required text input. Connect for/id, include name, and use type=\"text\". Do not use server or JavaScript code.",
+          "2": "Exam 2: Build a form with one labelled required email input and one explicit submit button. Include name, type=\"email\", and type=\"submit\".",
+          "3": "Exam 3: Build the Module 4 profile form with labelled required display-name and email inputs plus an explicit submit button. Use only concepts taught through HTML Intern Module 4; action, method, JavaScript and server handling are not required."
+        }
+      },
       "references": [
         {
           "title": "MDN — Web forms",
           "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms"
         },
         {
-          "title": "MDN — HTML accessibility",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
+          "title": "MDN — HTML <label>",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+        },
+        {
+          "title": "MDN — HTML <input>",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not rely on visible label text alone; connect label for to the matching input id.",
+        "Do not confuse id with name. id identifies an element in the page; name identifies the form-data value.",
+        "Use type=\"email\" when the control is meant for an email address instead of using a generic text input without explanation.",
+        "Remember that required is a boolean attribute: required=\"false\" still leaves the attribute present and therefore enabled.",
+        "Remember that input is a void element and does not use </input>.",
+        "Radio options that belong to one group should share the same name; each option can still have its own id/value.",
+        "Write button type explicitly while learning so its behavior is not accidental.",
+        "Do not mistake browser validation for trusted application/server validation.",
+        "Do not add action, method, JavaScript handlers or advanced controls just to complete Module 4; they have not been required yet."
+      ],
+      "mastery": [
+        "Explain what a form and a form control are in your own words.",
+        "Create a label/input pair and explain how for and id connect them.",
+        "Explain the different jobs of id and name.",
+        "Create text and email inputs and explain why their type values differ.",
+        "Explain how the required boolean attribute behaves.",
+        "Recognize input as a void element and avoid writing </input>.",
+        "Explain the basic difference between an independent checkbox and a radio-button group.",
+        "Explain why radio buttons in one group share a name.",
+        "Create an explicit submit button and explain what browser validation runs before ordinary submission.",
+        "Create the Module 4 practice without action, method, JavaScript, server code, select, textarea or other later concepts."
+      ]
     },
     {
       "title": "Semantic Page Structure & Accessibility Basics",
-      "summary": "Combine structural elements into a page that is understandable when styles are removed or when it is navigated with assistive technology.",
+      "summary": "Learn how semantic HTML gives a page meaningful regions and reading structure, then apply beginner accessibility habits using native elements, logical headings, descriptive content, and clean source order.",
       "concepts": [
         {
-          "name": "Landmarks",
-          "explanation": "header, nav, main, aside, and footer create useful page regions. A document should normally have one main landmark for its primary content."
+          "name": "Semantic elements describe the job of a region",
+          "explanation": "A semantic HTML element tells the browser and other tools something about what its content represents. Instead of treating every block as an unnamed container, elements such as header, nav, main and footer communicate purpose. The goal is meaningful structure, not a different visual style."
         },
         {
-          "name": "Sections and articles",
-          "explanation": "section groups a themed part of a document and typically has a heading. article is for self-contained content that could stand on its own."
+          "name": "Sections and articles organize main content",
+          "explanation": "section groups a themed part of a page and normally has a heading that names that theme. article represents self-contained content that could make sense on its own, such as a news story, forum post, lesson card or blog entry. Not every group of elements needs to become a section or article."
         },
         {
-          "name": "Built-in accessibility",
-          "explanation": "Start with correct native elements, meaningful headings, useful link text, alt text, and labels. ARIA is not a substitute for correct HTML."
+          "name": "Accessible HTML starts with the native structure",
+          "explanation": "Good accessibility begins with the HTML you already know: logical headings, descriptive links, useful image alt text, connected form labels, and native semantic regions. Assistive technology can use that structure. ARIA can be useful later, but it should not replace correct native HTML."
         }
       ],
-      "example": "<header>\n  <h1>Code Ascension</h1>\n  <nav aria-label=\"Primary\"><a href=\"#roadmap\">Roadmap</a></nav>\n</header>\n<main id=\"roadmap\">\n  <section>\n    <h2>Current path</h2>\n    <article><h3>HTML Intern</h3><p>Five modules in progress.</p></article>\n  </section>\n</main>\n<footer><p>Local learning build</p></footer>",
-      "challenge": "Build a page fragment with header, nav, main, section, article and footer, using headings in a logical hierarchy.",
-      "hint": "Imagine the page with all CSS disabled. The structure and reading order should still make sense.",
-      "solution": "<header>\n  <h1>Code Ascension</h1>\n  <nav aria-label=\"Primary\"><a href=\"#roadmap\">Roadmap</a></nav>\n</header>\n<main id=\"roadmap\">\n  <section>\n    <h2>Current path</h2>\n    <article><h3>HTML Intern</h3><p>Five modules in progress.</p></article>\n  </section>\n</main>\n<footer><p>Local learning build</p></footer>",
+      "starter": "<header>\n  <h1>Code Ascension Academy</h1>\n</header>\n\n<main>\n  <h2>Current path</h2>\n  <p>I am learning semantic HTML.</p>\n</main>",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what semantic HTML and accessibility mean at a beginner level, identify the jobs of header, nav, main, section, article and footer, build a page whose source order and heading hierarchy make sense, and explain why native HTML should come before unnecessary ARIA.",
+        "whyItMatters": "A webpage is not only something people look at. People may navigate it with a keyboard, hear it through a screen reader, zoom it heavily, restyle it, or consume it through other software. Meaningful HTML gives all of those experiences a stronger structure before CSS and JavaScript are involved.",
+        "terms": [
+          {
+            "term": "Semantic HTML",
+            "meaning": "HTML chosen because an element describes the meaning or job of its content, not merely because of how the browser happens to display it."
+          },
+          {
+            "term": "Accessibility",
+            "meaning": "Designing content so people with different abilities and ways of using a computer can perceive, understand, navigate and operate it."
+          },
+          {
+            "term": "Assistive technology",
+            "meaning": "Software or hardware that helps a person interact with digital content. A screen reader is one example."
+          },
+          {
+            "term": "Screen reader",
+            "meaning": "Software that can present interface and webpage information through speech or other non-visual output."
+          },
+          {
+            "term": "Landmark",
+            "meaning": "A meaningful page region that helps describe the page structure. Native elements such as nav and main can provide landmark information."
+          },
+          {
+            "term": "Header",
+            "meaning": "Introductory content for a page or a section. In this Intern lesson we use header for the page introduction."
+          },
+          {
+            "term": "Navigation",
+            "meaning": "A group of important links used to move to major destinations. HTML represents this with nav."
+          },
+          {
+            "term": "Main content",
+            "meaning": "The primary content of the page. HTML represents it with main; a normal page should not have several competing visible main regions."
+          },
+          {
+            "term": "Section",
+            "meaning": "A themed grouping of content, normally with a heading that tells the reader what the section is about."
+          },
+          {
+            "term": "Article",
+            "meaning": "Self-contained content that can still make sense as an individual item, such as a lesson update, post, or story."
+          },
+          {
+            "term": "Footer",
+            "meaning": "Closing or supporting information for a page or section. In this lesson we use footer for page-level closing information."
+          },
+          {
+            "term": "Source order",
+            "meaning": "The order elements appear in the HTML source. A sensible source order should tell a coherent story even before visual layout is added."
+          },
+          {
+            "term": "ARIA",
+            "meaning": "A set of accessibility attributes used when extra accessibility information is genuinely needed. It is not a replacement for correct native HTML."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "<header> ... </header>",
+            "meaning": "Wrap introductory page content such as the page heading."
+          },
+          {
+            "symbol": "<nav> ... </nav>",
+            "meaning": "Wrap a major group of navigation links. Do not use nav for every random link on the page."
+          },
+          {
+            "symbol": "<main> ... </main>",
+            "meaning": "Wrap the page's primary content. Keep one clear visible main region in a normal beginner page."
+          },
+          {
+            "symbol": "<section> ... </section>",
+            "meaning": "Group content about one theme. Give the section a meaningful heading when it needs a named place in the document structure."
+          },
+          {
+            "symbol": "<article> ... </article>",
+            "meaning": "Wrap self-contained content that could reasonably stand as an individual item."
+          },
+          {
+            "symbol": "<footer> ... </footer>",
+            "meaning": "Wrap closing or supporting information. This lesson uses it as the page footer."
+          },
+          {
+            "symbol": "<h1> → <h2> → <h3>",
+            "meaning": "Keep heading levels connected to the content hierarchy you learned in Module 2."
+          },
+          {
+            "symbol": "Native HTML first",
+            "meaning": "Prefer the correct built-in element and attributes you already know before reaching for extra accessibility attributes."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Give the page an introductory header",
+            "explanation": "The header groups the page introduction. The h1 still provides the actual top-level heading; header does not replace headings.",
+            "code": "<header>\n  <h1>Code Ascension Academy</h1>\n</header>"
+          },
+          {
+            "title": "Step 2 — Mark the primary content with main",
+            "explanation": "main identifies the content that is central to this page. It is not a styling box and it does not automatically create a heading, so the content inside still needs its own logical headings.",
+            "code": "<main>\n  <h2>Current path</h2>\n  <p>I am learning semantic HTML.</p>\n</main>"
+          },
+          {
+            "title": "Step 3 — Put major navigation links inside nav",
+            "explanation": "nav is for an important navigation group. The links themselves are the same a elements you learned in Module 3. A short list gives the links a clear grouped structure.",
+            "code": "<nav>\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"projects.html\">Projects</a></li>\n  </ul>\n</nav>"
+          },
+          {
+            "title": "Step 4 — Create a named section",
+            "explanation": "section groups content about one theme. The h2 tells the reader what this section is about. A section is not just a generic wrapper for spacing.",
+            "code": "<section>\n  <h2>Current path</h2>\n  <p>I am working through HTML Intern.</p>\n</section>"
+          },
+          {
+            "title": "Step 5 — Recognize self-contained article content",
+            "explanation": "This lesson update can make sense as one self-contained item, so article is meaningful. Its h3 fits beneath the h2 of the surrounding section.",
+            "code": "<article>\n  <h3>HTML Intern</h3>\n  <p>I have completed four modules.</p>\n</article>"
+          },
+          {
+            "title": "Step 6 — Add closing information with footer",
+            "explanation": "A page footer can contain closing or supporting information. The footer element adds meaning; it does not force the footer to the bottom of the screen or style it automatically.",
+            "code": "<footer>\n  <p>Local learning build</p>\n</footer>"
+          },
+          {
+            "title": "Step 7 — Check the source order before thinking about CSS",
+            "explanation": "Read the elements from top to bottom: introduction, navigation, primary content, closing information. If that order makes sense without visual layout, you have a strong structural starting point.",
+            "code": "<header>...</header>\n<nav>...</nav>\n<main>...</main>\n<footer>...</footer>"
+          },
+          {
+            "title": "Step 8 — Reuse the accessibility habits you already learned",
+            "explanation": "Semantic regions do not replace the earlier rules. Keep headings logical, links descriptive, image alt text meaningful, and form labels connected. Accessibility is built from these small correct choices working together.",
+            "code": "<h2>Study resources</h2>\n<a href=\"lessons.html\">Open HTML lessons</a>\n<img src=\"academy-badge.png\" alt=\"Code Ascension Academy badge\">"
+          },
+          {
+            "title": "Step 9 — Know when not to add ARIA",
+            "explanation": "The native nav element already communicates navigation semantics. At Intern level, do not add roles or ARIA attributes simply because they sound more accessible. Learn the native structure first; later ranks can cover cases where extra accessible naming or roles are genuinely needed.",
+            "code": "<nav>\n  <a href=\"lessons.html\">Lessons</a>\n</nav>"
+          },
+          {
+            "title": "Step 10 — Combine the semantic page regions",
+            "explanation": "The final structure uses only native elements and concepts taught across HTML Intern. The headings follow h1 → h2 → h3, navigation reuses normal links, and the page still makes sense if styling is removed.",
+            "code": "<header>\n  <h1>Code Ascension Academy</h1>\n</header>\n\n<nav>\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"projects.html\">Projects</a></li>\n  </ul>\n</nav>\n\n<main>\n  <section>\n    <h2>Current path</h2>\n    <article>\n      <h3>HTML Intern</h3>\n      <p>I am learning semantic page structure.</p>\n    </article>\n  </section>\n</main>\n\n<footer>\n  <p>Local learning build</p>\n</footer>"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "header",
+            "meaning": "Introduces the page; it does not replace the h1 inside it."
+          },
+          {
+            "piece": "nav",
+            "meaning": "Groups important navigation links that move the learner to major destinations."
+          },
+          {
+            "piece": "main",
+            "meaning": "Marks the primary page content and gives the page one clear central region."
+          },
+          {
+            "piece": "section + h2",
+            "meaning": "Creates a themed region and names that theme with a heading."
+          },
+          {
+            "piece": "article + h3",
+            "meaning": "Creates one self-contained content item inside the broader section."
+          },
+          {
+            "piece": "footer",
+            "meaning": "Provides page-level closing/supporting information."
+          },
+          {
+            "piece": "h1 → h2 → h3",
+            "meaning": "Preserves the content hierarchy rather than choosing heading numbers for visual size."
+          },
+          {
+            "piece": "link text",
+            "meaning": "Continues the Module 3 habit of describing where a link goes rather than using vague text."
+          }
+        ],
+        "computerSteps": [
+          "The browser parses the HTML from top to bottom and builds its document structure from the nested elements.",
+          "Native semantic elements contribute meaning to that structure; they are not merely visual containers.",
+          "Assistive technology can use headings and landmark information to help a person understand or move around the page.",
+          "The browser still renders the content even if no CSS exists, which is why meaningful source order matters.",
+          "If markup is malformed, the browser may repair it. Inspect the source structure rather than judging correctness only by appearance."
+        ],
+        "guidedChanges": [
+          "Change the h3 article title and confirm that its level still makes sense beneath the surrounding h2.",
+          "Add one more descriptive navigation link using the a/href syntax from Module 3.",
+          "Remove all imagined styling from your mental picture and read the source from top to bottom. Ask whether the order still makes sense.",
+          "Replace a vague link such as “Click here” with text that names the destination.",
+          "If you add an image from Module 3, write alt text that communicates the image's purpose instead of only saying “image”.",
+          "If you add a form control from Module 4, keep its label correctly connected with for/id."
+        ],
+        "workedExampleIntro": "This final HTML Intern example combines concepts from all five modules. Focus on meaning first: introduction, navigation, primary content, themed section, self-contained article, then closing information. Notice that no ARIA is required to make these native elements semantic.",
+        "errorExamples": [
+          {
+            "mistake": "<div>Lessons</div> used as the only navigation structure",
+            "explanation": "A generic div does not communicate that the content is a navigation region.",
+            "fix": "Use <nav> around the major navigation links when the content really is navigation."
+          },
+          {
+            "mistake": "Two separate visible <main> regions competing as primary content",
+            "explanation": "A normal page should have one clear primary main region. Multiple visible main regions make the page structure ambiguous.",
+            "fix": "Keep one main for the page's primary content and use section/article for structure inside it."
+          },
+          {
+            "mistake": "<section><p>...</p></section> with no reason or identifiable theme",
+            "explanation": "section is semantic, not a generic styling wrapper. A thematic section normally benefits from a heading that identifies its topic.",
+            "fix": "Give the section a meaningful heading, or use a non-semantic container later if there is no semantic section to describe."
+          },
+          {
+            "mistake": "Using <article> for every ordinary paragraph",
+            "explanation": "article is intended for self-contained content, not every block of text.",
+            "fix": "Use p for normal prose; use article when the whole content item can reasonably stand on its own."
+          },
+          {
+            "mistake": "<h1>Page</h1> followed by <h4>Current path</h4> for a direct section",
+            "explanation": "The heading number was chosen without following the content hierarchy.",
+            "fix": "Use the logical next level, such as h2 for a direct section beneath the page h1."
+          },
+          {
+            "mistake": "<nav><a href=\"lessons.html\">Click here</a></nav>",
+            "explanation": "The semantic nav region is present, but the link text is still vague. Accessibility depends on the smaller content choices too.",
+            "fix": "Use descriptive text such as <a href=\"lessons.html\">HTML lessons</a>."
+          },
+          {
+            "mistake": "<img src=\"badge.png\">",
+            "explanation": "Semantic page regions do not remove the need for meaningful text alternatives on informative images.",
+            "fix": "Add appropriate alt text, for example alt=\"Code Ascension Academy badge\"."
+          },
+          {
+            "mistake": "<input id=\"email\" type=\"email\"> with an unrelated or missing label",
+            "explanation": "Adding semantic landmarks does not repair inaccessible form controls.",
+            "fix": "Keep the Module 4 label relationship: <label for=\"email\">Email</label> with id=\"email\"."
+          },
+          {
+            "mistake": "Adding role=\"navigation\" to <nav> only because “more accessibility attributes must be better”",
+            "explanation": "The native nav element already carries navigation semantics. Redundant ARIA is not the beginner goal.",
+            "fix": "Use the correct native element first. Add ARIA later only when there is a real accessibility need you understand."
+          },
+          {
+            "mistake": "Moving content into a strange source order only to achieve a visual layout",
+            "explanation": "People and tools may encounter the source/reading order differently from a visual CSS layout.",
+            "fix": "Keep the HTML order logical, then use CSS later to create presentation without destroying the content story."
+          }
+        ],
+        "recap": [
+          "Semantic HTML describes what content is for, not how large, colorful or positioned it should look.",
+          "header introduces, nav groups major navigation, main contains primary content, and footer closes/supports the page.",
+          "section groups a theme; article is a self-contained content item.",
+          "Heading hierarchy and source order remain important inside semantic regions.",
+          "Accessibility builds on native elements plus the link, alt-text and label habits learned earlier.",
+          "ARIA is a later tool for real gaps; it is not a replacement for correct HTML."
+        ]
+      },
+      "example": "<header>\n  <h1>Code Ascension Academy</h1>\n</header>\n\n<nav>\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"projects.html\">Projects</a></li>\n  </ul>\n</nav>\n\n<main>\n  <section>\n    <h2>Current path</h2>\n    <article>\n      <h3>HTML Intern</h3>\n      <p>I am learning semantic page structure.</p>\n    </article>\n  </section>\n</main>\n\n<footer>\n  <p>Local learning build</p>\n</footer>",
+      "challenge": "Build a semantic learning-dashboard page fragment with header, nav, main, one section, one article and footer. Include a logical h1 → h2 → h3 heading hierarchy and at least two descriptive navigation links. Use only native HTML and concepts taught through HTML Intern; ARIA is not required.",
+      "hint": "Start with the page regions in source order: header, nav, main, footer. Inside main, add a section with an h2, then an article with an h3 and paragraph. Reuse the ul/li/a link structure from Module 3 inside nav.",
+      "solution": "<header>\n  <h1>Code Ascension Academy</h1>\n</header>\n\n<nav>\n  <ul>\n    <li><a href=\"lessons.html\">Lessons</a></li>\n    <li><a href=\"projects.html\">Projects</a></li>\n  </ul>\n</nav>\n\n<main>\n  <section>\n    <h2>Current path</h2>\n    <article>\n      <h3>HTML Intern</h3>\n      <p>I am learning semantic page structure.</p>\n    </article>\n  </section>\n</main>\n\n<footer>\n  <p>Local learning build</p>\n</footer>",
       "groups": [
         [
           "<header"
@@ -249,20 +2184,240 @@
         ],
         [
           "<footer"
+        ],
+        [
+          "<h1"
+        ],
+        [
+          "<h2"
+        ],
+        [
+          "<h3"
+        ],
+        [
+          "<a"
+        ],
+        [
+          "href="
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "<header"
+          ],
+          [
+            "<nav"
+          ],
+          [
+            "<main"
+          ],
+          [
+            "<section"
+          ],
+          [
+            "<article"
+          ],
+          [
+            "<footer"
+          ],
+          [
+            "<h1"
+          ],
+          [
+            "<h2"
+          ],
+          [
+            "<h3"
+          ],
+          [
+            "<a"
+          ],
+          [
+            "href="
+          ]
+        ],
+        "practiceMinLength": 300,
+        "testCodeQuestions": [
+          {
+            "prompt": "Build the top-level semantic structure for a learning page using header with an h1, nav containing at least one descriptive link, main containing an h2, and footer. ARIA is not required.",
+            "groups": [
+              [
+                "<header"
+              ],
+              [
+                "<h1"
+              ],
+              [
+                "<nav"
+              ],
+              [
+                "<a"
+              ],
+              [
+                "href="
+              ],
+              [
+                "<main"
+              ],
+              [
+                "<h2"
+              ],
+              [
+                "<footer"
+              ]
+            ],
+            "minLength": 180
+          },
+          {
+            "prompt": "Inside a main region, create a section with an h2 and a self-contained article with an h3 plus paragraph. Keep the heading hierarchy logical.",
+            "groups": [
+              [
+                "<main"
+              ],
+              [
+                "<section"
+              ],
+              [
+                "<h2"
+              ],
+              [
+                "<article"
+              ],
+              [
+                "<h3"
+              ],
+              [
+                "<p"
+              ]
+            ],
+            "minLength": 150
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "<header"
+            ],
+            [
+              "<h1"
+            ],
+            [
+              "<nav"
+            ],
+            [
+              "<a"
+            ],
+            [
+              "href="
+            ],
+            [
+              "<main"
+            ],
+            [
+              "<footer"
+            ]
+          ],
+          "2": [
+            [
+              "<main"
+            ],
+            [
+              "<section"
+            ],
+            [
+              "<h2"
+            ],
+            [
+              "<article"
+            ],
+            [
+              "<h3"
+            ],
+            [
+              "<p"
+            ]
+          ],
+          "3": [
+            [
+              "<header"
+            ],
+            [
+              "<nav"
+            ],
+            [
+              "<main"
+            ],
+            [
+              "<section"
+            ],
+            [
+              "<article"
+            ],
+            [
+              "<footer"
+            ],
+            [
+              "<h1"
+            ],
+            [
+              "<h2"
+            ],
+            [
+              "<h3"
+            ],
+            [
+              "<a"
+            ],
+            [
+              "href="
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Build a semantic page skeleton using header with h1, nav with at least one descriptive link, one main region, and footer. Use native HTML; ARIA is not required.",
+          "2": "Exam 2: Inside main, create a themed section with h2 and a self-contained article with h3 and paragraph. Preserve the heading hierarchy.",
+          "3": "Exam 3: Build the complete HTML Intern semantic learning page using header, nav, main, section, article and footer with h1 → h2 → h3 hierarchy and descriptive links. Use only concepts taught through HTML Intern."
+        }
+      },
       "references": [
         {
-          "title": "MDN — Structuring content with HTML",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content"
+          "title": "MDN — HTML elements reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements"
         },
         {
-          "title": "MDN — HTML accessibility",
+          "title": "MDN — HTML <main>",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main"
+        },
+        {
+          "title": "MDN — HTML: A good basis for accessibility",
           "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not choose semantic elements because of their default appearance. Their purpose is meaning; CSS controls presentation later.",
+        "Do not use nav for every link. Reserve it for an important navigation group.",
+        "Keep one clear visible main region for a normal beginner page rather than creating several competing primary-content regions.",
+        "Do not use section merely as a generic wrapper. A semantic section should represent a real theme and normally has a heading.",
+        "Do not use article for every paragraph or card-shaped box. Use it when the content item is meaningfully self-contained.",
+        "Keep heading levels tied to structure, not visual size, even inside header/section/article elements.",
+        "Semantic landmarks do not replace descriptive link text, useful image alt text or connected form labels.",
+        "Do not assume adding more ARIA automatically creates better accessibility. Prefer correct native HTML first.",
+        "Keep source order understandable before using CSS to change the visual layout.",
+        "Remember that browsers may repair malformed nesting, so inspect the source instead of trusting appearance alone."
+      ],
+      "mastery": [
+        "Explain semantic HTML in your own words and distinguish meaning from visual styling.",
+        "Explain the beginner-level jobs of header, nav, main and footer.",
+        "Explain the difference between section and article using your own example.",
+        "Build a page with one h1 and logical h2/h3 headings inside semantic regions.",
+        "Explain why a normal page should have one clear visible main region.",
+        "Explain why nav should contain major navigation rather than every link on a page.",
+        "Read a page fragment from top to bottom and judge whether its source order tells a coherent story.",
+        "Reuse descriptive link text, alt text and form-label habits from Modules 3–4 when those elements appear inside semantic regions.",
+        "Explain why native HTML should be preferred before adding unnecessary ARIA.",
+        "Build the Module 5 practice without relying on CSS, JavaScript, advanced ARIA, custom roles, or concepts from later HTML ranks."
+      ]
     }
   ]
 }

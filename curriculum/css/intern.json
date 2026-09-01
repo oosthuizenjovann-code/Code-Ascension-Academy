@@ -4,39 +4,382 @@
   "topics": [
     {
       "title": "Selectors, Rules & the Cascade",
-      "summary": "Learn the basic grammar of CSS: choose elements with selectors, declare properties and values, and understand why one competing rule wins.",
+      "summary": "Start from absolute zero: understand what CSS is, how it works with HTML, and how a browser reads a CSS rule. Learn selectors, braces, properties, values, colons, semicolons, reusable classes, basic id selectors, and the simplest safe idea of the cascade.",
       "concepts": [
         {
-          "name": "Rulesets",
-          "explanation": "A ruleset combines a selector with a declaration block. Each declaration is a property/value pair such as color: white."
+          "name": "CSS works with HTML",
+          "explanation": "HTML describes what page content is; CSS describes how that content should look. A selector connects a CSS rule to matching HTML elements. In the Academy CSS practice area, the preview HTML is already provided so you can focus on the CSS itself."
         },
         {
-          "name": "Selectors",
-          "explanation": "Type, class, and id selectors target different sets of elements. Classes are the normal reusable styling hook; ids are unique document identifiers."
+          "name": "A rule has a selector and declarations",
+          "explanation": "A CSS rule starts with a selector, then a declaration block inside { and }. Inside the block, each declaration normally follows property: value; syntax. The property names what you want to change and the value says what setting to use."
         },
         {
-          "name": "Cascade basics",
-          "explanation": "When rules target the same property, origin, importance, specificity, and source order determine which declaration wins."
+          "name": "Selectors choose targets; the cascade resolves conflicts",
+          "explanation": "An element selector such as p targets that HTML element type, .card targets elements with class=\"card\", and #featured targets the element with id=\"featured\". When equally strong rules set the same property on the same target, the later rule wins. More advanced conflict rules are deliberately left for later lessons."
         }
       ],
-      "example": "body {\n  background: #0b1220;\n  color: #eaf2ff;\n}\n\n.card {\n  border: 1px solid #28405f;\n  padding: 1rem;\n}",
-      "challenge": "Style the page background/text and create a reusable .card class with padding and a border.",
-      "hint": "Use one body rule and one class selector beginning with a dot.",
-      "solution": "body {\n  background: #0b1220;\n  color: #eaf2ff;\n}\n\n.card {\n  border: 1px solid #28405f;\n  padding: 1rem;\n}",
+      "starter": "body {\n  \n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain the different jobs of HTML and CSS, read the pieces of a basic CSS rule, write declarations using property: value; syntax, use an element selector, a reusable class selector and a basic id selector, and explain the simplest form of the cascade when two otherwise-equal rules conflict.",
+        "whyItMatters": "CSS becomes much easier when the punctuation is not mysterious. Every later topic—color, spacing, the box model, Flexbox and responsive design—uses the same basic rule grammar you learn here. If selector, braces, property, colon, value and semicolon are clear now, later CSS feels like adding new vocabulary instead of learning a new language from scratch each time.",
+        "terms": [
+          {
+            "term": "CSS",
+            "meaning": "Cascading Style Sheets. CSS is the language used to describe the visual presentation of HTML content, including things such as color, spacing, sizing and layout."
+          },
+          {
+            "term": "Stylesheet",
+            "meaning": "A collection of CSS rules. A stylesheet can be stored in a .css file such as styles.css."
+          },
+          {
+            "term": "Selector",
+            "meaning": "The part before { that chooses which HTML element or elements a rule should target."
+          },
+          {
+            "term": "Rule / ruleset",
+            "meaning": "A selector together with its declaration block, for example p { color: blue; }."
+          },
+          {
+            "term": "Declaration block",
+            "meaning": "The declarations between { and } in a CSS rule."
+          },
+          {
+            "term": "Declaration",
+            "meaning": "One property/value instruction inside a rule, such as color: blue;."
+          },
+          {
+            "term": "Property",
+            "meaning": "The name of the visual feature you want to change, such as color or background-color."
+          },
+          {
+            "term": "Value",
+            "meaning": "The setting assigned to a property, such as blue in color: blue;."
+          },
+          {
+            "term": "Element selector",
+            "meaning": "A selector such as p or body that targets HTML elements by tag name."
+          },
+          {
+            "term": "Class",
+            "meaning": "A reusable HTML label written with class=\"...\". CSS selects a class by putting a dot before the class name, such as .card."
+          },
+          {
+            "term": "ID",
+            "meaning": "A document identifier written with id=\"...\". CSS selects an id by putting # before the id value, such as #featured. IDs should normally be unique within one HTML document."
+          },
+          {
+            "term": "Cascade",
+            "meaning": "The system CSS uses to decide which declaration wins when more than one rule tries to set the same property on the same element."
+          },
+          {
+            "term": "Source order",
+            "meaning": "The order rules appear in the stylesheet. When competing rules are otherwise equal, a later declaration can win because it appears later."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": ".css",
+            "meaning": "The normal filename extension for a standalone CSS stylesheet, for example styles.css."
+          },
+          {
+            "symbol": "p",
+            "meaning": "An element selector that targets p (paragraph) elements."
+          },
+          {
+            "symbol": "{",
+            "meaning": "Opens the declaration block for a CSS rule."
+          },
+          {
+            "symbol": "}",
+            "meaning": "Closes the declaration block for a CSS rule."
+          },
+          {
+            "symbol": "color",
+            "meaning": "A CSS property. In this lesson it is used as a simple property so you can learn rule grammar; Module 2 teaches color in much more detail."
+          },
+          {
+            "symbol": ":",
+            "meaning": "Separates a CSS property name from its value."
+          },
+          {
+            "symbol": "blue",
+            "meaning": "A simple named color value used here to make the declaration easy to read."
+          },
+          {
+            "symbol": ";",
+            "meaning": "Ends a declaration. Keeping the semicolon makes each instruction's boundary clear and prevents problems when more declarations are added."
+          },
+          {
+            "symbol": ".card",
+            "meaning": "A class selector. The dot means target elements whose class list contains card."
+          },
+          {
+            "symbol": "#featured",
+            "meaning": "An id selector. The # means target the element whose id is featured."
+          },
+          {
+            "symbol": "background-color",
+            "meaning": "A property that changes an element's background color. Detailed color choices belong to Module 2."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Read one complete CSS rule",
+            "explanation": "The selector p chooses paragraph elements. The braces contain the instructions. color is the property, blue is its value, : connects property to value, and ; ends the declaration.",
+            "code": "p {\n  color: blue;\n}"
+          },
+          {
+            "title": "Step 2 — Add a second declaration",
+            "explanation": "One rule can contain more than one declaration. Each declaration gets its own property, colon, value and semicolon. Module 2 will teach color choices in depth; here the named colors simply make the grammar visible.",
+            "code": "body {\n  color: black;\n  background-color: white;\n}"
+          },
+          {
+            "title": "Step 3 — Target a reusable class",
+            "explanation": "If the HTML contains class=\"card\", the CSS selector starts with a dot: .card. A class can be reused on multiple HTML elements, which makes it a normal styling hook.",
+            "code": ".card {\n  color: navy;\n}"
+          },
+          {
+            "title": "Step 4 — Recognize the HTML-to-CSS class connection",
+            "explanation": "The HTML class value itself is card, without a dot. The dot belongs to CSS selector syntax. This example shows the connection conceptually; your CSS practice editor only needs the CSS rule.",
+            "code": "HTML: <div class=\"card\">Lesson</div>\nCSS:  .card { color: navy; }"
+          },
+          {
+            "title": "Step 5 — Target one id",
+            "explanation": "If an HTML element has id=\"featured\", CSS can target it with #featured. The # is CSS selector syntax; it is not part of the HTML id value.",
+            "code": "#featured {\n  background-color: lightyellow;\n}"
+          },
+          {
+            "title": "Step 6 — See the simplest cascade conflict",
+            "explanation": "These two rules use the same selector and set the same property. Because they are otherwise equal, the later color declaration wins, so paragraphs end up green. CSS has more conflict rules, but Intern does not need the full specificity system yet.",
+            "code": "p {\n  color: blue;\n}\n\np {\n  color: green;\n}"
+          },
+          {
+            "title": "Step 7 — Combine the selector types you know",
+            "explanation": "This stylesheet uses an element selector, a class selector and an id selector. Each rule follows the same selector { property: value; } grammar.",
+            "code": "body {\n  color: black;\n  background-color: white;\n}\n\n.card {\n  color: navy;\n}\n\n#featured {\n  background-color: lightyellow;\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "body",
+            "meaning": "Element selector: target the body element."
+          },
+          {
+            "piece": "{ ... }",
+            "meaning": "Declaration block: contain the styling instructions for that selector."
+          },
+          {
+            "piece": "color: black;",
+            "meaning": "Set the color property to the value black and end the declaration with a semicolon."
+          },
+          {
+            "piece": "background-color: white;",
+            "meaning": "Set the background-color property to white."
+          },
+          {
+            "piece": ".card",
+            "meaning": "Class selector: target HTML elements whose class list contains card."
+          },
+          {
+            "piece": "#featured",
+            "meaning": "ID selector: target the element whose id value is featured."
+          },
+          {
+            "piece": ".",
+            "meaning": "In a CSS selector, a leading dot means class."
+          },
+          {
+            "piece": "#",
+            "meaning": "In a CSS selector, a leading # means id."
+          }
+        ],
+        "computerSteps": [
+          "The browser reads the HTML and builds the page structure.",
+          "The browser also reads CSS rules that apply to that page. In the Academy CSS practice environment, the preview page and stylesheet connection are prepared for you.",
+          "For each rule, the browser evaluates the selector and finds matching elements.",
+          "It reads each declaration inside the braces as a property/value instruction.",
+          "If multiple declarations compete for the same property on the same element, the cascade decides which one wins.",
+          "For the simple equal-selector conflict taught in this lesson, the later declaration wins. Specificity, importance and more advanced cascade details are intentionally deferred."
+        ],
+        "guidedChanges": [
+          "Change blue to red in p { color: blue; } and predict what visual property should change before running the preview.",
+          "Add a second declaration inside the same rule and make sure both declarations end with semicolons.",
+          "Change .card to .panel and explain why the matching HTML class would also need to be panel for the rule to apply.",
+          "Change #featured to #highlighted and explain why the matching HTML id would also need to change.",
+          "Place two identical p selectors one after the other with different color values and predict which value wins.",
+          "Remove one colon or semicolon temporarily, observe the unexpected result, then restore the correct property: value; syntax.",
+          "Re-indent a rule so each declaration is easy to distinguish inside the braces."
+        ],
+        "workedExampleIntro": "This stylesheet combines only grammar and selector types already introduced. Read each rule as: choose a target, open the declaration block, give the browser one or more property/value instructions, then close the block.",
+        "errorExamples": [
+          {
+            "mistake": "p ( color: blue; )",
+            "explanation": "CSS rules use curly braces for the declaration block, not parentheses.",
+            "fix": "Write p { color: blue; }."
+          },
+          {
+            "mistake": "p { color = blue; }",
+            "explanation": "CSS declarations use a colon between the property and value. The = symbol here is not CSS declaration syntax.",
+            "fix": "Write color: blue;."
+          },
+          {
+            "mistake": "p { color blue; }",
+            "explanation": "The colon between property and value is missing.",
+            "fix": "Write color: blue;."
+          },
+          {
+            "mistake": "p { color: blue background-color: white; }",
+            "explanation": "The first declaration has no semicolon, so the browser cannot cleanly separate the two instructions.",
+            "fix": "Write color: blue; background-color: white;."
+          },
+          {
+            "mistake": "card { color: navy; }",
+            "explanation": "Without the dot, card is treated as an element selector rather than a class selector.",
+            "fix": "Write .card { color: navy; }."
+          },
+          {
+            "mistake": "# card { color: navy; }",
+            "explanation": "A space separates selector pieces. The # must directly touch the id name.",
+            "fix": "Write #card { color: navy; }."
+          },
+          {
+            "mistake": "HTML class=\"card\" but CSS uses #card",
+            "explanation": "A class and an id are different selector types. #card looks for id=\"card\", not class=\"card\".",
+            "fix": "Use .card for class=\"card\"."
+          },
+          {
+            "mistake": "p { color: blue; } followed later by p { color: green; }, but expecting blue",
+            "explanation": "With the same selector and same property, the later equal-strength declaration wins in this simple cascade case.",
+            "fix": "Expect green, or remove/change the later conflicting declaration."
+          },
+          {
+            "mistake": ".card color: navy;",
+            "explanation": "The selector is present, but the declaration block braces are missing.",
+            "fix": "Write .card { color: navy; }."
+          }
+        ],
+        "recap": [
+          "HTML describes page structure and meaning; CSS describes presentation.",
+          "A CSS rule is a selector plus a declaration block inside { and }.",
+          "A declaration normally follows property: value; syntax.",
+          "Element selectors target tag names such as p or body.",
+          "A leading dot selects a class, so .card matches class=\"card\".",
+          "A leading # selects an id, so #featured matches id=\"featured\".",
+          "The cascade decides between competing declarations; for otherwise-equal rules in this lesson, the later one wins.",
+          "Module 2 will expand color and typography; this module's job is to make CSS grammar and targeting feel predictable first."
+        ]
+      },
+      "example": "body {\n  color: black;\n  background-color: white;\n}\n\n.card {\n  color: navy;\n}\n\n#featured {\n  background-color: lightyellow;\n}",
+      "challenge": "Write three simple CSS rules: style body with black text on a white background, style the reusable .card class with navy text, and style #featured with a lightyellow background. Use correct braces, colons and semicolons.",
+      "hint": "Use body, .card and #featured as three separate selectors. Each rule follows selector { property: value; }. Remember: dot means class and # means id.",
+      "solution": "body {\n  color: black;\n  background-color: white;\n}\n\n.card {\n  color: navy;\n}\n\n#featured {\n  background-color: lightyellow;\n}",
       "groups": [
         [
           "body"
         ],
         [
+          "color"
+        ],
+        [
+          "background-color"
+        ],
+        [
           ".card"
         ],
         [
-          "padding"
-        ],
-        [
-          "border"
+          "#featured"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "body"
+          ],
+          [
+            "color"
+          ],
+          [
+            "background-color"
+          ],
+          [
+            ".card"
+          ],
+          [
+            "#featured"
+          ]
+        ],
+        "practiceMinLength": 85,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write one CSS rule that targets paragraph elements and sets their color to blue. Use a selector, braces, a colon and a semicolon.",
+            "groups": [
+              [
+                "p"
+              ],
+              [
+                "color"
+              ],
+              [
+                "blue"
+              ]
+            ],
+            "minLength": 18
+          },
+          {
+            "prompt": "Write one CSS rule for the reusable class card that sets its color to navy. Remember that a CSS class selector begins with a dot.",
+            "groups": [
+              [
+                ".card"
+              ],
+              [
+                "color"
+              ],
+              [
+                "navy"
+              ]
+            ],
+            "minLength": 22
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "body"
+            ],
+            [
+              "color"
+            ]
+          ],
+          "2": [
+            [
+              ".card"
+            ],
+            [
+              "color"
+            ]
+          ],
+          "3": [
+            [
+              "body"
+            ],
+            [
+              "background-color"
+            ],
+            [
+              ".card"
+            ],
+            [
+              "#featured"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Write a basic CSS rule that targets the body element and sets its color. Use correct rule and declaration punctuation.",
+          "2": "Exam 2: Write a CSS class rule for .card that sets a color value. The class selector must begin with a dot.",
+          "3": "Exam 3: Write separate rules for body, .card and #featured. Include a background-color declaration and use correct element, class and id selector syntax."
+        }
+      },
       "references": [
         {
           "title": "MDN — CSS styling basics",
@@ -47,195 +390,2089 @@
           "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not treat CSS like C# or JavaScript assignment syntax: declarations use property: value;, not property = value;.",
+        "Do not forget that { and } surround the declaration block for a rule.",
+        "Keep a colon between each property and value and a semicolon at the end of each beginner declaration.",
+        "Do not confuse the CSS selector prefix with the HTML attribute value: .card matches class=\"card\"; the dot is not written inside the HTML class value.",
+        "Do not use #card when the HTML has class=\"card\". # selects an id, while . selects a class.",
+        "Do not assume a rule failed simply because the selector is valid; if it matches no HTML element, there is nothing for the browser to style.",
+        "When identical selectors set the same property, remember that later source order wins in the simple cascade case taught here.",
+        "Do not memorize full specificity rules yet. Intern Module 1 only requires the basic equal-selector/source-order idea."
+      ],
+      "mastery": [
+        "Explain the different jobs of HTML and CSS in your own words.",
+        "Point out the selector, opening brace, property, colon, value, semicolon and closing brace in p { color: blue; }.",
+        "Write one element-selector rule without copying the worked example.",
+        "Explain why .card uses a dot and how it connects to class=\"card\" in HTML.",
+        "Explain why #featured uses # and how it connects to id=\"featured\" in HTML.",
+        "Explain the difference between a CSS property and its value.",
+        "Recognize a missing colon, missing semicolon and missing brace in a small rule.",
+        "Predict which color wins when two identical p selectors set color and the second rule appears later.",
+        "Build separate element, class and id rules using the same selector { property: value; } grammar.",
+        "Explain why the Academy is postponing full specificity and advanced cascade rules until the basic grammar is comfortable."
+      ]
     },
     {
       "title": "Color, Fonts & Text",
-      "summary": "Control readable typography using color, font families, sizes, weights, line height, alignment, and spacing.",
+      "summary": "Build readable CSS typography from the ground up. Learn foreground and background color, named and hex color values, font families and fallbacks, font size with beginner-friendly units, font weight, line height, text alignment, and the importance of readable contrast.",
       "concepts": [
         {
-          "name": "Color values",
-          "explanation": "CSS accepts named colors, hex, rgb()/rgba(), hsl(), and newer color functions. Good contrast matters more than choosing a fashionable notation."
+          "name": "Color describes foreground and background",
+          "explanation": "The color property normally controls the foreground text color, while background-color controls the area behind content. Good color choices are not only decorative: text and background need enough contrast to remain readable."
         },
         {
-          "name": "Font stack",
-          "explanation": "font-family should normally include fallback fonts or a generic family such as sans-serif or monospace."
+          "name": "Font families use fallbacks",
+          "explanation": "font-family tells the browser which typeface to try. A comma-separated font stack gives the browser alternatives when the first choice is unavailable. A generic family such as sans-serif is a safe final fallback."
         },
         {
-          "name": "Readable text",
-          "explanation": "font-size, line-height, letter-spacing, max-width, and spacing all affect readability. Avoid using tiny text or low contrast as decoration."
+          "name": "Readable text uses size, weight, line height and alignment deliberately",
+          "explanation": "font-size controls text size, font-weight controls how light or bold text appears, line-height controls vertical space between lines of text, and text-align controls inline text alignment. These should support readability rather than be used randomly."
         }
       ],
-      "example": "body {\n  color: #dce8f7;\n  font-family: Inter, system-ui, sans-serif;\n  line-height: 1.6;\n}\n\nh1 {\n  font-size: 2.5rem;\n  letter-spacing: 0.03em;\n}",
-      "challenge": "Create readable body typography and give h1 a larger size and deliberate letter spacing.",
-      "hint": "Start with font-family and line-height on body so descendants inherit useful defaults.",
-      "solution": "body {\n  color: #dce8f7;\n  font-family: Inter, system-ui, sans-serif;\n  line-height: 1.6;\n}\n\nh1 {\n  font-size: 2.5rem;\n  letter-spacing: 0.03em;\n}",
+      "starter": "body {\n  \n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to choose simple readable foreground/background colors, read and write six-digit hex colors, create a font-family fallback stack, size text with px and rem at a beginner level, use font-weight and unitless line-height, align text deliberately, and explain why readable contrast matters.",
+        "whyItMatters": "Once CSS grammar is familiar, typography is usually the first place styling starts to feel useful. Nearly every page contains text. Learning how color and type properties work gives you immediate visual feedback while also building the vocabulary used by later UI, layout and design work.",
+        "terms": [
+          {
+            "term": "Foreground color",
+            "meaning": "The color of text or other foreground content. For ordinary text, the CSS color property controls this."
+          },
+          {
+            "term": "Background color",
+            "meaning": "The color painted behind an element's content, controlled here with background-color."
+          },
+          {
+            "term": "Contrast",
+            "meaning": "The visual difference between foreground and background. Strong enough contrast makes text easier to read."
+          },
+          {
+            "term": "Named color",
+            "meaning": "A color value written as a recognized word such as navy, white or darkgreen."
+          },
+          {
+            "term": "Hex color",
+            "meaning": "A color value beginning with # and normally followed by six hexadecimal digits, for example #1d4ed8."
+          },
+          {
+            "term": "Font / typeface",
+            "meaning": "The visual design used to draw letters and other characters."
+          },
+          {
+            "term": "Font stack",
+            "meaning": "A comma-separated list of font-family choices. The browser tries them from left to right until it finds one it can use."
+          },
+          {
+            "term": "Fallback font",
+            "meaning": "A later font choice used when an earlier font in the stack is unavailable."
+          },
+          {
+            "term": "Generic font family",
+            "meaning": "A broad browser-provided category such as sans-serif or monospace, normally used as the last fallback."
+          },
+          {
+            "term": "CSS unit",
+            "meaning": "A unit attached to some numeric CSS values. This lesson introduces px and rem for font size."
+          },
+          {
+            "term": "px",
+            "meaning": "CSS pixel unit. It gives a direct CSS-sized value such as 16px."
+          },
+          {
+            "term": "rem",
+            "meaning": "A unit relative to the root element's computed font size. 2rem means twice the root font size."
+          },
+          {
+            "term": "Font weight",
+            "meaning": "How light or bold the text is. Common beginner values include normal/bold or numeric values such as 400 and 700."
+          },
+          {
+            "term": "Line height",
+            "meaning": "The vertical height of each line box. A unitless value such as 1.5 scales with the element's font size."
+          },
+          {
+            "term": "Text alignment",
+            "meaning": "How inline text is aligned within its available line area, for example left or center."
+          },
+          {
+            "term": "Inheritance",
+            "meaning": "Some text-related CSS properties, such as color and font-family, are commonly passed from a parent element to its descendants unless another rule overrides them."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "color: navy;",
+            "meaning": "Set the foreground/text color to the named color navy."
+          },
+          {
+            "symbol": "background-color: white;",
+            "meaning": "Set the element's background color to white."
+          },
+          {
+            "symbol": "#1d4ed8",
+            "meaning": "A six-digit hex color. In a property value this # begins a color value; it is not an id selector because it appears after a property colon."
+          },
+          {
+            "symbol": "font-family: Arial, sans-serif;",
+            "meaning": "Try Arial first; if it is unavailable, fall back to the browser's sans-serif family."
+          },
+          {
+            "symbol": ",",
+            "meaning": "Inside font-family, a comma separates one font choice from the next fallback choice."
+          },
+          {
+            "symbol": "font-size: 16px;",
+            "meaning": "Set the text size to 16 CSS pixels."
+          },
+          {
+            "symbol": "font-size: 2rem;",
+            "meaning": "Set the text size to twice the root element's computed font size."
+          },
+          {
+            "symbol": "font-weight: 700;",
+            "meaning": "Request a bold-like font weight when that weight is available."
+          },
+          {
+            "symbol": "line-height: 1.5;",
+            "meaning": "Use a line height equal to 1.5 times the element's font size. The value is intentionally unitless."
+          },
+          {
+            "symbol": "text-align: center;",
+            "meaning": "Center the inline text inside its available line area."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Change the text color with a named value",
+            "explanation": "You already know the declaration grammar from Module 1. Here color is the property and navy is a named color value.",
+            "code": "p {\n  color: navy;\n}"
+          },
+          {
+            "title": "Step 2 — Give foreground and background different jobs",
+            "explanation": "color affects the text; background-color affects what sits behind it. Choose combinations that stay easy to read.",
+            "code": "body {\n  color: black;\n  background-color: white;\n}"
+          },
+          {
+            "title": "Step 3 — Read a six-digit hex color",
+            "explanation": "A hex color begins with # and uses six digits/letters to describe red, green and blue components. You do not need to calculate hex by hand; the important Intern skill is recognizing and using the notation correctly.",
+            "code": "h1 {\n  color: #1d4ed8;\n}"
+          },
+          {
+            "title": "Step 4 — Notice # means different things in different CSS positions",
+            "explanation": "#featured before a declaration block is an id selector. #1d4ed8 after color: is a hex color value. The surrounding CSS grammar tells you which meaning applies.",
+            "code": "#featured {\n  color: #1d4ed8;\n}"
+          },
+          {
+            "title": "Step 5 — Create a simple font fallback stack",
+            "explanation": "The browser tries Arial first. If Arial cannot be used, sans-serif asks the browser for an available sans-serif typeface.",
+            "code": "body {\n  font-family: Arial, sans-serif;\n}"
+          },
+          {
+            "title": "Step 6 — Size ordinary text with px",
+            "explanation": "px is a direct CSS unit that is easy to read when learning. This example sets body text to 16 CSS pixels.",
+            "code": "body {\n  font-size: 16px;\n}"
+          },
+          {
+            "title": "Step 7 — Size a heading relative to the root with rem",
+            "explanation": "rem is relative to the root font size. 2rem means twice that root size, so it expresses a relationship rather than one fixed number of pixels.",
+            "code": "h1 {\n  font-size: 2rem;\n}"
+          },
+          {
+            "title": "Step 8 — Make a heading stronger with font weight",
+            "explanation": "A numeric font-weight of 700 commonly represents a bold weight. Not every typeface provides every possible weight, so the browser uses the closest available weight when needed.",
+            "code": "h1 {\n  font-weight: 700;\n}"
+          },
+          {
+            "title": "Step 9 — Give multi-line text breathing room",
+            "explanation": "A unitless line-height of 1.5 scales with the current font size. This is often easier to maintain than hard-coding a separate pixel line height.",
+            "code": "body {\n  line-height: 1.5;\n}"
+          },
+          {
+            "title": "Step 10 — Align heading text deliberately",
+            "explanation": "text-align changes inline text alignment inside the available line area. It does not magically center the entire element box itself.",
+            "code": "h1 {\n  text-align: center;\n}"
+          },
+          {
+            "title": "Step 11 — Combine readable base typography and a heading",
+            "explanation": "The body establishes readable defaults; the h1 then overrides the properties that should be different for the main heading.",
+            "code": "body {\n  color: #1f2937;\n  background-color: #f8fafc;\n  font-family: Arial, sans-serif;\n  font-size: 16px;\n  line-height: 1.5;\n}\n\nh1 {\n  color: #1d4ed8;\n  font-size: 2rem;\n  font-weight: 700;\n  text-align: center;\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": "color: #1f2937;",
+            "meaning": "Set the body text color using a six-digit hex value."
+          },
+          {
+            "piece": "background-color: #f8fafc;",
+            "meaning": "Set a light background color behind the page content."
+          },
+          {
+            "piece": "font-family: Arial, sans-serif;",
+            "meaning": "Try Arial first and use a generic sans-serif fallback if needed."
+          },
+          {
+            "piece": "font-size: 16px;",
+            "meaning": "Establish a beginner-friendly body text size using px."
+          },
+          {
+            "piece": "line-height: 1.5;",
+            "meaning": "Give text a line box one and a half times the current font size."
+          },
+          {
+            "piece": "font-size: 2rem;",
+            "meaning": "Make the h1 twice the root font size."
+          },
+          {
+            "piece": "font-weight: 700;",
+            "meaning": "Request a bold-like heading weight."
+          },
+          {
+            "piece": "text-align: center;",
+            "meaning": "Center the h1's inline text."
+          }
+        ],
+        "computerSteps": [
+          "The browser finds the HTML elements matched by each selector, just as in Module 1.",
+          "It reads color values and paints foreground text and backgrounds using those values.",
+          "For font-family, it tries the listed font choices from left to right until it finds one it can use.",
+          "It computes font-size values. px supplies a CSS pixel size; rem is resolved relative to the root element's computed font size.",
+          "It applies font-weight, line-height and text alignment when laying out and drawing the text.",
+          "Some text properties such as color and font-family can be inherited by descendants unless a more specific matching rule gives them another value.",
+          "The browser then renders the final text. Valid CSS can still produce poor readability, so visual contrast remains a design responsibility as well as a syntax concern."
+        ],
+        "guidedChanges": [
+          "Change a named color such as navy to darkgreen and predict which visual part changes.",
+          "Replace a named text color with a six-digit hex value and confirm that the declaration still follows property: value; syntax.",
+          "Swap the foreground and background colors, then decide whether the new combination is easier or harder to read.",
+          "Change Arial, sans-serif to Georgia, serif and observe that the fallback category changes as well.",
+          "Change body font-size from 16px to 18px and compare the result.",
+          "Change the h1 from 2rem to 1.5rem and explain why the heading becomes smaller relative to the root size.",
+          "Change font-weight from 700 to 400 and observe the visual difference.",
+          "Change line-height from 1.5 to 1 and compare how crowded multiple lines feel.",
+          "Change text-align from center to left and observe that only text alignment changes; the element itself still participates in normal layout."
+        ],
+        "workedExampleIntro": "This stylesheet combines only properties and value formats introduced above. Read each declaration as a visual instruction, then identify whether its value is a color, font choice, size, weight, line-height or alignment setting.",
+        "errorExamples": [
+          {
+            "mistake": "color: 1d4ed8;",
+            "explanation": "A six-digit hex color requires the leading #.",
+            "fix": "Write color: #1d4ed8;."
+          },
+          {
+            "mistake": "color: #12xz90;",
+            "explanation": "Hex colors use hexadecimal digits: 0-9 and A-F. x and z are not valid hex digits.",
+            "fix": "Use a valid value such as #1d4ed8."
+          },
+          {
+            "mistake": "font-family: Arial sans-serif;",
+            "explanation": "Separate fallback font choices with commas.",
+            "fix": "Write font-family: Arial, sans-serif;."
+          },
+          {
+            "mistake": "font-size: 16;",
+            "explanation": "font-size normally needs a unit unless the value is zero. The browser cannot treat bare 16 as 16px automatically.",
+            "fix": "Write font-size: 16px;."
+          },
+          {
+            "mistake": "font-size: 2 px;",
+            "explanation": "There must not be a space between the number and its unit.",
+            "fix": "Write font-size: 2px; or, for the lesson's heading example, 2rem."
+          },
+          {
+            "mistake": "font-weight: 700px;",
+            "explanation": "Font weight is not a length, so px does not belong on the value.",
+            "fix": "Write font-weight: 700;."
+          },
+          {
+            "mistake": "line-height: 1.5px; when you intended a scalable 1.5 ratio",
+            "explanation": "1.5px is technically a tiny fixed line height, not one-and-a-half times the current font size.",
+            "fix": "For this lesson's scalable spacing, write line-height: 1.5;."
+          },
+          {
+            "mistake": "text-align: middle;",
+            "explanation": "middle is not the value used to center text with text-align.",
+            "fix": "Write text-align: center;."
+          },
+          {
+            "mistake": "#1d4ed8 { color: navy; } when you meant to use #1d4ed8 as a color",
+            "explanation": "Before {, #1d4ed8 is interpreted as an id selector. A color value belongs after a color property and colon.",
+            "fix": "Write h1 { color: #1d4ed8; }."
+          },
+          {
+            "mistake": "Very light text on a nearly white background",
+            "explanation": "The CSS can be valid but the result can still be difficult to read because foreground/background contrast is too weak.",
+            "fix": "Choose foreground and background colors with clearer visual contrast."
+          }
+        ],
+        "recap": [
+          "color controls foreground/text color; background-color controls the background behind content.",
+          "Named colors are readable words; a six-digit hex color begins with # and contains valid hexadecimal digits.",
+          "The same # symbol can begin an id selector or a hex color value; its position in CSS tells you the meaning.",
+          "font-family can contain comma-separated fallback choices and should normally end with a generic family such as sans-serif.",
+          "px is a direct CSS size unit; rem expresses a size relative to the root font size.",
+          "font-weight controls how light/bold text appears and does not use px.",
+          "A unitless line-height such as 1.5 scales with the current font size.",
+          "text-align controls inline text alignment; it does not perform general page layout.",
+          "Valid syntax is only part of good CSS: readable color contrast and sensible typography still matter."
+        ]
+      },
+      "example": "body {\n  color: #1f2937;\n  background-color: #f8fafc;\n  font-family: Arial, sans-serif;\n  font-size: 16px;\n  line-height: 1.5;\n}\n\nh1 {\n  color: #1d4ed8;\n  font-size: 2rem;\n  font-weight: 700;\n  text-align: center;\n}",
+      "challenge": "Create readable base typography for body using a text color, background color, Arial with a sans-serif fallback, 16px text and a unitless 1.5 line-height. Then style h1 with a contrasting hex color, 2rem size, 700 weight and centered text.",
+      "hint": "Start with body and write one declaration at a time. Remember the comma in Arial, sans-serif; the units on font-size; no unit on font-weight; and no unit on the lesson's line-height ratio.",
+      "solution": "body {\n  color: #1f2937;\n  background-color: #f8fafc;\n  font-family: Arial, sans-serif;\n  font-size: 16px;\n  line-height: 1.5;\n}\n\nh1 {\n  color: #1d4ed8;\n  font-size: 2rem;\n  font-weight: 700;\n  text-align: center;\n}",
       "groups": [
         [
+          "color"
+        ],
+        [
+          "background-color"
+        ],
+        [
           "font-family"
+        ],
+        [
+          "font-size"
         ],
         [
           "line-height"
         ],
         [
-          "font-size"
+          "font-weight"
+        ],
+        [
+          "text-align"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            "body"
+          ],
+          [
+            "color"
+          ],
+          [
+            "background-color"
+          ],
+          [
+            "font-family"
+          ],
+          [
+            "Arial"
+          ],
+          [
+            "sans-serif"
+          ],
+          [
+            "font-size"
+          ],
+          [
+            "16px"
+          ],
+          [
+            "line-height"
+          ],
+          [
+            "1.5"
+          ],
+          [
+            "h1"
+          ],
+          [
+            "2rem"
+          ],
+          [
+            "font-weight"
+          ],
+          [
+            "700"
+          ],
+          [
+            "text-align"
+          ],
+          [
+            "center"
+          ]
+        ],
+        "practiceMinLength": 180,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write a body CSS rule that uses Arial with a sans-serif fallback, sets font-size to 16px, and uses a unitless line-height of 1.5.",
+            "groups": [
+              [
+                "body"
+              ],
+              [
+                "font-family"
+              ],
+              [
+                "Arial"
+              ],
+              [
+                "sans-serif"
+              ],
+              [
+                "font-size"
+              ],
+              [
+                "16px"
+              ],
+              [
+                "line-height"
+              ],
+              [
+                "1.5"
+              ]
+            ],
+            "minLength": 80
+          },
+          {
+            "prompt": "Write an h1 CSS rule that sets color to #1d4ed8, font-size to 2rem, font-weight to 700, and centers its text.",
+            "groups": [
+              [
+                "h1"
+              ],
+              [
+                "color"
+              ],
+              [
+                "#1d4ed8"
+              ],
+              [
+                "font-size"
+              ],
+              [
+                "2rem"
+              ],
+              [
+                "font-weight"
+              ],
+              [
+                "700"
+              ],
+              [
+                "text-align"
+              ],
+              [
+                "center"
+              ]
+            ],
+            "minLength": 90
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "body"
+            ],
+            [
+              "color"
+            ],
+            [
+              "background-color"
+            ],
+            [
+              "font-family"
+            ]
+          ],
+          "2": [
+            [
+              "font-size"
+            ],
+            [
+              "16px"
+            ],
+            [
+              "line-height"
+            ],
+            [
+              "1.5"
+            ]
+          ],
+          "3": [
+            [
+              "h1"
+            ],
+            [
+              "#1d4ed8"
+            ],
+            [
+              "2rem"
+            ],
+            [
+              "font-weight"
+            ],
+            [
+              "700"
+            ],
+            [
+              "text-align"
+            ],
+            [
+              "center"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Style body with a readable foreground color, background color and a font-family fallback stack. Use only color/font syntax taught in this module.",
+          "2": "Exam 2: Write typography declarations using a 16px font size and a unitless 1.5 line-height. Keep the CSS rule syntax valid.",
+          "3": "Exam 3: Style an h1 with the taught hex color #1d4ed8, a 2rem font size, 700 font weight and centered text."
+        }
+      },
       "references": [
         {
-          "title": "MDN — CSS styling basics",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+          "title": "MDN — CSS colors",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Applying_color"
         },
         {
-          "title": "MDN — CSS reference",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+          "title": "MDN — Fundamental text and font styling",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not confuse foreground color with background-color; they style different visual layers.",
+        "Do not omit the # from a six-digit hex color or use characters outside 0-9 and A-F.",
+        "Remember that # before a declaration block can be an id selector, while # inside a color value appears after a property colon.",
+        "Separate font-family fallback choices with commas and include a generic family such as sans-serif at the end.",
+        "Do not write a bare non-zero font-size such as 16; include a unit such as px or rem.",
+        "Do not place a space between a number and its unit: write 16px, not 16 px.",
+        "Do not add px/rem to font-weight; values such as 400 and 700 are unitless.",
+        "For the ratio taught here, keep line-height unitless so it scales with font size.",
+        "Do not use text-align as a replacement for Flexbox/Grid or general element positioning.",
+        "Valid CSS can still be inaccessible or uncomfortable to read; check foreground/background contrast."
+      ],
+      "mastery": [
+        "Explain the difference between color and background-color.",
+        "Recognize a named color and a valid six-digit hex color.",
+        "Explain why #featured and #1d4ed8 use the same symbol for different purposes.",
+        "Write a font-family stack with at least one fallback and a generic family.",
+        "Explain the beginner-level difference between px and rem.",
+        "Write valid font-size values using px and rem without a space between number and unit.",
+        "Use font-weight without attaching a length unit.",
+        "Explain why line-height: 1.5 scales with the current font size.",
+        "Use text-align: center; for text and explain what it does not center.",
+        "Build the final body + h1 typography exercise without using the hint."
+      ]
     },
     {
       "title": "Box Model & Spacing",
-      "summary": "Reason about every element as content surrounded by padding, border, and margin, then control sizing predictably with box-sizing.",
+      "summary": "Understand the invisible box around every HTML element. Learn content size, width and height, padding, border, margin, how those layers affect total size, and how box-sizing: border-box makes sizing easier to predict.",
       "concepts": [
         {
-          "name": "Four layers",
-          "explanation": "Content is the inner box. Padding adds interior space, border surrounds padding, and margin creates space outside the border."
+          "name": "Every element has a box",
+          "explanation": "A normal CSS box has four layers moving outward: content, padding, border, then margin. Content is where text or other child content lives. Padding creates space inside the border. The border draws around the content and padding. Margin creates space outside the border between this element and nearby content."
         },
         {
-          "name": "box-sizing",
-          "explanation": "With border-box, declared width and height include padding and border. Many projects apply box-sizing: border-box globally for easier sizing."
+          "name": "Width and height depend on box sizing",
+          "explanation": "With the browser's normal content-box sizing, width and height describe the content area only; padding and border are added outside that declared size. With box-sizing: border-box, the declared width and height include the content, padding and border, which often makes the final visible size easier to predict."
         },
         {
-          "name": "Margin behavior",
-          "explanation": "Vertical margins between normal block elements can collapse in some situations. Gap, padding, or layout systems can be clearer when you need explicit spacing."
+          "name": "Spacing has an inside and an outside",
+          "explanation": "Padding is inside the border and can show the element's background. Margin is outside the border and does not paint the element's background. Choosing padding or margin depends on whether the space should belong inside the element or separate the element from its neighbours."
         }
       ],
-      "example": "*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.panel {\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}",
-      "challenge": "Create a .panel with width, padding, border and margin, and enable border-box sizing.",
-      "hint": "Remember that margin is outside the border while padding is inside it.",
-      "solution": "*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.panel {\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}",
+      "starter": ".panel {\n  \n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to describe the four box-model layers in order, set width and height with px values, add padding inside a box, add a visible border, add margin outside the box, explain why content-box can become larger than the declared width, and use box-sizing: border-box to keep sizing predictable.",
+        "whyItMatters": "Spacing bugs are much less mysterious when you can picture the box around an element. Padding, borders and margins appear everywhere in buttons, cards, forms, menus and page layouts. Understanding them now also makes Flexbox and responsive design much easier later because you know what size each item is actually bringing into the layout.",
+        "terms": [
+          {
+            "term": "Box model",
+            "meaning": "The CSS model that describes an element as content surrounded by padding, border and margin."
+          },
+          {
+            "term": "Content box",
+            "meaning": "The innermost area where the element's text, image or other content is laid out."
+          },
+          {
+            "term": "Width",
+            "meaning": "A CSS property that sets a horizontal size. Under the default content-box model, it sets the content area's width."
+          },
+          {
+            "term": "Height",
+            "meaning": "A CSS property that sets a vertical size. Under the default content-box model, it sets the content area's height."
+          },
+          {
+            "term": "Padding",
+            "meaning": "Space inside the border, between the content and the border."
+          },
+          {
+            "term": "Border",
+            "meaning": "A line drawn around the content and padding. A border can have a width, style and color."
+          },
+          {
+            "term": "Margin",
+            "meaning": "Space outside the border that separates the element from nearby content."
+          },
+          {
+            "term": "content-box",
+            "meaning": "The browser's normal box-sizing value. Declared width/height describe only the content area, so padding and border increase the visible box size."
+          },
+          {
+            "term": "border-box",
+            "meaning": "A box-sizing value where declared width/height include the content, padding and border."
+          },
+          {
+            "term": "Total size",
+            "meaning": "The amount of space the element's visible box occupies after the relevant content, padding and border sizes are combined. Margin sits outside that visible border box."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "width: 320px;",
+            "meaning": "Set a horizontal size of 320 CSS pixels. With content-box this is the content width; with border-box it is the whole border-box width."
+          },
+          {
+            "symbol": "height: 180px;",
+            "meaning": "Set a vertical size of 180 CSS pixels. Fixed heights can be useful for demonstrations but should not be used randomly when content needs room to grow."
+          },
+          {
+            "symbol": "padding: 24px;",
+            "meaning": "Add 24px of inside spacing on all four sides between the content and border."
+          },
+          {
+            "symbol": "border: 2px solid #3d5b82;",
+            "meaning": "Border shorthand: 2px is the border width, solid is the border style, and #3d5b82 is the border color."
+          },
+          {
+            "symbol": "margin: 16px;",
+            "meaning": "Add 16px of outside spacing on all four sides beyond the border."
+          },
+          {
+            "symbol": "box-sizing: content-box;",
+            "meaning": "Make width/height describe only the content area. This is the normal browser default for most elements."
+          },
+          {
+            "symbol": "box-sizing: border-box;",
+            "meaning": "Make width/height include content, padding and border so the declared size is easier to reason about."
+          },
+          {
+            "symbol": "px",
+            "meaning": "The CSS pixel unit introduced in Module 2. This lesson reuses it for box sizes and spacing."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Give the content box a width",
+            "explanation": "Start with one size property. Under the default content-box model, this sets the content area to 320px wide.",
+            "code": ".panel {\n  width: 320px;\n}"
+          },
+          {
+            "title": "Step 2 — See width and height together",
+            "explanation": "width controls horizontal size and height controls vertical size. The 180px height is only for learning the property; real content often works better when height can grow naturally.",
+            "code": ".panel {\n  width: 320px;\n  height: 180px;\n}"
+          },
+          {
+            "title": "Step 3 — Add inside space with padding",
+            "explanation": "padding creates breathing room between the content and the future border. A single padding value applies to the top, right, bottom and left sides.",
+            "code": ".panel {\n  width: 320px;\n  padding: 24px;\n}"
+          },
+          {
+            "title": "Step 4 — Draw the border",
+            "explanation": "The border sits outside the padding. Read this shorthand left to right as border width, border style, then border color.",
+            "code": ".panel {\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n}"
+          },
+          {
+            "title": "Step 5 — Add outside space with margin",
+            "explanation": "margin sits outside the border. It separates this panel from neighbouring elements rather than creating more room inside the panel.",
+            "code": ".panel {\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}"
+          },
+          {
+            "title": "Step 6 — Calculate what content-box does",
+            "explanation": "With content-box, width: 320px means 320px of content. Add 24px padding on the left and right plus a 2px border on the left and right: 320 + 24 + 24 + 2 + 2 = 372px for the border box. The 16px margins remain outside that 372px box.",
+            "code": ".panel {\n  box-sizing: content-box;\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}"
+          },
+          {
+            "title": "Step 7 — Make the declared width include padding and border",
+            "explanation": "With border-box, the same declared width of 320px now includes the content, left/right padding and left/right border. The browser makes the content area smaller so the border box itself stays 320px wide.",
+            "code": ".panel {\n  box-sizing: border-box;\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}"
+          },
+          {
+            "title": "Step 8 — Decide whether space belongs inside or outside",
+            "explanation": "Use padding when the element itself needs breathing room around its content. Use margin when you want separation between this element and nearby elements. They are not interchangeable even if both can create visible empty space.",
+            "code": ".panel {\n  box-sizing: border-box;\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": ".panel",
+            "meaning": "The class selector learned in Module 1. It targets HTML elements whose class list contains panel."
+          },
+          {
+            "piece": "box-sizing: border-box;",
+            "meaning": "Count padding and border inside the declared width/height instead of adding them outside."
+          },
+          {
+            "piece": "width: 320px;",
+            "meaning": "Set the panel's declared horizontal size to 320px."
+          },
+          {
+            "piece": "padding: 24px;",
+            "meaning": "Create 24px of inside spacing on all four sides."
+          },
+          {
+            "piece": "border: 2px solid #3d5b82;",
+            "meaning": "Draw a 2px solid border using the hex color already familiar from Module 2."
+          },
+          {
+            "piece": "margin: 16px;",
+            "meaning": "Create 16px of outside separation on all four sides."
+          },
+          {
+            "piece": "content → padding → border → margin",
+            "meaning": "The box-model layers from the inside outward."
+          }
+        ],
+        "computerSteps": [
+          "The browser matches the .panel selector to elements with class=\"panel\".",
+          "It reads box-sizing first when calculating what the declared width should include.",
+          "With border-box, width: 320px describes the whole border box: content plus left/right padding plus left/right border.",
+          "It places the content inside that available content area.",
+          "It creates the padding around the content, then draws the border around the padded area.",
+          "It leaves the margin outside the border to separate this panel from neighbouring content.",
+          "Background color (if one is applied) paints behind the content and padding, but the element's background does not paint into its margin."
+        ],
+        "guidedChanges": [
+          "Change width from 320px to 260px and predict which dimension changes.",
+          "Change padding from 24px to 8px and observe that the content moves closer to the border.",
+          "Change margin from 16px to 32px and compare the outside separation without changing the inside padding.",
+          "Change the border width from 2px to 6px and identify which layer got thicker.",
+          "Temporarily change box-sizing from border-box to content-box, then explain why the visible border box becomes wider than the declared 320px when padding and border are added.",
+          "Remove height from a test rule and notice that an element can size vertically according to its content instead of being forced to a fixed height."
+        ],
+        "workedExampleIntro": "Read the final rule from the inside out. The panel has content, 24px of padding, a 2px solid border and 16px of margin. Because it uses border-box, its declared 320px width already includes the padding and border.",
+        "errorExamples": [
+          {
+            "mistake": "padding: 24;",
+            "explanation": "Non-zero spacing lengths need a unit. CSS does not assume that 24 means 24px.",
+            "fix": "Write padding: 24px;."
+          },
+          {
+            "mistake": "padding: 24 px;",
+            "explanation": "The number and unit must stay together.",
+            "fix": "Write padding: 24px;."
+          },
+          {
+            "mistake": "border: solid 2 #3d5b82;",
+            "explanation": "The border width needs a length unit. In the lesson shorthand, keep width, style and color clear.",
+            "fix": "Write border: 2px solid #3d5b82;."
+          },
+          {
+            "mistake": "margin = 16px;",
+            "explanation": "CSS declarations use a colon between property and value, not an equals sign.",
+            "fix": "Write margin: 16px;."
+          },
+          {
+            "mistake": "Using margin when you wanted more room between text and the border",
+            "explanation": "Margin is outside the border, so it separates the whole element from neighbours. It does not push the content away from its own border.",
+            "fix": "Use padding for space inside the border."
+          },
+          {
+            "mistake": "Using padding when you only wanted more separation between two cards",
+            "explanation": "Padding adds room inside each card and can increase its visible size under content-box.",
+            "fix": "Use margin for basic outside separation in this lesson."
+          },
+          {
+            "mistake": "Assuming width: 320px always means the visible border box is exactly 320px",
+            "explanation": "Under content-box, left/right padding and border are added outside the 320px content width.",
+            "fix": "Use box-sizing: border-box when you want the declared width to include padding and border."
+          },
+          {
+            "mistake": "box-sizing: borderbox;",
+            "explanation": "The valid value contains a hyphen.",
+            "fix": "Write box-sizing: border-box;."
+          },
+          {
+            "mistake": "Giving every text container a fixed height",
+            "explanation": "A fixed height can become too small when text grows, wraps, or the user changes text size.",
+            "fix": "Use height only when you genuinely need a fixed vertical size; otherwise allow content to determine height."
+          },
+          {
+            "mistake": "Applying *, *::before, *::after before learning those selectors",
+            "explanation": "Many real projects use a global border-box reset, but * and pseudo-elements are separate selector concepts that have not been taught in CSS Intern yet.",
+            "fix": "For this Intern lesson, apply box-sizing: border-box directly to .panel. Learn global reset patterns later."
+          }
+        ],
+        "recap": [
+          "The box-model layers from inside to outside are content, padding, border and margin.",
+          "width and height set dimensions; under normal content-box sizing they describe the content area.",
+          "Padding is inside the border and creates breathing room around content.",
+          "A border surrounds the content and padding; the shorthand taught here combines width, style and color.",
+          "Margin is outside the border and separates the element from neighbouring content.",
+          "With content-box, padding and border make the visible border box larger than the declared content width.",
+          "With box-sizing: border-box, declared width/height include padding and border.",
+          "A single padding or margin value applies to all four sides; side-specific and multi-value shorthand patterns can be learned later.",
+          "Fixed height is not automatically desirable; allow content to grow when a fixed height is unnecessary.",
+          "Do not copy global * / pseudo-element box-sizing reset patterns before you understand the selector syntax they use."
+        ]
+      },
+      "example": ".panel {\n  box-sizing: border-box;\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}",
+      "challenge": "Create a .panel that uses border-box sizing, has a declared width of 320px, 24px of inside padding, a 2px solid #3d5b82 border, and 16px of outside margin. Use only the box-model syntax taught in this module.",
+      "hint": "Work from the box model outward. Start with .panel and box-sizing, then width, padding, border and margin. Remember that non-zero lengths need units and that border-box contains padding and border inside the declared width.",
+      "solution": ".panel {\n  box-sizing: border-box;\n  width: 320px;\n  padding: 24px;\n  border: 2px solid #3d5b82;\n  margin: 16px;\n}",
       "groups": [
         [
           "box-sizing"
         ],
         [
+          "border-box"
+        ],
+        [
+          "width"
+        ],
+        [
+          "320px"
+        ],
+        [
           "padding"
+        ],
+        [
+          "24px"
         ],
         [
           "border"
         ],
         [
+          "2px"
+        ],
+        [
+          "solid"
+        ],
+        [
           "margin"
+        ],
+        [
+          "16px"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            ".panel"
+          ],
+          [
+            "box-sizing"
+          ],
+          [
+            "border-box"
+          ],
+          [
+            "width"
+          ],
+          [
+            "320px"
+          ],
+          [
+            "padding"
+          ],
+          [
+            "24px"
+          ],
+          [
+            "border"
+          ],
+          [
+            "2px"
+          ],
+          [
+            "solid"
+          ],
+          [
+            "#3d5b82"
+          ],
+          [
+            "margin"
+          ],
+          [
+            "16px"
+          ]
+        ],
+        "practiceMinLength": 120,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write a .card rule with width: 280px, padding: 16px, a 1px solid #1d4ed8 border, and margin: 12px. Use the box-model syntax taught in this module.",
+            "groups": [
+              [
+                ".card"
+              ],
+              [
+                "width"
+              ],
+              [
+                "280px"
+              ],
+              [
+                "padding"
+              ],
+              [
+                "16px"
+              ],
+              [
+                "border"
+              ],
+              [
+                "1px"
+              ],
+              [
+                "solid"
+              ],
+              [
+                "#1d4ed8"
+              ],
+              [
+                "margin"
+              ],
+              [
+                "12px"
+              ]
+            ],
+            "minLength": 90
+          },
+          {
+            "prompt": "Write a .panel rule that keeps its declared width predictable by using box-sizing: border-box, width: 320px, padding: 24px and a 2px solid border.",
+            "groups": [
+              [
+                ".panel"
+              ],
+              [
+                "box-sizing"
+              ],
+              [
+                "border-box"
+              ],
+              [
+                "width"
+              ],
+              [
+                "320px"
+              ],
+              [
+                "padding"
+              ],
+              [
+                "24px"
+              ],
+              [
+                "border"
+              ],
+              [
+                "2px"
+              ],
+              [
+                "solid"
+              ]
+            ],
+            "minLength": 95
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "width"
+            ],
+            [
+              "320px"
+            ],
+            [
+              "padding"
+            ],
+            [
+              "24px"
+            ]
+          ],
+          "2": [
+            [
+              "border"
+            ],
+            [
+              "2px"
+            ],
+            [
+              "solid"
+            ],
+            [
+              "margin"
+            ],
+            [
+              "16px"
+            ]
+          ],
+          "3": [
+            [
+              "box-sizing"
+            ],
+            [
+              "border-box"
+            ],
+            [
+              "width"
+            ],
+            [
+              "320px"
+            ],
+            [
+              "padding"
+            ],
+            [
+              "border"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Write box-model declarations that give an element width: 320px and padding: 24px. Use valid CSS length syntax.",
+          "2": "Exam 2: Add a 2px solid border and 16px margin to a CSS rule using the shorthand and spacing syntax taught in this module.",
+          "3": "Exam 3: Write a .panel rule that uses box-sizing: border-box together with the taught width, padding and border concepts so its declared width includes its padding and border."
+        }
+      },
       "references": [
         {
-          "title": "MDN — CSS styling basics",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+          "title": "MDN — Introduction to the CSS box model",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model"
         },
         {
-          "title": "MDN — CSS reference",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+          "title": "MDN — box-sizing",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Remember the layer order: content, padding, border, margin.",
+        "Use padding for inside spacing and margin for outside separation; they have different jobs.",
+        "Non-zero width, height, padding, border width and margin values need a unit such as px in this lesson.",
+        "Keep the number and unit together: 24px, not 24 px.",
+        "Under content-box, declared width does not include padding and border, so the visible border box can become larger than expected.",
+        "Use box-sizing: border-box when you want the declared width/height to include padding and border.",
+        "Read border shorthand as width + style + color and do not forget the width unit.",
+        "Do not assume margin paints the element's background; margin is outside the border.",
+        "Avoid unnecessary fixed heights when content may need to grow or wrap.",
+        "Do not require a global *, *::before, *::after box-sizing reset at Intern level before those selectors are taught."
+      ],
+      "mastery": [
+        "Name the four box-model layers from the inside outward.",
+        "Explain the difference between padding and margin.",
+        "Write width and height values using valid px syntax.",
+        "Use one padding value to create inside spacing on all four sides.",
+        "Read and write the taught border shorthand as width, style and color.",
+        "Use one margin value to create outside spacing on all four sides.",
+        "Calculate why a 320px content-box with 24px left/right padding and 2px left/right borders produces a 372px border box.",
+        "Explain what box-sizing: border-box changes.",
+        "Recognize why a fixed height can become a problem when content grows.",
+        "Build the final .panel exercise without using the hint."
+      ]
     },
     {
       "title": "Flexbox Fundamentals",
-      "summary": "Lay out items in one dimension and control direction, wrapping, alignment, flexible growth, and spacing.",
+      "summary": "Learn Flexbox from the parent-child mental model: turn a container into a flex container, identify its direct flex items, understand the main and cross axes, then control direction, distribution, alignment, and spacing with a small set of readable properties.",
       "concepts": [
         {
-          "name": "Main and cross axes",
-          "explanation": "flex-direction defines the main axis. justify-content distributes items along the main axis; align-items controls the cross axis."
+          "name": "Flex containers and flex items",
+          "explanation": "Flexbox starts on a parent element. display: flex turns that element into a flex container, and its direct child elements become flex items. Flexbox then helps arrange those items along one main direction."
         },
         {
-          "name": "Flexible sizing",
-          "explanation": "flex-grow, flex-shrink, and flex-basis describe how an item participates when space is added or removed. The flex shorthand combines them."
+          "name": "Main axis and cross axis",
+          "explanation": "flex-direction chooses the main axis. In a row, the main axis runs left-to-right in the normal writing direction and the cross axis runs vertically. justify-content works along the main axis; align-items works along the cross axis."
         },
         {
-          "name": "Wrapping and gap",
-          "explanation": "flex-wrap allows items to move to another line. gap creates consistent spacing without margin tricks."
+          "name": "Alignment and consistent spacing",
+          "explanation": "justify-content controls how available main-axis space is distributed, align-items aligns items across the cross axis, and gap creates consistent space between flex items without adding individual margins."
         }
       ],
-      "example": ".toolbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  flex-wrap: wrap;\n}\n\n.toolbar__actions {\n  display: flex;\n  gap: 8px;\n}",
-      "challenge": "Create a flex row that spaces major groups apart and allows wrapping on smaller widths.",
-      "hint": "Set display:flex first, then think separately about main-axis and cross-axis alignment.",
-      "solution": ".toolbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  flex-wrap: wrap;\n}\n\n.toolbar__actions {\n  display: flex;\n  gap: 8px;\n}",
+      "starter": ".toolbar {\n  \n}",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain what a flex container and flex item are, turn a parent into a flex container with display: flex, predict the main and cross axes for row and column directions, distribute items with justify-content, align them with align-items, and add consistent space with gap.",
+        "whyItMatters": "Many interfaces need a row or column of related items: navigation links, buttons, toolbars, cards, labels, or controls. Without a layout system, learners often try to solve these problems with random margins. Flexbox gives the parent a clear set of rules for arranging its children, so layout becomes intentional rather than trial and error.",
+        "terms": [
+          {
+            "term": "Layout",
+            "meaning": "The way elements are arranged and spaced on a page."
+          },
+          {
+            "term": "Flexbox",
+            "meaning": "A CSS layout system designed mainly for arranging items in one direction at a time: a row or a column."
+          },
+          {
+            "term": "Flex container",
+            "meaning": "An element whose display value is flex. It controls the layout of its direct child flex items."
+          },
+          {
+            "term": "Flex item",
+            "meaning": "A direct child of a flex container. The parent's Flexbox rules arrange these items."
+          },
+          {
+            "term": "Direct child",
+            "meaning": "An element immediately inside another element, not a deeper descendant nested inside another child."
+          },
+          {
+            "term": "Main axis",
+            "meaning": "The primary direction Flexbox uses to arrange items. flex-direction decides this axis."
+          },
+          {
+            "term": "Cross axis",
+            "meaning": "The direction perpendicular to the main axis."
+          },
+          {
+            "term": "Row",
+            "meaning": "A flex direction where items are arranged horizontally in the normal writing direction."
+          },
+          {
+            "term": "Column",
+            "meaning": "A flex direction where items are arranged vertically from top to bottom."
+          },
+          {
+            "term": "Alignment",
+            "meaning": "How items or available space are positioned along an axis."
+          },
+          {
+            "term": "Gap",
+            "meaning": "Consistent space placed between neighbouring flex items."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "display: flex;",
+            "meaning": "Turns the selected element into a flex container. Its direct children become flex items."
+          },
+          {
+            "symbol": "flex-direction: row;",
+            "meaning": "Use a horizontal main axis. row is the normal default direction for Flexbox."
+          },
+          {
+            "symbol": "flex-direction: column;",
+            "meaning": "Use a vertical main axis."
+          },
+          {
+            "symbol": "justify-content: flex-start;",
+            "meaning": "Place items at the start of the main axis."
+          },
+          {
+            "symbol": "justify-content: center;",
+            "meaning": "Group the items in the center of the main axis."
+          },
+          {
+            "symbol": "justify-content: space-between;",
+            "meaning": "Place the first item/group at the main-axis start and the last at the end, distributing remaining space between the items."
+          },
+          {
+            "symbol": "align-items: center;",
+            "meaning": "Center flex items along the cross axis."
+          },
+          {
+            "symbol": "gap: 12px;",
+            "meaning": "Place 12px of consistent space between neighbouring flex items."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — Turn the parent into a flex container",
+            "explanation": "Assume the preview HTML has several elements directly inside .toolbar. display: flex belongs on their parent. The parent becomes the flex container and its direct children become flex items.",
+            "code": ".toolbar {\n  display: flex;\n}"
+          },
+          {
+            "title": "Step 2 — Make the main direction explicit",
+            "explanation": "Flexbox uses row by default, but writing flex-direction: row while learning makes the main axis visible in your code. The items now travel along a horizontal main axis.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n}"
+          },
+          {
+            "title": "Step 3 — Start items at the beginning",
+            "explanation": "justify-content works along the main axis. With a row, flex-start keeps the items grouped at the row's starting side.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n}"
+          },
+          {
+            "title": "Step 4 — Center items along the main axis",
+            "explanation": "Changing only justify-content to center moves the group to the middle of the main axis. Because the main axis is currently a row, this changes horizontal distribution.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}"
+          },
+          {
+            "title": "Step 5 — Distribute remaining space between groups",
+            "explanation": "space-between pushes the first flex item toward the main-axis start and the last toward the end, with remaining space distributed between items. This is useful for a toolbar with a title/group on one side and actions on the other.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}"
+          },
+          {
+            "title": "Step 6 — Align items on the cross axis",
+            "explanation": "align-items works on the cross axis. In a row, the cross axis is vertical, so center is useful when neighbouring items have different heights.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n}"
+          },
+          {
+            "title": "Step 7 — Add consistent space between items",
+            "explanation": "gap adds spacing between neighbouring flex items. It does not add space around the outside of the container; Module 3's padding and margin still have those separate jobs.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  gap: 12px;\n}"
+          },
+          {
+            "title": "Step 8 — Change the main axis to a column",
+            "explanation": "Changing flex-direction to column turns the main axis vertical. Now justify-content works vertically and align-items works horizontally. The property names do not change—the axes do.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 12px;\n}"
+          },
+          {
+            "title": "Step 9 — Build the final toolbar layout",
+            "explanation": "This final rule combines only the fundamentals introduced in this lesson. The toolbar is a horizontal flex container, major groups use the available main-axis space, items are cross-axis centered, and gap keeps neighbouring items separated.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  gap: 12px;\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": ".toolbar",
+            "meaning": "The class selector from Module 1. It targets the parent element whose children you want Flexbox to arrange."
+          },
+          {
+            "piece": "display: flex;",
+            "meaning": "Create the flex formatting context on the parent; its direct children become flex items."
+          },
+          {
+            "piece": "flex-direction: row;",
+            "meaning": "Use a horizontal main axis."
+          },
+          {
+            "piece": "justify-content: space-between;",
+            "meaning": "Distribute available space along the main axis so the outer items/groups move toward opposite ends."
+          },
+          {
+            "piece": "align-items: center;",
+            "meaning": "Center the flex items along the cross axis."
+          },
+          {
+            "piece": "gap: 12px;",
+            "meaning": "Keep 12px of consistent space between neighbouring flex items."
+          },
+          {
+            "piece": "main axis",
+            "meaning": "The direction chosen by flex-direction; justify-content works along this direction."
+          },
+          {
+            "piece": "cross axis",
+            "meaning": "The perpendicular direction; align-items works along this direction."
+          }
+        ],
+        "computerSteps": [
+          "The browser matches the .toolbar class selector to the toolbar element.",
+          "display: flex tells the browser to use Flexbox for that element's direct children.",
+          "flex-direction: row establishes a horizontal main axis and a perpendicular vertical cross axis.",
+          "The browser measures the flex items and available space inside the container.",
+          "justify-content: space-between distributes leftover main-axis space between the flex items/groups.",
+          "align-items: center positions the items around the center of the cross axis.",
+          "gap: 12px reserves consistent space between neighbouring flex items.",
+          "If flex-direction changed to column, the main/cross axes would rotate, so the same alignment properties would operate in different physical directions."
+        ],
+        "guidedChanges": [
+          "Remove display: flex and observe that the Flexbox-only alignment properties no longer create the intended flex layout.",
+          "Change justify-content from space-between to center and predict where the items will gather along the row.",
+          "Change justify-content to flex-start and compare it with center and space-between.",
+          "Change gap from 12px to 24px and identify which spaces change and which outside edges do not.",
+          "Change flex-direction from row to column and identify the new main axis before looking at the preview.",
+          "With column active, explain why justify-content is now concerned with vertical distribution while align-items is concerned with horizontal alignment.",
+          "Remove align-items: center and compare items of different heights if the preview provides them."
+        ],
+        "workedExampleIntro": "Read the final rule from the parent outward: .toolbar is the parent, display: flex activates Flexbox, row chooses the main axis, justify-content distributes space on that axis, align-items centers items on the cross axis, and gap provides consistent spacing between neighbours.",
+        "errorExamples": [
+          {
+            "mistake": "display = flex;",
+            "explanation": "CSS declarations use a colon between property and value, not an equals sign.",
+            "fix": "Write display: flex;."
+          },
+          {
+            "mistake": "display: flexbox;",
+            "explanation": "The display value that activates Flexbox is flex, not flexbox.",
+            "fix": "Write display: flex;."
+          },
+          {
+            "mistake": "flex-direction: horizontal;",
+            "explanation": "Flexbox does not use horizontal as a flex-direction value.",
+            "fix": "Use flex-direction: row; for the basic horizontal direction taught here."
+          },
+          {
+            "mistake": "justify-content: middle;",
+            "explanation": "middle is not the alignment value taught for centering.",
+            "fix": "Write justify-content: center;."
+          },
+          {
+            "mistake": "align-items: space-between;",
+            "explanation": "space-between is taught here as a justify-content distribution value, not an align-items value.",
+            "fix": "Use align-items: center; for the cross-axis alignment taught in this module."
+          },
+          {
+            "mistake": "gap: 12;",
+            "explanation": "A non-zero gap length needs a unit.",
+            "fix": "Write gap: 12px;."
+          },
+          {
+            "mistake": "gap: 12 px;",
+            "explanation": "The number and unit must stay together.",
+            "fix": "Write gap: 12px;."
+          },
+          {
+            "mistake": "Applying display: flex to each child instead of the parent",
+            "explanation": "Flexbox arranges a parent's direct children. Putting display: flex only on each child creates separate flex containers rather than arranging the siblings together.",
+            "fix": "Put display: flex on the parent whose direct children you want to arrange."
+          },
+          {
+            "mistake": "Assuming justify-content always means horizontal",
+            "explanation": "justify-content follows the main axis, and flex-direction can change which physical direction the main axis uses.",
+            "fix": "Identify the flex-direction first, then decide what the main axis is."
+          },
+          {
+            "mistake": "Using gap as outside spacing around the container",
+            "explanation": "gap creates space between flex items, not around the outside of the flex container.",
+            "fix": "Use gap between items; use the padding/margin concepts from Module 3 for inside/outside container spacing."
+          }
+        ],
+        "recap": [
+          "Flexbox is a parent-controlled one-dimensional layout system.",
+          "display: flex belongs on the parent flex container.",
+          "The direct children of a flex container are flex items.",
+          "flex-direction chooses the main axis: row is horizontal and column is vertical in the basic cases taught here.",
+          "justify-content works along the main axis.",
+          "align-items works along the cross axis.",
+          "gap creates consistent spacing between neighbouring flex items.",
+          "Do not assume justify-content is always horizontal; identify the main axis first.",
+          "Wrapping, flexible growth/shrink rules, order, and complex alignment belong to later learning."
+        ]
+      },
+      "example": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  gap: 12px;\n}",
+      "challenge": "Create a .toolbar flex container that lays out its direct children in a row, places major groups apart with justify-content: space-between, centers items on the cross axis, and keeps 12px between neighbouring items.",
+      "hint": "Start by making .toolbar a flex container. Then set the main direction to row, use justify-content for the main axis, align-items for the cross axis, and finish with gap.",
+      "solution": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  gap: 12px;\n}",
       "groups": [
+        [
+          ".toolbar"
+        ],
         [
           "display: flex",
           "display:flex"
         ],
         [
+          "flex-direction"
+        ],
+        [
+          "row"
+        ],
+        [
           "justify-content"
+        ],
+        [
+          "space-between"
         ],
         [
           "align-items"
         ],
         [
+          "center"
+        ],
+        [
           "gap"
+        ],
+        [
+          "12px"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            ".toolbar"
+          ],
+          [
+            "display: flex",
+            "display:flex"
+          ],
+          [
+            "flex-direction"
+          ],
+          [
+            "row"
+          ],
+          [
+            "justify-content"
+          ],
+          [
+            "space-between"
+          ],
+          [
+            "align-items"
+          ],
+          [
+            "center"
+          ],
+          [
+            "gap"
+          ],
+          [
+            "12px"
+          ]
+        ],
+        "practiceMinLength": 120,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write a .nav-row rule that makes it a row flex container, centers its items on the cross axis, and places 16px between neighbouring items.",
+            "groups": [
+              [
+                ".nav-row"
+              ],
+              [
+                "display: flex",
+                "display:flex"
+              ],
+              [
+                "flex-direction"
+              ],
+              [
+                "row"
+              ],
+              [
+                "align-items"
+              ],
+              [
+                "center"
+              ],
+              [
+                "gap"
+              ],
+              [
+                "16px"
+              ]
+            ],
+            "minLength": 80
+          },
+          {
+            "prompt": "Write a .toolbar rule that uses Flexbox in a row and distributes major groups with justify-content: space-between. Also center the items on the cross axis.",
+            "groups": [
+              [
+                ".toolbar"
+              ],
+              [
+                "display: flex",
+                "display:flex"
+              ],
+              [
+                "flex-direction"
+              ],
+              [
+                "row"
+              ],
+              [
+                "justify-content"
+              ],
+              [
+                "space-between"
+              ],
+              [
+                "align-items"
+              ],
+              [
+                "center"
+              ]
+            ],
+            "minLength": 100
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "display: flex",
+              "display:flex"
+            ],
+            [
+              "flex-direction"
+            ],
+            [
+              "row"
+            ]
+          ],
+          "2": [
+            [
+              "justify-content"
+            ],
+            [
+              "space-between"
+            ],
+            [
+              "align-items"
+            ],
+            [
+              "center"
+            ]
+          ],
+          "3": [
+            [
+              "display: flex",
+              "display:flex"
+            ],
+            [
+              "flex-direction"
+            ],
+            [
+              "row"
+            ],
+            [
+              "justify-content"
+            ],
+            [
+              "space-between"
+            ],
+            [
+              "align-items"
+            ],
+            [
+              "center"
+            ],
+            [
+              "gap"
+            ],
+            [
+              "12px"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Write the core declarations that turn a class rule into a Flexbox container with a row main axis.",
+          "2": "Exam 2: Write Flexbox declarations that distribute items with space-between on the main axis and center them on the cross axis.",
+          "3": "Exam 3: Build a .toolbar using the Module 4 Flexbox fundamentals: row direction, space-between main-axis distribution, centered cross-axis alignment, and a 12px gap."
+        }
+      },
       "references": [
         {
-          "title": "MDN — CSS layout",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+          "title": "MDN — Basic concepts of flexbox",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox"
         },
         {
-          "title": "MDN — CSS reference",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+          "title": "MDN — flex",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/flex"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Put display: flex on the parent whose direct children you want to arrange.",
+        "Remember that flex-direction determines the main axis before you reason about alignment.",
+        "justify-content works on the main axis; align-items works on the cross axis.",
+        "Use center, not middle, for the centering values taught here.",
+        "Use gap for spacing between flex items rather than treating it as container padding or outside margin.",
+        "Non-zero gap lengths need a unit such as px, with no space between number and unit.",
+        "Do not assume row/column are purely visual labels; changing flex-direction also changes how justify-content and align-items map to physical directions.",
+        "Do not require flex-wrap, flex-grow, flex-shrink, flex-basis, flex shorthand, order, align-self, or multi-line alignment before those concepts are taught later."
+      ],
+      "mastery": [
+        "Explain the difference between a flex container and a flex item.",
+        "Explain why display: flex belongs on the parent.",
+        "Identify the main and cross axes for flex-direction: row.",
+        "Identify how the axes change for flex-direction: column.",
+        "Use justify-content: flex-start, center, and space-between in the simple cases taught here.",
+        "Use align-items: center for cross-axis alignment.",
+        "Use gap with a valid length unit.",
+        "Explain why justify-content is not always horizontal.",
+        "Explain why gap is different from padding and margin.",
+        "Build the final .toolbar exercise without the hint."
+      ]
     },
     {
       "title": "Responsive Foundations",
-      "summary": "Build layouts that adapt to available space using fluid dimensions, media queries, and content-driven breakpoints.",
+      "summary": "Learn why layouts need to adapt to different screen sizes, use flexible percentage widths with max-width, understand the viewport and a simple breakpoint, then use a media query to change an existing Flexbox row into a column on narrower screens.",
       "concepts": [
         {
-          "name": "Fluid first",
-          "explanation": "Prefer flexible widths such as percentages, fr units, max-width, and min() before adding many media queries."
+          "name": "Flexible sizing before breakpoints",
+          "explanation": "Responsive design starts by letting content adapt naturally. Percentage widths can follow the available space, while max-width can stop a region from becoming excessively wide on larger screens."
         },
         {
-          "name": "Media queries",
-          "explanation": "@media conditionally applies rules based on features such as viewport width, input capability, motion preference, or color scheme."
+          "name": "Viewport and breakpoint",
+          "explanation": "The viewport is the visible browser/page area available to the webpage. A breakpoint is a chosen width threshold where a layout rule changes because the previous arrangement no longer fits comfortably."
         },
         {
-          "name": "Mobile-friendly sizing",
-          "explanation": "The viewport meta tag belongs in HTML; CSS should then avoid fixed widths that force horizontal scrolling on narrow screens."
+          "name": "Media queries change rules conditionally",
+          "explanation": "@media lets CSS apply a set of rules only when a condition is true. In this Intern lesson, the only condition required is a simple max-width check that changes a Flexbox row to a column on narrower viewports."
         }
       ],
-      "example": ".course-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 1rem;\n}\n\n@media (max-width: 700px) {\n  .course-grid {\n    grid-template-columns: 1fr;\n  }\n}",
-      "challenge": "Create a two-column layout that becomes one column below 700px.",
-      "hint": "Write the base layout first, then override only the property that must change inside @media.",
-      "solution": ".course-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 1rem;\n}\n\n@media (max-width: 700px) {\n  .course-grid {\n    grid-template-columns: 1fr;\n  }\n}",
+      "starter": ".content {\n  \n}\n\n.toolbar {\n  display: flex;\n  flex-direction: row;\n  gap: 12px;\n}\n",
+      "beginnerScaffold": {
+        "learningGoal": "By the end of this lesson, you should be able to explain why responsive design matters, describe the viewport and a breakpoint in beginner-friendly terms, use percentage width together with max-width, read the structure of a simple @media (max-width: ...) rule, and change a Flexbox row into a column when the available width becomes small.",
+        "whyItMatters": "A layout that looks good on one wide monitor can become cramped or overflow on a smaller window or phone. Responsive CSS helps the same HTML adapt instead of requiring a separate page for every screen size. This lesson gives you the smallest useful responsive toolkit while reusing the Flexbox knowledge from Module 4.",
+        "terms": [
+          {
+            "term": "Responsive design",
+            "meaning": "Designing a webpage so its content and layout can adapt to different available sizes instead of assuming one fixed screen width."
+          },
+          {
+            "term": "Viewport",
+            "meaning": "The visible area available to the webpage in the browser or app window. When that area becomes narrower, a wide layout may need to adapt."
+          },
+          {
+            "term": "Flexible / fluid width",
+            "meaning": "A width that can grow or shrink with the available space, such as width: 90%;."
+          },
+          {
+            "term": "Maximum width",
+            "meaning": "An upper limit set with max-width. The element may be narrower when space is limited, but it should not grow beyond that limit."
+          },
+          {
+            "term": "Media query",
+            "meaning": "A CSS condition beginning with @media. Rules inside it apply only while its condition is true."
+          },
+          {
+            "term": "Breakpoint",
+            "meaning": "A chosen width threshold where the layout changes because the current arrangement no longer fits comfortably. It is a design decision, not a magic device size."
+          },
+          {
+            "term": "Override",
+            "meaning": "A later declaration that changes a property already set by an earlier rule when the later rule applies. The media query in this lesson overrides flex-direction."
+          }
+        ],
+        "syntax": [
+          {
+            "symbol": "90%",
+            "meaning": "A percentage width. width: 90%; asks the element to use 90 percent of the available width from its containing block."
+          },
+          {
+            "symbol": "max-width: 900px;",
+            "meaning": "Limits an element so it does not become wider than 900px even when more space is available."
+          },
+          {
+            "symbol": "@media",
+            "meaning": "Begins a media query: a conditional section of CSS."
+          },
+          {
+            "symbol": "(",
+            "meaning": "Opens the media-query condition."
+          },
+          {
+            "symbol": ")",
+            "meaning": "Closes the media-query condition."
+          },
+          {
+            "symbol": "max-width: 700px",
+            "meaning": "The simple condition taught here: apply the enclosed rules when the viewport is 700px wide or narrower."
+          },
+          {
+            "symbol": "@media (max-width: 700px) { ... }",
+            "meaning": "A complete media-query wrapper. Its nested CSS rules become active only while the width condition is true."
+          },
+          {
+            "symbol": "flex-direction: column;",
+            "meaning": "Reuses Module 4 Flexbox knowledge to stack flex items vertically when the media query is active."
+          },
+          {
+            "symbol": "@",
+            "meaning": "The at-sign begins special CSS at-rules such as @media. Intern only needs @media here."
+          }
+        ],
+        "examples": [
+          {
+            "title": "Step 1 — See why one fixed width can be fragile",
+            "explanation": "A fixed 900px content region cannot shrink below 900px. On a viewport narrower than that, the page may overflow horizontally. Fixed pixel widths are not always wrong, but they are a poor default when the content needs to adapt to much smaller spaces.",
+            "code": ".content {\n  width: 900px;\n}"
+          },
+          {
+            "title": "Step 2 — Let the content width follow available space",
+            "explanation": "A percentage can shrink and grow with its containing space. width: 90%; leaves some room instead of demanding one fixed pixel width.",
+            "code": ".content {\n  width: 90%;\n}"
+          },
+          {
+            "title": "Step 3 — Add an upper limit",
+            "explanation": "width: 90% keeps the region flexible. max-width: 900px prevents it from growing wider than 900px on a large viewport. Both declarations can work together.",
+            "code": ".content {\n  width: 90%;\n  max-width: 900px;\n}"
+          },
+          {
+            "title": "Step 4 — Start with the normal Flexbox layout",
+            "explanation": "Module 4 already taught this row layout. Responsive work normally starts with a sensible base rule before adding a breakpoint.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  gap: 12px;\n}"
+          },
+          {
+            "title": "Step 5 — Read an empty media query",
+            "explanation": "@media starts a conditional CSS section. The condition max-width: 700px asks whether the viewport is 700px wide or narrower. The outer braces contain the rules that should become active only then.",
+            "code": "@media (max-width: 700px) {\n\n}"
+          },
+          {
+            "title": "Step 6 — Change one property at the breakpoint",
+            "explanation": "The base .toolbar rule creates a row. When the viewport becomes 700px or narrower, the media query activates and changes only flex-direction to column. display: flex and gap continue coming from the base rule.",
+            "code": ".toolbar {\n  display: flex;\n  flex-direction: row;\n  gap: 12px;\n}\n\n@media (max-width: 700px) {\n  .toolbar {\n    flex-direction: column;\n  }\n}"
+          },
+          {
+            "title": "Step 7 — Combine flexible content and a responsive toolbar",
+            "explanation": "The content region can shrink naturally, and the Flexbox toolbar changes direction only when the narrow layout needs it. No Grid knowledge is required.",
+            "code": ".content {\n  width: 90%;\n  max-width: 900px;\n}\n\n.toolbar {\n  display: flex;\n  flex-direction: row;\n  gap: 12px;\n}\n\n@media (max-width: 700px) {\n  .toolbar {\n    flex-direction: column;\n  }\n}"
+          },
+          {
+            "title": "Step 8 — Think in layout needs, not device names",
+            "explanation": "700px is an example breakpoint, not a universal definition of phone or tablet. A good breakpoint is chosen where the current layout becomes uncomfortable. Intern only needs to understand and use the supplied breakpoint safely; choosing a full professional breakpoint system comes later.",
+            "code": "@media (max-width: 700px) {\n  .toolbar {\n    flex-direction: column;\n  }\n}"
+          }
+        ],
+        "breakdown": [
+          {
+            "piece": ".content",
+            "meaning": "A class selector for the content region whose width should remain flexible."
+          },
+          {
+            "piece": "width: 90%;",
+            "meaning": "Use 90 percent of the available containing width rather than forcing one fixed pixel width."
+          },
+          {
+            "piece": "max-width: 900px;",
+            "meaning": "Cap that flexible region at 900px on wider screens."
+          },
+          {
+            "piece": ".toolbar",
+            "meaning": "The Flexbox parent from Module 4."
+          },
+          {
+            "piece": "display: flex;",
+            "meaning": "Keep the toolbar as a flex container."
+          },
+          {
+            "piece": "flex-direction: row;",
+            "meaning": "Use the normal wide-layout direction before the breakpoint is active."
+          },
+          {
+            "piece": "@media (max-width: 700px)",
+            "meaning": "Activate the enclosed CSS only when the viewport is 700px wide or narrower."
+          },
+          {
+            "piece": "flex-direction: column;",
+            "meaning": "Override the toolbar direction at the narrow breakpoint so the flex items stack vertically."
+          }
+        ],
+        "computerSteps": [
+          "The browser reads the normal .content and .toolbar rules first.",
+          "The .content width is calculated relative to its containing space, but max-width prevents it from exceeding 900px.",
+          "The .toolbar becomes a flex container in row direction using the Module 4 rules.",
+          "The browser evaluates the @media condition against the current viewport width.",
+          "When the viewport is wider than 700px, the nested media-query rule is inactive and the toolbar remains a row.",
+          "When the viewport is 700px wide or narrower, the media-query rule becomes active.",
+          "The later flex-direction: column declaration overrides the base row direction while the condition is true.",
+          "If the viewport becomes wider again, that conditional override stops applying and the toolbar returns to its base row direction."
+        ],
+        "guidedChanges": [
+          "Change width: 90% to width: 100% and explain how that affects the flexible content region.",
+          "Change max-width: 900px to max-width: 700px and predict what happens on a wide viewport.",
+          "Temporarily remove max-width and explain why the percentage width can keep growing on large screens.",
+          "Change the breakpoint from 700px to 600px and identify when the column override should begin applying.",
+          "Change the narrow-layout flex-direction from column back to row and explain why the media query would then produce no visible direction change.",
+          "Resize the Academy CSS preview around the breakpoint if the preview supports resizing, and observe the toolbar changing between row and column.",
+          "Remove the entire @media block and confirm that the base Flexbox row remains valid CSS."
+        ],
+        "workedExampleIntro": "Read the final stylesheet in two layers: first the normal rules that always apply, then the @media block that conditionally changes only what needs to change. The content width is fluid with an upper cap, and the existing Flexbox toolbar simply rotates from row to column at the narrow breakpoint.",
+        "errorExamples": [
+          {
+            "mistake": "width: 90;",
+            "explanation": "A percentage value needs the % symbol. A plain non-zero number is not a valid width length here.",
+            "fix": "Write width: 90%;."
+          },
+          {
+            "mistake": "width: 90 %;",
+            "explanation": "The percentage sign belongs directly next to the number.",
+            "fix": "Write width: 90%;."
+          },
+          {
+            "mistake": "max-width = 900px;",
+            "explanation": "CSS declarations use a colon between property and value, not an equals sign.",
+            "fix": "Write max-width: 900px;."
+          },
+          {
+            "mistake": "@media max-width: 700px { ... }",
+            "explanation": "The media feature condition taught here belongs inside parentheses.",
+            "fix": "Write @media (max-width: 700px) { ... }."
+          },
+          {
+            "mistake": "@media (max-width = 700px)",
+            "explanation": "Inside the basic media condition, max-width and its value are separated by a colon.",
+            "fix": "Write @media (max-width: 700px)."
+          },
+          {
+            "mistake": "@media (max-width: 700) { ... }",
+            "explanation": "The non-zero breakpoint length needs a unit.",
+            "fix": "Write @media (max-width: 700px) { ... }."
+          },
+          {
+            "mistake": "Putting the entire base stylesheet only inside the media query",
+            "explanation": "Then those styles would disappear whenever the media condition is false. Responsive CSS normally keeps a useful base layout outside and places only the necessary changes inside the query.",
+            "fix": "Write the normal .toolbar rule first, then override flex-direction inside @media."
+          },
+          {
+            "mistake": "Using Grid syntax such as grid-template-columns in this Intern exercise",
+            "explanation": "CSS Grid has not been taught yet and is a Junior topic in the Academy. Responsive design does not require Grid; the Flexbox knowledge you already have is enough for this lesson.",
+            "fix": "Reuse display: flex and change flex-direction at the breakpoint."
+          },
+          {
+            "mistake": "Treating 700px as a universal phone size",
+            "explanation": "A breakpoint should reflect where your particular layout needs to change. Device categories and professional responsive strategies are more nuanced.",
+            "fix": "For this Intern lesson, use the supplied 700px threshold and understand what the condition means rather than memorizing it as a universal rule."
+          },
+          {
+            "mistake": "Assuming max-width makes an element exactly that wide",
+            "explanation": "max-width is a ceiling, not a demand. width: 90% can make the element narrower when less space is available.",
+            "fix": "Read width as the preferred flexible size and max-width as the upper limit."
+          }
+        ],
+        "recap": [
+          "Responsive design lets one page adapt to different available widths.",
+          "The viewport is the visible area available to the webpage.",
+          "Percentage widths can shrink and grow with available space.",
+          "max-width places an upper limit on how wide an element may become.",
+          "@media begins a conditional section of CSS.",
+          "@media (max-width: 700px) applies its nested rules at 700px wide or narrower.",
+          "A breakpoint is a chosen layout threshold, not a universal device category.",
+          "Write a useful base layout first and override only the properties that need to change.",
+          "The Flexbox knowledge from Module 4 is enough to create a basic responsive stack; Grid is not required at Intern level.",
+          "Responsive CSS can be simple: fluid sizing plus one clear media-query change is already a useful foundation."
+        ]
+      },
+      "example": ".content {\n  width: 90%;\n  max-width: 900px;\n}\n\n.toolbar {\n  display: flex;\n  flex-direction: row;\n  gap: 12px;\n}\n\n@media (max-width: 700px) {\n  .toolbar {\n    flex-direction: column;\n  }\n}",
+      "challenge": "Create flexible .content that uses 90% of the available width but never grows beyond 900px. Keep .toolbar as a row Flexbox with a 12px gap on wider screens, then use a max-width: 700px media query to change only its flex-direction to column on narrower screens.",
+      "hint": "Build the normal rules first. Use width plus max-width for .content, reuse the Flexbox row from Module 4, then add @media (max-width: 700px) and override only flex-direction inside it.",
+      "solution": ".content {\n  width: 90%;\n  max-width: 900px;\n}\n\n.toolbar {\n  display: flex;\n  flex-direction: row;\n  gap: 12px;\n}\n\n@media (max-width: 700px) {\n  .toolbar {\n    flex-direction: column;\n  }\n}",
       "groups": [
         [
-          "@media"
+          ".content"
+        ],
+        [
+          "width"
+        ],
+        [
+          "90%"
         ],
         [
           "max-width"
         ],
         [
-          "grid-template-columns"
+          "900px"
+        ],
+        [
+          ".toolbar"
+        ],
+        [
+          "display: flex",
+          "display:flex"
+        ],
+        [
+          "flex-direction"
+        ],
+        [
+          "row"
+        ],
+        [
+          "gap"
+        ],
+        [
+          "12px"
+        ],
+        [
+          "@media"
+        ],
+        [
+          "700px"
+        ],
+        [
+          "column"
         ]
       ],
+      "assessment": {
+        "practiceGroups": [
+          [
+            ".content"
+          ],
+          [
+            "width"
+          ],
+          [
+            "90%"
+          ],
+          [
+            "max-width"
+          ],
+          [
+            "900px"
+          ],
+          [
+            ".toolbar"
+          ],
+          [
+            "display: flex",
+            "display:flex"
+          ],
+          [
+            "flex-direction"
+          ],
+          [
+            "row"
+          ],
+          [
+            "gap"
+          ],
+          [
+            "12px"
+          ],
+          [
+            "@media"
+          ],
+          [
+            "700px"
+          ],
+          [
+            "column"
+          ]
+        ],
+        "practiceMinLength": 180,
+        "testCodeQuestions": [
+          {
+            "prompt": "Write a .panel rule that uses 100% of the available width but never grows beyond 800px.",
+            "groups": [
+              [
+                ".panel"
+              ],
+              [
+                "width"
+              ],
+              [
+                "100%"
+              ],
+              [
+                "max-width"
+              ],
+              [
+                "800px"
+              ]
+            ],
+            "minLength": 55
+          },
+          {
+            "prompt": "Start a .nav flex container in row direction, then use @media (max-width: 600px) to change its flex-direction to column on narrower viewports.",
+            "groups": [
+              [
+                ".nav"
+              ],
+              [
+                "display: flex",
+                "display:flex"
+              ],
+              [
+                "flex-direction"
+              ],
+              [
+                "row"
+              ],
+              [
+                "@media"
+              ],
+              [
+                "max-width"
+              ],
+              [
+                "600px"
+              ],
+              [
+                "column"
+              ]
+            ],
+            "minLength": 110
+          }
+        ],
+        "examGroups": {
+          "1": [
+            [
+              "width"
+            ],
+            [
+              "90%"
+            ],
+            [
+              "max-width"
+            ],
+            [
+              "900px"
+            ]
+          ],
+          "2": [
+            [
+              "@media"
+            ],
+            [
+              "max-width"
+            ],
+            [
+              "700px"
+            ],
+            [
+              "flex-direction"
+            ],
+            [
+              "column"
+            ]
+          ],
+          "3": [
+            [
+              ".content"
+            ],
+            [
+              "width"
+            ],
+            [
+              "90%"
+            ],
+            [
+              "max-width"
+            ],
+            [
+              "900px"
+            ],
+            [
+              ".toolbar"
+            ],
+            [
+              "display: flex",
+              "display:flex"
+            ],
+            [
+              "flex-direction"
+            ],
+            [
+              "row"
+            ],
+            [
+              "@media"
+            ],
+            [
+              "700px"
+            ],
+            [
+              "column"
+            ]
+          ]
+        },
+        "examPrompts": {
+          "1": "Exam 1: Write flexible sizing declarations that use 90% of available width while limiting the element to a maximum width of 900px.",
+          "2": "Exam 2: Write a max-width: 700px media query that changes an existing flex container to flex-direction: column.",
+          "3": "Exam 3: Build the Module 5 responsive foundation: flexible .content sizing plus a .toolbar Flexbox row that becomes a column at 700px or narrower."
+        }
+      },
       "references": [
         {
-          "title": "MDN — CSS layout",
-          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+          "title": "MDN — Responsive design",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design"
         },
         {
-          "title": "MDN — CSS reference",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+          "title": "MDN — Using media queries",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries"
+        },
+        {
+          "title": "MDN — max-width",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/max-width"
         }
       ],
-      "pitfalls": [],
-      "mastery": []
+      "pitfalls": [
+        "Do not require CSS Grid in Intern responsive exercises; Grid is taught later in the Junior track.",
+        "Keep a useful base layout outside the media query and override only what needs to change at the breakpoint.",
+        "Percentage values need the % symbol with no space between the number and symbol.",
+        "Non-zero media-query breakpoint lengths need a unit such as px.",
+        "Remember that max-width is an upper limit, not an instruction to always make the element exactly that width.",
+        "Treat breakpoints as layout decisions rather than memorized phone/tablet device sizes.",
+        "Use the Flexbox concepts already taught in Module 4 instead of introducing new layout systems during this lesson."
+      ],
+      "mastery": [
+        "Explain what responsive design is and why fixed-width layouts can become fragile on narrow viewports.",
+        "Explain the viewport in beginner-friendly terms.",
+        "Use a percentage width correctly.",
+        "Explain how width and max-width can work together.",
+        "Read @media (max-width: 700px) aloud in plain English.",
+        "Explain what a breakpoint is without calling it a universal device size.",
+        "Write a simple max-width media query with correct punctuation and units.",
+        "Keep a base Flexbox rule outside the media query and override flex-direction inside it.",
+        "Explain why Grid is not needed for this Intern responsive exercise.",
+        "Build the final responsive .content and .toolbar exercise without the hint."
+      ]
     }
   ]
 }

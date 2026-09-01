@@ -1,4 +1,5 @@
-import { $, shuffle } from '../core/utils.js';
+import { $ , shuffle } from '../core/utils.js';
+import { runCSharp } from '../csharp/csharp-runner.js';
 
 export function createAssessmentController({
   store,
@@ -8,6 +9,7 @@ export function createAssessmentController({
   passMark
 }) {
   let session = null;
+  let submitting = false;
 
   function startAssessment(kind, index) {
     const level = learning.currentLevel();
@@ -24,9 +26,11 @@ export function createAssessmentController({
       }))),
       position: 0,
       correct: 0,
-      selected: null
+      selected: null,
+      csharpCompileFailures: 0
     };
 
+    submitting = false;
     nav.assessment = { kind, index };
     $('testEyebrow').textContent = kind === 'test' ? 'CLASS TEST' : 'FINAL EXAM';
     $('testTitle').textContent = source.title;
@@ -46,6 +50,7 @@ export function createAssessmentController({
     const area = $('answerArea');
     area.innerHTML = '';
     session.selected = null;
+    setSubmitting(false);
 
     if (question.type === 'mc') {
       shuffle(question.options).forEach(option => {
@@ -69,10 +74,20 @@ export function createAssessmentController({
       session.selected = input.value;
     };
     area.appendChild(input);
+
+    if (requiresCSharpCompile(question)) {
+      const status = document.createElement('div');
+      status.id = 'assessmentCompilerStatus';
+      status.className = 'assessment-compiler-status';
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      status.textContent = 'C# code responses are checked by the real local compiler when submitted.';
+      area.appendChild(status);
+    }
   }
 
-  function submitAnswer() {
-    if (!session) return;
+  async function submitAnswer() {
+    if (!session || submitting) return;
 
     const question = session.questions[session.position];
     if (session.selected === null || String(session.selected).trim() === '') {
@@ -80,9 +95,35 @@ export function createAssessmentController({
       return;
     }
 
-    const correct = question.type === 'mc'
-      ? session.selected === question.answer
-      : Boolean(question.validator(session.selected));
+    let correct;
+
+    if (question.type === 'mc') {
+      correct = session.selected === question.answer;
+    } else if (requiresCSharpCompile(question)) {
+      setSubmitting(true, 'COMPILING...');
+      setCompilerStatus('Compiling your C# answer with the real local compiler...', 'working');
+
+      const compileResult = await runCSharp(String(session.selected));
+
+      if (isRunnerInfrastructureFailure(compileResult)) {
+        setCompilerStatus(
+          compileResult?.message || 'The C# compiler could not be reached. Your answer has not been graded.',
+          'error'
+        );
+        setSubmitting(false);
+        return;
+      }
+
+      const compiled = Boolean(compileResult?.compiled);
+      const matchesRequiredConcepts = Boolean(question.validator(session.selected));
+      correct = compiled && matchesRequiredConcepts;
+
+      if (!compiled) {
+        session.csharpCompileFailures += 1;
+      }
+    } else {
+      correct = Boolean(question.validator(session.selected));
+    }
 
     if (correct) session.correct += 1;
     session.position += 1;
@@ -92,6 +133,7 @@ export function createAssessmentController({
       return;
     }
 
+    setSubmitting(false);
     finishAssessment();
   }
 
@@ -115,9 +157,14 @@ export function createAssessmentController({
       ? 'CLASS TEST COMPLETE'
       : 'FINAL EXAM COMPLETE';
     $('resultTitle').textContent = passed ? 'PASS' : 'NOT PASSED';
+
+    const compileNote = session.csharpCompileFailures > 0
+      ? ` ${session.csharpCompileFailures} C# code response${session.csharpCompileFailures === 1 ? '' : 's'} did not compile and ${session.csharpCompileFailures === 1 ? 'was' : 'were'} counted as incorrect.`
+      : '';
+
     $('resultMessage').textContent = passed
-      ? `You reached the required ${passMark}% mark. Progress has been saved locally.`
-      : `You need ${passMark}% to pass. Review the material and try again when ready.`;
+      ? `You reached the required ${passMark}% mark. Progress has been saved locally.${compileNote}`
+      : `You need ${passMark}% to pass. Review the material and try again when ready.${compileNote}`;
     $('resultBreakdown').innerHTML = `
       <div><span>SCORE</span><strong>${score}%</strong></div>
       <div><span>CORRECT</span><strong>${session.correct}/${session.questions.length}</strong></div>
@@ -126,7 +173,42 @@ export function createAssessmentController({
     navigator.show('resultsScreen');
   }
 
+  function requiresCSharpCompile(question) {
+    return nav.language === 'csharp' && question?.type === 'code';
+  }
+
+  function isRunnerInfrastructureFailure(result) {
+    if (!result) return true;
+    const status = String(result.status || '');
+    return [
+      'unavailable',
+      'bridge-timeout',
+      'bridge-error',
+      'host-error',
+      'build-timeout',
+      'build-output-limit',
+      'assembly-missing'
+    ].includes(status);
+  }
+
+  function setCompilerStatus(message, state = 'idle') {
+    const status = $('assessmentCompilerStatus');
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.state = state;
+  }
+
+  function setSubmitting(value, label = 'SUBMIT ANSWER') {
+    submitting = value;
+    const button = document.querySelector('[data-action="submit-answer"]');
+    if (!button) return;
+    button.disabled = value;
+    button.textContent = value ? label : 'SUBMIT ANSWER';
+    button.setAttribute('aria-busy', value ? 'true' : 'false');
+  }
+
   function abort() {
+    if (submitting) return;
     session = null;
     learning.renderRoadmap();
     navigator.show('roadmapScreen');
