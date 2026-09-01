@@ -344,6 +344,21 @@ export function createLearningController({
     }
 
     if (language === 'javascript') {
+      if (nav.difficulty === 'intern' && nav.lessonIndex === 4) {
+        const popup = window.open('', '_blank', 'width=760,height=620');
+        if (!popup) {
+          output.textContent = 'DOM preview could not open. Allow pop-ups for the Academy, then press RUN again.';
+          return;
+        }
+
+        const safeJs = String(code).replace(/<\/script/gi, '<\\/script');
+        popup.document.open();
+        popup.document.write(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JavaScript DOM Academy Preview</title><style>body{margin:0;background:#08101b;color:#eaf2ff;font-family:system-ui,sans-serif;padding:28px}.demo-shell{max-width:720px;margin:auto}.demo-card{background:#111d2d;border:1px solid #2b405d;border-radius:14px;padding:22px}.demo-kicker{font-size:11px;letter-spacing:.16em;color:#f4d64e}.demo-button{margin-top:12px;padding:10px 14px;border-radius:8px;border:1px solid #f4d64e;background:#1b2635;color:#fff;cursor:pointer}.demo-status{margin-top:16px;padding:12px;border-radius:8px;background:#0b1523;border:1px solid #263b55}.demo-console{margin-top:18px;white-space:pre-wrap;color:#b8c8da}</style></head><body><main class="demo-shell"><section class="demo-card"><div class="demo-kicker">ACADEMY DOM PRACTICE PAGE</div><h1>JavaScript DOM Preview</h1><p>This isolated page contains the two elements used by Intern Module 5. Interact here without changing the Academy interface.</p><button id="demo-button" class="demo-button" type="button">Click the demo button</button><p id="demo-status" class="demo-status">Waiting for JavaScript...</p><pre id="academy-demo-console" class="demo-console">Console output will appear here.</pre></section></main><script>(function(){const academyConsole=document.getElementById('academy-demo-console');const lines=[];const write=(prefix,args)=>{const text=Array.from(args).map(value=>{if(value===null)return 'null';if(value===undefined)return 'undefined';if(typeof value==='object'&&value.tagName)return '<'+value.tagName.toLowerCase()+(value.id?' id=\"'+value.id+'\"':'')+'>';try{return typeof value==='string'?value:JSON.stringify(value);}catch{return String(value);}}).join(' ');lines.push(prefix+text);academyConsole.textContent=lines.join('\\n');};const demoConsole={log:(...args)=>write('',args),warn:(...args)=>write('WARN: ',args),error:(...args)=>write('ERROR: ',args)};try{new Function('console', ${JSON.stringify(safeJs)})(demoConsole);if(!lines.length)academyConsole.textContent='Program loaded. Interact with the demo button to test event behaviour.';}catch(error){academyConsole.textContent='ERROR: '+error.message;}})();<\/script></body></html>`);
+        popup.document.close();
+        output.textContent = 'DOM preview opened in an isolated window. Use #demo-button and #demo-status there, then interact with the button to test your event code.';
+        return;
+      }
+
       const logs = [];
       try {
         const fakeConsole = { log: (...args) => logs.push(args.join(' ')) };

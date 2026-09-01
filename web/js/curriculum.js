@@ -91,6 +91,127 @@ function escapeInline(text) {
   return String(text).replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]));
 }
 
+function bulletList(items) {
+  return `<ul>${items.map(item => `<li>${escapeInline(item)}</li>`).join('')}</ul>`;
+}
+
+function labelledList(items, labelKey, detailKey, codeLabel = false) {
+  return `<ul>${items.map(item => {
+    const label = escapeInline(item[labelKey]);
+    const detail = escapeInline(item[detailKey]);
+    const renderedLabel = codeLabel ? `<code>${label}</code>` : `<strong>${label}</strong>`;
+    return `<li>${renderedLabel} — ${detail}</li>`;
+  }).join('')}</ul>`;
+}
+
+function beginnerSections(topic) {
+  const scaffold = topic.beginnerScaffold;
+  if (!scaffold) return null;
+
+  const sections = [];
+
+  if (scaffold.learningGoal) {
+    sections.push({ title:'What are we learning?', html:scaffold.learningGoal, code:'' });
+  }
+
+  if (scaffold.whyItMatters) {
+    sections.push({ title:'Why does it matter?', html:scaffold.whyItMatters, code:'' });
+  }
+
+  if (scaffold.terms?.length) {
+    sections.push({
+      title:'New terminology',
+      html:labelledList(scaffold.terms, 'term', 'meaning'),
+      code:''
+    });
+  }
+
+  if (scaffold.syntax?.length) {
+    sections.push({
+      title:'Meet the symbols and syntax',
+      html:labelledList(scaffold.syntax, 'symbol', 'meaning', true),
+      code:''
+    });
+  }
+
+  topic.concepts.forEach(concept => {
+    sections.push({ title:concept.name, html:concept.explanation, code:'' });
+  });
+
+  (scaffold.examples || []).forEach(example => {
+    sections.push({
+      title:example.title,
+      html:example.explanation,
+      code:example.code || ''
+    });
+  });
+
+  if (scaffold.breakdown?.length) {
+    sections.push({
+      title:'Break the code down piece by piece',
+      html:labelledList(scaffold.breakdown, 'piece', 'meaning', true),
+      code:''
+    });
+  }
+
+  if (scaffold.computerSteps?.length) {
+    sections.push({
+      title:'What does the computer/browser/compiler do?',
+      html:bulletList(scaffold.computerSteps),
+      code:''
+    });
+  }
+
+  if (scaffold.guidedChanges?.length) {
+    sections.push({
+      title:'Change one thing at a time',
+      html:bulletList(scaffold.guidedChanges),
+      code:''
+    });
+  }
+
+  sections.push({
+    title:'Worked example — now combine the pieces',
+    html:scaffold.workedExampleIntro || 'This example only combines syntax that has already been introduced above. Read it from top to bottom and identify each piece before running it.',
+    code:topic.example
+  });
+
+  sections.push({
+    title:'Common mistakes & debugging',
+    html:(topic.pitfalls && topic.pitfalls.length)
+      ? bulletList(topic.pitfalls)
+      : `<ul><li>Do not copy syntax you cannot yet explain.</li><li>Change one thing at a time, then inspect the browser/compiler output before changing something else.</li><li>Prefer the smallest example that proves the idea you are learning.</li></ul>`,
+    code:''
+  });
+
+  if (scaffold.errorExamples?.length) {
+    sections.push({
+      title:'Read the error or unexpected result',
+      html:`<ul>${scaffold.errorExamples.map(item => `<li><code>${escapeInline(item.mistake)}</code> — ${escapeInline(item.explanation)} <strong>Fix:</strong> ${escapeInline(item.fix)}</li>`).join('')}</ul>`,
+      code:''
+    });
+  }
+
+  if (scaffold.recap?.length) {
+    sections.push({ title:'Recap', html:bulletList(scaffold.recap), code:'' });
+  }
+
+  sections.push({
+    title:'Mastery checkpoint',
+    html:(topic.mastery && topic.mastery.length)
+      ? bulletList(topic.mastery)
+      : `<ul><li>Explain ${escapeInline(topic.title)} without reading the example.</li><li>Rebuild the core example with different names and values.</li><li>Complete the practice challenge without opening the hint if possible.</li></ul>`,
+    code:''
+  });
+
+  return sections;
+}
+
+function assessmentGroups(topic, key) {
+  const configured = topic.assessment?.[key];
+  return Array.isArray(configured) && configured.length ? configured : topic.groups;
+}
+
 const WRONG_SUMMARIES = {
   html: [
     'It is mainly a browser database mechanism for storing application records.',
@@ -131,7 +252,8 @@ function topicSummaryQuestion(topic, language) {
 }
 
 function lessonFromTopic(topic, language, difficulty, index) {
-  const sections = [
+  const scaffoldedSections = difficulty === 'intern' ? beginnerSections(topic) : null;
+  const sections = scaffoldedSections || [
     { title:'Core idea', html:topic.summary, code:'' },
     ...topic.concepts.map(concept => ({
       title:concept.name,
@@ -146,18 +268,30 @@ function lessonFromTopic(topic, language, difficulty, index) {
     {
       title:'Common mistakes & debugging',
       html:(topic.pitfalls && topic.pitfalls.length)
-        ? `<ul>${topic.pitfalls.map(item=>`<li>${item}</li>`).join('')}</ul>`
+        ? bulletList(topic.pitfalls)
         : `<ul><li>Do not copy the syntax without being able to explain the role of the key pieces used in this lesson.</li><li>Change one thing at a time, then inspect the browser/compiler output before making another change.</li><li>Prefer the simplest correct feature that communicates intent clearly.</li></ul>`,
       code:''
     },
     {
       title:'Mastery checkpoint',
       html:(topic.mastery && topic.mastery.length)
-        ? `<ul>${topic.mastery.map(item=>`<li>${item}</li>`).join('')}</ul>`
+        ? bulletList(topic.mastery)
         : `<ul><li>Explain ${escapeInline(topic.title)} without reading the example.</li><li>Rebuild the core example with different names and values.</li><li>Recognize at least one situation where this feature is the wrong tool.</li><li>Complete the practice challenge without opening the hint if possible.</li></ul>`,
       code:''
     }
   ];
+
+  const configuredTestQuestions = topic.assessment?.testCodeQuestions;
+  const codeQuestions = Array.isArray(configuredTestQuestions) && configuredTestQuestions.length
+    ? configuredTestQuestions.map(question => ({
+        type:'code',
+        prompt:question.prompt,
+        validator:buildValidator(question.groups, question.minLength || 8)
+      }))
+    : [
+        { type:'code', prompt:`Write a short ${ACADEMY_LANGUAGE_META[language].name} example that demonstrates the essential syntax or structure from “${topic.title}”.`, validator:buildValidator(topic.groups.slice(0, Math.min(2, topic.groups.length)), 8) },
+        { type:'code', prompt:`Apply “${topic.title}” to a small academy-themed example. Include the key feature(s) from the lesson.`, validator:buildValidator(topic.groups, 12) }
+      ];
 
   const test = {
     title:`${ACADEMY_LANGUAGE_META[language].name} ${ACADEMY_DIFFICULTIES.find(d=>d.id===difficulty).name} — ${topic.title}`,
@@ -165,8 +299,7 @@ function lessonFromTopic(topic, language, difficulty, index) {
       topicSummaryQuestion(topic, language),
       topicQuestion(topic, language, 0),
       topicQuestion(topic, language, 1),
-      { type:'code', prompt:`Write a short ${ACADEMY_LANGUAGE_META[language].name} example that demonstrates the essential syntax or structure from “${topic.title}”.`, validator:buildValidator(topic.groups.slice(0, Math.min(2, topic.groups.length)), 8) },
-      { type:'code', prompt:`Apply “${topic.title}” to a small academy-themed example. Include the key feature(s) from the lesson.`, validator:buildValidator(topic.groups, 12) }
+      ...codeQuestions
     ]
   };
 
@@ -174,14 +307,14 @@ function lessonFromTopic(topic, language, difficulty, index) {
     title:topic.title,
     intro:topic.summary,
     sections,
-    starter:topic.example,
+    starter:topic.starter || topic.example,
     references:topic.references,
     practice:{
       prompt:topic.challenge,
-      details:'The checker looks for the important ideas from the lesson. There can be more than one valid solution.',
+      details:topic.practiceDetails || 'The checker looks for the important ideas from the lesson. There can be more than one valid solution.',
       hint:topic.hint,
       solution:topic.solution,
-      validator:buildValidator(topic.groups, 10)
+      validator:buildValidator(assessmentGroups(topic, 'practiceGroups'), topic.assessment?.practiceMinLength || 10)
     },
     test
   };
@@ -196,14 +329,25 @@ function examFromTopics(language, difficulty, topics, examNumber) {
       : topicSummaryQuestion(topic, language));
   });
   topics.forEach((topic, index) => {
-    const rotate = (examNumber + index) % topic.groups.length;
-    const ordered = [...topic.groups.slice(rotate), ...topic.groups.slice(0, rotate)];
-    const required = examNumber === 1 ? ordered.slice(0, Math.min(2, ordered.length))
-                   : examNumber === 2 ? ordered.slice(0, Math.min(3, ordered.length))
-                   : ordered;
+    const configuredExamGroups = topic.assessment?.examGroups?.[String(examNumber)];
+    let required;
+
+    if (Array.isArray(configuredExamGroups) && configuredExamGroups.length) {
+      required = configuredExamGroups;
+    }
+    else {
+      const groups = topic.groups;
+      const rotate = (examNumber + index) % groups.length;
+      const ordered = [...groups.slice(rotate), ...groups.slice(0, rotate)];
+      required = examNumber === 1 ? ordered.slice(0, Math.min(2, ordered.length))
+               : examNumber === 2 ? ordered.slice(0, Math.min(3, ordered.length))
+               : ordered;
+    }
+
+    const configuredPrompt = topic.assessment?.examPrompts?.[String(examNumber)];
     questions.push({
       type:'code',
-      prompt:`Exam ${examNumber}: Create a fresh example demonstrating “${topic.title}”. Do not simply copy the lesson wording; change names/data/structure while preserving the concept.`,
+      prompt:configuredPrompt || `Exam ${examNumber}: Create a fresh example demonstrating “${topic.title}”. Do not simply copy the lesson wording; change names/data/structure while preserving the concept.`,
       validator:buildValidator(required, examNumber === 3 ? 20 : 12)
     });
   });
